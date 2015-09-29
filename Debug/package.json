@@ -1,0 +1,15 @@
+{
+  "name": "debugging",
+  "version": "1.0.0",
+  "description": "",
+  "main": "assert.js",
+  "dependencies": {
+    "should": "^7.1.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
