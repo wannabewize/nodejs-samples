@@ -13,9 +13,9 @@ function nextTask(result) {
 
 new Promise(simpleTask).then(nextTask);
 
-new Promise(simpleTask).then(function() {
+new Promise(simpleTask).then(result => {
    console.log('After task1');
-}).then(function() {
+}).then( reason => {
    console.log('After task2');
 });
 
@@ -64,7 +64,6 @@ myTask(true).then(onResolved, onRejected);
 /**
  * Step 4 - Promise.all
  */
-
 var task1 = new Promise(function(resolve) {
    setTimeout(function() {
       console.log('Task1 done');
