@@ -1,0 +1,14 @@
+{
+  "name": "http-samples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "basicPostServer.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "formidable": "^1.0.17"
+  }
+}
