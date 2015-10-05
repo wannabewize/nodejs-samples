@@ -94,5 +94,6 @@ function showList(res) {
    res.end(body);
 }
 
-server.listen(3002);
-console.log('Server is running on 3002');
+server.listen(3002, function() {
+   console.log('Server is running on 3002');   
+});
