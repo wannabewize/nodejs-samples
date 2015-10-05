@@ -8,6 +8,7 @@ app.get('/', function (req, res) {
    res.send('GET request, /');
 });
 
+// 영화 목록 보기 Get 요청
 app.get('/movies', function(req, res) {
    res.send('GET request, /movies');
 });
@@ -22,7 +23,7 @@ app.put('/movies/avata', function (req, res) {
    res.end('PUT request, /movies');
 });
 
-// DELETE request
+// 영화 개별 상세 정보 삭제
 app.delete('/movies/avata', function (req, res) {
    res.end('DELETE request, /movies/avata');
 });
