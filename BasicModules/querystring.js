@@ -25,4 +25,8 @@ parts.forEach(function(element) {
 // 배열
 var str2 = 'group=걸스데이&member=혜리&member=유라&member=민아';
 var parsed2 = querystring.parse(str2);
-console.log(parsed2['group'], ' members : ',parsed2['member']);
+console.log('member');
+var members = parsed2['member']; // 배열
+for ( var i = 0 ; i < members.length ; i++ ) {
+   console.log(members[i]);
+} 

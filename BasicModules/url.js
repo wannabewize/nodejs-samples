@@ -4,7 +4,8 @@ var urlStr = 'http://idols.com/q?group=EXID&name=하니&since=';
 
 var parsed = url.parse(urlStr, true);
 
-// console.log(parsed);
+console.log(parsed);
+
 console.log('protocol : ', parsed['protocol']);
 console.log('host : ', parsed['host']);
 console.log('pathname : ', parsed['pathname']);
