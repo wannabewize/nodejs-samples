@@ -5,8 +5,8 @@
 <script>
   var socket = io('http://localhost:8080');
   
-  socket.on('connection', function(arg) {
-	  console.log('connection');
+  socket.on('connect', function(arg) {
+	  console.log('server connect');
 	  console.log('arg', arg);
   });
   
