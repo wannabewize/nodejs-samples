@@ -1,0 +1,47 @@
+<html>
+<head>	
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<style>
+	#chatInput { position: fixed; bottom: 0; width:100% }   /* 화면 하단 고정 */	
+	#userInput { width:80%; margin-left:1%; margin-right:1%; }
+	#submitButton { width:15%; }
+	#messages { padding-left: 10; }
+ 	#messages li { list-style-type: none; }
+</style>
+</head>
+<body>
+<h3>Socket.IO Chat</h3>
+<ul id="messages">
+</ul>  
+<form id="chatInput" action="./" class="form-inline">
+	<input type="text" id="userInput" class="form-control" />
+	<input type="submit" id="submitButton" class="btn btn-default" value="Send" />
+</form>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+<script>
+	// html 모두 로딩 후 스크립트 로딩
+	var socket = io('http://127.0.0.1:8080');
+  
+	socket.on('connect', function() {
+		console.log('connect');
+	});
+  
+	socket.on('message', function(data) {
+		var msg = data['message'];
+		$('#clientInput').text(msg);
+		$('#messages').append($('<li>').text(msg));
+	});
+  
+	$('#chatInput').submit(function() {
+		var userInput = $('#userInput').val();
+		socket.emit('clientInput', {message:userInput});
+		$('#userInput').val('');
+		return false; // refresh 방지
+	});
+
+</script>
+</body>
+</html>

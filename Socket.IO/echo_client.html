@@ -1,0 +1,40 @@
+<html>
+<head>	
+<script src="/socket.io/socket.io.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+<script>
+  var socket = io('http://localhost:8080');
+  
+  socket.on('connection', function(arg) {
+	  console.log('connection');
+	  console.log('arg', arg);
+  });
+  
+  socket.on('echo', function(data) {
+    var msg = data['message'];
+	 console.log('Server Event :', msg);   
+   $('#serverEcho').text(msg);
+  });
+  
+  function sendMessage() {
+    var userInput = $('#userInput').val();
+    socket.emit('message', {message:userInput});
+    $('#userInput').val('');
+  }
+</script>  
+<style>
+  /*#clientInput { width:100%; position: fixed; bottom: 0;}
+  #clientInput .input { border: 1; padding: 10px; width: 90%; margin-right: 2px; }
+  #clientInput .submit { width: 8%; background:darkgrey; border: none; padding: 12px; }*/
+</style>
+</head>
+<body>
+<div id="clientInput">
+<input type="text" id="userInput" class="input"  />
+<input type="button" class="submit" value="Send" onclick="sendMessage()"/>
+</div>
+<h3>Server Echo</h3>
+<div id="serverEcho">
+</div>  
+</body>
+</html>
