@@ -1,7 +1,9 @@
 var http = require('http');
+// 1024보다 작은 포트로도 테스트
+var port = 3000;
 
 var server1 = http.createServer();
-server1.listen(3000);
+server1.listen(port);
 
 var server2 = http.createServer();
 
@@ -10,7 +12,7 @@ var server2 = http.createServer();
 //    console.log('Error', err);
 // });
 
-server2.listen(3000, function(err) {
+server2.listen(port, function(err) {
    if ( err ) {
       // 포트 에러는 여기서 잡히지 않는다.
       console.log('Error', err);      
