@@ -6,13 +6,18 @@ console.log('fd : ', fd);
 
 var strData = 'String Data';
 
-// 파일에 내용 쓰기
 var file = './data1.txt';
-fs.writeFileSync(file, strData);   
-
-// 파일 삭제
-fs.unlink(file);
-
+if ( fs.accessSync('./data1.txt', fs.F_OK) ) {
+   console.log('파일 data1.txt 존재함');
+   
+   // 파일 삭제
+   // fs.unlink(file);      
+}
+else {
+   // 파일에 내용 쓰기   
+   console.log('파일 data1.txt 생성');
+   fs.writeFileSync(file, strData);   
+}
 
 // 파일에 내용 읽기
 try {
