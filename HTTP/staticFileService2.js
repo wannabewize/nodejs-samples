@@ -1,3 +1,5 @@
+console.log('== 정적 파일 서버 샘플\nUSAGE : resources 폴더에 jpg, mp3, mp4파일 준비\nServer/reources/image.jpg로 요청');
+
 var http = require('http');
 var fs = require('fs');
 var pathUtil = require('path');
