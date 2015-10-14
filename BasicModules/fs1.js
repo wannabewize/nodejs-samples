@@ -7,18 +7,15 @@ console.log('fd : ', fd);
 var strData = 'String Data';
 
 var file = './data1.txt';
-if ( fs.accessSync('./data1.txt', fs.F_OK) ) {
+try {
+   fs.accessSync('./data1.txt', fs.F_OK)
    console.log('파일 data1.txt 존재함');
-   
-   // 파일 삭제
-   // fs.unlink(file);      
 }
-else {
-   // 파일에 내용 쓰기   
+catch ( err ) {
+   // 파일이 없을 때, 파일 생성   
    console.log('파일 data1.txt 생성');
    fs.writeFileSync(file, strData);   
 }
-
 // 파일에 내용 읽기
 try {
    var stats = fs.statSync(file)
