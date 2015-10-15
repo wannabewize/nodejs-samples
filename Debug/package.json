@@ -6,9 +6,11 @@
   "dependencies": {
     "should": "^7.1.0"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "should": "^7.1.0"
+  },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha test1"
   },
   "author": "",
   "license": "ISC"
