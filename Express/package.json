@@ -1,5 +1,5 @@
 {
-  "name": "express-samples",
+  "name": "express-sample",
   "version": "1.0.0",
   "description": "",
   "main": "basicRouting.js",
@@ -9,6 +9,8 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.13.3"
+    "ejs": "^2.3.4",
+    "express": "^4.13.3",
+    "jade": "^1.11.0"
   }
 }

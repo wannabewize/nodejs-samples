@@ -1,0 +1,14 @@
+<html>
+<head>
+   <meta charset="UTF-8" />
+    <title>EJS Example</title>
+</head>
+<body>
+    <h1><%= title %></h1>
+    <ul>
+    <% sports.forEach(function(item) { %>
+        <li> <img src="images/<%= item.image %>" height="50px"> <%= item.title %> </li>
+    <% }) %>
+    </ul>
+</body>
+</html

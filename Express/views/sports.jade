@@ -1,0 +1,11 @@
+html
+   head
+      meta(charset="UTF-8")
+      title Jade Listing Example
+   body
+      h1= title
+      ul
+         for item in sports
+            li
+               img(src="images/" +item.image height="50px")
+               span= item.title
