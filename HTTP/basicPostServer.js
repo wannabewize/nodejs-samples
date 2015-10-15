@@ -4,44 +4,48 @@ var query = require('querystring');
 
 var movieList = [];
 
-var server = http.createServer(function (request, response) {
-   if (request.method.toLowerCase() == 'post') {
-      var body = '';
-      request.on('data', function (chunk) {
-         console.log('data event : ' + chunk.length);
-         body += chunk;
-      });
-      request.on('end', function () {
-         console.log('end : ' + body);
-			
-         // 바디 파싱
-         var data = query.parse(body);
-         var title = data.title;
-         var director = data.director;
-
-         if (title && director) {
-            // 목록 저장
-            movieList.push({ title: data.title, director: data.director });
-				
-            // Redirect
-            response.statusCode = 302;
-            response.setHeader('Location', '.');
-            response.end();
-         }
-         else {
-            response.statusCode = 400;
-            response.end('can not find title, director');
-         }
-      });
+var server = http.createServer(function (req, res) {
+   if (req.method.toLowerCase() == 'post') {
+      addNewMovie(req, res);
    }
    // get이면 목록 출력
    else {
-      showList(response);
+      showList(req, res);
    }
 });
 
-function showList(res) {
-   res.writeHeader(200, { 'Content-Type': 'text/html' });
+function addNewMovie(req, res) {
+   var body = '';
+   req.on('data', function (chunk) {
+      console.log('data event : ' + chunk.length);
+      body += chunk;
+   });
+   req.on('end', function () {
+      console.log('end : ' + body);
+			
+      // 바디 파싱
+      var data = query.parse(body);
+      var title = data.title;
+      var director = data.director;
+
+      if (title && director) {
+         // 목록 저장
+         movieList.push({ title: data.title, director: data.director });
+				
+         // Redirect
+         res.statusCode = 302;
+         res.setHeader('Location', '.');
+         res.end();
+      }
+      else {
+         res.statusCode = 400;
+         res.end('Bad Request : title, director 정보 부족');
+      }
+   });
+}
+
+function showList(req, res) {
+   res.writeHeader(200, { 'Content-Type': 'text/html; charset=UTF-8' });
    res.write('<html>');
    res.write('<body>');
 
