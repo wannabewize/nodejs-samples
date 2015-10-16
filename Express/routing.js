@@ -15,7 +15,7 @@ app.get('/ab?cd', function (req, res) {
    res.send('ab?cd');
 });
 
-// +는 0번 이상의 반복이다. abcd, abbcd, abbbcd 등의 매칭된다.
+// +는 1번 이상의 반복이다. abcd, abbcd, abbbcd 등의 매칭된다.
 app.get('/ab+cd', function (req, res) {
    res.send('ab+cd');
 });
