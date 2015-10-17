@@ -41,7 +41,16 @@ function addReview(req, res) {
 	
 
 function showMovieList(req, res) {
+   var movieList = [];
    // TODO : 영화 목록 출력
+   movies.forEach(function(item, index) {
+      var info = {
+         movieId : item.movieId,
+         title : item.title
+      };
+      movieList.push(info)
+   });  
+   res.render('movieList', {title:'Movie List', movieList:movieList}); 
 }
 
 function showMovieDetail(req, res) {
