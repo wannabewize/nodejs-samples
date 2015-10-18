@@ -6,7 +6,7 @@ pool.getConnection(function(err, conn) {
       return;
    }
    
-   var sql = 'SELECT * FROM movie';
+   var sql = 'SELECT * FROM movies';
    conn.query(sql, function(err, results) {
       if ( err ) {
          console.error('Error', err);

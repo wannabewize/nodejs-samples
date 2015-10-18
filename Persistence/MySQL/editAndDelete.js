@@ -5,7 +5,7 @@ pool.getConnection(function(err, conn) {
    
    async.waterfall([
       function(callback) {
-         var sql = 'INSERT INTO movie (title, director, year) VALUES ("스타워즈", "조지 루카스", 0);';
+         var sql = 'INSERT INTO movies (title, director, year) VALUES ("스타워즈", "조지 루카스", 0);';
          conn.query(sql, function(err, results) {
             if ( err ) {
                return callback(err);
@@ -18,7 +18,7 @@ pool.getConnection(function(err, conn) {
       },
       function(movieId, callback) {
          var year = 1977;
-         var sql = 'UPDATE movie SET year = ? WHERE movie_id = ?';
+         var sql = 'UPDATE movies SET year = ? WHERE movie_id = ?';
 
          conn.query(sql, [year, movieId], function(err, result) {
             if ( err ) {
@@ -29,7 +29,7 @@ pool.getConnection(function(err, conn) {
          });
       },
       function(year, callback) {
-         var sql = 'DELETE FROM movie WHERE year <= ?';
+         var sql = 'DELETE FROM movies WHERE year <= ?';
          
          conn.query(sql, year, function(err, result) {
             if ( err ) {

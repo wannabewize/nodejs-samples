@@ -9,7 +9,7 @@ Moviest.prototype.getMovieList = function(cb) {
       if ( err ) {
          return cb(err);
       }
-      var sql = 'SELECT * FROM movie';
+      var sql = 'SELECT * FROM movies';
       conn.query(sql, function(err, results) {
          if ( err ) {
             return cb(err);

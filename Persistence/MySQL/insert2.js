@@ -8,7 +8,7 @@ pool.getConnection(function(err, conn) {
    }
    
    // 임의의 1개 로우 선택
-   var sql = 'SELECT movie_id, title FROM movie ORDER BY RAND() LIMIT 1;'
+   var sql = 'SELECT movie_id, title FROM movies ORDER BY RAND() LIMIT 1;'
    conn.query(sql, function(err, result) {
       if ( err ) {
          console.error('Error', err);

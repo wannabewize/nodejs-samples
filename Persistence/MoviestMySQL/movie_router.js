@@ -5,7 +5,7 @@ var pool = require('./dbConnect');
 // 라우터 얻기
 var router=express.Router();
 
-router.route('/newMovie')
+router.route('/movies/new')
 	.get(showMovieInputPage);
 
 router.route('/movies')
@@ -37,7 +37,7 @@ function showMovieList(req, res, next) {
       if ( err ) {
          return next(err);
       }
-      var sql = 'SELECT * FROM movie';
+      var sql = 'SELECT * FROM movies';
       conn.query(sql, function(err, results) {
          if ( err ) {
             return next(err);
@@ -62,6 +62,7 @@ function showMovieInputPage(req, res) {
 
 function addMovie(req, res) {
    // TODO : 새 영화 추가
+   res.send('TODO : 새 영화 추가');
 }
 
 function deleteMovie(req, res) {
