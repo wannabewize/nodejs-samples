@@ -1,0 +1,15 @@
+{
+  "name": "mysql-samples",
+  "version": "1.0.0",
+  "description": "",
+  "main": "connection.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "async": "^1.4.2",
+    "mysql": "^2.9.0"
+  }
+}
