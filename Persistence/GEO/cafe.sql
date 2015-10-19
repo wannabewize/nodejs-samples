@@ -1,6 +1,6 @@
 CREATE TABLE cafes 
 (
-   cafe_id    int(10),
+   cafe_id    INT PRIMARY KEY AUTO_INCREMENT,
    title      varchar(20),
    location   geometry
 );

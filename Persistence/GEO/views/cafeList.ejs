@@ -1,0 +1,23 @@
+<html>
+<body>
+
+<h3>Cafes</h3>
+<ul>
+<% for ( var i = 0 ; i < cafeList.length ; i++) { %>
+	<% var title = cafeList[i].title, lat = cafeList[i].location.x, lnt = cafeList[i].location.y %>
+	<li> <%= title %> 
+	<div><img src="http://maps.googleapis.com/maps/api/staticmap?center=<%=lat%>,<%=lnt%>&zoom=9&scale=true&size=400x200&maptype=roadmap&format=png&visual_refresh=true&markers=size:mid|color:red|label:<%=title%>|<%=lat%>,<%=lnt%>"></div>
+	</li>
+<% } %>
+</ul>
+
+<h3>새 카페 추가</h3>
+<form method='post' action='/'>
+제목 : <input type='text' name='title' value='new Cafe'><li />
+Latitude : <input type='text' name='latitude' value=10><li />
+Longitude : <input type='text' name='longitude' value=20><li />
+<input type='submit' value='등록'>
+</form>
+ 
+</body>
+</html>
