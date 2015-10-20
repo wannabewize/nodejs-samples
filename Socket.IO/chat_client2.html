@@ -33,11 +33,9 @@
 	});
   
 	socket.on('serverMessage', function(data) {
-		var msg = data['msg'];
-      var nick = data['nick'];
-      var str = nick + ' : ' + msg;
+		var msg = data['message'];
 		$('#clientInput').text(msg);
-		$('#messages').append($('<li>').text(str));
+		$('#messages').append($('<li>').text(msg));
 	});
   
 	$('#chatInput').submit(function() {
@@ -47,6 +45,30 @@
 		$('#userInput').val('');
 		return false; // refresh 방지
 	});
+   
+   function connectChatRoom(room) {
+      if ( 'lounge' == room ) {         
+         console.log('Leave Chat Room');
+         socket.emit('leaveRoom');
+      }
+      else {
+         console.log('Joining chat room : ', room);
+         socket.emit('joinRoom', {room:room});               
+      }
+   }
+   
+   // 채팅방 목록   
+   $.getJSON('/rooms', function(data) {
+      var roomList = data;
+      roomList.splice(0, 0, 'lounge'); // 라운지 - Default 대화방
+      roomList.forEach(function(room) {
+         var menu = $('<li>').text(room);
+         menu.on('click', function() {
+            connectChatRoom(room);
+         });
+         $('#chat_rooms').append(menu);     
+      });
+   });
 
 </script>
 </body>
