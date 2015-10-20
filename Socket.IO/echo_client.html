@@ -5,11 +5,10 @@
    <script src="/socket.io/socket.io.js"></script>
    <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
    <script>
-      var socket = io('http://localhost:3000');
+      var socket = io();
   
-  socket.on('connect', function(arg) {
-	  console.log('server connect');
-	  console.log('arg', arg);
+  socket.on('connect', function() {
+	  console.log('server connect');	  
   });
   
   socket.on('echo', function(data) {

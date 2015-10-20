@@ -9,10 +9,12 @@
 	#submitButton { width:15%; }
 	#messages { padding-left: 10; }
  	#messages li { list-style-type: none; }
+   #chat_rooms li { display:inline; padding-right: 10px; }
 </style>
 </head>
 <body>
 <h3>Socket.IO Chat</h3>
+<ul id='chat_rooms'></ul>
 <ul id="messages">
 </ul>  
 <form id="chatInput" action="./" class="form-inline">
@@ -24,7 +26,7 @@
 <script src="http://code.jquery.com/jquery-1.11.1.js"></script>
 <script>
 	// html 모두 로딩 후 스크립트 로딩
-	var socket = io('http://127.0.0.1:8080');
+	var socket = io();
   
 	socket.on('connect', function() {
 		console.log('connect');
@@ -42,6 +44,22 @@
 		$('#userInput').val('');
 		return false; // refresh 방지
 	});
+   
+   function connectChatRoom(room) {
+      console.log('Joining chat room : ', room);
+      socket.join(room);
+   }
+   
+   $.getJSON('/rooms', function(data) {
+      data.forEach(function(room) {
+         var menu = $('<li>').text(room);
+         menu.on('click', function() {
+            connectChatRoom(room);
+         });
+         $('#chat_rooms').append(menu);     
+      });
+      console.log(data);
+   });
 
 </script>
 </body>

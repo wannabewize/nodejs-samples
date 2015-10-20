@@ -1,13 +1,21 @@
+var express = require('express');
 var http = require('http');
-var fs = require('fs');
 
-var app = http.createServer(function(req, res) {
-	fs.createReadStream('./chat_client.html').pipe(res);
+var app = express();
+var server = http.createServer(app);
+server.listen(3000);
+
+var rooms = ['server', 'client', 'designer', 'project'];
+
+app.get('/rooms', function(req, res) {
+   res.json(rooms);
 });
 
-app.listen(8080);
+app.get('/', function(req, res) {
+   res.sendFile(__dirname + '/chat_client.html');
+});
 
-var io = require('socket.io')(app);
+var io = require('socket.io')(server);
 io.on('connection', function(socket){
 	console.log('client Connected!');
 	
