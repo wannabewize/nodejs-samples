@@ -15,15 +15,25 @@ var server = net.createServer(function (socket) {
 
    socket.on('close', function () {      
       console.log('Socket Close Event');
+      // 클라이언트가 접속을 종료하면 서버도 종료 시도
+      server.close();
    });
 
    socket.on('error', function (error) {
       console.error('Socket Error Event ', error);
    });
 });
-server.listen(3000);
 
-// Server의 close 이벤트. 연결이 남아 있으면 발생하지 않는다.
+server.on('listening', function() {
+   console.log('Server is listening @', server.address().port);
+})
+
+// Server의 close 이벤트 - 연결이 남아있으면 종료되지 않는다.
 server.on('close', function() {
    console.log('Server Close Event');
 });
+
+server.listen(3000);
+
+
+
