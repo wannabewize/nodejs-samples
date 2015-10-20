@@ -17,20 +17,13 @@ socket.connect({port : port, host : ip}, function() {
    var is = process.stdin;
    
    is.on('data', function(data) {
-      var str = data.toString().trim();
-      console.log('Data Event : ', str);
-      
-      if ( str == 'close' ) {
-         socket.end();
-      }
-      else {
-         socket.write(str);
-      }
+      var str = data.toString().trim();      
+      socket.write(str);
    });
    
    socket.on('data', function(data) {
       var str = data.toString();
-      console.log(' >> ', str);
+      console.log(str);
    });
    
    socket.on('end', function() {

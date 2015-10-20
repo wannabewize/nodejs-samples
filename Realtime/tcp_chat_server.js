@@ -26,27 +26,32 @@ var server = net.createServer(function (socket) {
    socket.write('채팅방 종료 : \\close\n');   
 
    socket.on('data', function (data) {
-      var sender = findClient(socket);
-      
+      var sender = findClient(socket);      
       var message = data.toString('UTF-8');
       
-      if ( message.indexOf('\\rename') != -1 ) {
-         var newNickName = data.split(' ')[2];
-         console.log(sender.nickname + ' change nickname ' + newNickName);
+      if ( message.trim() == '\\close' ) {
+         sender.socket.end();
+         return;
+      }
+      else if ( message.indexOf('\\rename') != -1 ) {
+         var newNickName = message.split(' ')[1];
+         
+         message = sender.nickname + ' change nickname ' + newNickName;
+         console.log(message);
+                  
          sender.nickname = newNickName;
          return;         
       }
-      else if ( message.trim() == '\\close' ) {
-         sender.socket.close();
-         return;
+      else {
+         console.log(sender.nickname + ' write ' + message);   
+         message = sender.nickname + ' : ' + message;
       }
-      
-      console.log(sender.nickname + ' write ' + message);      
+                  
       clientList.forEach(function (client) {
          var socket = client.socket;
          // 글 작성자에게는 보내지 않는다.
          if ( socket != sender.socket )      
-            socket.write(sender.nickname + ' : ' + message);
+            socket.write(message);
       });
    });
 
