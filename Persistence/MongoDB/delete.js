@@ -18,8 +18,8 @@ MongoClient.connect(url, function (err, db) {
       console.log('DeleteOne 성공 ', result);
    });
    
-   // Delete Multi Option
-   movies.deleteMany({title:'Interstella'}, {multi:true}, function(err, result) {
+   // Delete Many Documents
+   movies.deleteMany({title:'Interstella'}, function(err, result) {
       if ( err ) {
          console.error('DeleteMany Error ', err);
          return;
