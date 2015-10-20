@@ -47,15 +47,18 @@ conn.connect(function (err) {
          console.log(results);          
       });
       
-      // 현재 거리순 정렬
-      var sql4 = 'SELECT title from cafes order by ST_Distance(location, Point(30, 126) );';
+      // 현재 거리순 정렬, x,y 좌표 별도로 얻기
+      var sql4 = 'SELECT title, X(location) as lat, Y(location) as lnt from cafes order by ST_Distance(location, Point(30, 126) );';
       conn.query(sql4, function(err, results) {
          if ( err ) {
             console.error('SELECT, OrderBy St_Distnace Error ', err);
             return;
          }
          console.log('SELECT, OrderBy St_Distnace 성공');
-         console.log(results);            
+         results.forEach(function(item) {
+            console.log('Title : ' + item.title + ' Location : ' + item.lat + ',' + item.lnt);
+         });
+         // console.log(results);            
       });
       
    }, 1000);
