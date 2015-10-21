@@ -34,7 +34,6 @@
   
 	socket.on('serverMessage', function(data) {
 		var msg = data['message'];
-		$('#clientInput').text(msg);
 		$('#messages').append($('<li>').text(msg));
 	});
   
