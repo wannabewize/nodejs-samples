@@ -4,12 +4,6 @@ app.listen(3000, function () {
    console.log('Server is listening @3000');
 });
 
-app.use('/items/:item', function (req, res) {
-   var item = req.params.item;
-   res.send('Params : ' + item);
-});
-
-
 // b는 옵셔널
 app.get('/ab?cd', function (req, res) {
    res.send('ab?cd');

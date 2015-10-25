@@ -16,3 +16,9 @@ app.get('/movies/:movieId/:actor', function (req, res) {
 
    res.send('Actor : ' + actor + ' -  Movie ID : ' + movieId);
 });
+
+// /user/:id 와 겹친다.
+app.get('/user/sample', function(req, res) {
+   res.send('GET /user/sample');
+});
+
