@@ -1,12 +1,7 @@
 var net = require('net');
 
-if ( process.argv.length < 3 ) {
-   console.log('node tcp_chat_client [ipaddress] [port]');
-   process.exit();
-}
-
-var ip = process.argv[2];
-var port = process.argv[3];
+var ip = '127.0.0.1';
+var port = 3000;
 
 console.log('trying to Chat Server : ', ip, port);
 
