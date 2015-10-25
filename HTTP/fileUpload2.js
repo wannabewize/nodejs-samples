@@ -70,6 +70,7 @@ function showList(res) {
    res.writeHeader(200, { 'content-type': 'text/html' });
 
    var body = '<html>';
+   body += '<head><meta charset="UTF-8"></head>';
    body += '<body>';
    body += '<h3>Favorite Paint</h3>';
 
