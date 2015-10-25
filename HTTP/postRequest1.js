@@ -47,6 +47,7 @@ function addNewMovie(req, res) {
 function showList(req, res) {
    res.writeHeader(200, { 'Content-Type': 'text/html; charset=UTF-8' });
    res.write('<html>');
+   res.write('<meta charset="UTF-8">');
    res.write('<body>');
 
    res.write('<h3>Favorite Movie</h3>');
@@ -59,7 +60,7 @@ function showList(req, res) {
 
    res.write(
       '<form method="post" action="."><h4>새 영화 입력</h4>' +
-      '<div><input type="text" placeholder="영화제목" name="title"></div>' +
+      '<div><input type="text" name="title" placeholder="영화제목"></div>' +
       '<div><input type="text" name="director" placeholder="감독"></div>' +
       '<input type="submit" value="upload">' +
       '</form>'
