@@ -1,0 +1,23 @@
+<html>
+<body>
+<h1>Login Page</h1>
+<div>Login 상태 : <%= isAuthorized %></div>
+
+<% if ( isAuthorized ) { %>
+
+<a href="logout">로그아웃</a>
+
+<% } else { %>
+
+<form method='post' action='/login'>
+<ul>
+<li>ID : <input type='text' name='username'></li>
+<li>PW : <input type='password' name='password'></li>
+</ul>
+<input type='submit' value='로그인'>
+</form>
+
+<% } %>
+
+</body>
+</html>
