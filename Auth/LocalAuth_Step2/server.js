@@ -39,7 +39,7 @@ var strategy = new LocalStrategy({ passReqToCallback: true },
         return done(null, defaultUser);
      }     
      console.log('로그인 실패');
-     return done(null, false);
+     return done(null, false, {message:'로그인 실패'});
    }
 );
 passport.use(strategy);
@@ -63,7 +63,22 @@ app.get('/login', function(req, res) {
 });
 
 // 로그인 요청
-app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login'}));
+app.post('/login', passport.authenticate('local', { successRedirect: '/myHome', failureRedirect: '/login'}));
+
+app.get('/myHome', isAuthenticated, function(req, res) {
+   // 인증된 상태이므로 myHome 템플릿 페이지 렌더링
+   res.render('myHome', {user:req.user});
+});
+
+function isAuthenticated(req, res, next) {
+   if (req.isAuthenticated()) {
+      // 인증된 상태면 다음 미들웨어 실행
+      return next();
+   }
+   // 인증된 상태가 아니면 /login로 이동
+   res.redirect('/login');
+}
+
 
 // 로그아웃
 app.get('/logout', function(req, res) {
