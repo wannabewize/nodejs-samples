@@ -35,7 +35,7 @@ passport.use(strategy);
 // 로그인 페이지
 app.get('/login', function(req, res) {
    console.log('authorized : ', req.isAuthenticated());
-   res.render('login', {isAuthorized:req.isAuthenticated()} ) 
+   res.render('login'); 
 });
 
 // 로그인 요청 - 세션은 다음 예제에서 사용
