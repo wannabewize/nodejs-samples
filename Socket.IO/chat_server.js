@@ -35,3 +35,18 @@ io.on('connection', function(socket){
 		console.log('Disconnected');
 	});
 });
+
+// 네임 스페이스
+var mySpace = io.of('/myNamespace');
+
+mySpace.on('connection', function(socket){
+   console.log('mySpace 에 접속됨');
+
+   socket.on('howAreYou', function() {
+      console.log('Fine thank and you?');
+   });
+   
+   mySpace.emit('hi', {message:'Hello everyone!'});
+   socket.emit('hi', {message:'Hello, stranger'});
+   
+});

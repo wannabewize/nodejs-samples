@@ -51,7 +51,8 @@
    <script>
    // html 모두 로딩 후 스크립트 로딩
 	var socket = io();
-  
+   
+     
 	socket.on('connect', function() {
 		console.log('connect');
 	});
@@ -75,6 +76,18 @@
 		$('#userInput').val('');
 		return false; // refresh 방지
 	});
+   
+   // 네임 스페이스
+   var mySpace = io().connect('/myNamespace');
+   
+   mySpace.on('connect', function() {
+      console.log('My Namespace에 연결');
+   });
+   
+   mySpace.on('hi', function(data) {
+      console.log('Namespace Message', data.message);
+   });
+
    </script>
 </body>
 
