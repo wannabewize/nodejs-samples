@@ -12,25 +12,22 @@ app.set('views', './views');
 app.use(bodyParser.urlencoded({extended:false}));
 
 var passport = require('passport');
-
 app.use(passport.initialize());
-
-var defaultUser = {
-   id : 'iu',
-   password : '1234',
-   name : '아이유'
-}
 
 // Local Strategy
 var LocalStrategy = require('passport-local').Strategy;
-var strategy = new LocalStrategy({ passReqToCallback: true },
-   function (req, username, password, done) {
-     if ( username == defaultUser.id && password == defaultUser.password ) {
-        console.log('로그인 성공');
-        return done(null, defaultUser);
+var strategy = new LocalStrategy(   
+   function (username, password, done) {
+      // 사용자 ID와 PW가 user/1234
+     if ( username == 'user' && password == '1234' ) {
+        var userInfo = {
+           name : 'user'
+        }            
+        done(null, userInfo);
      }     
-     console.log('로그인 실패');
-     return done(null, false);
+     else {
+        done(null, false, {message : '로그인 실패'});
+     }
    }
 );
 passport.use(strategy);
@@ -41,8 +38,11 @@ app.get('/login', function(req, res) {
    res.render('login', {isAuthorized:req.isAuthenticated()} ) 
 });
 
-// 로그인 요청
-app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login'}));
+// 로그인 요청 - 세션은 다음 예제에서 사용
+app.post('/login', passport.authenticate('local', { session: false }), function(req, res) {
+   console.log(req.user);
+   res.end('로그인 성공! 사용자 이름은 ' + req.user.name);
+});
 
 app.get('/', function(req, res) {
    res.redirect('/login');
