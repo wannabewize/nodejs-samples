@@ -1,0 +1,27 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+   ul.nav li { display:inline; list-style:none; padding-right:20pt; }
+</style>
+</head>
+<body>
+
+<ul>
+<% data.items.forEach(function(item) { %>
+   <li> <%= item %>   
+<% }); %>
+</ul>
+
+<ul class="nav">
+<% for(var i = 0 ; i < data.total ; i++) { %>
+   <% if ( data.page == i ) { %>
+      <li> <%= i %></li>
+   <% } else { %>
+      <li> <a href="/list?page=<%=i%>"><%= i %></a></li>
+   <% } %>   
+<% } %>
+</ul>
+
+</body
+</html>
