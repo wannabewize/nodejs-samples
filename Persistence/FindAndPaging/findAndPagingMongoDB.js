@@ -34,18 +34,28 @@ function showList(req, res) {
       currentPage = 1
 
    var keyword = req.query.keyword;       
-   var conditionExp = new RegExp('"/1' + '/"');
-   var condition = {title : conditionExp};
+   // SQL의 title like %12%는 title:/12/ 에 해당  
+   var condition = {title : new RegExp(keyword)};
    
    var items = db.collection('items');
    items.count(condition, {}, {_id:0} ,function(err, result) {
-      console.log(result);
+      var itemCount = parseInt(result);
+      // 전체 페이지
+      var totalPage = Math.floor(itemCount / itemNumInPage );
       
-      items.find(condition).toArray(function(err, results) {
-         console.log(results);
+      // Skip할 개수 계산. page는 1부터 시작
+      var skip = itemNumInPage * (currentPage-1);      
+      items.find(condition).limit(itemNumInPage).skip(skip).toArray(function(err, results) {
+         // console.log(results);
+         
+         var data = {
+            totalPage : totalPage,
+            page : currentPage,
+            items : results
+         }    
+         
+         res.render('list', {data : data, keyword : keyword});
+         
       });      
-      
-      res.end('success');
-      
    });
 }
