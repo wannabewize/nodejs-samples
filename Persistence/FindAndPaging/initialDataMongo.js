@@ -23,7 +23,7 @@ MongoClient.connect(url, function (err, db) {
             console.error('Insert Error', err);
             return;
          }
-         console.log('INERT Many 성공');
+         console.log('INSERT Many 성공');
          db.close();      
    });
 });

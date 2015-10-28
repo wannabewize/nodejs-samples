@@ -6,7 +6,7 @@ var dbConfig = {
 	host : 'localhost',
 	user : 'root',
 	password : '',
-	port : 3307,
+	port : 3306,
 	database : 'test'
 };
 
@@ -27,33 +27,44 @@ app.listen(3000);
 var itemNumInPage = 10;
 
 function showList(req, res) {
-   var currentPage = parseInt(req.query.page);
-   if ( ! currentPage )
-      currentPage = 1
-
-   var keyword = req.query.keyword;
-   var conditionStr = '%' + keyword + '%';
-
-   var sql1 = 'SELECT count(*) as count FROM items where title like ?';
+   // 입력이 없으면 1페이지
+   var currentPage = parseInt(req.query.page) || 1;
+   console.log(currentPage);
    
-   conn.query(sql1, conditionStr , function(err, result) {
+   // 검색어
+   var keyword = req.query.keyword;
+   
+   var conditions = [];
+   
+   var where = '';
+   
+   if ( keyword && keyword.length > 0 ) {
+      where += 'where title like ? '
+      conditions.push('%' + keyword + '%')
+   }   
+
+   var sql1 = 'SELECT count(*) as count FROM items ' + where;
+   
+   conn.query(sql1, conditions , function(err, result) {
       if ( err ) {
          console.log(err);
          res.sendStatus(500);
          return;
       }
+      
+      var sql2 = 'SELECT title FROM items ' + where + ' LIMIT ?, ?';
             
       // 전체 아이템 개수
       var itemCount = parseInt(result[0].count);
       // 전체 페이지
-      var totalPage = Math.floor(itemCount / itemNumInPage );
-      
+      var totalPage = Math.floor(itemCount / itemNumInPage );      
       // Skip할 개수 계산. page는 1부터 시작
       var skip = itemNumInPage * (currentPage-1);
       
-      var sql2 = 'SELECT title FROM items where title like ? LIMIT ?, ?';
-
-      conn.query(sql2, [conditionStr, skip, itemNumInPage], function(err, results) {
+      conditions.push(skip);
+      conditions.push(itemNumInPage);
+      
+      conn.query(sql2, conditions, function(err, results) {
          if ( err ) {
             console.log(err);
             res.sendStatus(500);

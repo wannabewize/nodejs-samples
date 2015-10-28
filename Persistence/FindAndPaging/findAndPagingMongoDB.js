@@ -29,13 +29,14 @@ app.listen(3000);
 var itemNumInPage = 10;
 
 function showList(req, res) {
-   var currentPage = parseInt(req.query.page);
-   if ( ! currentPage )
-      currentPage = 1
+   var currentPage = parseInt(req.query.page) || 1;
 
    var keyword = req.query.keyword;       
-   // SQL의 title like %12%는 title:/12/ 에 해당  
-   var condition = {title : new RegExp(keyword)};
+   var condition = {};
+   if ( keyword && keyword.length > 0) {
+      // SQL의 title like %12%  
+      condition.title = new RegExp(keyword);
+   }
    
    var items = db.collection('items');
    items.count(condition, {}, {_id:0} ,function(err, result) {
