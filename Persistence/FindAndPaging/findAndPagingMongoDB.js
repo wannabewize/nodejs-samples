@@ -42,7 +42,7 @@ function showList(req, res) {
    items.count(condition, {}, {_id:0} ,function(err, result) {
       var itemCount = parseInt(result);
       // 전체 페이지
-      var totalPage = Math.floor(itemCount / itemNumInPage );
+      var maxPage = Math.floor(itemCount / itemNumInPage );
       
       // Skip할 개수 계산. page는 1부터 시작
       var skip = itemNumInPage * (currentPage-1);      
@@ -50,7 +50,7 @@ function showList(req, res) {
          // console.log(results);
          
          var data = {
-            totalPage : totalPage,
+            maxPage : maxPage,
             page : currentPage,
             items : results
          }    
