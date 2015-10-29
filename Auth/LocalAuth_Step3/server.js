@@ -2,7 +2,6 @@ var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
 var User = require('./user');
-console.log(User);
 
 var app = express();
 app.use(morgan('dev'));
@@ -20,7 +19,6 @@ app.use(session({
    resave: false,
    saveUninitialized: true
 }));
-
 
 
 var passport = require('passport');
@@ -88,13 +86,13 @@ app.get('/logout', function (req, res) {
 });
 
 // 글 쓰기와 읽기 관련 라우팅
-app.use(require('./articles'));
+app.use(require('./talks'));
 
 
 
 // 목록으로 리다이렉션
 app.get('/', function (req, res) {
-   res.redirect('/articles');
+   res.redirect('/talks');
 });
 
 app.listen(3000);

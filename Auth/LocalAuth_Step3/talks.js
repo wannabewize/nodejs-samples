@@ -5,18 +5,18 @@ var router = express.Router();
 // 데이터베이스 - 대신
 var articles = [];
 
-router.get('/articles', function (req, res) {
+router.get('/talks', function (req, res) {
    console.log('req.user : ', req.user);
-   res.render('articleList', { articles: articles, isAuthorized: req.isAuthenticated() });
+   res.render('smalltalks', { articles: articles, isAuthorized: req.isAuthenticated() });
 });
 
 // 글쓰기 POST 요청
-router.post('/articles', isAuthenticated, function (req, res) {
+router.post('/talks', isAuthenticated, function (req, res) {
    var writer = req.user.name;
    var text = req.body.text;
 
    articles.push({ writer: writer, text: text });
-   res.redirect('/articles');
+   res.redirect('/talks');
 });
 
 // 글 쓰기 폼 GET 요청
