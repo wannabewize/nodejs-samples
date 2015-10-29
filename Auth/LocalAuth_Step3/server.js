@@ -67,8 +67,6 @@ app.get('/login', function (req, res) {
 // 로그인 요청
 app.post('/login', passport.authenticate('local', { successRedirect: '/', failureRedirect: '/login' }));
 
-app.use(require('./articles'));
-
 // 회원 가입 폼
 app.get('/signup', function (req, res) {
    res.render('signup');
@@ -88,6 +86,11 @@ app.get('/logout', function (req, res) {
    req.logout();
    res.redirect('/');
 });
+
+// 글 쓰기와 읽기 관련 라우팅
+app.use(require('./articles'));
+
+
 
 // 목록으로 리다이렉션
 app.get('/', function (req, res) {
