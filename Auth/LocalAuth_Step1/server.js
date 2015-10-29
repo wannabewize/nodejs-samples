@@ -1,3 +1,8 @@
+/**
+ * 로그인 예제
+ * ID : user
+ * PW : 1234
+ */
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
