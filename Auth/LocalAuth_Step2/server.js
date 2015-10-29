@@ -25,9 +25,9 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 var defaultUser = {
-   id : 'iu',
+   id : 'user',
    password : '1234',
-   name : '아이유'
+   name : '사용자'
 }
 
 // Local Strategy

@@ -1,3 +1,7 @@
+/**
+ * 사용자 ID : user
+ * 사용자 PW : 1234
+ */
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
