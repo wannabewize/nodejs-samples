@@ -1,5 +1,6 @@
 var express = require('express');
 var User = require('./user');
+var bodyParser = require('body-parser');
 var app = express();
 
 // Template Engine
@@ -8,6 +9,9 @@ app.set('views', __dirname + '/views');
 
 // Favicon. ignore.
 app.use('/favicon.ico', function () { });
+
+// 바디파서 - 필수
+app.use(bodyParser.urlencoded({ extended: false }));
 
 // Logging..
 var morgan = require('morgan');
@@ -32,8 +36,8 @@ var fbStrategy = new FacebookStrategy(
    {
       profileFields: ['id', 'displayName', 'photos', 'email'],
       // ClientID와 Secret
-      clientID: '494034337427237',
-      clientSecret: 'cac0fcf972c4e4fef2afb21db62e4bd8',
+      clientID: 'CLIENT-ID',
+      clientSecret: 'CLIENT-SECRET',
       // Callback URL - GET 요청 처리가 가능해야 한다.
       callbackURL: "http://localhost:3000/auth/facebook/callback"
    },
@@ -56,44 +60,33 @@ var fbStrategy = new FacebookStrategy(
    });
 passport.use(fbStrategy);
 
-// Session write/
+// 세션 쓰기
 passport.serializeUser(function (user, done) {
-   console.log('serializeUser', user);
    done(null, user.id);
 });
 
+// 세션에서 사용자 정보 얻기
 passport.deserializeUser(function (id, done) {
-   console.log('deserializeUser', id);
    var user = User.findOne(id);
    done(null, user);
 });
 
-function isAuthenticated(req, res, next) {
-   console.log('isAuthenticated', req.isAuthenticated());
-   if (req.isAuthenticated()) {
-      return next();
-   }
-   else {
-      res.redirect('/login');
-   }
-}
-
 // 사용자 
 app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
 // 사용자 권한 승인 요청 이후 콜백 페이지 요청
-app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/myHome', failureRedirect: '/login' }));
+app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/' }));
 
 app.get('/logout', function (req, res) {
    req.logout();
-   res.redirect('/login');
+   res.redirect('/');
 })
 
-app.get('/myHome', isAuthenticated, function (req, res) {
-   res.render('myHome', { 'user': req.user });
-});
+// 글 쓰기와 읽기 관련 라우팅
+app.use(require('./talks'));
 
-app.get('/login', function (req, res) {   
-   res.render('login', { isAuthorized: req.isAuthenticated() });
+// 목록으로 리다이렉션
+app.get('/', function (req, res) {
+   res.redirect('/talks');
 });
 
 app.listen(3000, function (err) {

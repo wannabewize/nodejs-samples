@@ -1,0 +1,29 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+
+<head><h3>My Profile</h3></head>
+
+<section>
+<head><h4>이름</h4></head>
+<%= user.name %>
+</section>
+
+<section>
+<head><h4>이메일</h4></head>
+<%= user.email %>
+</section>
+
+<section>
+<head><h4>프로필 사진</h4></head>
+<img src="<%= user.picture %>"></img>
+</section>
+
+</div>
+
+</body>
+</html>

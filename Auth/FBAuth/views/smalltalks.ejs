@@ -1,0 +1,46 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+<header><h3>Small Talks</h3></header>
+
+<nav class="navbar">
+<a class="btn btn-link" href="/write">글 쓰기</a>
+<a class="btn btn-link" href="/profile">프로필</a>
+<% if ( isAuthorized ) { %>
+   <a class="btn btn-link" href="/logout">로그아웃</a>
+<% } else { %>
+   <a class="btn btn-link" href="/auth/facebook">FB 로그인</a>
+<% } %>
+</nav>
+
+<table class="table">
+<tr>
+   <th>내용</th>
+   <th>작성자</th>
+</tr>
+<% articles.forEach(function(item) { %>
+   <tr>
+   <td class="col-xs-8"> <%= item.text %> </td>
+   <td class="col-xs-4"> <%= item.writer %> </td>
+   </tr>
+<% }); %>
+</table>
+
+</div>
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) return;
+  js = d.createElement(s); js.id = id;
+  js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.5&appId=883559271738929";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+</body>
+</html>
