@@ -1,3 +1,8 @@
+/**
+ * 로그인, 세션, 제한된 사용자 API
+ * ID : user
+ * PW : 1234
+ */
 var express = require('express');
 var morgan = require('morgan');
 var bodyParser = require('body-parser');
