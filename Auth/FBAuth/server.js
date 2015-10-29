@@ -1,6 +1,7 @@
 var express = require('express');
 var User = require('./user');
 var bodyParser = require('body-parser');
+var fbConfig = require('./fbConfig');
 var app = express();
 
 // Template Engine
@@ -36,14 +37,12 @@ var fbStrategy = new FacebookStrategy(
    {
       profileFields: ['id', 'displayName', 'photos', 'email'],
       // ClientID와 Secret
-      clientID: 'CLIENT-ID',
-      clientSecret: 'CLIENT-SECRET',
+      clientID: fbConfig.clientID,
+      clientSecret: fbConfig.clientSecret,
       // Callback URL - GET 요청 처리가 가능해야 한다.
       callbackURL: "http://localhost:3000/auth/facebook/callback"
    },
    function (accessToken, refreshToken, profile, done) {
-      // console.log('strategy callback : accessToken : ', accessToken, ' RefreshToken : ', refreshToken);
-      // console.log(profile);
       var id = profile.id;
       
       var user = User.findOne(id);
@@ -72,7 +71,7 @@ passport.deserializeUser(function (id, done) {
 });
 
 // 사용자 
-app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile'] }));
+app.get('/auth/facebook', passport.authenticate('facebook', { scope: ['email', 'public_profile', 'user_posts'] }));
 // 사용자 권한 승인 요청 이후 콜백 페이지 요청
 app.get('/auth/facebook/callback', passport.authenticate('facebook', { successRedirect: '/', failureRedirect: '/' }));
 

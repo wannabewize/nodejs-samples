@@ -14,6 +14,7 @@
     "ejs": "^2.3.4",
     "express": "^4.13.3",
     "express-session": "^1.12.0",
+    "fb": "^0.7.3",
     "morgan": "^1.6.1",
     "passport": "^0.3.0",
     "passport-facebook": "^2.0.0"

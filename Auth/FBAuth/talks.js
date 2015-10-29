@@ -1,4 +1,6 @@
 var express = require('express');
+var FB = require('fb');
+
 var router = express.Router();
 
 // 데이터베이스 - 대신
@@ -34,7 +36,12 @@ function isAuthenticated(req, res, next) {
 }
 
 router.get('/profile', isAuthenticated, function(req, res) {
-   res.render('profile', {user:req.user} );
+   var token = req.user.token;
+   
+   FB.api('me/feed', {access_token: token }, function(results) {
+      console.log(results);
+      res.render('profile', {user:req.user, feed:results.data} );      
+   });
 });
 
 module.exports = router;
