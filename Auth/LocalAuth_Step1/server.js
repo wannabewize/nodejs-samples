@@ -1,7 +1,12 @@
 /**
+<<<<<<< HEAD
  * 로그인 예제
  * ID : user
  * PW : 1234
+=======
+ * 사용자 ID : user
+ * 사용자 PW : 1234
+>>>>>>> origin/master
  */
 var express = require('express');
 var morgan = require('morgan');
