@@ -1,0 +1,38 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+
+<div class="container">
+
+<header><h3>글 목록 보기</h3></header>
+
+<nav class="navbar">
+<a class="btn btn-link" href="/write">글 쓰기</a>
+<% if ( isAuthorized ) { %>
+   <a class="btn btn-link" href="/logout">로그아웃</a>
+<% } else { %>
+   <a class="btn btn-link" href="/login">로그인</a>
+<% } %>
+<a class="btn btn-link" href="/signup">가입</a>
+</nav>
+
+<table class="table">
+<tr>
+   <th>내용</th>
+   <th>작성자</th>
+</tr>
+<% articles.forEach(function(item) { %>
+   <tr>
+   <td class="col-xs-8"> <%= item.text %> </td>
+   <td class="col-xs-4"> <%= item.writer %> </td>
+   </tr>
+<% }); %>
+</table>
+
+</div>
+
+</body>
+</html>
