@@ -1,0 +1,64 @@
+<html>
+<head>
+<meta chatset="UTF-8">
+<script src="http://code.jquery.com/jquery-2.1.4.js"></script>
+</head>
+<body>
+<h3>Device List</h3>
+<div>Total <%= devices.length %> devices</div>
+<table>
+<thead>
+   <td></td>
+   <td>Device ID</td>
+   <td>OS</td>
+   <td>Token</td>
+</thead>
+<tbody>
+<% devices.forEach(function(item, index) {%>
+   <tr>
+      <td><input type="checkbox" value=<%=item.deviceID%>></td>
+      <td><%=item.deviceID%></td>
+      <td><%=item.os%></td>      
+      <td><%=item.token%></td>      
+   </tr>
+<% });%>
+</tbody>
+</table>
+
+<form method="post" action="sendMessage">
+<div>   
+<input type="text" id="message">
+<input type="submit" value="전송" onClick="sendMessage(); return false;">
+</div>
+</form>
+<script>
+
+function sendMessage() {
+   // 선택된 항목 찾기
+   var $table = $('table'); 
+   var $checked    = $('tbody input[type="checkbox"]:checked', $table);
+
+   // 선택된 device ID 목록
+   var deviceList = '';
+   for(var i = 0 ; i < $checked.length ; i++ ) {
+      var $item = $checked.get(i);
+      console.log($item);
+      deviceList += '&deviceID=' + $item.value;
+   }
+   
+   // 메세지
+   var message = $('#message').val();
+   
+   var data = 'message=' + message + deviceList;
+   console.log('data : ', data);
+   
+   $.post('/sendMessage', data,
+      function(data) {
+         alert('Success');
+      },
+      'application/x-www-form-urlencoded'
+   )
+}
+</script>
+</body>
+</html>
