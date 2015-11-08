@@ -73,13 +73,13 @@ function sendMessage(req, res) {
    }   
    
    // 클라이언트가 전송한 DeviceID에서 Registration ID 찾기
-   var regIds = [];         
+   var regIDList = [];         
    if ( Array.isArray(deviceIDList)) {
       for(var i = 0 ; i < deviceIDList.length ; i++) {
          var deviceID = deviceIDList[i];
          var device = getDeviceInfo(deviceID);
          if ( device )
-            regIds.push(device.token);
+            regIDList.push(device.token);
          else
             console.error('RegID 못찾음 : ', deviceID);
       }
@@ -87,12 +87,12 @@ function sendMessage(req, res) {
    else {
       var device = getDeviceInfo(deviceIDList);
       if ( device )
-         regIds.push(device.token);
+         regIDList.push(device.token);
       else
          console.error('RegID 못찾음 : ', deviceID);
    }
    
-   console.log('regIds : ', regIds);
+   console.log('regIds : ', regIDList);
 
    // GCM용 메세지 객체 생성 
    var message = new gcm.Message({
@@ -105,12 +105,25 @@ function sendMessage(req, res) {
    });
    
    // GCM 메세지 발송 요청
-   sender.send(message, regIds, function(err, result) {
+   sender.send(message, regIDList, function(err, result) {
       if (err) {
-         console.error('Error : ' + err);
+         console.error('Error : ' + sendError);
       }
       else {
-         console.log('Success : ', result);
+         console.log(result);
+         
+         var results = result.results;
+         for(var i = 0 ; i < results.length ; i++) {
+            var item = results[i];
+            var regID = regIDList[i];
+            var sendError = item.error;
+            if ( sendError ) {
+               console.error(sendError, regID);
+            }
+            else {
+               console.log('Success : ', regID);
+            }
+         }
       }
    });        
    
