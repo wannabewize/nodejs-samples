@@ -1,10 +1,30 @@
-<html>
+<html ng-app="moviestApp">
 <head>
    <meta charset="UTF-8">
-   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.7/angular.min.js"></script>
-   <script src="./moviest.js"></script>
+   <script src="http://code.angularjs.org/1.4.7/angular.min.js"></script>
+   <script src="http://code.angularjs.org/1.4.7/angular-route.min.js"></script>
+   <script src="moviest.js"></script>
+   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+   <style>
+      ul li img { height:100px; }
+   </style>
 </head>   
-<body ng-controller="movieList">
-   <h1>Welcome To Movies</h1>
+<body ng-controller="MovieListController">
+   <h1>Welcome To {{title}}</h1>
+   <div>
+      Search : <input ng-model="query">
+      Sort By :
+      <select ng-model="orderProp">
+         <option value="year">Year</option>
+         <option value="title">Title</option>   
+      </select>
+   </div>   
+   <ul>
+      <li ng-repeat="movie in movies | filter : query | orderBy : orderProp ">
+         <img ng-src={{movie.image}}> <a href="#/movies/{{movie.movieID}}"> {{movie.title}} ({{movie.year}}) </a>
+      </li>
+   </ul>
+   
+
 </body>
 </html>

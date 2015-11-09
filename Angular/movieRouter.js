@@ -7,7 +7,7 @@ var fs = require('fs');
 var content = fs.readFileSync('movieData.json', 'utf8');
 var movieData = JSON.parse(content);
 
-router.get('/', function(req, res) {
+router.get('/app', function(req, res) {
 	res.sendFile(__dirname + '/public/moviest.html');
 });
 
@@ -18,10 +18,10 @@ router.route('/movies')
 	.get(showMovieList)
 	.post(addMovie);
 
-router.route('/movies/:movieID')
-	.get(showMovieDetail)
-	.delete(deleteMovie)
-	.put(editMovie);	
+// router.route('/movies/:movieID')
+// 	.get(showMovieDetail)
+// 	.delete(deleteMovie)
+// 	.put(editMovie);	
 	
 router.route('/reviews/:movieID')
 	.get(showReviews)
@@ -41,12 +41,14 @@ function showMovieList(req, res) {
    // TODO : 영화 목록 출력
    movieData.forEach(function(item, index) {
       var info = {
-         movieId : item.movieId,
-         title : item.title
+         movieID : item.movieID,
+         title : item.title,
+         year : item.year,
+         image : item.image
       };
       movieList.push(info)
    });
-   res.json({result:movieList});    
+   res.json({movies:movieList});    
 }
 
 function showMovieDetail(req, res) {

@@ -5,6 +5,7 @@ var morgan = require('morgan');
 
 var app = express();
 app.use(morgan('dev'));
+app.use(express.static('./public'));
 
 app.use(bodyParser.urlencoded({ extended: false }))
 
