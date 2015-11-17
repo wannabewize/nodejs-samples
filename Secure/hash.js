@@ -22,15 +22,10 @@ md5.on('end', function() {
 md5.setEncoding('hex');
 md5.end('hello');
 
+//update-digest 로 사용하기, digest 이후에 더 이상 사용할 수 없다.
 var sha1 = crypto.createHash('sha1');
 sha1.update('hello');
 var digest = sha1.digest('hex');
 console.log('sha1 : ', digest);
 
 // hello -> 5d41402abc4b2a76b9719d911017c592
-
-var hash2 = crypto.createHmac('sha1', 'secret key');
-hash2.update('Hello');
-var hashed2 = hash2.digest('hex');
-console.log('hashed2 : ', hash2);
-
