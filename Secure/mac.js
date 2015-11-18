@@ -9,15 +9,16 @@ console.log('hmac : ', hmac);
 
 // 정상 데이터 전송
 console.log('== 정상 데이터 전송');
-sendMessage(message, hmac);
+onMessageReceived(message, hmac);
 
 // 데이터 변조
 console.log('== 변조된 데이터 전송');
 var changedMessage = message + '!';
-sendMessage(changedMessage, hmac);
+onMessageReceived(changedMessage, hmac);
 
 
-function sendMessage(message, hmac) {
+// 메세지와 mac 전송될 때의 동작
+function onMessageReceived(message, hmac) {
    var hmacFunc = crypto.createHmac('sha1', 'secret key');
    
    hmacFunc.update(message);
