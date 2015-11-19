@@ -46,23 +46,21 @@ passport.deserializeUser(function(id, done) {
 passport.use(strategy);
 
 // Custom Resonse
-app.post('/login', function(req, res, next) {
+app.post('/login', function(req, res) {
    passport.authenticate('local', function(err, user, msg, statusCode) {
       if ( ! user ) {
          res.status(401).json(msg);
          return;         
       }
+      // 세션에 기록
       req.logIn(user, function(err) {
          if ( err ) {
             res.status(401).json({msg:'Session Write Error'});
             return;
          }
-         next();
+         res.json({name : user.name , msg : 'Login Success'});         
       });
    })(req);  
-}, function(req, res) {
-   var userInfo = req.user;
-   res.json({name : userInfo.name , msg : 'Login Success'});
 });
 
 app.listen(3000);
