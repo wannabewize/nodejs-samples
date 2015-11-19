@@ -1,0 +1,20 @@
+{
+  "name": "fb-auth-mobileserver",
+  "version": "1.0.0",
+  "description": "",
+  "main": "fbConfig.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "express": "^4.13.3",
+    "express-session": "^1.12.1",
+    "fb": "^0.7.3",
+    "morgan": "^1.6.1",
+    "passport": "^0.3.2",
+    "passport-facebook-token": "^3.0.5"
+  }
+}
