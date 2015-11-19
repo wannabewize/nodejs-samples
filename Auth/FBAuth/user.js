@@ -26,7 +26,7 @@ User.prototype.findOrCreate = function(id, name, email) {
    else {
       console.log('기존 사용자');
    }
-   return this.fineOne(id);
+   return this.findOne(id);
 };
 
 
