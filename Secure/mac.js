@@ -1,3 +1,9 @@
+/**
+ * Message Authenticate Code
+ * 
+ * Key를 서로 공유해야 한다.
+ */
+
 var crypto = require('crypto');
 
 var SECRET_KEY = 'secret key';
