@@ -1,9 +1,14 @@
 var crypto = require('crypto');
 var buffer = require('buffer');
-var fs = require('fs');
 
-var privateKey = fs.readFileSync('./key.pem');
-var publicKey = fs.readFileSync('./cert.pem');
+var dh = crypto.createDiffieHellman(1024);
+var publicKey = dh.generateKeys('hex');
+var privateKey = dh.getPrivateKey('hex');
+
+// var fs = require('fs');
+
+// var privateKey = fs.readFileSync('./key.pem');
+// var publicKey = fs.readFileSync('./cert.pem');
 
 var data = 'Hello World';
 var buffer = new Buffer(data, 'utf8');
