@@ -1,33 +1,34 @@
 var crypto = require('crypto');
 
+var SECRET_KEY = 'secret key';
 var message = 'Hello Crypto';
 
-var hmacFunc = crypto.createHmac('sha1', 'secret key');
+var hmacFunc = crypto.createHmac('sha1', SECRET_KEY);
 hmacFunc.update(message);
-var hmac = hmacFunc.digest('hex');
-console.log('hmac : ', hmac);
+var mac = hmacFunc.digest('hex');
+console.log('hmac : ', mac);
 
 // 정상 데이터 전송
 console.log('== 정상 데이터 전송');
-onMessageReceived(message, hmac);
+onMessageReceived(message, mac);
 
 // 데이터 변조
 console.log('== 변조된 데이터 전송');
 var changedMessage = message + '!';
-onMessageReceived(changedMessage, hmac);
+onMessageReceived(changedMessage, mac);
 
 
 // 메세지와 mac 전송될 때의 동작
-function onMessageReceived(message, hmac) {
-   var hmacFunc = crypto.createHmac('sha1', 'secret key');
+function onMessageReceived(message, mac) {
+   var hmacFunc = crypto.createHmac('sha1', SECRET_KEY);
    
    hmacFunc.update(message);
-   var hmac2 = hmacFunc.digest('hex');
+   var digest = hmacFunc.digest('hex');
    
-   if ( hmac == hmac2 ) {
-      console.log('메세지 변조 안됨');
+   if ( mac == digest ) {
+      console.log('검증 성공 : 메세지 변조 안됨');
    }
    else {
-      console.log('메세지 변조');
+      console.log('검증 실패 : 메세지 변조 됨');
    }   
 }
