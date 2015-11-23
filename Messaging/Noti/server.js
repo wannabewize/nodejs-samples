@@ -95,7 +95,7 @@ function sendMessage(req, res) {
    console.log('regIds : ', regIDList);
 
    // GCM용 메세지 객체 생성 
-   var message = new gcm.Message({
+   var gcmMessage = new gcm.Message({
       collapseKey: 'demo',
       notification:{
          title:'Noti Sample',
@@ -105,7 +105,7 @@ function sendMessage(req, res) {
    });
    
    // GCM 메세지 발송 요청
-   sender.send(message, regIDList, function(err, result) {
+   sender.send(gcmMessage, regIDList, function(err, result) {
       if (err) {
          console.error('Error : ' + sendError);
       }
