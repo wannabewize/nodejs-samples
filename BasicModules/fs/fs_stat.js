@@ -35,15 +35,5 @@ fs.stat(path2, function(err, stats) {
    console.log('Access Time : ', stats.atime);
    console.log('Change Time : ', stats.ctime); // 상태 변경
    console.log('Modified Time : ', stats.mtime); // 내용 변경
-   
-   if ( stats.isFile() ) {
-      fs.readFile(path2, 'utf-8', function(err, data) {
-         if ( err ) {
-            console.error('파일 읽기 에러 : ', err);
-            return;
-         }
-         console.log('파일 읽기 :', data);
-      });
-   }
 });
 

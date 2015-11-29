@@ -1,20 +1,15 @@
 var fs = require('fs');
 
-// open File, Read only
-var fd = fs.openSync('./fs1.js', 'r');
-console.log('fd : ', fd);
+var file = './song.txt';
 
-var strData = 'String Data';
-
-var file = './data1.txt';
 try {
-   fs.accessSync('./data1.txt', fs.F_OK)
-   console.log('파일 data1.txt 존재함');
+   fs.accessSync(file, fs.F_OK)
+   console.log('파일 존재');
 }
 catch ( err ) {
-   // 파일이 없을 때, 파일 생성   
-   console.log('파일 data1.txt 생성');
-   fs.writeFileSync(file, strData);   
+   // 파일이 없을 때, 종료   
+   console.log('파일 존재하지 않음');
+   process.exit(1);   
 }
 // 파일에 내용 읽기
 try {

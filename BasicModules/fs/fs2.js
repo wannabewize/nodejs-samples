@@ -1,24 +1,14 @@
 var fs = require('fs');
 
-var strData = 'File Asynchronous API Sample';
-
-// 파일에 내용 쓰기
-var file = './data2.txt';
+var file = './song.txt';
 
 fs.access(file, fs.F_OK, function(err) {
    if ( err ) {
-      console.log(file + ' 없음');
-      
-      // 파일 생성
-      fs.writeFile(file, strData, function(err) {
-         if ( err ) {
-            console.error('File Write Error', err);
-            return;
-         }
-      });      
+      console.log('파일 없음');
+      process.exit(1);      
    }
    else {
-      console.log(file + ' 존재');
+      console.log('파일 존재');
       
       fs.stat(file, function(err, stats) {
          if ( err ) {
