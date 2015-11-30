@@ -1,16 +1,16 @@
 {
-  "name": "angular",
+  "name": "secure",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "auth.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "body-parser": "^1.14.1",
+    "bcrypt": "^0.8.5",
     "express": "^4.13.3",
-    "morgan": "^1.6.1"
+    "ursa": "^0.9.1"
   }
 }
