@@ -8,21 +8,11 @@ console.log('Buffer Concat : ', buf3);
 console.log('Concat buffer decode : ', buf3.toString());
 console.log('Concat buffer length : ', buf3.length);
 
+var buf4 = buf3.slice(3, 8);
+console.log('Slice(3, 8) : ', buf4.toString());
+
 //버퍼 비교
+console.log('== 버퍼 비교');
 console.log('compare 1 vs 2 : ', Buffer.compare(new Buffer([1]), new Buffer([2])));
 console.log('compare 2 vs 2 : ', Buffer.compare(new Buffer([2]), new Buffer([2])));
 console.log('compare 3 vs 2 : ', Buffer.compare(new Buffer([3]), new Buffer([2])));
-
-
-// 데이터 쓰기/읽기
-console.log('endianns : ', require('os').endianness());
-
-var buffer = new Buffer(10);
-// 8bit : -128~127
-buffer.writeInt8(0, 0); // value, offset
-buffer.writeInt8(1, 1); 
-buffer.writeInt8(127, 2)
-// 16bit : -256~255
-buffer.writeInt16LE(2^16, 3); 
-
-console.log(buffer); 
