@@ -1,52 +1,57 @@
-var numCPUs = require('os').cpus().length;
-var http = require('http');
-console.log('Number of CPU : ', numCPUs);
 
 var cluster = require('cluster');
 
 if (cluster.isMaster) {
+
+   var numCPUs = require('os').cpus().length;
+   console.log('Number of CPU : ', numCPUs);
+   
    // Fork workers.
    for (var i = 0; i < numCPUs; i++) {
       cluster.fork();
    }
 
-   cluster.on('fork', function (worker) {
-      console.log('fork event :', worker.id);
-   });
-   
-   cluster.on('online', function (worker) {
-      console.log('online Event from : ', worker.id);   
+   cluster.on('disconnect', function (worker) {
+      console.log('Master) Disconnect Event : ', worker.id);
    });
 
    cluster.on('exit', function (worker, code, signal) {
-      console.log('exit Event from : ', worker.id);               
+      console.log('Worker #' + worker.id + ' exit');
    });
+
+   cluster.on('fork', function (worker) {
+      console.log('Master) Fork event : ', worker.id);
+   });
+   
+   // 워커의 listen 메소드
+   cluster.on('listening', function (worker, address) {
+      console.log('Master) Listening event : ', worker.id, ' address : ', address);
+   });
+
+   cluster.on('online', function (worker) {
+      console.log('Worker #' + worker.id + ' is Online');
+   });
+
 } else {
-   //   Workers can share any TCP connection
-   //   In this case it is an HTTP server
-   http.createServer(function (req, res) {
-      res.writeHead(200);
+   var worker = cluster.worker;
+
+   worker.on('disconnect', function() {
+      console.log('Worker) Disconnect event : ', worker.id);
+   });
+   
+   worker.on('error', function(err) {
+      console.log('Worker) Error event : ', err);
+   });
+   
+   worker.on('exit', function(code, signal) {
+      console.log('Worker) Exit event : ', worker.id, ' code : ', code, ' signal : ', signal);
+   });
+   
+   worker.on('listening', function(address) {
+      console.log('Worker) Listening event : ', worker.id, ' address : ', address);
+   });
       
-      console.log('Handling Request : ', cluster.worker.id);
-
-      var primeNumbers = [];      
-      for(var i = 1 ; i < 10000 ; i ++ ) {
-         var isPrimeNumber = true;
-         for(var j = 1 ; j < i ; j++) {
-            if ( i % j == 0 ) {
-               isPrimeNumber = false;
-               break;
-            }
-         }
-         if ( isPrimeNumber ) {
-            primeNumbers.push(i);
-         }
-      }
-
-      // setTimeout(function () {
-         res.end('Hello World : ', primeNumbers);
-      // }, 5 * 1000)
-
-   }).listen(3000);
+   setTimeout(function() {
+      worker.kill();
+   }, 3000);
 }
-

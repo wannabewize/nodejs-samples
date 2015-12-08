@@ -11,14 +11,11 @@ var http = require('http');
 var cluster = require('cluster');
 
 var num = 10000;
+
+var worker = cluster.worker;
    
 http.createServer(function (req, res) {
    res.writeHead(200);
-   var id = 'Master';
-   if ( cluster.isWorker ) {
-      id = cluster.worker.id;
-      console.log('Handling Request by Worker(' + id + ')');
-   }
 
    console.time('PRIME NUMBER');
    var primeNumbers = [];      
@@ -35,7 +32,6 @@ http.createServer(function (req, res) {
          primeNumbers.push(i);
       }
    }
-   console.log('PrimeNumber 1~' + num, ' fount : ', primeNumbers.length);
    console.timeEnd('PRIME NUMBER');
-   res.end('Prime Number Service - Worker(' + id + ') : ' + primeNumbers);
-}).listen(3000);
+   res.end('Prime Number Service, Worker ' + worker.id + ' primeNumbers : ' + primeNumbers);
+}).listen(3002);

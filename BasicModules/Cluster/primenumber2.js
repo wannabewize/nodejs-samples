@@ -1,47 +1,47 @@
-var numCPUs = require('os').cpus().length;
-var http = require('http');
-console.log('Number of CPU : ', numCPUs);
+
+var number = 200000;
 
 var cluster = require('cluster');
 
+console.time('PRIME_NUMBER_CLUSTER');
+
 if (cluster.isMaster) {
    // Fork workers.
+   var numCPUs = require('os').cpus().length;
+   // console.log('Number of CPU : ', numCPUs);
+   var remainWorkers = numCPUs;
+   
    for (var i = 0; i < numCPUs; i++) {
       cluster.fork();
    }
-
-   cluster.on('fork', function (worker) {
-      console.log('fork event :', worker.id);
-   });
    
-   cluster.on('online', function (worker) {
-      console.log('online Event from : ', worker.id);   
+   cluster.on('online', function(worker) {
+      // console.log('Worker #' + worker.id + ' in online');
    });
 
    cluster.on('exit', function (worker, code, signal) {
-      console.log('exit Event from : ', worker.id);               
+      remainWorkers--;
+      // console.log('exit Event from : ', worker.id);      
+      if ( remainWorkers == 0 ) {
+         console.timeEnd('PRIME_NUMBER_CLUSTER');
+      }               
    });
 } else {
-   http.createServer(function (req, res) {
-      res.writeHead(200);
-      
-      console.log('Handling Request : ', cluster.worker.id);
-
-      var primeNumbers = 'Prime Numbers : ';      
-      for(var i = 1 ; i < 10000 ; i ++ ) {
-         var isPrimeNumber = true;
-         for(var j = 2 ; j < i ; j++) {
-            if ( i % j == 0 ) {
-               isPrimeNumber = false;
-               break;
-            }
-         }
-         if ( isPrimeNumber ) {
-            primeNumbers += i + ', ';
+   var primeNumbers = [];      
+   for(var i = 1 ; i < number ; i ++ ) {
+      var isPrimeNumber = true;
+      // TODO : i의 제곱근보다 커지면 더 이상 비교할 필요는 없다.
+      for(var j = 2 ; j < i ; j++) {
+         if ( i % j == 0 ) {
+            isPrimeNumber = false;
+            break;
          }
       }
-      res.end('Hello World : ' + primeNumbers);
-
-   }).listen(3000);
+      if ( isPrimeNumber ) {
+         primeNumbers.push(i);
+      }
+   }
+   
+   cluster.worker.kill();
 }
 
