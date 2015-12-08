@@ -1,11 +1,5 @@
 /**
- * pm2를 이용해서 클러스터로 소수 출력 서비스
- * 
- * pm2로 실행시키기
- * $ pm2 start primenumber_pm2.js -i 0
- * 
- * 콘솔 로그 보기 
- * $ pm2 logs
+ * 클러스터로 소수 출력 서비스
  */
 var http = require('http');
 var cluster = require('cluster');
