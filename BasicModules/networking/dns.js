@@ -7,19 +7,17 @@ dns.lookup('www.google.com', function(err, addresses, family) {
       return;
    }
 
-   console.log('addresses :', addresses, ' family : ', family);
+   console.log('lookup :', addresses, ' family : ', family);
 });
 
-
-dns.resolve4('www.google.com', function (err, addresses) {
+// resove - Connect DNS Server
+dns.resolve('www.google.com', function (err, addresses) {
    if (err) {
       console.error('resolve4 Error : ', err);
       return;
    }
-   
-   console.log(addresses);
+   console.log('resolve4 : ', addresses);
 });
-
 
 dns.reverse('74.125.203.147', function(err, hostnames) {
    if ( err ) {
@@ -27,8 +25,4 @@ dns.reverse('74.125.203.147', function(err, hostnames) {
       return;
    }
    console.log('reverse : ', hostnames);
-});
-
-dns.lookupService('74.125.203.147', 80,function(err, hostname, service) {
-   console.log(err, hostname, service);
 });

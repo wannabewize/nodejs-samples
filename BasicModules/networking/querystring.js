@@ -30,3 +30,14 @@ var members = parsed2['member']; // 배열
 for ( var i = 0 ; i < members.length ; i++ ) {
    console.log(members[i]);
 } 
+
+// Custom separatoer, equal symbol
+console.log(querystring.parse('name1*value1^name2*value2', '^', '*'));
+
+// 쿼리 문자열 만들기
+var queryObj = {
+   name : 'IU',
+   best : '좋은날'
+};
+var queryStr = querystring.stringify(queryObj);
+console.log('stringify : ', queryStr);
