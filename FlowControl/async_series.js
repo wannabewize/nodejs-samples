@@ -1,14 +1,14 @@
 var async = require('async');
 
 async.series([
-      function(callback) {
+      function task1(callback) {
          console.log('태스크 1 시작');
          setTimeout(function() {
             console.log('태스크 1 종료');
             callback(null, '태스크 1 결과');
          }, 3000);         
       },
-      function(callback) {
+      function task2(callback) {
          console.log('태스크 2 시작');
          setTimeout(function() {
             console.log('태스크 2 종료');
@@ -22,7 +22,7 @@ async.series([
          console.error('에러 : ', err);
          return;
       }
-      console.log('모든 태스크 종료, 결과 : ', results);
+      console.log('모든 태스크 종료, 결과 : ', results);      
    }
 );
 
