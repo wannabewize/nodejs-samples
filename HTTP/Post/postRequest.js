@@ -25,8 +25,6 @@ function handlePostReqeust(req, res) {
       var parsed = query.parse(buffer);      
       // JSON 형태로 출력      
       res.end(JSON.stringify(parsed));
-      
-      
    });
 }
 
