@@ -1,17 +1,15 @@
 var http = require('http');
 var formidable = require('formidable');
-var util = require('util');
+
+// 업로드 파일 폴더 확인
 var fs = require('fs');
-
-// 업로드 된 파일 경로
-var uploadDir = __dirname + '/files';
-
+var uploadDir = __dirname + '/upload';
 try {
    fs.accessSync(uploadDir, fs.W_OK);
-   console.log('files 폴더 확인');
+   console.log('upload 폴더 확인');
 }
 catch ( err ) {
-   console.log('files 폴더를 생성하세요');
+   console.log('upload 폴더를 생성하세요');
    process.exit();
 }
 
@@ -35,9 +33,14 @@ function handlePostRequest(req, res) {
          res.end();
       }
       else {
+         console.log('== Fields ==');
+         for ( var key in fields ) {
+            console.log('Field name : ', key, ' value : ', fields[key]);
+         }
+         
+         console.log('== Files ==');
          for ( var key in files ) {
             var file = files[key];
-            console.log('== Upload File ==');
             // console.log(file);
             console.log('Key : ', key);
             console.log('path : ', file.path);
@@ -50,6 +53,6 @@ function handlePostRequest(req, res) {
    });   
 }
 
-server.listen(3001, function() {
-   console.log('Server is running on 3001');   
+server.listen(3000, function() {
+   console.log('Server is running on 3000');   
 });
