@@ -28,19 +28,19 @@ function addNewMovie(req, res) {
       var title = data.title;
       var director = data.director;
 
-      if (title && director) {
-         // 목록 저장
-         movieList.push({ title: data.title, director: data.director });
-				
-         // Redirect
-         res.statusCode = 302;
-         res.setHeader('Location', '.');
-         res.end();
-      }
-      else {
+      if (! title || ! director) {
          res.statusCode = 400;
          res.end('Bad Request : title, director 정보 부족');
+         return;
       }
+      
+      // 목록 저장
+      movieList.push({ title: data.title, director: data.director });
+         
+      // Redirect
+      res.statusCode = 302;
+      res.setHeader('Location', '.');
+      res.end();
    });
 }
 
