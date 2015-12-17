@@ -4,7 +4,7 @@ app.listen(3000, function () {
    console.log('Server is listening @3000');
 });
 
-// b는 옵셔널
+// b는 옵셔널 /abcd, /acd
 app.get('/ab?cd', function (req, res) {
    res.send('ab?cd');
 });
