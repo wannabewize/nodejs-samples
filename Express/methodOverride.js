@@ -11,7 +11,7 @@ app.post('/', function(req, res) {
    res.send('Post Request');
 });
 
-app.delete('/resource', function(req, res) {
+app.delete('/', function(req, res) {
    res.send('Delete Request');
 });
 
@@ -22,7 +22,7 @@ function showForm(req, res) {
    body += '<head><meta charset="UTF-8"></head>';
    body += '<body>';
    body += '<h3>Method override Sample</h3>';
-   body += '<form method="POST" action="/" >';
+   body += '<form method="POST" action="/?_method=DELETE" >';
    body += '<input type="hidden" name="_method" value="DELETE">';
    body += '<button type="submit">Delete</button>';
    body += '</form>';
