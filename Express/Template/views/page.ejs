@@ -1,0 +1,26 @@
+<html>
+<body>
+<%
+   var data = {title:'EJS Example', link:'./link'}
+%>
+<h3>Link</h3>
+<div>
+<a href="<%= data.link %>">link1</a>
+</div>
+<ul>
+<%
+   var i = 0;
+   var j = i + 1; 
+%>
+
+<% for ( var i = 0 ; i < 10 ; i++) { %>
+    <li><a href="./page_<%= i %>"> <%= i %> </a> </li>
+<% } %>
+</ul>
+<% var tag = 'h1' %>
+<<%= tag %>>
+TAG 만들기
+</<%= tag %>/>
+<%= undefinedVar %>
+</body>
+</html>
