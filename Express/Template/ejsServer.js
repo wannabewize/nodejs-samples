@@ -3,6 +3,7 @@ var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 
+
 var data = [
 	{title:'야구', image:'baseball.png'},
 	{title:'농구', image:'basketball.png'},
