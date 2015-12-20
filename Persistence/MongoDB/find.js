@@ -1,5 +1,6 @@
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/Moviest';
+var ObjectID = require('mongodb').ObjectID;
 var db;
 
 MongoClient.connect(url, function (err, database) {
@@ -23,7 +24,6 @@ MongoClient.connect(url, function (err, database) {
       console.error('Error : ', err);      
    });
 });
-
 
 
 function executeFindExample() {
@@ -65,5 +65,22 @@ function executeFindExample() {
    movies.find({}).limit(2).toArray(function (err, docs) {
       console.log('== limit');
       console.log(docs);
+   });
+   
+   // ObjecdtID
+   movies.findOne({}).then(function(result) {
+      var objectIDStr = result._id.toString();
+      
+      movies.findOne({_id:objectIDStr}).then(function(result) {
+         console.log('Find By ID Str : \n', result);
+      }, function(err) {
+         console.log('Find By ID Str Error : ', err);
+      });
+      
+      movies.findOne({_id:new ObjectID(objectIDStr)}).then(function(result) {
+         console.log('Find By ObjectID : \n', result);
+      }, function(err) {
+         console.log('Find By ObjectID Error : ', err);
+      });
    });
 }
