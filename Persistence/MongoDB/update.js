@@ -17,7 +17,7 @@ MongoClient.connect(url, function (err, database) {
       { title: '아바타', director: '제임스 카메론' },
       { title: '다크 나이트', director: '크리스토퍼 놀란', year: 2008 },
       { title: '인터스텔라', director: '크리스토퍼 놀란', year: 2014 },
-      { _id:1, title: '스타워즈7', director: 'JJ 에이브럼스', year: 2015 }]);
+      { title: '스타워즈7', director: 'JJ 에이브럼스', year: 2015 }]);
    promise.then(function (results) {
       console.log('초기 데이터 입력 성공');
       executeUpdateExample();
