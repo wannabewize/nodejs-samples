@@ -1,15 +1,19 @@
 {
-  "name": "mobile-samples",
+  "name": "mobile_samples",
   "version": "1.0.0",
   "description": "",
   "main": "jsonParsing.js",
+  "dependencies": {
+    "jstoxml": "^0.2.3",
+    "libxmljs": "^0.16.1",
+    "node-xml": "^1.0.2",
+    "xml": "^1.0.0",
+    "xml2js": "^0.4.15"
+  },
+  "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
-  "license": "ISC",
-  "dependencies": {
-    "node-xml": "^1.0.2",
-    "xml2js": "^0.4.13"
-  }
+  "license": "ISC"
 }
