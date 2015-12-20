@@ -35,4 +35,12 @@ MongoClient.connect(url, function (err, db) {
          console.log('INERT Many 성공');
          console.log('새로 추가한 항목들 ObjectID : ', results.insertedIds);      
    });
+   
+   // Promise Based  
+   movies.insert({ title:'스타워즈7', director:'JJ 에이브럼스', year:2015}).then(function(results) {
+      // console.log('== Resolved\n', results);
+      console.log('Promise Based Insert Result : ', results);
+   }, function(err) {
+      console.log('== Rejected\n', err);      
+   });
 });
