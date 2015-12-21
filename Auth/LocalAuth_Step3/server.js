@@ -28,31 +28,29 @@ app.use(passport.session());
 
 // Local Strategy
 var LocalStrategy = require('passport-local').Strategy;
-var strategy = new LocalStrategy({ passReqToCallback: true },
-   function (req, username, password, done) {
-
-      var user = User.findOne(username);
-      if (!user) {
-         return done(null, false, { message: '사용자가 없습니다.' });
-      }
-      else if (user.password != password) {
-         return done(null, false, { message: '비밀번호가 다릅니다.' });
-      }
-
-      done(null, user);
+var strategy = new LocalStrategy(function (username, password, done) {
+   var user = User.findOne(username);
+   if (!user) {
+      return done(null, false, { message: '사용자가 없습니다.' });
    }
-   );
+   else if (user.password != password) {
+      return done(null, false, { message: '비밀번호가 다릅니다.' });
+   }
+
+   done(null, user);
+});
 passport.use(strategy);
 
-// 세션에 기록하기
+// 세션에 기록하기 - id로 기록
 passport.serializeUser(function (user, done) {
    console.log('serializeUser', user);
    done(null, user.id);
 });
 
-// 세션에서 사용자 정보 얻어오기
+// 세션에서 사용자 id 얻기
 passport.deserializeUser(function (id, done) {
    console.log('deserializeUser', id);
+   // id에서 사용자 정보 얻기
    var user = User.findOne(id);
    done(null, user);
 });

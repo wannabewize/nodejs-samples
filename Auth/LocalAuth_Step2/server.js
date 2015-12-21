@@ -21,7 +21,7 @@ var session = require('express-session');
 app.use(session({
    secret: 'Secret Key',
    resave: false,
-   saveUninitialized: true
+   saveUninitialized: false
 }));
 
 var passport = require('passport');
@@ -52,14 +52,14 @@ passport.use(strategy);
 // 세션에 기록하기
 passport.serializeUser(function (user, done) {
    console.log('serializeUser', user);
-   done(null, user.id);
+   done(null, user); // Session에 user 정보 기록
 });
 
 // 세션에서 사용자 정보 얻어오기
-passport.deserializeUser(function (id, done) {
-   //serializeUser에서 user.id로 반환했으므로 user.id가 온다. 객체로 설정 가능
-   console.log('deserializeUser', id);
-   done(null, defaultUser);
+passport.deserializeUser(function (user, done) {
+   //serializeUser에서 user를 세션에 저장했으므로 user 정보가 전달된다.
+   console.log('deserializeUser', user);
+   done(null, user);
 });
 
 // 로그인 페이지
