@@ -1,9 +1,17 @@
 var assert = require('assert');
 
+
+console.log('== True 판단하기')
+var trueValue = true;
+assert(trueValue);
+assert.ok(trueValue, '참 판단');
+
+var falseValue = false
+assert(falseValue, 'False Value');
+
+
 var value = 0;
 assert.equal(value, 0, 'value는 0 이어야 함');
-
-assert.ok(true, 'value가 유효한 값');
 
 var obj1 = {
    value : 0
