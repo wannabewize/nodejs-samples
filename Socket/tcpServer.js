@@ -1,22 +1,22 @@
 var net = require('net');
 var server = net.createServer(function (socket) {
-   console.log('Connect Event ', socket.remoteAddress);
-
+   console.log('Socket Client connect From ', socket.remoteAddress);
+   socket.write('Welcome to Socket Server\n');
+   
    // 클라이언트의 데이터 전송 이벤트
-   socket.on('data', function (data) {      
-      console.log('Data from : ' + socket.remoteAddress + ' data : ' + data);
-      socket.write(data);
+   socket.on('data', function (data) {    
+      var textMsg = data.toString();
+      console.log('Client send : ', textMsg);  
    });
    
    // 접속 종료 이벤트
    socket.on('end', function () {
-      console.log('Socket End Event');
-   })
+      console.log('Client disconnected');
+   });
 
    socket.on('close', function () {      
       console.log('Socket Close Event');
       // 클라이언트가 접속을 종료하면 서버도 종료 시도
-      server.close();
    });
 
    socket.on('error', function (error) {
