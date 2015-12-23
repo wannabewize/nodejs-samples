@@ -1,0 +1,14 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script src="http://code.jquery.com/jquery-1.11.1.js"></script>
+</head>
+<body>
+<ul>
+<% chatrooms.forEach(function(item) { %>
+   <li> <a href="/chatroom/<%=item.roomid%>"><%= item.name %> </a></li>
+<% });%>
+</ul>
+</body>
+</html>
