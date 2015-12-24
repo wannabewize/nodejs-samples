@@ -1,7 +1,9 @@
 var dgram = require('dgram');
 
 var socket = dgram.createSocket('udp4');
-socket.bind(3000);
+socket.bind(function() {
+   socket.addMembership('224.0.0.114');
+});
 
 socket.on('message', function(msg, rinfo) {
 	console.log('Message Event\n', 'Message : ', msg.toString(), ' from : ', rinfo.address, rinfo.port);

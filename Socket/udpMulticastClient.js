@@ -25,4 +25,6 @@ socket.on('message', function(msg, rinfo) {
    console.log(rinfo.address,' >> ', msg.toString());   
 });
 
+socket.bind(3000);
+
 
