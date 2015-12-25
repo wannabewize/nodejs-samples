@@ -7,6 +7,11 @@ var server = http.createServer(function (req, res) {
 
 server.listen(3000);
 
+// Socket.IO Server
+// var IOServer = require('socket.io');
+// var io = new IOServer(server);
+
+// short form
 var io = require('socket.io')(server);
 io.on('connection', function (socket) {
    console.log('클라이언트 접속');
