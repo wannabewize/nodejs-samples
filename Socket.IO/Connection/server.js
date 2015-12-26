@@ -18,8 +18,8 @@ app.get('/', function(req, res) {
 // server.listen(3000);
 
 // Socket.IO Server
-// var IOServer = require('socket.io');
-// var io = new IOServer(server);
+// var Server = require('socket.io');
+// var io = new Server();
 
 // short form
 var io = require('socket.io')(server);
