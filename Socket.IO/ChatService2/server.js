@@ -1,3 +1,8 @@
+/**
+ * Socket.IO 채팅 서비스
+ * 네임 스페이스 적용 예제
+ * 서버 콘솔에서 키입력 - 클라이언트의 경고창으로 뜨기 
+ */
 var express = require('express');
 var http = require('http');
 
@@ -6,7 +11,7 @@ var server = http.createServer(app);
 server.listen(3000);
 
 app.get('/', function(req, res) {
-   res.sendFile(__dirname + '/chat_client.html');
+   res.sendFile(__dirname + '/client.html');
 });
 
 // 닉네임 기능
@@ -18,7 +23,7 @@ io.on('connection', function(socket){
    // 닉네임 등록. socket.id로 구분     
    var nickName = 'Guest' + Math.floor(Math.random()*100);
    nickNames[socket.id] = nickName; 
-   console.log(nickNames + ' connected');
+   console.log(nickName + ' connected');
    
 	// 개별 클라이언트에 환영 메세지
 	socket.emit('serverMessage', {nick:'Admin', msg:'Welcome to Socket.IO Chat-Service, ' + nickName});
@@ -27,7 +32,7 @@ io.on('connection', function(socket){
 	socket.on('clientMessage', function(data) {
       var msg = data['message'];
       var sender = nickNames[socket.id];      
-		console.log('message from ', sender, msg);		
+		console.log(sender + ' >> '+ msg);		
       io.emit('serverMessage', {nick:sender, msg:msg});
 	});
    	
@@ -36,17 +41,18 @@ io.on('connection', function(socket){
 	});
 });
 
-// 네임 스페이스
-var mySpace = io.of('/myNamespace');
+// 네임 스페이스 - 서버의 콘솔 입력을 시스템 메세지로 사용
+var is = process.stdin;
+var system = io.of('/system');
+is.on('data', function(chunk) {
+   system.emit('message', chunk.toString());
+});   
 
-mySpace.on('connection', function(socket){
-   console.log('mySpace 에 접속됨');
+system.on('connection', function(socket){
+   console.log('system namespace에 접속');
 
-   socket.on('howAreYou', function() {
-      console.log('Fine thank and you?');
+   socket.on('ping', function() {
+      console.log('Clinet - System namespace ping');
    });
-   
-   mySpace.emit('hi', {message:'Hello everyone!'});
-   socket.emit('hi', {message:'Hello, stranger'});
    
 });
