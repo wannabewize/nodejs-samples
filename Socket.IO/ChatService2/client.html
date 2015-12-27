@@ -51,8 +51,7 @@
    <script>
    // html 모두 로딩 후 스크립트 로딩
 	var socket = io();
-   
-     
+        
 	socket.on('connect', function() {
 		console.log('connect');
 	});
@@ -84,6 +83,7 @@
       console.log('System Namespace에 연결');
    });
    
+   // 시스템 메세지는 경고창으로 출력
    system.on('message', function(msg) {
       alert('System Message : ' + msg);
    });
