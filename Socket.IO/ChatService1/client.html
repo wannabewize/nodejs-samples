@@ -58,7 +58,7 @@
 	});
   
   // 서버에서 보낸 이벤트
-	socket.on('serverMessage', function(data) {
+	socket.on('chatMessage', function(data) {
 		var msg = data['msg'];
       var nick = data['nick'];
       var str = nick + ' : ' + msg;
@@ -71,7 +71,7 @@
       // 입력된 문자열
 		var userInput = $('#userInput').val();
       // 서버로 이벤트 발생
-      socket.emit('clientMessage', {message:userInput});
+      socket.emit('chatInput', {message:userInput});
       
 		$('#userInput').val('');
 		return false; // refresh 방지

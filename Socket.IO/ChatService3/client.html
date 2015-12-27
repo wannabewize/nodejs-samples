@@ -32,14 +32,17 @@
 		console.log('connect');
 	});
   
-	socket.on('serverMessage', function(data) {
-		var msg = data['message'];
-		$('#messages').append($('<li>').text(msg));
+	socket.on('chatMessage', function(data) {
+		var msg = data['msg'];
+      var nick = data['nick'];
+      var str = nick + ' : ' + msg;
+      // 채팅 메세지
+		$('#messages').append($('<li>').text(str));
 	});
   
 	$('#chatInput').submit(function() {
 		var userInput = $('#userInput').val();
-      socket.emit('clientMessage', {message:userInput});
+      socket.emit('chatInput', {message:userInput});
       
 		$('#userInput').val('');
 		return false; // refresh 방지
