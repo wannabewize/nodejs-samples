@@ -23,7 +23,6 @@ function showForm(req, res) {
    body += '<body>';
    body += '<h3>Method override Sample</h3>';
    body += '<form method="POST" action="/?_method=DELETE" >';
-   body += '<input type="hidden" name="_method" value="DELETE">';
    body += '<button type="submit">Delete</button>';
    body += '</form>';
    body += '</body></html>';
