@@ -1,5 +1,5 @@
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('moviest2', 'root', '', {});
+var sequelize = new Sequelize('moviest', 'root', '1234', {});
 
 var Movie = sequelize.define('movie', {
    title : { type:Sequelize.STRING },
@@ -58,9 +58,9 @@ function findMovies() {
 
 function modify() {
    Movie.update({
-      synopsis:'시놉시스'
+      synopsis:'인류의 마지막 희망, 행성 판도라! 이 곳을 정복하기 위한 ‘아바타 프로젝트’가 시작된다!'
    }, {
-      where : {}
+      where : {title:'아바타'}
    }).then(function(result) {
       console.log(result);
    });
@@ -69,6 +69,6 @@ function modify() {
 
 function deleteMovie() {
    Movie.destroy({
-      where:{}
+      where:{year:{$lt:2000}}
    }).then(resolved, rejected);
 }
