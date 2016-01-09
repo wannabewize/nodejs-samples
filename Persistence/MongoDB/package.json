@@ -8,7 +8,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^2.0.52",
+    "mongodb": "^2.1.3",
     "mongoose": "^4.3.3"
   },
   "description": ""

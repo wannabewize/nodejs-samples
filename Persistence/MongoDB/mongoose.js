@@ -1,9 +1,9 @@
 var Movie = require('./model').Movie;
 
 // saveInitialData();
-// findData();
+findData();
 // modifyData();
-removeData();
+// removeData();
 
 function resolved(result) {
    console.log('Resolved : ', result);
@@ -26,7 +26,8 @@ function saveInitialData() {
 
 
    // Promise Based
-   var starwars = new Movie({title:'스타워즈7', director:'JJ 에이브럼스', year:2015});
+   // notDefined는 스키마에 정의된 항목이 아니다. - 저장 안됨
+   var starwars = new Movie({title:'스타워즈7', director:'JJ 에이브럼스', year:2015, notDefined:true});
    starwars.save().then(function(product) {
       console.log('Save Resolved : ', product);
    }, function rejected(err) {
@@ -39,16 +40,23 @@ function saveInitialData() {
 
 
 function findData() {
+   // 콜백을 이용한 검색
+   Movie.find({year:{$gt:2010}}, function(err, docs) {
+      console.log(docs);
+   });   
+      
+   // 쿼리 객체 - exec를 이용하는 방법
    Movie.findOne({title:'인터스텔라'}).exec(function(err, docs) {
       console.log(docs);
    });   
-   
+
    Movie.where('year').gt(2010).exec(function(err, docs) {
       console.log('year > 20!0 : ', docs);
    });
 }
 
 function modifyData() {
+   // 도큐먼트 수정 후 저장 
    Movie.findOne({title:'아바타'}).exec(function(err, doc) {
       if ( doc ) {
          doc.title = 'Avata';
@@ -62,6 +70,7 @@ function modifyData() {
 }
 
 function removeData() {
+   // 도큐먼트 삭제
    Movie.findOne({title:'아바타'}).exec(function(err, doc) {
       if ( doc ) {
          doc.title = 'Avata';
