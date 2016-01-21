@@ -28,5 +28,5 @@ winston.add(winston.transports.DailyRotateFile, {dataPattenr:'yyyy-MM-dd', filen
 
 logger.info('Daily Info Message');
 logger.warn('Daily Wraning Message');
-logger.errro('Daily Error Message');
+logger.error('Daily Error Message');
 
