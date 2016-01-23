@@ -47,7 +47,7 @@ passport.use(strategy);
 
 // Custom Resonse
 app.post('/login', function(req, res) {
-   passport.authenticate('local', function(err, user, msg, statusCode) {
+   passport.authenticate('local', function(err, user, msg) {
       if ( ! user ) {
          res.status(401).json(msg);
          return;         
