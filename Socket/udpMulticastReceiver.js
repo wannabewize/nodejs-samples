@@ -1,15 +1,16 @@
 var dgram = require('dgram');
 var socket = dgram.createSocket('udp4');
 
-socket.bind(3000);
+var address = '239.255.255.255';
+var port = 49001;
 
-socket.on('listening', function() {
-   socket.addMembership('224.0.0.114');   
+socket.bind(port);
+
+socket.on('listening', function () {
+    console.log('Multicast packet from ' + address + ' Receiving.');
+    socket.addMembership(address);
 });
 
-socket.on('message', function(msg, rinfo) {
-   console.log(rinfo.address,' >> ', msg.toString());   
+socket.on('message', function (msg, rinfo) {
+    console.log(rinfo.address, ' >> ', msg.toString());
 });
-
-
-
