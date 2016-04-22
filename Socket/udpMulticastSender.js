@@ -1,6 +1,8 @@
 var dgram = require('dgram');
 
 var socket = dgram.createSocket('udp4');
+var address = '239.255.255.255';
+var port = 49001;
 
 // 서버에서 작성한 내용을 클라이언트로 멀티 캐스트
 var is = process.stdin;
@@ -13,7 +15,7 @@ is.on('data', function(chunk) {
       socket.close();
    }
    else {      
-      socket.send(msg, 0, msg.length, 3000, '224.0.0.114', function(err) {
+      socket.send(msg, 0, msg.length, port, address, function(err) {
          if ( err ) {
             console.error('UDP Message send error.', err);   
             return;
