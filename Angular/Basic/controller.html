@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script>
+        var exampleApp = angular.module('ExampleApp', []);
+        exampleApp.controller('DefaultCtrl', function() {
+            console.log('Default Controller works');
+        });
+    </script>
+</head>
+<body ng-app="ExampleApp">
+<div ng-controller="DefaultCtrl">
+    <h1>Controller Example</h1>
+</div>
+
+</body>
+</html>

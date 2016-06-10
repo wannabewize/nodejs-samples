@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script>
+        var exampleApp = angular.module('ExampleApp', []);
+        exampleApp.controller('DefaultCtrl', function($scope) {
+
+            $scope.title = 'Angular Scope Example';
+
+            $scope.hello = 'Lorem ipsum dolor sit amet, ligula suspendisse nulla pretium, rhoncus tempor fermentum, enim integer ad vestibulum volutpat.';
+
+            var count = 0;
+
+            $scope.sayHello = function() {
+                console.log('Welcome to Angular Scope Example ', count++);
+            };
+        });
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+<h1>{{title}}</h1>
+
+<div>
+    {{hello}}
+    {{sayHello()}}
+</div>
+
+</body>
+</html>

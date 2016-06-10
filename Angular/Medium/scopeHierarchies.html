@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Scope Example</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script>
+        var exampleApp = angular.module('ExampleApp', []);
+
+        exampleApp.controller('FirstCtrl', ['$scope', function($scope) {
+            $scope.greeting = "Good Morning";
+        }]).controller('SecondCtrl', function($scope) {
+            $scope.greeting = "Good Afternoon";
+        });
+
+        exampleApp.controller('OuterCtrl', function($scope) {
+            $scope.greeting = "Good Evening";
+        });
+
+        exampleApp.controller('InnerCtrl', function($scope) {
+            $scope.greeting = "Good Bye";
+        });
+
+    </script>
+</head>
+<body>
+    <div ng-controller="FirstCtrl">
+        <h3>{{greeting}}</h3>
+    </div>
+
+    <div ng-controller="SecondCtrl">
+        <h3>{{greeting}}</h3>
+    </div>
+
+    <div ng-controller="OuterCtrl">
+        <h3>{{greeting}}</h3>
+
+        <div ng-controller="InnerCtrl">
+            <h3>{{greeting}}</h3>
+        </div>
+
+        <h3>{{greeting}}</h3>
+    </div>
+</body>
+</html>
