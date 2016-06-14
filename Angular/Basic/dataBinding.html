@@ -1,15 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
+    <title>Angular Data Binding example</title>
     <script src="../bower_components/angular/angular.js"></script>
 </head>
+<body ng-app ng-init="data1='Hello';data2=1">
 
-<body ng-app>
-<div>
-    <h1>{{sayHello}}</h1>
-    <p>{{1+2}}</p>
-</div>
+    <h1>Text Model</h1>
+    <div>
+        Input : <input type="text" ng-model="data1">
+    </div>
+    <div>
+        Follow : <input type="text" ng-model="data1">
+    </div>
 
+    <h1>Next Number</h1>
+    <div>
+        Input : <input type="number" ng-model="data2">
+    </div>
+    <div>
+        Next Number : <input type="number" ng-model="data2 + 1" readonly>
+    </div>
 </body>
-
 </html>
