@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TodoExample">
+<head>
+    <meta charset="UTF-8">
+    <title>Todo Example</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script>
+        angular.module('TodoExample', []).controller('TodoCtrl', function($scope) {
+            $scope.todos = [{title:'todo1', done:false}]
+        });
+    </script>
+</head>
+<body ng-controller="TodoCtrl">
+<h1>Todos</h1>
+<ul>
+    <li ng-repeat="todo in todos">{{todo.title}} <input type="checkbox" value="{{todo.done}}"></li>
+</ul>
+
+<ng-form>
+    <input type="text" ng-model="title">
+    <input type="submit">
+</ng-form>
+
+</body>
+</html>

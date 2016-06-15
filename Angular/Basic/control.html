@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Control Example</title>
+    <script src="../bower_components/angular/angular.js"></script>
+
+</head>
+<body ng-app ng-init="data=['a','b','c','d','e'];good=false">
+
+
+<h1>Loop Example</h1>
+<ul>
+    <li ng-repeat="item in data">{{item}}</li>
+</ul>
+
+
+<h1>Conditional Example</h1>
+
+<div ng-if="good">I'm Good.</div>
+<div ng-if="!good">I'm not Good.</div>
+
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Form Example</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script>
+        var app = angular.module('ExampleApp',[]);
+
+        app.controller('DefaultCtrl', function($scope) {
+            $scope.addMovie = function(data) {
+                if ( data.num > 0 ) {
+                    console.log('Positive Number : ', data.num, ' - ', data.text);
+                }
+                else {
+                    console.log('Negative or Zero');
+                }
+
+            }
+        });
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+
+<h1>Form Example</h1>
+
+<form class="css-form">
+    Text : <input type="text" ng-model="data.text" /><br>
+    Number(>0) : <input type="number" ng-model="data.num" required /><br>
+    <input type="reset" />
+    <input type="submit" ng-click="addMovie(data)" />
+</form>
+
+</body>
+</html>
