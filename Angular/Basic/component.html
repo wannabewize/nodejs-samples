@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Component Example</title>
+    <script src="../bower_components/angular/angular.js"></script>
+    <script>
+        var app = angular.module('ExampleApp', []);
+        app.component('sayHello', {
+            template : 'Hello, {{$ctrl.message}}',
+            controller : function() {
+                this.message = 'Angular';
+            }
+        });
+
+        app.component('howAreYou', {
+            template : '{{ message }}',
+            controller : howAreYou
+        });
+
+        function howAreYou($scope) {
+            $scope.message = 'How are you?';
+        }
+    </script>
+</head>
+<body>
+
+<h1>Component Exampel1</h1>
+<say-hello></say-hello>
+
+<h1>Component Exampel2</h1>
+<how-are-you></how-are-you>
+
+</body>
+</html>
