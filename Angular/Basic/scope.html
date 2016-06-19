@@ -6,7 +6,7 @@
     <script src="../bower_components/angular/angular.js"></script>
     <script>
         var exampleApp = angular.module('ExampleApp', []);
-        exampleApp.controller('DefaultCtrl', function($scope) {
+        exampleApp.controller('DefaultCtrl', ['$scope', function($scope) {
 
             $scope.title = 'Angular Scope Example';
 
@@ -17,7 +17,7 @@
             $scope.sayHello = function() {
                 console.log('Welcome to Angular Scope Example ', count++);
             };
-        });
+        }]);
     </script>
 </head>
 <body ng-controller="DefaultCtrl">
