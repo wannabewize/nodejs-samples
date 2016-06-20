@@ -7,14 +7,14 @@
     <script>
         var app = angular.module('ExampleApp', []);
         app.component('sayHello', {
-            template : 'Hello, {{$ctrl.message}}',
-            controller : function() {
-                this.message = 'Angular';
+            template : 'Hello, {{message}}',
+            controller : function($scope) {
+                $scope.message = 'Angular';
             }
         });
 
         app.component('howAreYou', {
-            template : '{{ message }}',
+            templateUrl: 'partial/helloComponent.html',
             controller : howAreYou
         });
 
@@ -25,10 +25,10 @@
 </head>
 <body>
 
-<h1>Component Exampel1</h1>
+<h1>Component Example1</h1>
 <say-hello></say-hello>
 
-<h1>Component Exampel2</h1>
+<h1>Component Example2</h1>
 <how-are-you></how-are-you>
 
 </body>
