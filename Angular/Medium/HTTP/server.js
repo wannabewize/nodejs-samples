@@ -24,6 +24,4 @@ app.post('/greeting', function(req, res) {
 	}
 });
 
-app.use(require('./movieRouter'));
-
 app.listen(3000);
