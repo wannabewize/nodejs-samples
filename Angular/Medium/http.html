@@ -5,11 +5,12 @@
     <title>HTTP Service example</title>
     <script src="../bower_components/angular/angular.js"></script>
     <script>
-        angular.module('ExampleApp', []).controller('DefaultCtrl', ['$scope', '$http', function($scope, $http) {
+        var app = angular.module('ExampleApp', []);
+        app.controller('DefaultCtrl', ['$scope', '$http', function($scope, $http) {
             $scope.sendGetRequest = function() {
                 var url = 'http://localhost:3000/greeting';
                 $http.get(url).then(function onSuccess(response){
-                    console.log('Success : ', response);
+                    console.log('Success. hello : ', response.data.hello);
                     $scope.getResult = response.data;
                 }, function onFailure(error) {
                     console.log('Fail : ', error);
