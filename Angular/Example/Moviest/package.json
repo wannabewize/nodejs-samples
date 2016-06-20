@@ -1,8 +1,8 @@
 {
-  "name": "movies",
+  "name": "moviest",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server.js",
   "dependencies": {
     "body-parser": "^1.15.2",
     "express": "^4.14.0"
