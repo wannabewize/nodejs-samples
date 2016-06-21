@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebook Example</title>
+    <script src="//connect.facebook.net/en_US/sdk.js"></script>
+    <script src="../bower_components/angular/angular.js"></script>
+
+    <script>
+        var app = angular.module('ExampleApp', []);
+
+        app.factory('facebookService', function ($q) {
+            var service = {};
+
+            service.getMyLastName = function () {
+                var deferred = $q.defer();
+                FB.api('/me', {
+                    fields: 'last_name'
+                }, function (response) {
+                    if (!response || response.error) {
+                        deferred.reject('Error occured');
+                    } else {
+                        deferred.resolve(response);
+                    }
+                });
+                return deferred.promise;
+            };
+
+            return service;
+        });
+
+        app.controller('DefaultCtrl', function ($scope, facebookService) {
+            $scope.getMyLastName = function () {
+                facebookService.getMyLastName()
+                        .then(function (response) {
+                                    $scope.last_name = response.last_name;
+                                }
+                        );
+            };
+        });
+
+        app.run(function($window) {
+            $window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1866106250330238',
+                    status: true,
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v2.4'
+                });
+            };
+        });
+
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+
+<fb:login-button show-faces="true" max-rows="1"
+size="large"></fb:login-button>
+
+<input type="button" text="My Name" ng-click="getMyLastName()">
+
+MyName : {{last_name}}
+
+</body>
+</html>

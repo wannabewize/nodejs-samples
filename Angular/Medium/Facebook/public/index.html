@@ -1,72 +1,78 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" ng-app="ExampleApp">
 <head>
     <meta charset="UTF-8">
     <title>Facebook Example</title>
+    <script src="//connect.facebook.net/en_US/sdk.js"></script>
+    <script src="bower_components/angular/angular.js"></script>
+    <script>
+        var app = angular.module('ExampleApp', []);
 
+        app.run(function($window) {
+            $window.fbAsyncInit = function () {
+                FB.init({
+                    appId: '1866106250330238',
+                    status: true,
+                    cookie: true,
+                    xfbml: true,
+                    version: 'v2.5'
+                });
+            };
+        });
+
+        app.controller('DefaultCtrl', function ($scope) {
+            $scope.checkLoginState = function() {
+                FB.getLoginStatus(function(response) {
+                    console.log('login status : ', response);
+                    if ( response.status == 'connected' ) {
+                        var token = response.authResponse.accessToken;
+                        var expire = response.authResponse.expiresIn;
+                        var userId = response.authResponse.userID;
+                        console.log('token : ', token, 'expire : ', expire, ' userId : ', userId);
+                    }
+                });
+            };
+
+            $scope.login = function() {
+                FB.login(function(response) {
+                    console.log('login result : ', response);
+                }, {scope: 'public_profile, email, publish_actions'});
+            };
+
+            $scope.logout = function() {
+                FB.logout();
+            }
+        });
+
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+
+
+<fb:login-button scope="public_profile,email, publish_actions"></fb:login-button>
+
+<input type="button" ng-click="checkLoginState()" value="Login Check">
+<input type="button" ng-click="login()" value="Custom Login">
+<input type="button" ng-click="logout()" value="Logout">
+
+
+<div>
     <meta property="og:url" content="http://localhost:3000" />
     <meta property="og:title" content="Facebook Test" />
     <meta property="og:description" content="컨텐츠 공유 테스트" />
 
-</head>
-<body>
-<script>
-    window.fbAsyncInit = function() {
-        FB.init({
-            appId      : '1866106250330238',
-            xfbml      : true,
-            version    : 'v2.5'
-        });
-    };
-
-    (function(d, s, id){
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) {return;}
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk.js";
-        fjs.parentNode.insertBefore(js, fjs);
-    }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<script>
-    function checkLoginState() {
-        FB.getLoginStatus(function(response) {
-            console.log('login status : ', response);
-            if ( response.status == 'connected' ) {
-                var token = response.authResponse.accessToken;
-                var expire = response.authResponse.expiresIn;
-                var userId = response.authResponse.userID;
-                console.log('token : ', token, 'expire : ', expire, ' userId : ', userId);
-            }
-        });
-    }
-</script>
-
-<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-</fb:login-button>
-
-<input type="button" onclick="checkLoginState()" value="Login Check">
-<input type="button" onclick="FB.login()" value="Custom Login">
-<input type="button" onclick="FB.logout()" value="Logout">
-
-<div class="fb-share-button" data-href="http://localhost:3000" data-layout="button_count">
-</div>
-
-<div>
-    <div class="fb-share-button" data-href="http://localhost:3000/" data-layout="button_count" data-mobile-iframe="true">
+    <div>
+        <h1>Your Headline</h1>
+        <p>
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget tristique nibh,
+            vel consequat purus. Praesent molestie, turpis ut ultrices commodo, felis arcu cursus enim,
+            vel porttitor ante quam vel lacus. Quisque at laoreet sapien. Proin nec purus dolor. Integer
+            pharetra nec ligula a condimentum. Fusce sem orci, porta ut felis id, commodo imperdiet risus.
+        </p>
+        <div class="fb-share-button" data-href="http://localhost:3000" data-layout="button_count">
+        </div>
     </div>
 </div>
-<div>
-    <h1>Your Headline</h1>
-    <p>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget tristique nibh,
-        vel consequat purus. Praesent molestie, turpis ut ultrices commodo, felis arcu cursus enim,
-        vel porttitor ante quam vel lacus. Quisque at laoreet sapien. Proin nec purus dolor. Integer
-        pharetra nec ligula a condimentum. Fusce sem orci, porta ut felis id, commodo imperdiet risus.
-    </p>
 
-    <!-- Comment #4: Plugin Code -->
-    <div class="fb-quote"></div>
-</div>
 </body>
 </html>
