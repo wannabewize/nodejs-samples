@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular REST Module</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+    <script>
+        var app = angular.module('ExampleApp', ['ngResource']);
+
+        app.factory('Movie', function($resource) {
+            var Movie = $resource('/movies/:item', {item:'@item'}, {post : { method:'POST'} });
+            return Movie;
+        });
+
+        app.controller('DefaultCtrl', function($scope, Movie) {
+            $scope.sendGet = function (path) {
+                console.log('Send get request : ', path);
+
+                if ( path ) {
+                    var detail = Movie.get({item:path});
+                    console.log('/movies/' + path, detail);
+                }
+                else {
+                    var movies = Movie.get();
+                    console.log('/movies : ', movies);
+                }
+            }
+
+            $scope.sendPost = function(path) {
+                console.log('Send Post request : ', path);
+                var res = Movie.post({title:'Titanic', director:'James cameron'});
+                console.log(res);
+            }
+
+            $scope.sendPut = function (path) {
+                console.log('Send Put request : ', path);
+            }
+
+            $scope.sendDelete = function(path) {
+                console.log('Send Delete request : ', path);
+            }
+        });
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+<h1>Angular Resource Example</h1>
+
+<div>
+    <h3>/movies Request</h3>
+    <input type="button" ng-click="sendGet()" value="GET">
+    <input type="button" ng-click="sendPost()" value="POST">
+    <input type="button" ng-click="sendPut()" value="PUT">
+    <input type="button" ng-click="sendDelete()" value="DELETE">
+</div>
+
+<div>
+    <h3>/movies/:item Request</h3>
+    <p>
+    Path : <input type="text" ng-model="path" ng-init="path='Avata'">
+    </p>
+    <input type="button" ng-click="sendGet(path)" value="GET">
+    <input type="button" ng-click="sendPost(path)" value="POST">
+    <input type="button" ng-click="sendPut(path)" value="PUT">
+    <input type="button" ng-click="sendDelete(path)" value="DELETE">
+</div>
+
+<div>
+    <h3>Result</h3>
+    <div id="result">
+
+    </div>
+</div>
+</body>
+</html>
