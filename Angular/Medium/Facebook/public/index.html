@@ -19,11 +19,11 @@
                 });
             };
         });
-
         app.controller('DefaultCtrl', function ($scope) {
             $scope.checkLoginState = function() {
                 FB.getLoginStatus(function(response) {
                     console.log('login status : ', response);
+                    $scope.loginState = JSON.stringify(response);
                     if ( response.status == 'connected' ) {
                         var token = response.authResponse.accessToken;
                         var expire = response.authResponse.expiresIn;
@@ -35,12 +35,44 @@
 
             $scope.login = function() {
                 FB.login(function(response) {
-                    console.log('login result : ', response);
+                    if ( response.status === 'connected') {
+                        var token = response.authResponse.accessToken;
+                        var expire = response.authResponse.expiresIn;
+                        var userId = response.authResponse.userID;
+                        console.log('token : ', token, 'expire : ', expire, ' userId : ', userId);
+                    } else if ( response.status === 'not_authorized') {
+                        console.log('페이스 북에만 로그인 앱에는 로그인 되지 않은 상태');
+                    } else {
+                        console.log('페북에 로그인 되지 않은 상태');
+                    }
                 }, {scope: 'public_profile, email, publish_actions'});
             };
 
             $scope.logout = function() {
-                FB.logout();
+                FB.logout(function(response) {
+                    console.log('Logout : ', response);
+                });
+            };
+
+            $scope.showMyInfo = function() {
+                FB.api('/me', function(response) {
+                    console.log(response);
+                    $scope.myInfo = JSON.stringify(response);
+                });
+            };
+
+            $scope.showPermissions = function() {
+                FB.api('/me/permissions', function(response) {
+                    console.log(response);
+                    $scope.permissions = JSON.stringify(response);
+                });
+            };
+
+            $scope.showToken = function() {
+                FB.getAuthResponse(function(response) {
+                    console.log(response);
+                    $scope.accessToken = JSON.stringify(response);
+                });
             }
         });
 
@@ -49,11 +81,25 @@
 <body ng-controller="DefaultCtrl">
 
 
-<fb:login-button scope="public_profile,email, publish_actions"></fb:login-button>
+<div>
+    <h3>Login/Logout</h3>
+    <fb:login-button scope="public_profile,email, publish_actions"></fb:login-button>
+    <input type="button" ng-click="login()" value="Custom Login" onlogin="checkLoginState()">
+    <input type="button" ng-click="checkLoginState()" value="Login Check">
+    <input type="button" ng-click="logout()" value="Logout">
+    <p>{{loginState}}</p>
+</div>
 
-<input type="button" ng-click="checkLoginState()" value="Login Check">
-<input type="button" ng-click="login()" value="Custom Login">
-<input type="button" ng-click="logout()" value="Logout">
+<div>
+    <h3>Graph</h3>
+    <input type="button" ng-click="showMyInfo()" value="me">
+    <p>{{myInfo}}</p>
+    <input type="button" ng-click="showPermissions()" value="Permissions">
+    <p>{{permissions}}</p>
+    <input type="button" ng-click="showToken()" value="Access Token">
+    <p>{{accessToken}}</p>
+</div>
+
 
 
 <div>
@@ -62,7 +108,7 @@
     <meta property="og:description" content="컨텐츠 공유 테스트" />
 
     <div>
-        <h1>Your Headline</h1>
+        <h1>Content sharing</h1>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse eget tristique nibh,
             vel consequat purus. Praesent molestie, turpis ut ultrices commodo, felis arcu cursus enim,
