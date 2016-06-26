@@ -9,7 +9,7 @@
         var app = angular.module('ExampleApp', ['ngResource']);
 
         app.factory('Movie', function($resource) {
-            var Movie = $resource('/movies/:item', {item:'@item'}, {post : { method:'POST'} });
+            var Movie = $resource('/movies/:movieId',{movieId:'@id'}, {post : { method:'POST'}, put : { method : 'PUT'} });
             return Movie;
         });
 
@@ -18,7 +18,7 @@
                 console.log('Send get request : ', path);
 
                 if ( path ) {
-                    var detail = Movie.get({item:path});
+                    var detail = Movie.get({id:path});
                     console.log('/movies/' + path, detail);
                 }
                 else {
@@ -34,11 +34,13 @@
             }
 
             $scope.sendPut = function (path) {
-                console.log('Send Put request : ', path);
+                var res = Movie.put({});
+                console.log('Send Put request : ', res);
             }
 
             $scope.sendDelete = function(path) {
-                console.log('Send Delete request : ', path);
+                var res = Movie.delete({});
+                console.log('Send Delete request : ', res);
             }
         });
     </script>
