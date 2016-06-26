@@ -1,7 +1,7 @@
 var app = angular.module('MovieApp', ['ngRoute', 'ngResource']);
 
 app.factory('Movie', function($resource) {
-    var Movie = $resource('/movies/:movieId');
+    var Movie = $resource('/movies/:movieId', {}, {post : { method:'POST'}, put : { method : 'PUT'}} );
     return Movie;
 });
 
