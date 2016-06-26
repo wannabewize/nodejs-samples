@@ -22,30 +22,31 @@
         app.controller('DefaultCtrl', function ($scope) {
             $scope.checkLoginState = function() {
                 FB.getLoginStatus(function(response) {
-                    console.log('login status : ', response);
-                    $scope.loginState = JSON.stringify(response);
-                    if ( response.status == 'connected' ) {
-                        var token = response.authResponse.accessToken;
-                        var expire = response.authResponse.expiresIn;
-                        var userId = response.authResponse.userID;
-                        console.log('token : ', token, 'expire : ', expire, ' userId : ', userId);
-                    }
+                    showLoginState(response);
                 });
             };
 
+            function showLoginState(response) {
+                if ( response.status === 'connected') {
+                    var token = response.authResponse.accessToken;
+                    var expire = response.authResponse.expiresIn;
+                    var userId = response.authResponse.userID;
+                    $scope.loginState = '로그인된 상태 token : ' +  token + ' expire : ' + expire + ' userId : ' + userId;
+                } else if ( response.status === 'not_authorized') {
+                    $scope.loginState = '페이스 북에만 로그인 앱에는 로그인 되지 않은 상태';
+                } else {
+                    $scope.loginState = '페북에 로그인 되지 않은 상태';
+                }
+            }
+
             $scope.login = function() {
                 FB.login(function(response) {
+                    showLoginState(response);
                     if ( response.status === 'connected') {
-                        var token = response.authResponse.accessToken;
-                        var expire = response.authResponse.expiresIn;
-                        var userId = response.authResponse.userID;
-                        console.log('token : ', token, 'expire : ', expire, ' userId : ', userId);
                     } else if ( response.status === 'not_authorized') {
-                        console.log('페이스 북에만 로그인 앱에는 로그인 되지 않은 상태');
                     } else {
-                        console.log('페북에 로그인 되지 않은 상태');
                     }
-                }, {scope: 'public_profile, email, publish_actions'});
+                }, {scope: 'public_profile, email, user_friends, user_posts, user_photos, publish_actions'});
             };
 
             $scope.logout = function() {
@@ -57,23 +58,72 @@
             $scope.showMyInfo = function() {
                 FB.api('/me', function(response) {
                     console.log(response);
-                    $scope.myInfo = JSON.stringify(response);
+                    $scope.$apply(function(){
+                        $scope.myInfo = JSON.stringify(response);
+                    });
                 });
             };
 
             $scope.showPermissions = function() {
                 FB.api('/me/permissions', function(response) {
                     console.log(response);
-                    $scope.permissions = JSON.stringify(response);
+                    $scope.$apply(function() {
+                        $scope.permissions = JSON.stringify(response);
+                    });
                 });
             };
 
             $scope.showToken = function() {
                 FB.getAuthResponse(function(response) {
                     console.log(response);
-                    $scope.accessToken = JSON.stringify(response);
+                    $scope.$apply(function() {
+                        $scope.accessToken = JSON.stringify(response);
+                    });
+                });
+            };
+
+            $scope.showFriends = function() {
+                FB.api('me/friends?fields=email,name', function(response) {
+                    console.log(response);
+                    // delayed model change
+                    $scope.$apply(function() {
+                        $scope.friends = JSON.stringify(response);
+                    });
+                });
+            };
+
+            $scope.showFeed = function() {
+                // user_posts
+                FB.api('/me/feed', function(response) {
+                    if ( response.error ) {
+                        console.log('Error!', response.error);
+                        return;
+                    }
+                    console.log(response);
+                    $scope.$apply(function() {
+                        $scope.feeds = response.data;
+                    });
+                });
+            };
+            //feed?fields=comments{from{name, cover},message},message,message_tags,from{name, cover}
+            $scope.showAlbum = function() {
+                FB.api('/me/albums?fields=cover_photo{picture},count,identified', function(response) {
+                    console.log(response);
                 });
             }
+
+            $scope.shareContent = function() {
+                console.log('share content UI');
+                FB.ui({
+                            method: 'share',
+                            href: 'http://localhost:3000'},
+                        // callback
+                        function(response) {
+                            console.log(response);
+                        }
+                );
+            };
+
         });
 
     </script>
@@ -83,7 +133,7 @@
 
 <div>
     <h3>Login/Logout</h3>
-    <fb:login-button scope="public_profile,email, publish_actions"></fb:login-button>
+    <fb:login-button scope="public_profile,email, user_friends, user_posts, user_photos, publish_actions"></fb:login-button>
     <input type="button" ng-click="login()" value="Custom Login" onlogin="checkLoginState()">
     <input type="button" ng-click="checkLoginState()" value="Login Check">
     <input type="button" ng-click="logout()" value="Logout">
@@ -92,14 +142,28 @@
 
 <div>
     <h3>Graph</h3>
-    <input type="button" ng-click="showMyInfo()" value="me">
+    <input type="button" ng-click="showMyInfo()" value="/me">
     <p>{{myInfo}}</p>
-    <input type="button" ng-click="showPermissions()" value="Permissions">
+    <input type="button" ng-click="showPermissions()" value="/me/permissions">
     <p>{{permissions}}</p>
     <input type="button" ng-click="showToken()" value="Access Token">
     <p>{{accessToken}}</p>
+    <input type="button" ng-click="showFriends()" value="/me/friends">
+    <p>{{friends}}</p>
 </div>
 
+
+<div>
+    <h3>Content</h3>
+    <input type="button" ng-click="showFeed()" value="/me/feed">
+    <div>
+        <ul ng-repeat="feed in feeds">
+            <span ng-if="feed.message">{{feed.message}}</span>
+            <span ng-if="feed.story">{{feed.story}}</span>
+        </ul>
+    </div>
+    <input type="button" ng-click="showAlbum()" value="/me/album">
+</div>
 
 
 <div>
@@ -117,6 +181,7 @@
         </p>
         <div class="fb-share-button" data-href="http://localhost:3000" data-layout="button_count">
         </div>
+        <input type="button" ng-click="shareContent()" value="share dialog">
     </div>
 </div>
 
