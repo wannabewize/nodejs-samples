@@ -109,8 +109,11 @@
             $scope.showAlbum = function() {
                 FB.api('/me/albums?fields=cover_photo{picture},count,identified', function(response) {
                     console.log(response);
+                    $scope.$apply(function() {
+                        $scope.coverPhotos = response.data;
+                    });
                 });
-            }
+            };
 
             $scope.shareContent = function() {
                 console.log('share content UI');
@@ -163,8 +166,13 @@
         </ul>
     </div>
     <input type="button" ng-click="showAlbum()" value="/me/album">
+    <div>
+        <ul ng-repeat="photo in coverPhotos">
+            <img src="{{photo.cover_photo.picture}}">
+            count : {{photo.count}}
+        </ul>
+    </div>
 </div>
-
 
 <div>
     <meta property="og:url" content="http://localhost:3000" />
