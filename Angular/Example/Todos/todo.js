@@ -2,7 +2,7 @@ var app = angular.module('TodoExample', []);
 
 
 app.controller('TodoCtrl', function($scope) {
-    $scope.todos = [{title:'todo1', done:false}]
+    $scope.todos = [{title:'todo1', done:false}];
 
     $scope.remaining = function() {
         var count = 0;

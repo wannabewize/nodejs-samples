@@ -13,7 +13,7 @@
                 for(var i = 0 ; i < array.length ; i++) {
                     var item = array[i];
                     if ( item > 0 ) {
-                        positives.push(item)
+                        positives.push(item);
                     }
                 }
                 return positives;
@@ -22,7 +22,6 @@
 
         app.controller('DefaultCtrl', ['$scope', 'positiveFilter',function($scope, positiveFilter){
             $scope.data = [1, 2, -3, -4, 5];
-
         }]);
 
     </script>
