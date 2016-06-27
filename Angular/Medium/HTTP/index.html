@@ -3,12 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <title>HTTP Service example</title>
-    <script src="../../bower_components/angular/angular.js"></script>
+    <script src="./bower_components/angular/angular.js"></script>
     <script>
         var app = angular.module('ExampleApp', []);
         app.controller('DefaultCtrl', ['$scope', '$http', function($scope, $http) {
             $scope.sendGetRequest = function() {
-                var url = 'http://localhost:3000/greeting';
+                var url = '/greeting';
                 $http.get(url).then(function onSuccess(response){
                     console.log('Success. hello : ', response.data.hello);
                     $scope.getResult = response.data;
@@ -19,7 +19,7 @@
             };
 
             $scope.sendPostRequest = function() {
-                var url = 'http://localhost:3000/greeting';
+                var url = '/greeting';
                 $http.post(url, {'hello':$scope.postData}).then(function onSuccess(response) {
                     $scope.postResult = 'Success';
                 }, function onFailure(error) {

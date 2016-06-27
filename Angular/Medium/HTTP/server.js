@@ -6,7 +6,12 @@ var bodyParser = require('body-parser');
 // Cross Origin Resource Sharing
 app.use(cors());
 
+app.use(express.static('.'));
 app.use(bodyParser.json());
+
+app.get('/', function(req, res) {
+	res.sendFile(__dirname + '/index.html');
+});
 
 app.get('/greeting', function(req, res) {
 	var obj = {

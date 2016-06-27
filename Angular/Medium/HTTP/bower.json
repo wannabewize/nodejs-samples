@@ -1,0 +1,17 @@
+{
+  "name": "ApiServer",
+  "description": "",
+  "main": "server.js",
+  "authors": [
+    "wannabewize <wannabewize+macbookpro@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/wannabewize/Node-Samples",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ]
+}
