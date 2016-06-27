@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="MovieApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Movies(MEAN)</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="bower_components/angular-route/angular-route.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+
+    <script src="js/movieApp.js"></script>// 순서 주의
+    <script src="js/headerCtrl.js"></script>
+    <script src="js/movieListCtrl.js"></script>
+    <script src="js/movieDetailCtrl.js"></script>
+
+</head>
+<body>
+
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId       : '1866106250330238',
+            status      : true,
+            cookie      : true,
+            xfbml       : true,
+            version     : 'v2.5'
+        });
+    };
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div ng-controller="HeaderCtrl as ctrl">
+    <a href="#">Home</a>
+    <script>
+        function onLoginHandle() {
+            ctrl.checkLoginState();
+            ctrl.loginToServer();
+        };
+    </script>
+    <fb:login-button scope="public_profile, email, user_friends, user_posts, user_photos, publish_actions" onlogin="onLoginHandle()">
+    </fb:login-button>
+    <input type="button" ng-click="login()" value="로그인">
+    <input type="button" ng-click="logout()" value="로그아웃">
+    <input type="button" ng-click="checkLoginState()" value="로그인 상태 보기">
+    <input type="button" ng-click="register()" value="회원가입">
+</div>
+
+<ng-view></ng-view>
+
+</body>
+</html>

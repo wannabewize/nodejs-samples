@@ -1,0 +1,11 @@
+<div>
+<h3>{{movie.title}}</h3>
+    <p>year : {{movie.year}}</p>
+    <p>director : {{movie.director}} </p>
+    <h3>Synopsis</h3>
+    <p>{{movie.synopsis}}</p>
+</div>
+<input type="button" ng-click="fbShare()" value="Share">
+<div class="fb-share-button" data-href="{{pageHref}}" data-layout="button_count">
+</div>
+
