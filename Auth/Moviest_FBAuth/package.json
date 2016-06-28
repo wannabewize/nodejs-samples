@@ -11,6 +11,7 @@
   "dependencies": {
     "express": "^4.14.0",
     "express-session": "^1.13.0",
-    "passport": "^0.3.2"
+    "passport": "^0.3.2",
+    "passport-facebook-token": "^3.3.0"
   }
 }
