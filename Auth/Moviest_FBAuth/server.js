@@ -24,8 +24,8 @@ app.use(passport.session());
 var FacebookTokenStrategy = require('passport-facebook-token');
 passport.use('facebook-token', new FacebookTokenStrategy(
     {
-        clientID:'1866106250330238',
-        clientSecret: '5b97ae80a19755face568b7e0675f887',
+        clientID:APP-ID,
+        clientSecret: CLIENT-SECRET,
         profileFields: ['id', 'displayName', 'photos', 'email'],
     },
     function (accessToken, refreshToken, profile, done) {
