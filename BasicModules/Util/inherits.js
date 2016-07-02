@@ -1,6 +1,6 @@
 console.log('== inherits ==');
 
-var util = require('util');
+const util = require('util');
 
 
 function Parent() {
@@ -15,8 +15,9 @@ function Child() {
 
 util.inherits(Child, Parent);
 
-var child = new Child();
+const child = new Child();
 child.sayHello();
+
 console.log('instanceof Child : ',child instanceof Child);
 console.log('instanceof Parent : ',child instanceof Parent);
 
