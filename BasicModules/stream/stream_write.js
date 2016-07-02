@@ -1,13 +1,11 @@
-var fs = require('fs');
+const fs = require('fs');
+const os = fs.createWriteStream('output.txt');
 
-
-var os = fs.createWriteStream('output.txt');
-
-os.on('error', function(err) {
+os.on('error', err => {
    console.log('== ERROR EVENT]n', err);
 });
 
-os.on('finish', function() {
+os.on('finish', () => {
    console.log('== FINISH EVENT');
 });
 

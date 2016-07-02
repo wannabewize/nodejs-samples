@@ -1,18 +1,18 @@
 
 // 인풋 스트림은 콘솔
-var is = process.stdin;
+const is = process.stdin;
 is.setEncoding('utf8');
 
 // 아웃풋 스트림 - 파일
-var fs = require('fs');
-var os = fs.createWriteStream('output.txt');
+const fs = require('fs');
+const os = fs.createWriteStream('output.txt');
 
 // 파이프, 언파이프 이벤트
-os.on('pipe', function(src) {
+os.on('pipe', src => {
    console.log('== PIPE EVENT');
 });
 
-os.on('unpipe', function(src) {
+os.on('unpipe', src => {
    console.log('== UNPIPE EVENT');
 });
 
@@ -20,7 +20,7 @@ os.on('unpipe', function(src) {
 is.pipe(os);
 
 // exit 입력이 오면 파이프 연결 해제
-is.on('data', function(data) {
+is.on('data', data => {
    if ( data.trim() == 'exit' ) {
       is.unpipe(os);
       // 종료

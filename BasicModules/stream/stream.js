@@ -1,16 +1,23 @@
 // 콘솔 입력
-var is = process.stdin;
+const is = process.stdin;
 // 콘솔 출력
-var os = process.stdout;
+const os = process.stdout;
 
 is.setEncoding('utf8');
 
-is.on('data', function (data) {
+var count = 0;
+is.on('data', data => {
    os.write('data event : ' + data);
-
+   count++;
+   if ( count > 10 ) {
+      is.end('finish!');
+   }
 });
 
-// is.on('readable', function () {
-//    os.write('readable event\n');
-// });
+is.on('readable', () => {
+   os.write('readable event\n');
+});
 
+os.on('finish', ()=>{
+   console.log('Output Stream Finished');
+});
