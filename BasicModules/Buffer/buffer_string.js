@@ -24,7 +24,6 @@ var length2 = Buffer.byteLength(str2);
 console.log(str2, ' length : ', str2.length, ' bytes : ', length2);
 
 
-
 // String -> Buffer -> Base64 String
 const originStr = 'Hello Node.js';
 console.log('Origin : ', originStr);
@@ -36,4 +35,4 @@ console.log('base64 encoded : ', base64Str);
 const originStr2 = Buffer.from(base64Str, 'base64').toString('utf8');
 console.log('base64 decoded : ', originStr2);
 
-
+// Try String Decoder
