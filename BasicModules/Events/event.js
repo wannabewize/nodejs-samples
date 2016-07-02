@@ -24,3 +24,5 @@ process.on('uncaughtException', function() {
 
 // 없는 함수 실행
 justDoIt();
+// 예외 상황 발생 이후 코드
+console.log('예제 끝');
