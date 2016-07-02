@@ -1,7 +1,7 @@
 // 데이터 쓰기/읽기
 console.log('endianns : ', require('os').endianness());
 
-var buffer = new Buffer(10);
+var buffer = Buffer.alloc(10);
 // 0으로 채우기
 buffer.fill(0);
 
