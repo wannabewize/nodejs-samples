@@ -1,6 +1,6 @@
-var url = require('url');
+const url = require('url');
 
-var urlObj = {
+const urlObj = {
    protocol : 'http',
    host : 'idols.com',
    pathname : 'schedule/radio',
@@ -8,6 +8,6 @@ var urlObj = {
    auth : 'fan'
 }
 
-var urlStr = url.format(urlObj);
+const urlStr = url.format(urlObj);
 
 console.log(urlStr);
