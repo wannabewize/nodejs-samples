@@ -1,13 +1,27 @@
-"use strict";
+class Person {
+    // constructor는 1개만
+    constructor(name) {
+        // 프로퍼티 선언
+        this.name = name;
+    }
 
-
-
-class Polygon {
-  constructor(height, width) {
-    this.height = height;
-    this.width = width;
-  }
+    // 메소드
+    sayHello() {
+        console.log('Hello. I am ' + this.name);
+    }
 }
 
-var p = new Polygon(10, 20);
-console.log(p);
+const iu = new Person('IU');
+iu.sayHello();
+
+
+// 상속
+class Actor extends Person {
+    constructor(name, movie) {
+        super(name);
+        this.movie = movie;
+    }
+}
+
+const johansson = new Actor('Johansson', 'Avengers');
+johansson.sayHello();

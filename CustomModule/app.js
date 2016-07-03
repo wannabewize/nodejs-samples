@@ -1,5 +1,5 @@
 console.log('== Function Export');
-var greeting = require('./greeting.js');
+const greeting = require('./function_module.js');
 greeting.goodMorning();
 greeting.goodNight('IU');
 try{
@@ -11,28 +11,34 @@ catch (err) {
 
 
 console.log('== ClassDef Export');
-var Bus = require('./transport.js').Bus;
-var bus = new Bus();
+const Bus = require('./classdef_module.js').Bus;
+const bus = new Bus();
 bus.take();
 
-var metro = new (require('./transport').Metro)();
+const metro = new (require('./classdef_module').Metro)();
 metro.ride();
 
 console.log('== Class Export');
 // .js는 생략 가능
-var Exercise = require('./exercise');
-var exercise = new Exercise();
+const Exercise = require('./class_module');
+const exercise = new Exercise();
 
 exercise.pushup();
 exercise.run();
 
 console.log('== Object Export');
-var you  = require('./student.js');
+const you  = require('./object_module.js');
 you.study();
 you.study();
 
 // 모듈은 캐쉬됨
-var him = require('./student.js');
+const him = require('./object_module.js');
 him.study();
 
 console.log(module.cache);
+
+// ES6 - class
+const  Singer = require('./class_module_es6.js');
+const singer = new Singer('IU');
+singer.sing();
+singer.dance();
