@@ -1,6 +1,6 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var file = './song.txt';
+const file = './song.txt';
 
 try {
    fs.accessSync(file, fs.F_OK)
@@ -13,7 +13,7 @@ catch ( err ) {
 }
 // 파일에 내용 읽기
 try {
-   var stats = fs.statSync(file)
+   const stats = fs.statSync(file)
    // console.log(stats);
    console.log('Create : ', stats['birthtime']);
    console.log('size : ', stats['size']);
@@ -23,7 +23,7 @@ try {
    
    // 파일 읽기
    if ( stats.isFile() ) {
-      var data = fs.readFileSync(file, 'utf-8');
+      const data = fs.readFileSync(file, 'utf-8');
       console.log('File Contents : ', data);
    }
 }

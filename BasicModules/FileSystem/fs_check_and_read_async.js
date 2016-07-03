@@ -1,8 +1,8 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var file = './song.txt';
+const file = './song.txt';
 
-fs.access(file, fs.F_OK, function(err) {
+fs.access(file, fs.F_OK, err => {
    if ( err ) {
       console.log('파일 없음');
       process.exit(1);      
@@ -10,7 +10,7 @@ fs.access(file, fs.F_OK, function(err) {
    else {
       console.log('파일 존재');
       
-      fs.stat(file, function(err, stats) {
+      fs.stat(file,  (err, stats) => {
          if ( err ) {
             console.error('File Stats Error', err);
             return;
@@ -23,7 +23,7 @@ fs.access(file, fs.F_OK, function(err) {
          console.log('isBlockDevice : ', stats.isBlockDevice());
          
          if ( stats.isFile() ) {
-            fs.readFile(file, function(err, data) {
+            fs.readFile(file, (err, data) => {
                if ( err ) {
                   console.error('File Read Error', err);
                   return;

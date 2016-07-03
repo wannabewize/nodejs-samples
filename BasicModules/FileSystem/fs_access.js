@@ -1,6 +1,6 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var file = './song.txt';
+const  file = './song.txt';
 try {
    fs.accessSync(file, fs.F_OK)
    console.log('파일 접근 가능(Sync)');
@@ -14,13 +14,14 @@ catch ( exception ) {
 }
 
 // 비동기
-fs.access(file, fs.F_OK | fs.R_OK, function(err) {
+const mode = fs.F_OK | fs.R_OK;
+fs.access(file, mode, err => {
    if ( err ) {
       console.error('파일 없음(Async) : ', err);
       return;
    }
    
-   fs.readFile(file, 'utf8', function(err, data) {
+   fs.readFile(file, 'utf8', (err, data) => {
       if ( err ) {
          console.error('파일 읽기 에러(Async) : ', err);
          return;

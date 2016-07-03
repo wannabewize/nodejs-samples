@@ -1,7 +1,7 @@
-var fs = require('fs');
+const fs = require('fs');
 
 // 기본 인코딩 : utf-8
-fs.writeFile('./textData.txt', 'Hello World', 'utf-8', function(err) {
+fs.writeFile('./textData.txt', 'Hello World', 'utf-8',  err => {
    if ( err ) {
       console.error('File write Errro : ', err);
       return;
@@ -11,7 +11,7 @@ fs.writeFile('./textData.txt', 'Hello World', 'utf-8', function(err) {
 
 // 버퍼로 저장
 var buffer = new Buffer([10,20,30,40,50]);
-fs.writeFile('./binaryData.dat', buffer, function(err) {
+fs.writeFile('./binaryData.dat', buffer, err => {
    if ( err ) {
       console.error('파일 저장 실패 : ', err);
       return;
