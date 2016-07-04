@@ -1,6 +1,6 @@
-var async = require('async');
+const async = require('async');
 
-var array = ['hello', 'World', 'I kike', 'Node.js'];
+const array = ['hello', 'World', 'I kike', 'Node.js'];
 
 // 항목 1개씩 동작시키려면 eachSeries 사용
 async.each(array, function (item, callback) {
