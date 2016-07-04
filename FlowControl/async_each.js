@@ -1,13 +1,12 @@
 var async = require('async');
 
-var array = [1000, 500, 2000];
+var array = ['hello', 'World', 'I kike', 'Node.js'];
 
 // 항목 1개씩 동작시키려면 eachSeries 사용
 async.each(array, function (item, callback) {
-   var index = array.indexOf(item);
-   console.log('배열 ' + index + '항목 태스크 시작');
+   console.log('Taks Started : ', item);
    setTimeout(function () {
-      console.log('배열 ' + index + '항목 태스크 종료');
+      console.log('Task Done ', item);
       callback();
    }, item);
 }, function (err) {

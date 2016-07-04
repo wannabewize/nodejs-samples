@@ -16,11 +16,12 @@ async.parallel(
             callback(null, '태스크 2 결과');
          }, 2000);
       },
+      errorTask,
       task3      
    ],
    function(err, results) {
       if ( err ) {
-         console.error('에러 : ', err);
+         console.error('에러 : ', err.message);
          return;
       }
       
@@ -28,11 +29,14 @@ async.parallel(
    }
 );
 
-
 function task3(callback) {
    console.log('태스크 3 시작');
    setTimeout(function() {
       console.log('태스크 3 종료');      
       callback(null, '태스크 3 결과');
    }, 2000);         
+}
+
+function errorTask(callback) {
+   callback(new Error('Error'));
 }
