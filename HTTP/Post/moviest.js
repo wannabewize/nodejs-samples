@@ -30,7 +30,7 @@ function addNewMovie(req, res) {
 
       if (! title || ! director) {
          res.statusCode = 400;
-         res.end('Bad Request : title, director 정보 부족');
+         res.end('Bad Request : missing title, director');
          return;
       }
       
@@ -38,7 +38,7 @@ function addNewMovie(req, res) {
       movieList.push({ title: data.title, director: data.director });
          
       // Redirect
-      res.statusCode = 302;
+      res.statusCode = 303;
       res.setHeader('Location', '.');
       res.end();
    });
@@ -53,13 +53,15 @@ function showList(req, res) {
    res.write('<h3>Favorite Movie</h3>');
    res.write('<div><ul>');
 
+
+
    movieList.forEach(function (element) {
       res.write('<li>' + element.title + '(' + element.director + ')</li>');
    }, this);
    res.write('</ul></div>');
 
    res.write(
-      '<form method="post" action="."><h4>새 영화 입력</h4>' +
+      '<form method="post" action=""><h4>새 영화 입력</h4>' +
       '<div><input type="text" name="title" placeholder="영화제목"></div>' +
       '<div><input type="text" name="director" placeholder="감독"></div>' +
       '<input type="submit" value="upload">' +
@@ -70,5 +72,6 @@ function showList(req, res) {
    res.end();
 }
 
-server.listen(3001);
-console.log('Server is running on 3001');
+server.listen(3000, err => {
+   console.log('Server is running on 3000');
+});

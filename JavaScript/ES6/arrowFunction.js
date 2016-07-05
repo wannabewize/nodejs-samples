@@ -53,12 +53,14 @@ class MyClass {
 }
 MyClass.prototype.increase = function() {
     return () => {
-        console.log(this.count++);
+        console.log('this : ', this);
+        console.log(count++);
     }
 };
 MyClass.prototype.increase2 = function() {
     const self = this;
     return function() {
+        console.log('this : ', this);
         console.log(self.count++);
     }
 };
@@ -71,4 +73,3 @@ fn();
 const fn2 = obj.increase2();
 fn2();
 fn2();
-

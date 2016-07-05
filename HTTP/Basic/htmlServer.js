@@ -43,7 +43,7 @@ function getContentType(ext) {
       case '.jpg':
          return 'image/jpg';
       case '.css':
-         return 'application/css';
+         return 'text/css';
       case '.html':
          return 'text/html';
    }
