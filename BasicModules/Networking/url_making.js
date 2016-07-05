@@ -9,5 +9,4 @@ const urlObj = {
 }
 
 const urlStr = url.format(urlObj);
-
 console.log(urlStr);
