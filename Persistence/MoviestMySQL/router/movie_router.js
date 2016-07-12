@@ -1,6 +1,6 @@
 var express = require('express');
 var fs = require('fs');
-var pool = require('./dbConnect');
+var pool = require('./../model/dbConnect');
 
 // 라우터 얻기
 var router=express.Router();
@@ -37,7 +37,7 @@ function showMovieList(req, res, next) {
       if ( err ) {
          return next(err);
       }
-      var sql = 'SELECT * FROM movies';
+      var sql = 'SELECT movie_id, title FROM movies';
       conn.query(sql, function(err, results) {
          if ( err ) {
             return next(err);

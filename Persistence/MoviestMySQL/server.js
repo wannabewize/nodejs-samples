@@ -1,7 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
-var movieRouter = require('./movie_router');
+var movieRouter = require('./router/movie_router');
 
 var app = express();
 app.use(morgan('dev'));

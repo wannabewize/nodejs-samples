@@ -1,10 +1,10 @@
 var pool = require('./dbConnect');
 
-function Moviest() {
+class Movies {
    
 }
 
-Moviest.prototype.getMovieList = function(cb) {
+Movies.prototype.getMovieList = function(cb) {
    pool.getConnection(function(err, conn) {
       if ( err ) {
          return cb(err);
@@ -25,4 +25,4 @@ Moviest.prototype.getMovieList = function(cb) {
    });   
 }
 
-module.exports = Moviest;
+module.exports = Movies;
