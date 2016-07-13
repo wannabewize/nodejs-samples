@@ -6,11 +6,7 @@ var movieRouter = require('./router/movie_router');
 var app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
-// JADE 설정
-// app.set('view engine', 'jade');
-// EJS
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
+
 
 app.use(movieRouter);
 
@@ -20,7 +16,7 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-   res.send('ERROR', err.stack);
+   res.status(500).send({mag: err.message});
 });
 
 app.listen(3000, function() {
