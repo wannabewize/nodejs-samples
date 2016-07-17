@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html ng-app="SocketIO-Example">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Socket.IO</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="angular/angular.js"></script>
+    <script src="angular-socket-io/socket.js"></script>
+    <script>
+        var app = angular.module('SocketIO-Example', ["btford.socket-io"]);
+        app.factory('mySocket', function(socketFactory) {
+            var mySocket = socketFactory();
+            return mySocket;
+        });
+        app.controller('DefaultCtrl', function($scope, mySocket) {
+            console.log('angular controller started');
+
+            $scope.messages = [];
+
+            mySocket.on('connect', function() {
+                console.log('socket.io connect event');
+            });
+
+            mySocket.on('echo', function(data) {
+                var msg = data['message'];
+                console.log('echo event', msg);
+                $scope.messages.push(msg);
+            });
+
+            $scope.sendMessage = function() {
+                console.log('sending message :', $scope.message);
+                mySocket.emit('message', {'message':$scope.message});
+                $scope.message = '';
+            }
+        });
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+<div>
+    <input type="text" ng-model="message" />
+    <input type="button" ng-click="sendMessage()" value="Send" />
+</div>
+<h3>Server Echo</h3>
+<ul>
+    <li ng-repeat="message in messages track by $index">{{message}}</li>
+</ul>
+
+</body>
+</html>
