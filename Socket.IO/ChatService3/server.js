@@ -18,7 +18,7 @@ app.get('/rooms', function(req, res) {
 });
 
 app.get('/', function(req, res) {
-   res.sendFile(__dirname + '/client.html');
+   res.sendFile(__dirname + '/index.html');
 });
 
 // 닉네임 기능
@@ -32,7 +32,8 @@ io.on('connection', function(socket){
    console.log(nickName + ' connected');
    
    // 기본값으로는 0번째 방으로
-   var room = rooms[0];
+   var room;
+   room = rooms[0];
    socket.join(room);
 	
 	// 개별 클라이언트에 환영 메세지
@@ -45,9 +46,8 @@ io.on('connection', function(socket){
       var chat = {nick:nick, msg:msg};
       
       // 채팅방으로 메세지 이벤트 발생        
+      io.to(room).emit('chatMessage', chat);
       console.log(nick + '(' + room + ') >> ' + msg);   
-      if ( room )   
-         io.to(room).emit('chatMessage', chat);
 	});
    
    // 채팅방 들어가기

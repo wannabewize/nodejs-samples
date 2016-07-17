@@ -6,13 +6,15 @@ var app = express();
 var server = http.createServer(app);
 server.listen(3000);
 
+app.get('/favicon.ico', (req, res) => {res.send('')});
+
 app.get('/', function(req, res) {
-   res.sendFile(__dirname + '/client.html');
+   res.sendFile(__dirname + '/index.html');
 });
 
 // HTTP 모듈
 // var server = http.createServer(function (req, res) {
-//    fs.createReadStream('./client.html').pipe(res);
+//    fs.createReadStream('./index.html').pipe(res);
 // });
 
 // server.listen(3000);

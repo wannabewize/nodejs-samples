@@ -7,7 +7,7 @@ var server = http.createServer(app);
 server.listen(3000);
 
 app.get('/', function (req, res) {
-   res.sendFile(__dirname + '/client.html');
+   res.sendFile(__dirname + '/index.html');
 });
 
 var io = require('socket.io')(server);
