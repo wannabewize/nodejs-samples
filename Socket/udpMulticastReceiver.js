@@ -11,6 +11,6 @@ socket.on('listening', function () {
     socket.addMembership(address);
 });
 
-socket.on('message', function (msg, rinfo) {
+socket.on('message', (msg, rinfo) => {
     console.log(rinfo.address, ' >> ', msg.toString());
 });

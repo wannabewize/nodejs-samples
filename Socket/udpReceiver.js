@@ -1,20 +1,20 @@
-var dgram = require('dgram');
-var socket = dgram.createSocket('udp4');
+const dgram = require('dgram');
+const socket = dgram.createSocket('udp4');
 
 socket.bind(3000);
 
-socket.on('listening', function() {
+socket.on('listening', () => {
    console.log('UDP Receiver is listening');
 });
 
-socket.on('message', function(data, rinfo) {
+socket.on('message', (data, rinfo) => {
    console.log(rinfo.address + '>>', data.toString('utf8'));
 });
 
-socket.on('close', function() {
+socket.on('close', () => {
    console.log('Close Event');
 });
 
-socket.on('error', function(err) {
+socket.on('error', err => {
    console.log('Error : ', err);
 });

@@ -1,4 +1,4 @@
-var net = require('net');
+const net = require('net');
 
 var clientList = [];
 // 클라이언트 목록에서 소켓을 이용해서 클라이언트 정보 찾기   
@@ -13,7 +13,7 @@ function findClient(socket) {
    return null;
 }
 
-var server = net.createServer(function (socket) {
+var server = net.createServer( socket => {
    // Connection Event
    console.log('Remote Address : ', socket.remoteAddress);
    
@@ -23,13 +23,13 @@ var server = net.createServer(function (socket) {
    
    socket.write('Welcome to TCP Chat Service, ' + nickname + '\n');
    socket.write('대화명 변경 : \\rename [NAME]\n');
-   socket.write('채팅방 종료 : \\close\n');   
+   socket.write('채팅방 종료 : \\exit\n');   
 
-   socket.on('data', function (data) {
+   socket.on('data', data => {
       var sender = findClient(socket);      
       var message = data.toString('UTF-8');
       
-      if ( message.trim() == '\\close' ) {
+      if ( message.trim() == '\\exit' ) {
          sender.socket.end();
          return;
       }
@@ -47,15 +47,16 @@ var server = net.createServer(function (socket) {
          message = sender.nickname + ' : ' + message;
       }
                   
-      clientList.forEach(function (client) {
+      // 채팅 메세지를 모든 클라이언트 소켓에 전달
+      for(var client of clientList) {
          var socket = client.socket;
          // 글 작성자에게는 보내지 않는다.
          if ( socket != sender.socket )      
             socket.write(message);
-      });
+      };
    });
 
-   socket.on('end', function () {
+   socket.on('end', () => {
       console.log('connection end')
       // 소켓 목록에서 삭제
       var client = findClient(socket);
