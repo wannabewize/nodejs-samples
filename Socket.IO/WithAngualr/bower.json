@@ -1,0 +1,21 @@
+{
+  "name": "socket.io-example",
+  "description": "",
+  "main": "chat_server.js",
+  "authors": [
+    "wannabewize <wannabewize+macbookpro@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/wannabewize/Node-Samples",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-socket-io": "^0.7.0"
+  }
+}
