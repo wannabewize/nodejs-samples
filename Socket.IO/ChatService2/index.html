@@ -76,7 +76,7 @@
 		return false; // refresh 방지
 	});
    
-   // 네임 스페이스 - 시스템 메세지 처리용
+   // 네임 스페이스 - 시스템 메세지 처리용. 절대 경로로 안하면 에러 발생할 때도 생김
    var system = io('http://127.0.0.1:3000/system');
       
    system.on('connect', function() {

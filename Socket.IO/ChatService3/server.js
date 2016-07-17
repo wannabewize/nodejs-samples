@@ -2,15 +2,15 @@
  * ChatService with Socket.IO
  * Room example
  */
-var express = require('express');
-var http = require('http');
+const express = require('express');
+const http = require('http');
 
-var app = express();
-var server = http.createServer(app);
+const app = express();
+const server = http.createServer(app);
 server.listen(3000);
 
 // 채팅방
-var rooms = ['lounge', 'trevel', 'game', 'dining'];
+const rooms = ['lounge', 'travel', 'game', 'dining'];
 
 // 채팅방 목록
 app.get('/rooms', function(req, res) {

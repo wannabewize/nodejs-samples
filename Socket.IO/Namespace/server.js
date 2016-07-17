@@ -1,6 +1,5 @@
-var express = require('express');
-var http = require('http');
-var fs = require('fs');
+const express = require('express');
+const http = require('http');
 
 var app = express();
 var server = http.createServer(app);
@@ -26,12 +25,13 @@ io.on('connection', function (socket) {
 
 var is = process.stdin;
 
+// System Namespace
 var system = io.of('/system');
 system.on('connection', function (socket) {
-   console.log('emergency namesapce connected');
+   console.log('emergency namespace connected');
 
    is.on('data', function (chunk) {
-      console.log('emegency namespace!');
+      console.log('emergency namespace!');
       socket.emit('message', { msg: chunk.toString() });
    });
 });

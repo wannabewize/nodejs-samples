@@ -23,10 +23,12 @@
          $('#userInput').val('');
       }
 
-      var system = io('http://127.0.0.1:3000/system');
+      var system = io('/system');
       system.on('connect', function () {
          console.log('System Namespace connect');
       });
+
+      // 시스템 메세지는 얼럿창으로
       system.on('message', function (data) {
          alert('Emergency : ' + data.msg);
       });

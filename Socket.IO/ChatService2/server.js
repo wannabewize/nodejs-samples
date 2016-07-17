@@ -3,11 +3,11 @@
  * 네임 스페이스 적용 예제
  * 서버 콘솔에서 키입력 - 클라이언트의 경고창으로 뜨기 
  */
-var express = require('express');
-var http = require('http');
+const express = require('express');
+const http = require('http');
 
-var app = express();
-var server = http.createServer(app);
+const app = express();
+const server = http.createServer(app);
 server.listen(3000);
 
 app.get('/', function(req, res) {
