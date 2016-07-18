@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html ng-app="AuthExample">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple Auth Example with Session</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script>
+        var app = angular.module('AuthExample', []);
+        app.controller('DefaultCtrl', function($scope, $http) {
+            $scope.login = function(userInfo) {
+                $http.post('/login', userInfo).then( function(result) {
+                    $scope.loginResult = result.data;
+                }, function(error) {
+                    console.log(error);
+                    $scope.loginResult = error.data;
+                });
+            };
+
+            $scope.logout = function() {
+                $http.delete('/logout').then( function(result) {
+                    $scope.loginResult = result.data;
+                }, function(error) {
+                    console.log(error);
+                    $scope.loginResult = error.data;
+                });
+            };
+            
+            $scope.showPublicInfo = function () {
+                $http.get('/public').then( function(result) {
+                    $scope.publicInfo = result.data;
+                });
+            };
+
+            $scope.showPrivateInfo = function() {
+                $http.get('/private').then( function(result) {
+                    $scope.privateInfo = result.data;
+                }, function(error) {
+                    $scope.privateInfo = error.data;
+                });
+            };
+        });
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+    <div>
+        <h1>Login</h1>
+        <p>User ID : iu, Password : 1234</p>
+        <input type="text" placeholder="User ID" ng-model="user.id">
+        <input type="password" placeholder="Password" ng-model="user.password">
+        <input type="button" ng-click="login(user)" value="Login">
+        <input type="button" ng-click="logout()" value="Logout">
+        <p>{{loginResult}}</p>
+    </div>
+    <div>
+        <h1>Public Page</h1>
+        <input type="button" ng-click="showPublicInfo()" value="Show Public Info">
+        <p>{{publicInfo}}</p>
+    </div>
+    <div>
+        <h1>Personal Page</h1>
+        <input type="button" ng-click="showPrivateInfo()" value="Show Private Info">
+        <p>{{privateInfo}}</p>
+    </div>
+</body>
+</html>
