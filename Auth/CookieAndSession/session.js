@@ -1,40 +1,50 @@
-var express = require('express');
-var session = require('express-session');
+const express = require('express');
+const session = require('express-session');
 
-var app = express();
+const app = express();
 app.use(session({
-  secret: 'Secret Key',
-  resave: false,
-  saveUninitialized: false
+   secret: 'Secret Key',
+   resave: false,
+   saveUninitialized: false
+   //cookie:{maxAge:3000} // 쿠키의 maxAge를 이용해서 세션 유효기간 설정. 3초
 }));
 
 // 파비콘 무시
-app.use('/favicon.ico', function(){}); 
+app.use('/favicon.ico', function () {
+});
 
-app.use(function(req, res) {
-	console.log('req.session', req.session);
-	// 세션 ID
-	var sessionID = req.sessionID;
-	console.log('session id :', sessionID);
-		
-	// 방문 횟수
-	console.log('visit : ', req.session.visit);
-	if ( req.session.visit )
-		req.session.visit = parseInt(req.session.visit) + 1;		
-	else
-		req.session.visit = 1;		
-	
-	// 마지막 방문 날짜
-	var now = new Date();
-	var last = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
-	req.session.last = last;
+app.use(function (req, res) {
+   // 세션 ID
+   const sessionID = req.sessionID;
+   console.log('session id :', sessionID);
 
-	// 첫 방문 날짜		
-	if (! req.session.since ) {
-		req.session.since = last;
-	}	
-	
-	res.end('visit : ' + req.session.visit + ' since : ' + req.session.since + ' last : ' + req.session.last);
+   // 방문 횟수
+   console.log('sessionVisit : ', req.session.sessionVisit);
+   if (req.session.sessionVisit)
+      req.session.sessionVisit = parseInt(req.session.sessionVisit) + 1;
+   else
+      req.session.sessionVisit = 1;
+
+   // 마지막 방문 날짜
+   var now = new Date();
+   var last = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
+   req.session.sessionLast = last;
+
+   // 첫 방문 날짜
+   if (!req.session.sessionSince) {
+      req.session.sessionSince = last;
+   }
+
+
+   // 쿠키 접근하기
+   const cookies = req.session.cookie;
+   console.log('cookies : ', cookies);
+
+   res.send({
+      sessionVisit: req.session.sessionVisit,
+      sessionSince: req.session.sessionSince,
+      sessionLast: req.session.sessionLast
+   });
 });
 
 app.listen(3000);
