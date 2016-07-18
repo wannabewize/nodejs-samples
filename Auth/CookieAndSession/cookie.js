@@ -3,7 +3,7 @@
 */
 
 var express = require('express');
-var cookieParser = require('cookie-parser')
+var cookieParser = require('cookie-parser');
 
 var app = express();
 // 쿠키 파서 - req.cookies 사용 가능

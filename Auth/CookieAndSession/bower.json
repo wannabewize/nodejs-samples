@@ -1,0 +1,21 @@
+{
+  "name": "session-example",
+  "description": "",
+  "main": "cookie.js",
+  "authors": [
+    "wannabewize <wannabewize+macbookpro@gmail.com>"
+  ],
+  "license": "ISC",
+  "homepage": "https://github.com/wannabewize/Node-Samples",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7",
+    "angular-cookies": "^1.5.7"
+  }
+}
