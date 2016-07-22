@@ -2,9 +2,10 @@ var fs = require('fs');
 var pathUtil = require('path');
 
 var AWS = require('aws-sdk');
-AWS.config.region = 'ap-northeast-1';
-AWS.config.accessKeyId = 'ACCESS_KEY';
-AWS.config.secretAccessKey = 'SECRET_ACCESS_KEY'
+const config = require('./s3config.js');
+
+AWS.config.accessKeyId = config.accessKeyId;
+AWS.config.secretAccessKey = config.secretAccessKey;
 
 // 파일 스트림 생성 - 폴더에 파일 저장하고 사용
 var file = './image.jpg';
@@ -28,6 +29,7 @@ var params = {
 
 // s3 - Upload
 var s3 = new AWS.S3();
+
 s3.putObject(params, function (err, data) {
    if (err) {
       console.error('S3 PutObject Error', err);

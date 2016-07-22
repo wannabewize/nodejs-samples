@@ -1,7 +1,8 @@
-var AWS = require('aws-sdk');
-AWS.config.region = 'ap-northeast-1';
-AWS.config.accessKeyId = 'ACCESS_KEY';
-AWS.config.secretAccessKey = 'SECRET_ACCESS_KEY'
+const AWS = require('aws-sdk');
+const config = require('./s3config.js');
+
+AWS.config.accessKeyId = config.accessKeyId;
+AWS.config.secretAccessKey = config.secretAccessKey;
 
 // Listup All Files
 var s3 = new AWS.S3();
@@ -20,9 +21,10 @@ s3.listObjects({Bucket: bucketName}, function(err, data) {
 	var items = data.Contents;
 	items.forEach(function(item) {
 		// console.log('item : ', item);
-      var path1 = s3.endpoint.href + '/' + bucketName + '/' + item.Key;
-      var path2 = 'http://' + s3.endpoint.host + '/' + bucketName + '/' + item.Key;
-		console.log('path : ', path2);		
+      const path1 = s3.endpoint.href + '/' + bucketName + '/' + item.Key;
+      const path2 = 'http://' + s3.endpoint.host + '/' + bucketName + '/' + item.Key;		
+		console.log('HTTPS url : ', path1);
+		console.log('HTTP url : ', path2);				
 	});	
 });
 
