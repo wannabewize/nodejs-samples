@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html ng-app="RealtimeSNS">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Realtime SNS</title>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="bower_components/angular-socket-io/socket.min.js"></script>
+    <script>
+        var app = angular.module('RealtimeSNS', ['btford.socket-io']);
+        app.factory('snsSocket', function(socketFactory) {
+            var socket = socketFactory();
+            return socket;
+        });
+        app.controller('DefaultCtrl', function($scope, snsSocket) {
+            $scope.title = 'Realtime SNS';
+            $scope.feeds = [];
+
+            snsSocket.on('connect', function() {
+                console.log('socket connected');
+            });
+
+            snsSocket.on('feed', function(data) {
+                console.log('get feed : ', data.count);
+                for(feed of data.feeds) {
+                    $scope.feeds.unshift(feed);
+                }
+            });
+
+            $scope.writeFeed = function(author, message) {
+                snsSocket.emit('write', {author:author, message:message});
+                $scope.message = '';
+            };
+        });
+    </script>
+    <style>
+        .message { font-size: 14pt }
+        .author { font-size:11pt; }
+    </style>
+</head>
+<body ng-controller="DefaultCtrl">
+<h1>{{title}}</h1>
+<h2>글 작성</h2>
+<div>
+    <form>
+        <p><label>Author</label><input type="text" ng-model="author"></p>
+        <p><label>Message</label><input type="text" ng-model="message"></p>
+        <input type="submit" value="Write" ng-click="writeFeed(author, message)">
+    </form>
+</div>
+<h2>Feed</h2>
+<ul>
+    <li ng-repeat="feed in feeds">
+        <span class="message">{{feed.message}}</span><span class="author">by {{feed.author}}</span>
+    </li>
+</ul>
+
+
+</body>
+</html>
