@@ -1,6 +1,7 @@
 const AWS = require('aws-sdk');
 const config = require('./s3config.js');
 
+AWS.config.region = config.region;
 AWS.config.accessKeyId = config.accessKeyId;
 AWS.config.secretAccessKey = config.secretAccessKey;
 
