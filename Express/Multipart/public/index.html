@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="UploadExample">
+<head>
+   <meta charset="utf-8">
+   <script src="bower_components/angular/angular.js"></script>
+   <script>
+      var app = angular.module('UploadExample', []);
+      app.controller('DefaultCtrl', function($scope, $http) {
+
+         var selectedFile;
+         // 목록 새로 고치기
+         reload();
+         // 제목         
+         $scope.title = 'Express Multipart Upload Example';
+         // 목록
+         $scope.data = [];
+
+         $scope.upload = function() {
+            var formData = new FormData();
+            formData.append('text', $scope.text);
+            formData.append('image', selectedFile);
+
+            $http.post('/upload',
+               formData,
+               {headers : {'Content-type':undefined}})
+               .then( function(result) {
+                  console.log('file upload success : ', result);
+                  reload();
+               }, function(error) {
+                  console.log('file upload error : ', error);
+               });
+         }
+
+         function reload() {
+            $http.get('/list').then(function(result) {
+               var resBody = result.data;
+               console.log('count : ', resBody.count);    
+               $scope.data = resBody.data;           
+            }, function(error) {
+               console.log('Error : ', error);
+            });
+         }
+
+         $scope.fileChanged = function(element) {
+            selectedFile = element.files[0];
+         }
+      });
+   </script>
+</head>
+<body ng-controller="DefaultCtrl">
+   <h1>{{title}}</h1>
+
+   <h3>Item List</h3>
+   <ul>
+      <li ng-repeat="item in data">
+         <img src="{{item.image}}" height="100">{{item.text}}
+      </li>
+   </ul>
+
+   <h3>Upload Form</h3>
+   <form>
+      Text : <input type="text" ng-model="text" required><br />
+      Image : <input id="image" type="file" onchange="angular.element(this).scope().fileChanged(this)" required><br />
+      <input type="submit" value="Upload" ng-click="upload()">
+   </form>
+
+</body>
+</html>
