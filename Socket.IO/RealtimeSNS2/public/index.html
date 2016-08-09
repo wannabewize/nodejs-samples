@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html ng-app="RealtimeSNS">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Realtime SNS</title>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="bower_components/angular-socket-io/socket.min.js"></script>
+    <script>
+        var app = angular.module('RealtimeSNS', ['btford.socket-io']);
+        app.factory('snsSocket', function(socketFactory) {
+            var socket = socketFactory();
+            return socket;
+        });
+        app.controller('DefaultCtrl', function($scope, $http, snsSocket) {
+            $scope.title = 'Realtime SNS 2';
+            $scope.feeds = [];
+            $scope.loggedIn = false;
+
+            snsSocket.on('connect', function() {
+                console.log('socket connected');
+            });
+
+            snsSocket.on('feed', function(data) {
+                console.log('get feed : ', data.count);
+                for(feed of data.feeds) {
+                    $scope.feeds.unshift(feed);
+                }
+            });
+
+            $scope.writeFeed = function(message) {
+                snsSocket.emit('write', {message:message});
+                $scope.message = '';
+            };
+
+            $scope.login = function(user) {
+                $http.post('/login', user).then( function(result) {
+                    $scope.loggedIn = true;
+                    $scope.userInfo = 'User : ' + result.data.name;
+                }, function(error) {
+                    console.log('Login Failure');
+                    $scope.loggedIn = false;
+                });
+            }
+            $scope.logout = function() {
+                $http.delete('/logout').then(function(result) {
+                    $scope.loggedIn = false;
+                }, function(error) {
+                    console.log('Logout Failure', error);
+                    $scope.loggedIn = false;
+                });
+            }
+        });
+    </script>
+    <style>
+        .message { font-size: 14pt }
+        .author { font-size:11pt; }
+    </style>
+</head>
+<body ng-controller="DefaultCtrl">
+<h1>{{title}}</h1>
+<div>
+    <h2>Login</h2>
+    <form>
+        <span ng-show="!loggedIn" ng-init="user={id:'iu',pw:'1234'}">
+            <label>User</label><input type="text" ng-model="user.id">
+            <label>Password</label><input type="password" ng-model="user.pw">
+            <input type="submit" value="로그인" ng-click="login(user)">
+        </span>
+        <span ng-show="loggedIn">
+            {{userInfo}}
+            <input type="button" value="로그아웃" ng-click="logout()">
+        </span>
+    </form>
+</div>
+<h2>글 작성</h2>
+<div>
+    <form>
+        <label>Message</label><input type="text" ng-model="message">
+        <input type="submit" value="Write" ng-click="writeFeed(message)" ng-disabled="!loggedIn">
+    </form>
+</div>
+<h2>Feed</h2>
+<ul>
+    <li ng-repeat="feed in feeds">
+        <span class="message">{{feed.message}}</span><span class="author">by {{feed.author}}</span>
+    </li>
+</ul>
+
+
+</body>
+</html>
