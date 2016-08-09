@@ -4,6 +4,7 @@ var express = require('express');
 var app = express();
 
 var server = http.createServer(app);
+// app.listen() 으로 하지 않도록 주의!
 server.listen(3000);
 
 app.get('/favicon.ico', (req, res) => {res.send('')});
