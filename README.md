@@ -7,13 +7,11 @@ TAcademy Node.js 과정 샘플
 ## Auth
 Passport를 이용한 Local Auth Strategy를 사용한 예제
 
-1. LocalAuth_Step1
-2. LocalAuth_Step2
-3. LocalAuth_Step3
-
-페이스북 인증을 사용한 예제
-FBAuth : 웹 기반
-FBMobileAuth : 앱 기반
+1. CookieaAndSession : 세션과 쿠키. Express-session, CookieParser
+1. SimpleAuthWithSession : Express-session 모듈을 이용한 인증 예제
+1. LocalAuth : LocalAuth 예제
+1. DeviceIDAuth : 기기 ID를 이용한 Auth 예제
+1. FBAuth, FBMobileAuth, FBWebAuth : 페이스북 인증 예제
 
 ## BasicModules
 기본 모듈 예제
@@ -26,6 +24,10 @@ FBMobileAuth : 앱 기반
 
 ## Express
 Express 예제
+
+1. Multipart : 멀티파트 업로드 예제. express-formidable, Angular
+1. Routing : 라우팅 예제
+1. Template : EJS, Pug 템플릿 엔진 예제
 
 ## FlowControl
 Async, Promise 예제
@@ -42,6 +44,9 @@ GCM 예제
 ## Mobile
 JSON, XML 요청/응답 예제
 
+## MEAN
+MEAN Stack 예제
+
 ## Persistence
 MySQL과 MongoDB 예제
 
@@ -56,4 +61,10 @@ net과 dgram 모듈 예제
 
 ## Socket.IO
 Socket.IO 예제
+
+1. Connection : Socket.IO 서버와 클라이언트 연결
+1. EchoService : 에코 서비스 예제
+1. ChatService : 채팅 서비스 예제
+1. RealtimeSNS : 실시간 소셜 네트워크
+1. RealtimeSNS2 : 실시간 소셜 네트워크 + 인증
 
