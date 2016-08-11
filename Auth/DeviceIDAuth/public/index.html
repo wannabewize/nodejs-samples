@@ -13,9 +13,10 @@
             $scope.deviceLogin = function() {
                 $http.post('/deviceLogin', {deviceID:$scope.deviceID}).then(function(result) {
                     console.log('Login Success');
+                    $scope.authMessage = result.data.msg;
                 }, function(error){
                     console.log('Login Error : ', error);
-                    $window.alert(error.data.msg);
+                    $scope.authMessage = result.data.msg;                    
                 });
             };
 
@@ -28,11 +29,10 @@
             };
 
             $scope.writeArticle = function() {
-                var text = $scope.articles;
-                $scope.articles = '';
-                $http.post('/articles', {text:text}).then(function(result) {
+                $http.post('/articles', {text:$scope.article}).then(function(result) {
                     console.log('Success');
                     resolveArticles();
+                    $scope.article = '';
                 }, function(error) {
                     console.log('글 쓰기 에러 : ', error);
                     $window.alert(error.data.msg);
@@ -55,12 +55,13 @@
 <h1>{{title}}</h1>
 <div>
     <h3>DeviceID로 로그인</h3>
-    <div>device1, device2, device3</div>
+    <div>등록된 Device ID : device1, device2, device3</div>
     <form>
         <input type="text" ng-model="deviceID">
         <input type="submit" ng-click="deviceLogin()" value="로그인">
         <input type="submit" ng-click="logout()" value="로그아웃">
     </form>
+    {{authMessage}}
 </div>
 <div>
     <h3>글 목록</h3>

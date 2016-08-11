@@ -1,5 +1,4 @@
 class User {
-
 }
 
 const userList = [
@@ -18,9 +17,10 @@ User.findUserByDeviceID = function(deviceID, callback) {
    callback(null, null);
 };
 
+// 사용자 등록
 User.registUser = function(id, name, deviceID, callback) {
    // TODO : id 중복 체크
-   var user = user;
+   var user = {id:id, name:name, deviceID:deviceID};
    userList.push(user);
    callback(null, user);
 }
