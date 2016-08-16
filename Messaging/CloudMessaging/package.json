@@ -1,17 +1,18 @@
 {
-  "name": "pushnoti-samples",
+  "name": "cloud-messaging",
   "version": "1.0.0",
   "description": "",
-  "main": "sendGcmMessage.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^2.3.4",
-    "express": "^4.13.3",
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "fcm": "^1.0.3",
     "fcm-push": "^1.0.7",
-    "node-gcm": "^0.12.0"
+    "morgan": "^1.7.0"
   }
 }

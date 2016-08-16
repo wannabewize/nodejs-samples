@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html ng-app="Example">
+<head>
+   <script src="bower_components/angular/angular.min.js"></script>
+   <script>
+      angular.module('Example', []).controller('DefaultCtrl', function($scope, $http) {
+         $scope.title = 'Cloud Messaging Example';
+
+         $scope.devices = [];
+
+         resolveDevices();
+
+         function resolveDevices() {
+            $http.get('/devices').then(function(results){
+               var body = results.data;
+               $scope.devices = body.data;
+               console.log('devices : ', $scope.devices);
+            }, function(error) {
+               console.log('Error : ', error);
+            });
+         }
+
+         $scope.sendNotiRequest = function() {
+            var selected = [];
+            for(var device of $scope.devices) {
+               if ( device.selected ) {
+                  selected.push(device.token);
+               }
+            }
+            console.log(selected);
+
+            $http.post('/sendNoti', {msg:$scope.msg, tokens:selected}).then(function(result) {
+               console.log('success : ', result);
+            }, function(err) {
+               console.log('Error : ', err);
+            });
+         }
+      });
+   </script>
+</head>
+<body ng-controller="DefaultCtrl">
+<h1>{{title}}</h1>
+<div>
+   <h3>알림 메세지 발송 요청</h3>
+   <form>
+      <input type="text" ng-model="msg">
+      <input type="submit" ng-click="sendNotiRequest()" value="발송 요청">
+   </form>
+</div>
+<h3>Devices</h3>
+<table>
+   <thead>
+   <tr>
+      <td>Check</td>
+      <td>Device</td>
+      <td>Registration ID</td>
+   </tr>
+   </thead>
+   <tbody>
+   <tr ng-repeat="device in devices">
+      <td><input type="checkbox" ng-model="device.selected"></td>
+      <td>{{device.deviceId}}</td>
+      <td>{{device.token}}</td>
+   </tr>
+   </tbody>
+</table>
+</body>
+</html>
