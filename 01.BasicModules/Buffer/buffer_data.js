@@ -1,3 +1,7 @@
+/**
+ * 버퍼와 데이터
+ */
+
 // 데이터 쓰기/읽기
 console.log('endianns : ', require('os').endianness());
 
@@ -18,6 +22,7 @@ buffer.writeUInt16LE(0xFF, 6); // 255 : FF 00
 buffer.writeUInt16BE(0xFF, 8); // 255 : 00 FF
 
 console.log(buffer);
+
 
 // 읽기
 console.log('[0] : ', buffer.readInt8(0));

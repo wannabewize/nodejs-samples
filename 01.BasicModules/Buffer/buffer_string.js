@@ -1,10 +1,12 @@
-console.log('== Buffer from string');
+/**
+ * 버퍼와 문자열
+ */
+
 var strBuffer = Buffer.from('Hello World');
 console.log(strBuffer);
 console.log('utf8 : ', strBuffer.toString('utf-8'));
 console.log('hex : ', strBuffer.toString('hex'));
 console.log('base64 : ', strBuffer.toString('base64'));
-
 
 console.log('== Buffer write');
 
@@ -19,9 +21,12 @@ var str1 = 'Hello World';
 var length1 = Buffer.byteLength(str1);
 console.log(str1, ' length : ', str1.length, ' bytes : ', length1);
 
-var str2 = '😀📱';
-var length2 = Buffer.byteLength(str2);
-console.log(str2, ' length : ', str2.length, ' bytes : ', length2);
+// const mailbox = '📭';
+// const heart = '❤';
+
+const emoji = '😀📱';
+const emojiBuffer = Buffer.from(emoji);
+console.log('Emoji :', emoji, ' String Length : ', emoji.length, ' bytes : ', emojiBuffer.byteLength);
 
 
 // String -> Buffer -> Base64 String
