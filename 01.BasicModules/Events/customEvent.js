@@ -1,15 +1,23 @@
+/**
+ * Class, extends 를 이용해서 EventEmitter 자식 클래스로 만들기
+ */
 const event = require('events');
 const util = require('util');
 
 const EventEmitter = event.EventEmitter;
-class Person extends EventEmitter {
+
+class Person extends EventEmitter {    
+    // Person 생성자
+    constructor(name) {
+        super();
+        this.name = name;
+    }
 };
 
-const p = new Person();
-p.on('howAreYou', function() {
-    console.log('howAreYou 이벤트 발생 ')
+const p = new Person('IU');
+p.on('howAreYou', () => {
+    console.log('How are you? ', this.name)
 });
-
 
 // 이벤트 핸들러가 정의된 이벤트
 console.log('howAreYou 이벤트 발생');
