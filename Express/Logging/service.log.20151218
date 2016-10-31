@@ -1,0 +1,3 @@
+{"level":"info","message":"Info Message","timestamp":"2015-12-17T19:26:42.782Z"}
+{"level":"warn","message":"Warning Message","timestamp":"2015-12-17T19:26:42.784Z"}
+{"level":"error","message":"Error Message","timestamp":"2015-12-17T19:26:42.786Z"}
