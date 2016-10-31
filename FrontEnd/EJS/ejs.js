@@ -1,9 +1,11 @@
 var express = require('express');
 var app = express();
 app.set('views', __dirname + '/views');
-app.set('view engine', 'pug');
+app.set('view engine', 'ejs');
 
-app.get('/', function(req, res) {
+app.use('/images', express.static(__dirname + '/../../Resources/images'));
+
+app.use(function(req, res) {
 	res.render('page');
 });
 

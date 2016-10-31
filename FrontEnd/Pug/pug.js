@@ -1,9 +1,10 @@
 var express = require('express');
 var app = express();
 app.set('views', __dirname + '/views');
-app.set('view engine', 'ejs');
+app.set('view engine', 'pug');
 
-app.use(function(req, res) {
+
+app.get('/', function(req, res) {
 	res.render('page');
 });
 
