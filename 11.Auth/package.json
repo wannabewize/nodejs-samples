@@ -1,0 +1,26 @@
+{
+  "name": "auth-sample",
+  "version": "1.0.0",
+  "description": "",
+  "main": "cookie.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "aws-sdk": "^2.4.8",
+    "body-parser": "^1.15.2",
+    "connect-mongo": "^0.8.2",
+    "cookie-parser": "^1.4.0",
+    "cors": "^2.7.1",
+    "express": "^4.13.3",
+    "express-session": "^1.11.3",
+    "morgan": "^1.7.0",
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "passport-facebook-token": "^3.3.0",
+    "passport-kakao": "0.0.3",
+    "passport-local": "^1.0.0"
+  }
+}

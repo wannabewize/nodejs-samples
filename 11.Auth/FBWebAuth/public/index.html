@@ -1,0 +1,146 @@
+<!--https://developers.facebook.com/docs/javascript/howto/angularjs-->
+<!DOCTYPE html>
+<html ng-app="AuthExample">
+<head>
+    <meta charset="UTF-8">
+    <title>FBAuth Angular Example</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script>
+        var app = angular.module('AuthExample', []);
+
+        app.controller('DefaultCtrl', function ($scope, $http) {
+            $scope.login = function() {
+                FB.login(function(response) {
+                    showLoginState(response);
+                }, {scope: 'public_profile, email, user_friends, user_posts, user_photos, publish_actions'});
+            };
+
+            $scope.serviceLogin = function() {
+                console.log('token : ', FB.get);
+                $http.post('/fblogin', {}).then(function(result) {
+                    console.log('fbloing result : ', result);
+                }, function(error){
+                    console.log('fbloing error : ', error);
+                });
+            };
+
+            function showLoginState(response) {
+                $scope.loginStatus = JSON.stringify(response);
+                if ( response.status === 'connected') {
+                    var token = response.authResponse.accessToken;
+                    var expire = response.authResponse.expiresIn;
+                    var userId = response.authResponse.userID;
+                    console.log('token : ' ,  token , ' expire : ' , expire , ' userId : ' , userId);
+                }
+            }
+
+            $scope.logout = function() {
+                FB.logout(function(response) {
+                    console.log('Logout : ', response);
+                });
+            };
+
+            $scope.showMyInfo = function() {
+                FB.api('/me', function(response) {
+                    console.log(response);
+                    $scope.$apply(function(){
+                        $scope.myInfo = JSON.stringify(response);
+                    });
+                });
+            };
+
+            $scope.showFriends = function() {
+                FB.api('/me/friends?fields=about,id,name,gender', function(response) {
+                    // delayed model change
+                    $scope.$apply(function() {
+                        console.log('/me/frends', response);
+                        $scope.myInfo = JSON.stringify(response);
+                    });
+                });
+            };
+
+            $scope.feeds = [];
+            $scope.showFeed = function() {
+                // user_posts
+                FB.api('me/feed?fields=picture,message,created_time,story', function(response) {
+                    if ( response.error ) {
+                        console.log('Error!', response.error);
+                        return;
+                    }
+                    console.log(response);
+                    $scope.$apply(function() {
+                        $scope.feeds = response.data;
+                    });
+                });
+            };
+
+            $scope.albums = [];
+            $scope.showAlbum = function() {
+                FB.api('/me/albums?fields=cover_photo{picture},count,identified', function(response) {
+                    console.log(response);
+                    $scope.$apply(function() {
+                        $scope.albums = response.data;
+                    });
+                });
+            };
+        });
+    </script>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1492085981104723',
+                xfbml: true,
+                version: 'v2.7'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+<h1>페이스북 API</h1>
+<div>
+    <h2>FB 로그인</h2>
+    <fb:login-button scope="public_profile,email, user_friends, user_posts, user_photos, publish_actions"></fb:login-button>
+    <input type="button" ng-click="login()" value="Login">
+    <input type="button" ng-click="logout()" value="Logout">
+    <input type="button" ng-click="checkLoginState()" value="Login Check">
+    <p>{{loginStatus}}</p>
+</div>
+
+<div>
+    <h2>내 정보</h2>
+    <input type="button" ng-click="showMyInfo()" value="/me">
+    <input type="button" ng-click="showFriends()" value="/me/friends">
+    <p>{{myInfo}}</p>
+</div>
+
+<div>
+    <h2>Content</h2>
+    <input type="button" ng-click="showFeed()" value="/me/feed">
+    <div>
+        <ul ng-repeat="feed in feeds">
+            <img ng-if="feed.picture" src="{{feed.picture}}" height="50px">
+            <span ng-if="feed.message">{{feed.message}}</span>
+            <span ng-if="feed.story">{{feed.story}}</span>
+        </ul>
+    </div>
+    <input type="button" ng-click="showAlbum()" value="/me/album">
+    <div>
+        <ul ng-repeat="photo in albums">
+            <img src="{{photo.cover_photo.picture}}" height="50px">
+            count : {{photo.count}}
+        </ul>
+    </div>
+</div>
+</body>
+</html>

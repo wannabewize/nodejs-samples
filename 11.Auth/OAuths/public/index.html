@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html ng-app="FBOAuthSample">
+<head>
+    <meta charset="UTF-8">
+    <title>FBOAuth Example</title>
+    <script src="bower_components/angular/angular.js"></script>
+    <script src="//developers.kakao.com/sdk/js/kakao.min.js"></script>
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                appId: '1866106250330238',
+                xfbml: true,
+                version: 'v2.7'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {
+                return;
+            }
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        Kakao.init('f216469a53e180f160dc034a7b245e97');
+    </script>
+    <script>
+        var app = angular.module('FBOAuthSample', []);
+
+        app.controller('DefaultCtrl', function($scope, $http) {
+            var token;
+            $scope.login = function() {
+                FB.login(function(response) {
+                    showLoginState(response);
+                    console.log('login service');
+                }, {scope: 'public_profile, email, user_friends, user_posts, user_photos, publish_actions'});
+            };
+
+            $scope.serviceLogin = function() {
+                if ( token ) {
+                    loginService();
+                } else {
+                    console.log('token not exist');
+                }
+
+            };
+
+            function loginService() {
+                console.log('login service');
+                var url = '/auth/facebook/token?access_token=' + token;
+                console.log('regiseter token : ', url);
+                $http.get(url).then(function(result) {
+                    console.log('fbloing result : ', result);
+                }, function(error){
+                    console.log('fbloing error : ', error);
+                });
+            };
+
+            $scope.login = function() {
+                FB.login(function(response) {
+                    showLoginState(response);
+                }, {scope: 'public_profile, email, user_friends, user_posts, user_photos, publish_actions'});
+            };
+            function showLoginState(response) {
+                $scope.loginStatus = JSON.stringify(response);
+                if ( response.status === 'connected') {
+                    token = response.authResponse.accessToken;
+                    var expire = response.authResponse.expiresIn;
+                    var userId = response.authResponse.userID;
+                    console.log('token : ' ,  token , ' expire : ' , expire , ' userId : ' , userId);
+                    $scope.access_token = token;
+                }
+            }
+
+            $scope.kakaoLogin = function() {
+                Kakao.Auth.login({
+                    success : function(authObj) {
+                        console.log(authObj);
+                        $scope.$apply(function() {
+                            $scope.kakaoStatus = JSON.stringify(authObj);
+                        });
+                    },
+                    fail : function(err) {
+                        alert(JSON.stringify(err));
+                        console.log(err);
+                        $scope.kakaoStatus = JSON.stringify(err);
+                    }
+                });
+            }
+
+            $scope.kakaoLogout = function() {
+                Kakao.Auth.logout(function(arg) {
+                    console.log('logout ; ', arg);
+                });
+            }
+        });
+    </script>
+
+</head>
+<body ng-controller="DefaultCtrl">
+
+<h1>OAuth Example</h1>
+<div>
+    <h2>FB 로그인</h2>
+    <fb:login-button scope="public_profile,email, user_friends, user_posts, user_photos, publish_actions"></fb:login-button>
+    <input type="button" ng-click="login()" value="FB Login">
+    <input type="button" ng-click="logout()" value="Logout">
+    <input type="button" ng-click="serviceLogin()" value="Service Login">
+    <p>{{access_token}}</p>
+</div>
+<div>
+    <h2>Kakao 로그인</h2>
+    <a id="kakao-login-btn"></a>
+    <input type="button" ng-click="kakaoLogin()" value="Kakao Login">
+    <input type="button" ng-click="kakaoLogout()" value="Kakao Logout">
+    <a href="/auth/kakao">Login with Server</a>
+    <script type='text/javascript'>
+        // 카카오 로그인 버튼을 생성합니다. - 버튼 이후에 script 작성
+        Kakao.Auth.createLoginButton({
+            container: '#kakao-login-btn',
+            success: function(authObj) {
+                alert(JSON.stringify(authObj));
+            },
+            fail: function(err) {
+                alert(JSON.stringify(err));
+            }
+        });
+    </script>
+    {{kakaoStatus}}
+</div>
+</body>
+</html>

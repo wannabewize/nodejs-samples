@@ -1,0 +1,20 @@
+{
+  "name": "fb-otuth-sample",
+  "homepage": "https://github.com/wannabewize/Node-Samples",
+  "authors": [
+    "wannabewize <wannabewize+macbookpro@gmail.com>"
+  ],
+  "description": "",
+  "main": "",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "^1.5.7"
+  }
+}

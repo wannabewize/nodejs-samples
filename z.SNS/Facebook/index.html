@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Facebook Example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+</head>
+<body>
+<script>
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '1866106250330238',
+            status : true,
+            cookie : true,
+            xfbml      : true,
+            version    : 'v2.5'
+        });
+        checkLoginState();
+    };
+
+    function checkLoginState() {
+        FB.getLoginStatus(function(response){
+            console.log(response);
+            jQuery('#status').text( JSON.stringify(response));
+
+            if ( response.status === 'connected') {
+                var token = response.authResponse.accessToken;
+                var expire = response.authResponse.expiresIn;
+                var userId = response.authResponse.userID;
+                console.log('Connected : userId : ', userId,  'token : ', token, ' expire : ', expire);
+            } else if ( response.status === 'not_authorized') {
+                console.log('not_authorized');
+            } else {
+                console.log('unknown');
+            }
+        });
+    }
+
+    function fbLogin() {
+        FB.login(function(response) {
+            checkLoginState();
+        }, {scope: 'public_profile,email,user_friends'});
+    }
+
+    function fbLogout() {
+        FB.logout(function(response) {
+            checkLoginState();
+        });
+    }
+
+    function showMe() {
+        FB.api('/me', function(response) {
+            console.log(response);
+            jQuery('#info').text( JSON.stringify(response) );
+        });
+    }
+
+    function showFriends() {
+        FB.api('me/friends?fields=email,id,name,picture', function(response) {
+            console.log(response);
+            jQuery('#info').text( JSON.stringify(response) );
+        });
+    }
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div>
+    <h1>로그인</h1>
+    <fb:login-button scope="public_profile,email, user_friends" onlogin="checkLoginState();">
+    </fb:login-button>
+    <input type="button" onclick="fbLogin()" value="Login">
+    <input type="button" onclick="fbLogout()" value="Logout">
+    <input type="button" onclick="checkLoginState()" value="로그인 상태">
+    <p id="status"></p>
+</div>
+
+<div>
+    <h1>사용자 정보</h1>
+    <input type="button" onclick="showMe()" value="MyInfo">
+    <input type="button" onclick="showFriends()" value="Friends">
+    <p id="info"></p>
+</div>
+
+</body>
+</html>

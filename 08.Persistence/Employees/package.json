@@ -1,0 +1,16 @@
+{
+  "name": "mysql-employees",
+  "version": "1.0.0",
+  "description": "## MySQL Example Database",
+  "main": "employees.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.14.0",
+    "mysql": "^2.11.1",
+    "sequelize": "^3.23.4"
+  }
+}
