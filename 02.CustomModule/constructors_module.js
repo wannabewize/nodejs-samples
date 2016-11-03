@@ -1,3 +1,6 @@
+/**
+ * 다수의 Constructor를 exports 하는 모듈
+ */
 function BusDef() {
    this.take = function() {
       console.log('Take bus');

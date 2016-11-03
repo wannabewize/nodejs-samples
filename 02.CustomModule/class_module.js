@@ -1,12 +1,14 @@
-function Exercise() {
-	this.pushup = function() {
-		console.log('Push up, Push up!');
-	}
+class Singer {
+    constructor(name) {
+        this.name = name;
+    }
+    sing() {
+        console.log('sing sing');
+    }
 }
 
-Exercise.prototype.run = function() {
-	console.log('Fast, Fast');
+Singer.prototype.dance = function() {
+    console.log('dance dance');
 }
 
-// module 생략 불가
-module.exports = Exercise;
+module.exports = Singer;
