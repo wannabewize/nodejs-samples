@@ -15,21 +15,5 @@ app.listen(3000, function(err) {
 });
 
 function handler(req, res) {
-   // 정수형
-   var r = Math.round(Math.random() * 4);
-   console.log(r);
-   switch (r) {
-      case 0:
-         // Not finish
-         res.write('Message');
-         break;
-      case 1:
-         res.sendStatus(400);
-         break;
-      case 2:
-         res.redirect('http://google.com');
-         break;
-      default:
-         res.status(200).send('Express');
-   }
+   res.send('Morgan Example');
 }

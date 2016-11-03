@@ -1,7 +1,7 @@
 var express = require('express');
 var app = express();
 app.listen(3000, function () {
-   console.log('Server is listening @3000');
+   console.log('Server is listening @3000\nGET /movies\nPOST /movies\nPUT /movies/avata\nDELETE /moives/avata');
 });
 
 app.get('/', function (req, res) {

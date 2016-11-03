@@ -13,7 +13,7 @@ app.get('/json', function(req, res) {
 });
 
 app.get('/redirect', function (req, res) {
-   res.redirect('http://google.com');
+   res.redirect('hㄴttp://google.com');
 });
 
 app.get('/status', function (req, res) {

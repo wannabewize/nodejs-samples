@@ -1,6 +1,5 @@
 var winston = require('winston');
 
-
 console.log('== Transport ==');
 var logger = new winston.Logger({
    transports: [
@@ -24,7 +23,7 @@ logger.error('Error Message2');
 
 // 날짜 로거 추가
 // var dailyFileTransport = new winston.transports.DailyRotateFile({dataPattenr:'yyyy-MM-dd', filename:'daily-log'}); 
-winston.add(winston.transports.DailyRotateFile, {dataPattenr:'yyyy-MM-dd', filename:'daily-log'});
+winston.add(winston.transports.DailyRotateFile, {dataPattenr:'yyyy-MM-dd', filename:'Log/daily-log'});
 
 logger.info('Daily Info Message');
 logger.warn('Daily Wraning Message');

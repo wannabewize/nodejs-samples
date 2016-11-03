@@ -1,7 +1,13 @@
+/**
+ * Route Parameters
+ */
+
 var express = require('express');
 var app = express();
 
-app.listen(3000);
+app.listen(3000, (err) => {
+   console.log('Server is running @3000\n\nGET /user/:id\nGET /movies/:movieId/:actor\nGET /user/sample ( /user/:id와 겹침 )');
+});
 
 // 파라미터 1개
 app.get('/user/:id', function (req, res) {
@@ -21,4 +27,3 @@ app.get('/movies/:movieId/:actor', function (req, res) {
 app.get('/user/sample', function(req, res) {
    res.send('GET /user/sample');
 });
-
