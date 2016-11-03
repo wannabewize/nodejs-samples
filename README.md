@@ -137,6 +137,8 @@ Express 예제
 로그 남기기
 - morgan : morgan을 이용한 로그
 - winston :
+- winstonHttp : 
+- winstonRotateFile : 날짜별 로그 파일 만들기
 
 ### Multipart
 
