@@ -1,4 +1,8 @@
-// Asycn Task functio with Success, Failure Handler
+/**
+ * 비동기 동작
+ */
+
+// Asycn Task function with Success, Failure Handler
 function task(condition, success, failure) {
    setTimeout(function () {
       condition ? success() : failure();

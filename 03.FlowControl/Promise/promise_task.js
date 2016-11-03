@@ -20,6 +20,6 @@ task(true).then( result => {
 task(false).then( result => {
             console.log('Fullfilled : ', result);
       }, error => {
-            console.log('Rejected : ', err);
+            console.log('Rejected : ', error);
       }
 );
