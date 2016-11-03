@@ -5,33 +5,76 @@ TAcademy Node.js 과정 샘플
 기본 모듈 예제
 
 ### Global
+전역 객체
+- add : process의 콘솔 입력 다루기
+- console : 콘솔을 이용한 정보 출력, 시간 측정
+- process : 프로세스 정보 얻기
 
-### Utility
+### Util
+Util 모듈
+- format : 포맷 문자열 생성
+- inherits : 생성자를 이용한 클래스 상속
+- inspector : 객체 상태 출력하기
+- classAndInheritance : ES6의 클래스와 상속
 
 ### Event
+이벤트
+- customEvent, customEvent_es5 : EventEmitter 자식 클래스로 커스텀 이벤트 다루기
+- event : 이벤트 핸들러 등록
+- eventEmit : 이벤트 코드로 발생시키기
+- uncaughtedException : uncaughtedException 에러 이벤트 다루기
 
 ### Buffer
+버퍼 모듈 예제
+- buffer : 
+- buffer_data
+- buffer_unicode
+- buffer_string
 
 ### Stream
+스트림 모듈
+- stream_flowing
+- stream-pause
+- stream-pipe
+- stream_stdin_stdout
 
 ### FileSystem
+파일 스스템 모듈
 
-### Network
+### Networking
+네트워크에 관련된 모듈
+- querystring
+- request
+- url_parsing
+- url_making
 
 ### Cluster
 
 ### Timer
+타이머 예제
+- timer : 타이머
+- interval : 반복
+
+### Others
+- readline : readline 모듈
+- os : os 모듈을 이용한 환경 정보 얻기
 
 ## 02.CustomModule
 커스텀 모듈 만들기
 
-
 ## 03.FlowControl
 비동기 동작과 흐름 제어
 
+### CallbackHell
+콜백 지옥
+- callbackHell
+- callbackhell_esc : 함수 정의로 콜백 레벨 제어
 
 ### Async
-Async, Promise 예제
+Async 예제
+
+### Promise
+Promise 예제
 
 ## 04.HTTP
 http 모듈을 이용한 예제
@@ -53,8 +96,10 @@ Express의 템플릿 엔진 EJS
 Express의 템플릿 엔진 Pug
 
 ### jQuery
+jQuery를 이용한 프론트 엔드와 서버 통신
 
 ### Angular
+Angular를 이용한 프론트 엔드와 서버 통신
 
 ## 07.REST Service
 JSON, XML 요청/응답 예제
@@ -64,7 +109,6 @@ REST 기반의 서비스 작성 예제
 
 ## 08.Persistence
 MySQL과 MongoDB 예제
-
 
 ## 09.Socket.io
 Socket.io를 이용한 실시간 서비스 작성
@@ -80,8 +124,10 @@ Socket.io를 이용한 실시간 서비스 작성
 소켓을 이용한 실시간 서비스 작성
 
 ### net 모듈
+TCP를 이용한 실시간 통신
 
 ### dgram 모듈
+UDP를 이용한 실시간 통신
 
 ## 11.Auth
 Passport를 이용한 Local Auth Strategy를 사용한 예제
@@ -104,10 +150,10 @@ GCM 예제
 ## 15.Mail, Crawling
 
 ### Mail
-nodemailer를 이용한 메일 발송 예제
+메일 발송 예제
 
 ### Crawling
-
+크롤링
 
 ## 16.AWS
 아마존 S3 업로드와 접근 예제
