@@ -1,24 +1,19 @@
 /**
- * 미들웨어가 동작하는 원리
+ * 미들웨어와 Express 서버
  */
+const express = require('express');
+const app = express();
 
-var express = require('express');
-var app = express();
+app.use( (req, res) => {
+   console.log('url :', req.url);
+   console.log('path :', req.path);
+   console.log('query :', req.query);
+   console.log('method :', req.method);
+   // console.log('headers :', req.headers);
 
-// 요청 정보 분석용 미들웨어
-app.use(function(req, res, next) {
-   // 분석 결과를 요청 객체에 설정
-   req.processedData = 'Middleware data';
-   // 이어지는 미들웨어 실행   
-   next();
+   res.send('Hello Express!');
 });
 
-// 요청 처리용 미들웨어
-app.use(function(req, res) {
-   // 미들웨어에서 분석한 데이터
-   var data = req.processedData;
-   res.status(200).send('Express : ' + data);
+app.listen(3000, (err) => {
+   console.log('Express Server is running @ 3000');
 });
-
-
-app.listen(3000);

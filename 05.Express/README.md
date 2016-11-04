@@ -4,20 +4,31 @@ Express 예제
 ## Middleware
 미들웨어 예제
 
-- middleware : 미들웨어 작성
-- faviconAndLog : 파비콘과 로그 미들웨어
-- responses : 응답 처리 함수
-- methodOverride : HTML폼에서 Delete/Put 등의 메소드 사용하기
+- middleware : Express 서버와 미들웨어. 요청 분석
+- middleware_next : 연속된 미들웨어 사용하기
+- responses : 다양한 응답 처리 함수
 
 ## Routing
 라우팅 예제
 
-- staticFile : 정적 파일 라우팅
-- routingBasic : 라우팅 기본
-- routingMethod : 라우팅 메소드
-- routingParams : 라우팅 파라미터
-- routingRegEX : 정규식을 이용한 라이팅
-- app, eatingRouter, greetingRouter : 라우팅 모듈
+- routing : 경로와 메소드를 이용한 라우팅
+- routing_params : 라우팅 파라미터
+- routing_reg : 정규식을 이용한 라이팅
+- router_server, router_eating, router_greeting : 라우팅 모듈
+
+## UsefulMiddleware
+유용한 미들웨어 소개
+
+- staticFile : 정적 파일처리 미들웨어
+- faviconAndLog : 파비콘과 로그 미들웨어
+- methodOverride : HTML폼에서 Delete/Put 등의 메소드 사용하기
+
+
+## ErrorHandling
+- errorHandling : 에러 처리
+- env : 동작 환경
+
+
 
 ## Loggin
 로그 남기기
