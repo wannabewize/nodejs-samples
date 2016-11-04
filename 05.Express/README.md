@@ -16,6 +16,13 @@ Express 예제
 - routing_reg : 정규식을 이용한 라이팅
 - router_server, router_eating, router_greeting : 라우팅 모듈
 
+## ErrorHandling
+에러 다루기
+
+- errorHandling : 에러 처리
+- addService : 두 값을 더하는 서비스. 입력값이 잘못되면 에러.
+- env : 동작 환경
+
 ## UsefulMiddleware
 유용한 미들웨어 소개
 
@@ -24,9 +31,6 @@ Express 예제
 - methodOverride : HTML폼에서 Delete/Put 등의 메소드 사용하기
 
 
-## ErrorHandling
-- errorHandling : 에러 처리
-- env : 동작 환경
 
 
 

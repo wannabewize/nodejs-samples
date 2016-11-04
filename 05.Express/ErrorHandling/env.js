@@ -1,42 +1,29 @@
+/**
+ * 동작 환경
+ */
+
 // $ NODE_ENV=development node env
-var express = require('express');
-var app = express();
+const express = require('express');
+const app = express();
 app.listen(3000);
 
 console.log('env : ', app.get('env'));
 
 app.use(function (req, res, next) {
    var err = new Error('Error Message');
-   err.code = 100;
+   err.code = 500;
    next(err);
 });
 
-if (app.get('env') === 'development') {
-   app.use(function (err, req, res, next) {
+app.use(function (err, req, res, next) {
+   // 상황 별 에러 메세지 처리
+   if (app.get('env') === 'development') {
       res.end(err.stack);
       console.error(err.stack);
-   });
-}
-else {
-   app.use(function (err, req, res, next) {
-      console.log('code : ', err.code);
-      res.status(err.code || 500);
-      console.log('잠시 후 다시 시도해주세요');
-      res.end('잠시 후 다시 시도해주세요');
-   });
-}
-
-
-/*
-try {
-   throw new Error('Error!');
-}
-catch ( err  ) {
-   if ( app.get('env') == 'development' ) {
-      console.error('Error', err.stack);
    }
    else {
-      console.log('잠시후 다시 시도해주세요');
+      console.log('code : ', err.code);
+      console.log('잠시 후 다시 시도해주세요');
+      res.status(200).end('잠시 후 다시 시도해주세요');
    }
-}
-*/
+});

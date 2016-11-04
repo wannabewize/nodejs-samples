@@ -1,51 +1,39 @@
-var express = require('express');
-var app = express();
+/**
+ * 에러 담당 미들웨어 예제
+ */
 
-app.use('/add', add);
-app.use('/admin', showAdmin);
-app.use(errorHandler);
+const express = require('express');
+const app = express();
+
+// 문자열로 에러 전달
+app.get('/error1', (req, res, next) => {
+   const errorMessage = 'Error 발생';
+   next(errorMessage);
+});
+
+// 에러 객체로 에러 전달 - 상세 에러 처리 가능
+app.get('/error2', (req, res, next) => {
+   const error = new Error('에러 메세지');
+   error.code = 400;
+   next(error);
+});
+
+// 에러가 발생하지 않는 상황
+app.get('/', (req, res, next) => {
+   res.send('Error Handling Example');
+});
+
+// 에러 처리
+app.use( (err, req, res, next) => {
+   const code = err.code;
+   const msg = err.message;
+   
+   if ( code && msg ) {
+      res.status(code).send({code:code, message:msg});
+   }
+   else {
+      res.sendStatus(500);
+   }
+});
+
 app.listen(3000);
-
-// add?value1=1&value2=2
-function add(req, res, next) {
-   var v1 = req.query['value1'];
-   var v2 = req.query['value2'];
-   
-   // 입력 파라미터 체크
-   if ( v1 == null || v1.length == 0 || v2 == null || v2.length == 0 ) {
-      var error = new Error('value1, value2 입력이 없습니다.');
-      error.code = 400;
-      return next(error);
-   }
-   
-   var op1 = parseInt(v1);
-   var op2 = parseInt(v2);
-   
-   // 숫자 체크
-   if ( isNaN(op1) || isNaN(op2) ) {
-      var error = new Error('value1, value2는 숫자만 입력');
-      error.code = 400;
-      return next(error);
-   }
-   
-   var result = op1 + op2;
-   res.send('Result : ' + result);
-}
-
-// 401 에러
-function showAdmin(req, res, next) {
-   var error = new Error('권한 없음');
-   error.code = 401;
-   return next(error);
-}
-
-function errorHandler(err, req, res, next) {
-   // JSON 에러 메세지
-   var msg = {
-      code:err.code,
-      message:err.message
-   }
-   console.log(msg);
-   // 상태코드
-   res.status(err.code).json(msg);
-}
