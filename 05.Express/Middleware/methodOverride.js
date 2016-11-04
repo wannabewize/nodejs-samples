@@ -1,4 +1,6 @@
-// 작성중
+/**
+ * methodOverride 모듈을 이용해서 HTML 폼에서 DELETE/PUT 메소드 사용하기
+ */
 var express = require('express');
 var methodOverride = require('method-override');
 
@@ -9,6 +11,10 @@ app.get('/', showForm);
 
 app.post('/', function(req, res) {
    res.send('Post Request');
+});
+
+app.put('/', function(req, res) {
+   res.send('Put Request');
 });
 
 app.delete('/', function(req, res) {
@@ -24,6 +30,9 @@ function showForm(req, res) {
    body += '<h3>Method override Sample</h3>';
    body += '<form method="POST" action="/?_method=DELETE" >';
    body += '<button type="submit">Delete</button>';
+   body += '</form>';
+   body += '<form method="POST" action="/?_method=PUT" >';
+   body += '<button type="submit">Put</button>';
    body += '</form>';
    body += '</body></html>';
    res.send(body);

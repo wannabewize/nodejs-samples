@@ -5,7 +5,7 @@ app.listen(3000, function () {
 });
 
 app.get('/download', function (req, res) {
-   res.download('./images/baseball.png');
+   res.download('../../Resources/images/baseball.png');
 });
 
 app.get('/json', function(req, res) {
