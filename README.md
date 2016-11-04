@@ -4,60 +4,16 @@ TAcademy Node.js 과정 샘플
 ## 01.BasicModules
 기본 모듈 예제
 
-### Global
-전역 객체
-- add : process의 콘솔 입력 다루기
-- console : 콘솔을 이용한 정보 출력, 시간 측정
-- process : 프로세스 정보 얻기
-
-### Util
-Util 모듈
-- format : 포맷 문자열 생성
-- inherits : 생성자를 이용한 클래스 상속
-- inspector : 객체 상태 출력하기
-- classAndInheritance : ES6의 클래스와 상속
-
-### Event
-이벤트
-- customEvent, customEvent_es5 : EventEmitter 자식 클래스로 커스텀 이벤트 다루기
-- event : 이벤트 핸들러 등록
-- eventEmit : 이벤트 코드로 발생시키기
-- uncaughtedException : uncaughtedException 에러 이벤트 다루기
-
-### Buffer
-버퍼 모듈 예제
-- buffer : 
-- buffer_data
-- buffer_unicode
-- buffer_string
-
-### Stream
-스트림 모듈
-- stream_flowing
-- stream-pause
-- stream-pipe
-- stream_stdin_stdout
-
-### FileSystem
-파일 스스템 모듈
-
-### Networking
-네트워크에 관련된 모듈
-- querystring
-- request
-- url_parsing
-- url_making
-
-### Cluster
-
-### Timer
-타이머 예제
-- timer : 타이머
-- interval : 반복
-
-### Others
-- readline : readline 모듈
-- os : os 모듈을 이용한 환경 정보 얻기
+- Global : 전역 객체 예제
+- Util : 유틸 모듈
+- Event : 이벤트 모듈
+- Buffer : 버퍼
+- Stream : 스트림 모듈 예제
+- FileSystem : 파일 시스템 다루기
+- Networking : 네트워크에 관련된 모듈
+- Cluster
+- Timer : 타이머
+- readline, os 모듈 
 
 ## 02.CustomModule
 커스텀 모듈 만들기
@@ -70,81 +26,25 @@ Util 모듈
 ## 03.FlowControl
 비동기 동작과 흐름 제어
 
-### CallbackHell
-콜백 지옥
-- callbackHell : 콜백 지옥 상황
-- callbackhell_esc : 함수 정의로 콜백 레벨 제어
-
-### Async
-Async 예제
-- async_series
-- async_parallel
-- async_waterfall
-
-### Promise
-Promise 예제
-- asyncTask : 성공과 실패 콜백을 사용하는 비동기 태스크
-- promise : Promise 작성
-- promise_task : Promise를 반환하는 태스크
-- promise_series
-- promise_race
-- promise_all
+- CallbackHell : 콜백 지옥 상황
+- Async : Async 모듈을 이용한 흐름 제어 
+- Promise : Promise를 이용한 태스크 작성과 진행
 
 ## 04.HTTP
 http 모듈을 이용한 예제
 
-### Basic
-- helloWorld : Hello World 출력하는 HTTP 서버
-- calculation : 쿼리 문자열을 이용한 값 계산
-- staticFileService : 정적 파일 서비스
-- htmlServer : css/image를 포함한 HTML 서비스
-- responsePipe : 응답 객체 파이프라인
-
-### Error
-에러 상황인 서버
-- endlessResponse : 응답이 끊나지 않는 서버
-- headerSendError : 바디와 헤더 보내기 에러
-- portOpenError : 포트 오픈 에러
-
-### Post
-Post 요청
-- prg-pattern : Post-Redirect-Get 패턴
-- urlencoded : URLEncoded 방식의 Post 요청
-- jsonRequest : JSON 방식의 Post 요청
-
-### Multipart
-- multipartRequest : 멀티파트 메세지 분석
-- formidable : formidable 모듈
-- favoritePaint : 그림과 제목 서비스
+- Basic : HTTP 서버와 요청/응답
+- Error : HTTP 서버 작성시 에러 상황
+- Post : Post 요청 다루기
+- Multipart : 멀티파트 요청 다루기
 
 ## 05.Express
 Express 예제
 
-### Middleware
-미들웨어
-- middleware : 미들웨어 작성
-- faviconAndLog : 파비콘과 로그 미들웨어
-- response_function : 응답 처리 함수
-
-### Routing
-- routingBasic : 라우팅 기본
-- routingMethod : 라우팅 메소드
-- routingParams : 라우팅 파라미터
-- routingRegEX : 정규식을 이용한 라이팅
-- app, eatingRouter, greetingRouter : 라우팅 모듈
-
-### Loggin
-로그 남기기
-- morgan : morgan을 이용한 로그
-- winston :
-- winstonHttp : 
-- winstonRotateFile : 날짜별 로그 파일 만들기
-
-### Multipart
-
-- Multipart : 멀티파트 업로드 예제. express-formidable, Angular
-
-
+- Middleware : 미들웨어
+- Routing : 라우팅
+- Loggin : 로그 남기기
+- Multipart : 멀티파트
 
 ## 06.FrontEnd
 프론트 엔드
