@@ -21,26 +21,18 @@ Express 예제
 
 - errorHandling : 에러 처리
 - addService : 두 값을 더하는 서비스. 입력값이 잘못되면 에러.
-- env : 동작 환경
+- env : 동작 환경(development, production) 별 에러 다루기
 
 ## UsefulMiddleware
 유용한 미들웨어 소개
 
-- staticFile : 정적 파일처리 미들웨어
+- staticFiles : 정적 파일처리 미들웨어
 - faviconAndLog : 파비콘과 로그 미들웨어
 - methodOverride : HTML폼에서 Delete/Put 등의 메소드 사용하기
+- morgan : 로그 남기기
 
+## MessageBody
 
-
-
-
-## Loggin
-로그 남기기
-- morgan : morgan을 이용한 로그
-- winston : 기본 winston 로그 모듈
-- winstonHttp : HTTP를 이용해서 로그 전달
-- winstonRotateFile : 날짜별 로그 파일 만들기
-
-## Multipart
-
+- urlencoded : URLEncoded 바디 분석
+- json : JSON 메세지 분석
 - Multipart : 멀티파트 업로드 예제.

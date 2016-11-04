@@ -5,13 +5,14 @@ const app = express();
 
 // 파비콘 요청이면 콘솔 출력
 app.get('/', (req, res, next) => {
+   console.log('요청 경로 :', req.url);
    if ( req.url == '/favicon.ico') {
       console.log('Favicon 요청');
    }
    next();
 });
 
-app.use(favicon(__dirname + '/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 
 app.use((req, res) => {
    res.sendFile(__dirname + '/faviconIndex.html');      
