@@ -13,7 +13,9 @@ div
 h1= 'Writing Pug Code'
 
 - var title = 'Pug Example'
+- var message = 'Hello Pug'
 h1= title
+div #{message} 
 
 ul
 - for(var i = 0 ; i < 10 ; i++ ) {
@@ -39,7 +41,7 @@ div!= 'Unecsaped <strong>String</strong>'
 h1 Condition Sample
 
 - var val = true
-if val
+if ( val ) 
    div val is True
 else
    div val is False

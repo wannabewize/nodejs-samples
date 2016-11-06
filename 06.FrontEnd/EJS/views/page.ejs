@@ -1,26 +1,48 @@
 <html>
 <body>
-<%
-   var data = {title:'EJS Example', link:'./link'}
-%>
-<h3>Link</h3>
-<div>
-<a href="<%= data.link %>">link1</a>
-</div>
-<ul>
-<%
-   var i = 0;
-   var j = i + 1; 
-%>
 
-<% for ( var i = 0 ; i < 10 ; i++) { %>
-    <li><a href="./page_<%= i %>"> <%= i %> </a> </li>
-<% } %>
+<!-- 데이터 정의 -->
+<% var title = 'EJS 예제' %>  
+
+<h1> <%= title %></h1>
+
+<div>
+    <% if ( count ) { %> 
+        num의 값은 <%= count %> 그리고
+
+        <!-- if 조건문 -->
+        <% if ( count % 2 == 0 ) { %>
+            짝수
+        <% } else { %>
+            홀수
+        <% } %>
+    <% } else { %>
+        count 값 없음.
+    <% } %>
+</div>
+
+<ul>
+
+   <!-- for 반복문 -->
+   <% for ( var i = 0 ; i < count ; i++) { %>
+    <li>
+        <a href="./page_<%= i %>"> <%= i %> </a>
+    </li>
+    <% } %>
 </ul>
-<% var tag = 'h1' %>
-<<%= tag %>>
-TAG 만들기
-</<%= tag %>/>
-<%= undefinedVar %>
+<h1>태그와 어트리뷰트에서 사용</h1>
+<%
+    var tag = 'h3'
+    var data = {title:'Title', link:'./link'}
+%>
+<<%= tag %>> TAG 이름에 사용  </<%= tag %>/>
+
+
+<h3>링크의 어트리뷰트 값으로 사용</h3>
+<div>
+    <!-- 어트리뷰트의 값으로 사용 -->
+    <a href="<%= data.link %>">link1</a>
+</div>
+
 </body>
 </html>
