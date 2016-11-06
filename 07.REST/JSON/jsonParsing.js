@@ -1,3 +1,6 @@
+/**
+ * JSON 파싱
+ */
 var fs = require('fs');
 fs.readFile('./topSongs.json', function(err, data) {
    if ( err ) {
