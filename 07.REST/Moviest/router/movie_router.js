@@ -19,13 +19,15 @@ function showMovieList(req, res, next) {
 	res.send(movieList);
 }
 
+function showMovieDetail(req, res, next) {
+	res.send("TODO")
+}
+
 function addMovie(req, res, next) {
 	res.send("TODO")
 }
 
-function showMovieDetail(req, res, next) {
-	res.send("TODO")
-}
+
 
 function deleteMovie(req, res, next) {
 	res.send("TODO")
