@@ -1,10 +1,17 @@
+/**
+ * Express-formidable을 사용해서 멀티파트 요청 다루기
+ */
+
+const uploadDir = "upload";
+const imageDir = "images";
+
 const fs = require('fs');
 try {
-   fs.accessSync('upload');
-   fs.accessSync('public/images');
+   fs.accessSync(uploadDir);
+   fs.accessSync('images');
 }
 catch (error) {
-   console.log('Make upload, public/images folder');
+   console.log('Make upload, images folder');
    process.exit();
 }
 
@@ -15,19 +22,22 @@ const app = express();
 
 var data = [];
 
-// public 경로로 정적 파일 요청
+// public 경로로 정적 파일 요청 : html, js 등
+app.use(express.static('public'));
+// 이미지 요청 : image/iu.jpg -> images/iu.jpg
+app.use('/image',express.static('images'));
 app.use(express.static('public'));
 
-app.use(formidable.parse({
-   uploadDir : 'upload',
+app.use(formidable({
+   uploadDir : uploadDir,
    keepExtension : true,
    multiples : true // 같은 이름으로 파일이 다수 전달되면 배열로 파싱
 }));
 
 app.post('/upload', (req, res) => {
    // file 업로드 시 image로 전달
-   const imageFile = req.body.image;
-   const text = req.body.text;
+   const imageFile = req.files.image;
+   const text = req.fields.text;
    if ( !imageFile || !text ) {
       res.sendStatus(400);
       return;
@@ -46,17 +56,19 @@ app.post('/upload', (req, res) => {
    console.log('new name : ', newName);
    
    // 이미지 폴더로 이동
-   const newPath = 'public/images/' + newName;    
+   const newPath = imageDir + '/' + newName;    
+   console.log('New path :', newPath);
    fs.rename(imageFile.path, newPath, (err) => {
       if ( err ) {
          console.log('Error : ', err);
          res.sendStatus(500);
          return;
       }
-
+      // 경로
+      const imageUrl = 'image/' + newName;
       const info = {
-         text : text,
-         image : '/images/' + newName
+         text : text,         
+         image : imageUrl 
       };
       data.push(info);
       res.sendStatus(200);
@@ -71,8 +83,6 @@ app.get('/', (req, res) => {
    res.send('public/index.html');
 });
 
-
 app.listen(3000, err => {
    console.log('Server is running @ 3000');
 });
-

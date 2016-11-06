@@ -32,7 +32,13 @@ Express 예제
 - morgan : 로그 남기기
 
 ## MessageBody
+ 바디파서 모듈을 이용해서 메세지 바디를 사용하는 요청 분석.
 
 - urlencoded : URLEncoded 바디 분석
 - json : JSON 메세지 분석
-- Multipart : 멀티파트 업로드 예제.
+
+## Multipart
+멀티파트 메세지 분석
+
+- Formidable : express-formidable을 이용한 멀티파트 요청 다루기. 임시 파일을 이미지 폴더로 이동. public 폴더에서 bower install 실행
+- Multer : 작성 예정
