@@ -22,6 +22,3 @@
 { "_id" : ObjectId("5787c2f5d5e1591c6a92c667"), "writer" : "sj", "message" : "수지가 쓴 글2" }
 
 // 친구 관계
-
-
-

@@ -1,7 +1,14 @@
 var Movie = require('./model').Movie;
 
+//
+// 실행 순서
+// 1. 초기 데이터 입력
+// 2. 데이터 찾기
+// 3. 데이터 수정
+// 4. 데이터 삭제
+
 // saveInitialData();
-findData();
+// findData();
 // modifyData();
 // removeData();
 

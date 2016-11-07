@@ -1,18 +1,14 @@
 {
-  "name": "find-and-paging-sample",
+  "name": "mongodb-basic-example",
   "version": "1.0.0",
   "description": "",
-  "main": "findAndPaging.js",
+  "main": "connection.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "ejs": "^2.3.4",
-    "express": "^4.13.3",
-    "mongodb": "^2.0.46",
-    "morgan": "^1.6.1",
-    "mysql": "^2.9.0"
+    "mongodb": "^2.2.11"
   }
 }

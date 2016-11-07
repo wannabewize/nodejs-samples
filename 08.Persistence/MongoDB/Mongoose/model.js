@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var url = 'mongodb://localhost:27017/Moviest';
+var url = 'mongodb://localhost:27017/mongoose';
 mongoose.connect(url);
 
 var db = mongoose.connection;

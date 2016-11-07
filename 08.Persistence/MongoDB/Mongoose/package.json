@@ -1,15 +1,14 @@
 {
-  "name": "mongodb-samples",
+  "name": "mongoose-example",
   "version": "1.0.0",
-  "main": "connection.js",
+  "description": "",
+  "main": "model.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^2.2.1",
-    "mongoose": "^4.5.4"
-  },
-  "description": ""
+    "mongoose": "^4.6.6"
+  }
 }
