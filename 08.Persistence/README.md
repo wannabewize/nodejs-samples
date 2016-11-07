@@ -42,3 +42,11 @@ mysql -u root -p < initialData.sql
 
 ### MoviestSequelize
 준비중
+
+
+### FindAndPagingMySQL
+MySQL을 이용한 페이지네이션과 검색. 데이터베이스 mysql_example 사용
+
+- prepare : 테이블 생성과 초기 데이터 300건 입력
+
+http://127.0.0.1:3000/items?page=2&count=10&keyword=1

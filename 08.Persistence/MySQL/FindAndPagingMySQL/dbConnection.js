@@ -4,7 +4,7 @@ var dbConfig = {
 	user : 'root',
 	password : '',
 	port : 3306,
-	database : 'mysqlExample',
+	database : 'mysql_example',
    multipleStatements : true
 };
 
