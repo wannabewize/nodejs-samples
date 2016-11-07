@@ -1,15 +1,15 @@
 {
-  "name": "sequelize-example",
+  "name": "mysql-basic-examples",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "basicCRUD.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql": "^2.11.1",
-    "sequelize": "^3.23.4"
+    "async": "^2.1.2",
+    "mysql": "^2.12.0"
   }
 }

@@ -1,4 +1,7 @@
-var pool = require('./dbConnection');
+/**
+ * SELECT를 이용해서 데이터 얻어오기
+ */
+const pool = require('./dbConnection');
 
 pool.getConnection(function(err, conn) {
    if ( err ) {
@@ -13,11 +16,11 @@ pool.getConnection(function(err, conn) {
          return;
       }
       
-      for ( var i = 0 ; i < results.length ; i++ ) {
-         var movieInfo = results[i];
-         console.log('제목 : ' + movieInfo.title + ' 감독 : ' + movieInfo.director);
+      for ( var movie of results ) {
+         console.log('제목 : ' + movie.title + ' 감독 : ' + movie.director);
       }
       
-      conn.release();      
+      conn.release();    
+      pool.end();  
    });
 });

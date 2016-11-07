@@ -30,6 +30,7 @@ pool.getConnection(function(err, conn) {
             });            
          }
          conn.release();      
+         pool.end();
       });      
    });
 });

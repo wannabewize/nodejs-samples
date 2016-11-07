@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('sequelize-example', 'root', '');
+const sequelize = new Sequelize('sequelize_example', 'root', '');
 
 // 복수형 단어로 자동 변환 : Person => People
 const Person = sequelize.define('Person', {

@@ -4,7 +4,7 @@ var dbConfig = {
    user: 'root',
    password: '',
    port: 3306,
-   database: 'Samples'
+   database: 'mysql_example'
 };
 
 var conn = mysql.createConnection(dbConfig);

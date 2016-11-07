@@ -11,4 +11,8 @@ pool.getConnection(function (err, conn) {
    
    // 커넥션을 풀에 반환
    conn.release();
+
+   // 풀 종료
+   console.log('== 풀 닫기');
+   pool.end();
 });

@@ -1,4 +1,8 @@
-create TABLE movies (
+create database if not exists moviest;
+
+use moviest;
+
+create TABLE if not exists movies  (
 	movie_id INT PRIMARY KEY AUTO_INCREMENT,
 	title VARCHAR(50),
 	director VARCHAR(50),
@@ -6,7 +10,7 @@ create TABLE movies (
 	synopsis VARCHAR(255)
 );
 
-CREATE TABLE review (
+CREATE TABLE if not exists review (
 	movie_id int,
 	review VARCHAR(255),
 	FOREIGN KEY(movie_id) REFERENCES movies(movie_id)
