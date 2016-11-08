@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+<head>
+<script src="lib/jquery/dist/jquery.js"></script>
+<script>
+   $(document).ready(function() {
+      console.log('ready!');
+      resolveItems();
+      // sendPutRequest();
+   });   
+
+   function resolveItems() {
+      $.getJSON('/items', function(data, status, xhr) {
+         console.log('status :', status);
+         console.log('count :', data.count);
+         var items = data.data;
+         console.log(items);
+         for(item of items) {
+            $("#balls").append('<li><img src="' + item.image + '" height="50px">' + item.title + '</li>');
+         }
+      });
+   }
+
+   function sendPutRequest() {
+      $.ajax({
+         url : '/items',
+         type : 'put',
+         data : 'name1=value1&name2=value2',
+         success : function(data) {
+            console.log('ajax put request/response');
+         }
+      });
+   }
+</script>
+
+</head>
+
+<body>
+<h1>Balls</h1>
+<ul id="balls">
+</ul>
+</body>
+
+</html>
