@@ -49,17 +49,10 @@ Express 예제
 ## 06.FrontEnd
 프론트 엔드
 
-### EJS
-Express의 템플릿 엔진 EJS
-
-### Pug
-Express의 템플릿 엔진 Pug
-
-### jQuery
-jQuery를 이용한 프론트 엔드와 서버 통신
-
-### Angular
-Angular를 이용한 프론트 엔드와 서버 통신
+- EJS
+- Pug
+- AJAX
+- Angular
 
 ## 07.REST Service
 JSON, XML 요청/응답 예제
@@ -79,7 +72,6 @@ Socket.io를 이용한 실시간 서비스 작성
 1. RealtimeSNS : 실시간 소셜 네트워크
 1. RealtimeSNS2 : 실시간 소셜 네트워크 + 인증
 
-
 ## 10.Socket
 소켓을 이용한 실시간 서비스 작성
 
@@ -90,13 +82,7 @@ TCP를 이용한 실시간 통신
 UDP를 이용한 실시간 통신
 
 ## 11.Auth
-Passport를 이용한 Local Auth Strategy를 사용한 예제
-
-1. CookieaAndSession : 세션과 쿠키. Express-session, CookieParser
-1. SimpleAuthWithSession : Express-session 모듈을 이용한 인증 예제
-1. LocalAuth : LocalAuth 예제
-1. DeviceIDAuth : 기기 ID를 이용한 Auth 예제
-1. FBAuth, FBMobileAuth, FBWebAuth : 페이스북 인증 예제
+인증 예제
 
 ## 12.Testing
 테스팅 예제
