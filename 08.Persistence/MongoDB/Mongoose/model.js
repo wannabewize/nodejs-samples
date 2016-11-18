@@ -21,10 +21,4 @@ var MovieScheme = mongoose.Schema({
 // movies 콜렉션으로 생성
 module.exports.Movie = mongoose.model('Movie', MovieScheme);
 
-// var ReviewScheme = mongoose.Schema({
-//    movie : MovieScheme,
-//    review : String
-// });
-
-// module.exports.Review = mongoose.model('Review', ReviewScheme);
 
