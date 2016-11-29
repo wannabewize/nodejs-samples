@@ -1,5 +1,5 @@
 module.exports = {
-   region:'S3 경로 중 region 부분 입력',
-   accessKeyId:'ACCESS-KEY-ID',
-   secretAccessKey:'ACCESS-KEY'
-}
+   region:'ap-northeast-2',
+   accessKeyId:'AKIAIKRCVHS2NHQ4ADIQ',
+   secretAccessKey:'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'
+};
