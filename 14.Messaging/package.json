@@ -11,7 +11,7 @@
   "dependencies": {
     "ejs": "^2.3.4",
     "express": "^4.13.3",
-    "fcm-push": "^1.0.7",
+    "fcm-push": "^1.1.2",
     "node-gcm": "^0.12.0"
   }
 }
