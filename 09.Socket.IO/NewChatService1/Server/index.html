@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        #chatInput {
+            position: fixed;
+            bottom: 0;
+            width: 100%
+        }
+        /* 화면 하단 고정 */
+
+        #userInput {
+            width: 80%;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+
+        #submitButton {
+            width: 15%;
+        }
+
+        #messages {
+            padding-left: 10;
+        }
+
+        #messages li {
+            list-style-type: none;
+        }
+
+        #chat_rooms li {
+            display: inline;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+<h3>Socket.IO Chat Service</h3>
+<div>
+    채팅방
+    <select id="rooms">
+        <option value="room1">Room1</option>
+        <option value="room2">Room2</option>
+    </select>
+    사용자
+    <select id="users">
+        <option value="iu">IU</option>
+        <option value="sh">설현</option>
+    </select>
+    <input type="button" id="joinButton" value="Join">
+</div>
+
+<ul id="messages">
+</ul>
+
+<div id="chatInput" action="./" class="form-inline">
+    <input type="text" id="userInput" class="form-control" />
+    <input type="submit" id="sendButton" class="btn btn-default" value="Send" />
+</div>
+
+<script>
+	var socket = io.connect();
+	var user;
+	var room;
+
+	socket.on('connect', function() {
+		console.log('connect');
+	});
+
+	socket.on('joinRoomResult', function(data) {
+		console.log('join room result :', data);
+		socket.emit('getParticipants');
+		socket.emit('unreadMessage');
+	});
+
+	socket.on('participantsResult', function(data) {
+		console.log('participantsResult', data);
+	});
+
+	socket.on('unreadMessageResult', function(data) {
+        for(var i = 0 ; i < data.length ; i++) {
+            var item = data[i];
+			const message = item.message;
+			$('#messages').append($('<li>').text(message));
+        }
+    });
+
+	socket.on('messageResult', function(data) {
+        console.log('message result ', data);
+        const message = data.message;
+		$('#messages').append($('<li>').text(message));
+
+        // 메세지 수신 체크
+        var messageId = data.messageId;
+        socket.emit('messageReceived', {user:user, messageId:messageId});
+	});
+
+	$(document).ready(function() {
+		console.log('ready!');
+	});
+
+	$("#joinButton").on("click", function() {
+		user = $("#users").val();
+		room = $("#rooms").val();
+		console.log("user :", user, " room :", room);
+        socket.emit("joinRoom", {user:user, room:room});
+    });
+
+    $("#sendButton").on("click",function() {
+    	if ( ! user || ! room ) {
+            window.alert('Join First');
+            return;
+        }
+        console.log('onclick!');
+        var message = $("#userInput").val();
+        console.log('user :', user, 'message :', message);
+        socket.emit('message', {message:message, user:user});
+    });
+</script>
+
+</body>
+</html>
