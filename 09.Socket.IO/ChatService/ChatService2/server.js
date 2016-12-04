@@ -59,7 +59,7 @@ io.on('connection', socket => {
         // 채팅방 얻어오기
         const roomId = info.room;
         room = Chat.getRoom(roomId);
-        console.log('Chatroom :',room);
+        // console.log('Chatroom :',room);
 
         // 채팅방 입장
         if ( room ) {
