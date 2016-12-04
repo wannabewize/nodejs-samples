@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta chatset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Chat Service</title>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        body {
+            margin-left: 10px;
+        }
+
+        #chatInput {
+            position: fixed;
+            bottom: 3%;
+            width: 100%
+        }
+
+        #joinPanel span {
+            margin-left: 12px;
+            margin-right: 12px;
+        }
+
+        #joinPanel input {
+            margin-left: 12px;
+        }
+
+        /* 화면 하단 고정 */
+        #userInput {
+            width: 80%;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+
+        #sendButton {
+            width: 15%;
+        }
+
+        #messages {
+            padding-top: 10px;
+        }
+
+        #messages li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+<h1>Socket.IO Chat Service</h1>
+<div id="joinPanel" class="form-inline">
+    <span>채팅방</span>
+    <select id="rooms" class="form-control">
+        <option value="room">room</option>
+    </select>
+
+    <span>사용자</span>
+    <select id="users" class="form-control">
+        <option value="아이유">아이유</option>
+        <option value="설현">설현</option>
+        <option value="태연">태연</option>
+        <option value="수지">수지</option>
+    </select>
+    <input type="button" id="joinButton" value="입장" class="btn btn-default">
+</div>
+
+<ul id="messages">
+</ul>
+
+<form id="chatInput" action="./" class="form-inline">
+    <input type="text" id="userInput" class="form-control"/>
+    <input type="submit" id="sendButton" class="btn btn-default" value="보내기"/>
+</form>
+<script>
+    var socket = io.connect();
+    var user;
+
+    socket.on('connect', function () {
+        console.log('connect');
+
+        // 채팅방 목록 요청
+        socket.emit('chatRooms');
+    });
+
+    // 채팅방 목록
+    socket.on('chatRoomsResult', function (data) {
+        console.log('chat rooms :',data);
+        $("#rooms").empty();
+
+        // 채팅방 목록 갱신
+        for(var i = 0 ; i < data.length ; i++) {
+            var room = data[i];
+            var option = $("<option value='" + room + "'>").text(room);
+            $("#rooms").append(option);
+        }
+    });
+
+    function appendMessage(msg) {
+        $('#messages').append($('<li>').text(msg));
+    }
+
+    socket.on('notice', function(data) {
+        appendMessage(data.user + ' >> ' + data.message);
+    });
+
+    socket.on('joinRoomResult', function (data) {
+        console.log('join room result :', data);
+        if ( data.room ) {
+            appendMessage(data.user + ' 님이 ' + data.room + '에 입장했습니다');
+            room = data.room;
+
+            socket.emit('unreadMessage', {user:user});
+        }
+        else {
+            appendMessage('채팅방 입장 실패');
+        }
+    });
+
+    socket.on('unreadMessageResult', function(data) {
+        for(var i = 0 ; i < data.length ; i++) {
+            var item = data[i];
+            const sender = item.sender;
+            const message = item.message;
+            appendMessage(sender + ' >> ' + message);
+        }
+    });
+
+    socket.on('messageReceive', function (data) {
+        console.log('message receive', data);
+        const sender = data.sender;
+        const message = sender + ' >> ' + data.message;
+        appendMessage(message);
+
+        // 메세지 수신 체크
+        var messageId = data.messageId;
+        socket.emit('messageRead', {user:user, messageId:messageId});
+    });
+
+    // 메세지 보내기
+    $("#chatInput").submit(function () {
+        var message = $("#userInput").val();
+        if ( ! user || ! room ) {
+            window.alert('채팅방에 먼저 입장하세요.');
+            return false;
+        }
+
+        socket.emit('message', {message: message, user: user});
+
+        $("#userInput").val("")
+        console.log('user :', user, 'message :', message);
+
+        return false;
+    });
+
+    // 채팅방 입장
+    $("#joinButton").on("click", function () {
+        user = $("#users").val();
+        var room = $("#rooms").val();
+        console.log("trying to join user :", user, " room :", room);
+        socket.emit("joinRoom", {user: user, room: room});
+    });
+</script>
+</body>
+</html>
