@@ -66,20 +66,7 @@ RoomSchema.methods.getUnreadMessage = function(user) {
 	});
 };
 
-MessageSchema.static.createMessage = function(user, text, participants) {
-	const message = new Message();
-	message.sender = sender;
-	message.message = text;
 
-	for(let i = 0 ; i < participants.length ; i++) {
-		const user = participants[i];
-		const log = new Log();
-		log.user = user;
-		this.logs.push(log);
-	}
-
-	return message.save();
-};
 
 MessageSchema.methods.getUserLog = function(user) {
 	for(let i = 0 ; i < this.logs.length ; i++) {
@@ -145,9 +132,25 @@ RoomSchema.methods.addMessage = function(user, message) {
 	});
 };
 
+MessageSchema.statics.createMessage = function(user, text, participants) {
+    const message = new Message();
+    message.sender = sender;
+    message.message = text;
+
+    for(let i = 0 ; i < participants.length ; i++) {
+        const user = participants[i];
+        const log = new Log();
+        log.user = user;
+        this.logs.push(log);
+    }
+
+    return message.save();
+};
+
 const Log = mongoose.model('Log', LogSchema);
 const Message = mongoose.model('Message', MessageSchema);
 const Room = mongoose.model('Room', RoomSchema);
+
 
 class Chat {
 }
