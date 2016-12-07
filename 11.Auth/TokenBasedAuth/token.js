@@ -11,7 +11,7 @@ const payload = {
    name : 'IU'
 };
 const secretKey = 'IUakstp'
-const expireSec = 10; // 10 sec
+const expireSec = 10; // '1d'
 const option = {
    algorithm : 'HS256', // default, HMAC using SHA-256 hash algorithm
    expiresIn : expireSec
