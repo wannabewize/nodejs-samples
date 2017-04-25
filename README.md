@@ -1,5 +1,5 @@
 # Node-Samples
-TAcademy Node.js 과정 샘플
+Node.js 예제 모음
 
 ## 01.BasicModules
 기본 모듈 예제
