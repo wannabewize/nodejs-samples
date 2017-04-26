@@ -1,11 +1,27 @@
+/**
+ * await와 async 예제
+ */
+
 function task(success) {
     return new Promise( (resolve, reject) => {
-        success ? resolve('Task1 Done') : reject('Task1 Failure');
+        const taskResult = Math.round(Math.random() * 10);
+        setTimeout( ()=> {
+            success ? resolve(taskResult) : reject('Error');
+        }, 1000);        
     });
 }
 
-async function doIt() {
-    let result = await task(true);
+async function doIt(success) {
+    try {
+        let result = await task(success);
+        console.log('Task Done with', result);        
+    } catch (error) {
+        console.log('Task Failure', error);
+    }
 }
 
-doIt();
+// 비동기 태스크 성공
+doIt(true);
+
+// 비동기 태스크 실패
+// doIt(false);

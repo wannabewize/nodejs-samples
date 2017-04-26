@@ -4,11 +4,11 @@
  */
 
 // 비동기 태스크 1. 0 ~ 9 사이의 난수 결과
-function task1(success) {
-    console.log('Task1 started');
-    const taskResult = Math.round(Math.random() * 10);
-    return new Promise((resolve, rejected) => {
+function task1(success) {    
+    return new Promise((resolve, rejected) => {        
+        console.log('Task1 started');    
         setTimeout(() => {
+            const taskResult = Math.round(Math.random() * 10);
             console.log('Task1 Finished with', taskResult);
             success ? resolve(taskResult) : rejected('Task1 Failure');
         }, 1000)
@@ -17,12 +17,10 @@ function task1(success) {
 
 // 비동기 태스크 2. 10 ~ 19 사이의 난수 결과
 function task2(previousTaskResult, success) {
-    console.log('Task2 started with', previousTaskResult);
-    // 두 번째 태스크의 결과 : 10 ~ 19 사이의 난수
-    const taskResult = Math.round(Math.random() * 10) + 10;
-    
-    return new Promise((resolve, rejected) => {
+    return new Promise((resolve, rejected) => {        
+        console.log('Task2 started with', previousTaskResult);
         setTimeout(() => {            
+            const taskResult = Math.round(Math.random() * 10) + 10;
             const nextResult = [previousTaskResult, taskResult]
             console.log('Task2 Finished with', nextResult);
             success ? resolve(nextResult) : rejected('Task2 Failure');
@@ -32,10 +30,9 @@ function task2(previousTaskResult, success) {
 
 // 비동기 태스크 3. 20 ~ 29 사이의 난수 결과
 function task3(previousTaskResult, success) {
-    console.log('Task3 started with', previousTaskResult);
-    const taskResult = Math.round(Math.random() * 10) + 20;
-    
     return new Promise((resolve, rejected) => {
+        console.log('Task3 started with', previousTaskResult);
+        const taskResult = Math.round(Math.random() * 10) + 20;
         setTimeout(() => {            
             console.log('Task3 Finished with', taskResult);
             const nextResult = previousTaskResult.concat(taskResult);

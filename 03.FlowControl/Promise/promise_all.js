@@ -5,10 +5,10 @@
 
 // 비동기 태스크 1. 실행 결과는 0 ~ 9  사이의 난수
 function task1(success) {
-    console.log('Task1 started');
-    const taskResult = Math.round(Math.random() * 10);
     return new Promise((resolve, reject) => {
+        console.log('Task1 started');
         setTimeout(() => {
+            const taskResult = Math.round(Math.random() * 10);
             console.log('Task1 Finished with', taskResult);
             success ? resolve(taskResult) : reject('Task1 Failure');
         }, 1500)
@@ -17,10 +17,10 @@ function task1(success) {
 
 // 비동기 태스크 2. 실행 결과는 10 ~ 19  사이의 난수
 function task2(success) {
-    console.log('Task2 started');
-    const taskResult = Math.round(Math.random() * 10) + 10;
     return new Promise((resolve, reject) => {
+        console.log('Task2 started');
         setTimeout(() => {
+            const taskResult = Math.round(Math.random() * 10) + 10;
             console.log('Task2 Finished with', taskResult);
             success ? resolve(taskResult) : reject('Task2 Failure');
         }, 500)
@@ -29,10 +29,10 @@ function task2(success) {
 
 // 비동기 태스크 3. 실행 결과는 20 ~ 29  사이의 난수
 function task3(success) {
-    console.log('Task3 started');
-    const taskResult = Math.round(Math.random() * 10) + 20;
     return new Promise((resolve, reject) => {
+        console.log('Task3 started');
         setTimeout(() => {
+            const taskResult = Math.round(Math.random() * 10) + 20;
             console.log('Task3 Finished with', taskResult);
             success ? resolve(taskResult) : reject('Task3 Failure');
         }, 1500)
