@@ -18,8 +18,3 @@ process.addListener('exit', function(code) {
 process.once('exit', ()=> {
    console.log('Exit 이벤트 최초 발생');
 });
-/*
-process.once('exit', function() {
-   console.log('Exit 이벤트 최초 발생');
-});
-*/

@@ -10,16 +10,16 @@
 ## Util
 Util 모듈
 - format : 포맷 문자열 생성
-- inherits : 생성자를 이용한 클래스 상속
+- inherits : 생성자를 이용한 상속. inherits 대신 ES6의 클래스와 extends 사용을 권장.
 - inspector : 객체 상태 출력하기
-- classAndInheritance : ES6의 클래스와 상속
+- class_extends : ES6의 클래스와 상속, 재정의
 
 ## Event
 이벤트
-- customEvent, customEvent_es5 : EventEmitter 자식 클래스로 커스텀 이벤트 다루기
 - event : 이벤트 핸들러 등록
-- eventEmit : 이벤트 코드로 발생시키기
+- eventEmit : 코드로 이벤트 발생시키기
 - uncaughtedException : uncaughtedException 에러 이벤트 다루기
+- customEvent : 이벤트에 반응할 수 있는 커스텀 클래스 작성하기
 
 ## Buffer
 버퍼 모듈 예제
