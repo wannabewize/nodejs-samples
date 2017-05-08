@@ -23,10 +23,10 @@ Util 모듈
 
 ## Buffer
 버퍼 모듈 예제
-- buffer : 
+- buffer : 버퍼 기본 사용
+- buffer_string : 문자열과 버퍼
+- buffer_unicode : 이모지와 버퍼
 - buffer_data
-- buffer_unicode
-- buffer_string
 
 ## Stream
 스트림 모듈
@@ -36,7 +36,7 @@ Util 모듈
 - stream_stdin_stdout
 
 ## FileSystem
-파일 스스템 모듈
+파일 시스템 모듈
 
 ## Networking
 네트워크에 관련된 모듈

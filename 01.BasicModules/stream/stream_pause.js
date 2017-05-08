@@ -1,6 +1,6 @@
 const fs = require('fs');
 
-const file = '/Users/wannabewize/Downloads/node-v6.1.0.pkg'; // 'stream_pause.js';
+const file = '/Users/wannabewize/Downloads/BLE.mp4'; // 'stream_pause.js';
 
 const is = fs.createReadStream(file);
 

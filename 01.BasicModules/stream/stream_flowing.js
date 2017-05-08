@@ -1,7 +1,7 @@
 const fs = require('fs');
 
 //tream_flowing.js';
-const file = '/Users/wannabewize/Downloads/node-v6.1.0.pkg';
+const file = '/Users/wannabewize/Downloads/BLE.mp4';
 const is = fs.createReadStream(file);
 
 console.log('flowing : ', is._readableState.flowing);

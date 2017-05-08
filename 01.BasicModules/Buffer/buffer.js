@@ -22,6 +22,3 @@ try {
 catch ( err ) {
    console.log('Error : ', err.message);
 }
-
-
-const buf3 = Buffer.alloc()
