@@ -3,12 +3,11 @@
 ## JSON
 JSON 파싱, 요청과 응답
 
-
 ## XML
 
-## REST
+## Moviest
 
-- Moviest : 영화 정보 서버. 영화 목록만 작성됨. 나머지 구현해 볼 것
+JSON 초기 데이터, Express를 이용해서 작성한 REST 서버
 
 ## FindAndPaging
 검색과 페이지네이션
