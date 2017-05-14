@@ -1,3 +1,6 @@
+//
+// Class 문법을 이용한 모듈 작성
+//
 class Singer {
     constructor(name) {
         this.name = name;

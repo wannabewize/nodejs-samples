@@ -19,9 +19,11 @@ Node.js 예제 모음
 커스텀 모듈 만들기
 - function_module : 함수 단위의 모듈
 - object_module : 객체 단위의 모듈
-- class_module : 클래스를 이용한 모듈
 - constructor_module, constructors_module : Constructor로 작성한 모듈
 - app : 모듈 동작시키기
+- class_module : ES6에 도입된 Class를 이용해서 작성한 모듈
+- class_module_app : Class로 작성한 모듈을 사용하는 앱
+
 
 ## 03.FlowControl
 비동기 동작과 흐름 제어

@@ -35,10 +35,3 @@ const him = require('./object_module.js');
 him.study();
 
 // console.log(module.cache);
-
-console.log('== Class Export Module');
-// ES6 - class
-const  Singer = require('./class_module.js');
-const singer = new Singer('IU');
-singer.sing();
-singer.dance();

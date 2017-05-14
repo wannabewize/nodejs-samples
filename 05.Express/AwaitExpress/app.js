@@ -7,7 +7,8 @@ function asyncTask() {
         setTimeout(() => {
             let result = Math.round(Math.random() * 1000);
             resolve(result);
-        }, 5000);
+            // reject(`에러 발생 테스트`);
+        }, 3000);
     });
 }
 
@@ -18,6 +19,10 @@ app.get('/promise', (req, res) => {
 });
 
 app.get('/await', async (req, res) => {
-    let result = await asyncTask();
-    res.send(`OK with ${result}`);
+    try {
+        let result = await asyncTask();
+        res.send(`OK with ${result}`);        
+    } catch (error) {
+        res.status(500).send(`Error with ${error}`);
+    }
 });
