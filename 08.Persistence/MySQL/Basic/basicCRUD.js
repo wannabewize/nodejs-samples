@@ -4,7 +4,7 @@ const dbConfig = {
    user: 'root',
    password: '',
    port: 3306,
-   database: 'mysqlExample',
+   database: 'example',
    multipleStatements : true
 };
 
@@ -16,7 +16,7 @@ console.log('Database CRUD Basic');
 // tryInsert2();
 // tryUpdate1();
 // tryUpdate2();
-// tryDelete();
+tryDelete();
 
 function prepareTable() {
    const sql = 'drop table if exists movies; create table movies (movie_id int primary key auto_increment, title varchar(50), director varchar(50), year int);';

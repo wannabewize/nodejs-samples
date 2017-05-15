@@ -17,6 +17,7 @@ MySQL
 - select_movies : SELECT로 데이터 얻기
 - insert_review : 영화와 리뷰. 리뷰 추가
 - select_reviews : 영화의 리뷰 얻기
+- basicCRUD : 기본CRUD
 
 
 ### Sequelize

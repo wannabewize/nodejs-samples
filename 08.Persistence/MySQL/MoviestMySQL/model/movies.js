@@ -19,4 +19,4 @@ Movies.getMovieList = function(cb) {
       });
    });   
 }
-module.exports = Movies;
+module.exports = Movies;    

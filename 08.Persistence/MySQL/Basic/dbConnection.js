@@ -6,7 +6,7 @@ var dbConfig = {
    password: '',
    port: 3306,
    multiplestatements : true,
-   database: 'mysql_example'
+   database: 'example'
 };
 
 var pool = mysql.createPool(dbConfig);
