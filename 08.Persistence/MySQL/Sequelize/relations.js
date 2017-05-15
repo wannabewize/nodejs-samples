@@ -64,8 +64,6 @@ async function doOneToOne() {
     // });
 }
 
-
-
 async function doOneToMany() {
     const Member = sequelize.define('Member', {
         memberId: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
@@ -79,17 +77,31 @@ async function doOneToMany() {
 
     Team.hasMany(Member, {foreignKey:'teamId'});
 
-    Team.sync().then(result => {    
-        return Member.sync()
-    }).then(result => {
-        return Team.create({name:'idols'});
-    }).then(result => {
-        return Member.create({name:'IU', teamId: result.get('teamId')})
-    }).then(result => {
-        console.log('One to Many Example Success')
-    }).catch(error => {
+    try {
+        await Team.sync();
+        let team = await Team.create({name:'Favorites'});
+        let iu = Member.create({name:'IU', teamId: team.get('teamId')});
+        let inna = Member.create({name:'Inna', teamId: team.get('teamId')});
+    }
+    catch ( error ) {
         console.log('Error :', error);
-    });    
+    }
+    
+    // Promise based
+    // Team.sync().then(result => {    
+    //     return Member.sync()
+    // }).then(result => {
+    //     return Team.create({name:'idols'});
+    // }).then(result => {
+    //     return Member.create({name:'IU', teamId: result.get('teamId')})
+    // }).then(result => {
+    //     return Member.create({name:'Inna', teamId: result.get('teamId')})
+    // }).then(result => {
+    //     console.log('One to Many Example Success')
+    // }).catch(error => {
+    //     console.log('Error :', error);
+    // });    
+
 }
 
 
@@ -155,31 +167,32 @@ CREATE TABLE IF NOT EXISTS `Members` (
  */
 
 
-function doManyToMany() {
-    const Actor = sequelize.define('actor', {
-        actor_no: { type: Sequelize.INTEGER(2), primaryKey: true },
-        name: Sequelize.STRING(100)
-    }, { timestamps: false });
+// ing...
+// function doManyToMany() {
+//     const Actor = sequelize.define('actor', {
+//         actor_no: { type: Sequelize.INTEGER(2), primaryKey: true },
+//         name: Sequelize.STRING(100)
+//     }, { timestamps: false });
 
-    const Movie = sequelize.define('movie', {
-        movie_id: { type: Sequelize.INTEGER(2), primaryKey: true },
-        name: Sequelize.STRING(100)
-    }, { timestamps: false });
+//     const Movie = sequelize.define('movie', {
+//         movie_id: { type: Sequelize.INTEGER(2), primaryKey: true },
+//         name: Sequelize.STRING(100)
+//     }, { timestamps: false });
 
-    Actor.sync()
-        .then(result => { console.log('success') }, error => { console.log('Error : ', error.message) });
-    Movie.sync()
-        .then(result => { console.log('success') }, error => { console.log('Error : ', error.message) });
+//     Actor.sync()
+//         .then(result => { console.log('success') }, error => { console.log('Error : ', error.message) });
+//     Movie.sync()
+//         .then(result => { console.log('success') }, error => { console.log('Error : ', error.message) });
 
-    const Act = sequelize.define('act', {
-        year: Sequelize.DATEONLY
-    }, { timestamps: false });
+//     const Act = sequelize.define('act', {
+//         year: Sequelize.DATEONLY
+//     }, { timestamps: false });
 
-    Actor.belongsToMany(Movie, { through: Act, foreignKey: 'actor_no' })
-        .then(result => { console.log('a'); }, error => { console.log('error'); });
-    Movie.belongsToMany(Actor, { through: Act, foreignKey: 'movie_id' });
+//     Actor.belongsToMany(Movie, { through: Act, foreignKey: 'actor_no' })
+//         .then(result => { console.log('a'); }, error => { console.log('error'); });
+//     Movie.belongsToMany(Actor, { through: Act, foreignKey: 'movie_id' });
 
-    Act.sync().then(result => { console.log('success'), error => { console.log('Error : ', error.message) } });
-}
+//     Act.sync().then(result => { console.log('success'), error => { console.log('Error : ', error.message) } });
+// }
 
 

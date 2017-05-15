@@ -22,20 +22,30 @@ MySQL
 
 ### Sequelize
 
+도큐먼트 보기 : [링크](http://docs.sequelizejs.com)
+
 #### 데이터베이스 준비
-1. 데이터베이스 : sequelize_example 사용 : `CREATE DATABASE sequelize_example;`
+1. 데이터베이스 : sequelize_example 사용
+
+    `CREATE DATABASE sequelize_example;`
 
 #### 예제
 - model : 모델 정의하고 데이터베이스에 반영
 - crud : 영화 정보 CRUD. 코드 내 실행 순서 참고
+- relations : One To One, One To Many 관계, Many to Many는 작성 예정
+- rawQuery : SQL을 직접 실행하기
 
 ### MoviestMySQL
 MySQL을 이용한 영화 정보 서버
 
 #### 데이터베이스 준비 
 
-1. 데이터베이스(moviest)와 테이블 준비 :  `mysql -u root -p < moviest.sql`
-1. 초기 데이터 입력 : `mysql -u root -p < initialData.sql`
+1. 데이터베이스(moviest)와 테이블 준비
+
+    `mysql -u root -p < moviest.sql`
+1. 초기 데이터 입력
+
+    `mysql -u root -p < initialData.sql`
 
 ### MoviestSequelize
 준비중
@@ -50,9 +60,11 @@ http://127.0.0.1:3000/items?page=2&count=10&keyword=1
 
 ## MongoDB
 
-### 데이터베이스 동작
+### MongoDB 기본
 
-데이터베이스 동작 : `$ mongod --dbpath ./db`
+데이터베이스 동작
+
+`$ mongod --dbpath ./db`
 
 데이터 확인
 
@@ -92,6 +104,13 @@ http://127.0.0.1:3000/items?page=2&count=10&keyword=1
 
 
 ### FindAndPagingMongoDB
-페이지네이션과 검색
 
-`작성중`
+페이지네이션과 검색(FindAndPagingMongoDB)
+
+- initialData : 초기 데이터 입력
+- server : 서버
+
+사용 방법
+
+http://localhost:3000/list?page=2
+http://localhost:3000/list?page=3&keyword=1
