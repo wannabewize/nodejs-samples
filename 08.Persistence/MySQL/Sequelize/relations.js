@@ -1,5 +1,9 @@
+//
+// Sequelize를 이용한 관계
+//
+
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('sequelize-example', 'root', '');
+var sequelize = new Sequelize('sequelize_example', 'root', '');
 
 // doOneToOne();
 doOneToMany();
@@ -17,9 +21,9 @@ CREATE TABLE IF NOT EXISTS `Profiles` (
     `phone` VARCHAR(11),
     PRIMARY KEY (`id`)) ENGINE=InnoDB;     
  * */
-function doOneToOne() {
+async function doOneToOne() {
     const User = sequelize.define('User', {
-        user_id: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
+        userId: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
         name: { type: Sequelize.STRING(100), allowNull: false }
     }, { timestamps: false });
 
@@ -28,75 +32,64 @@ function doOneToOne() {
         phone: Sequelize.STRING(13)
     }, { timestamps: false });
 
+    Profile.belongsTo(User, {targetKey:'userId', foreignKey:'userId'});
 
-    //User.hasOne(Profile, {foreignKey:'user_id', as:'Detail'});
-    Profile.belongsTo(User, {targetKey:'user_id', foreignKey:'user_id'});
+    try {
+        let syncResult1 = await User.sync();
+        let syncResult2 = await Profile.sync();
 
-    User.sync({force:true}).then(result => {
-        console.log('User sync scucess');
-        Profile.sync().then(result => {
-            console.log('Profile sync success');
+        console.log('sync Scheme success');
 
-            insertOneToOneData(User, Profile);
+        let user = await User.create({name:'IU'});
+        let profile = await Profile.create({address:'Korea', phone:'010-1234-5678', userId:user.get('userId')});
 
-        }, error => {
-            console.log('Profile sync fail : ', error.message);
-        });
-    }, error => {
-        console.log('User sync failure : ', error.message);
-    });
+        console.log('Create Success');
+    }
+    catch ( error ) {
+        console.log('Error :', error);
+    }
+
+    // Promise Based
+    // User.sync().then( result => {
+    //     return Profile.sync()
+    // }).then( result => {
+    //     return User.create({name:'IU'});
+    // }).then( result => {
+    //     console.log(result);
+    //     return Profile.create({address:'Korea', phone:'010-1234-5678', userId : result.get('userId')});
+    // }).then( result => {
+    //     console.log('One to One Example success');
+    // }).catch( error => {
+    //     console.log('One to One Example Failure', error);
+    // });
 }
 
-function insertOneToOneData(User, Profile) {
-    console.log('insertOneToOneData');
-    const iu = User.create({name:'IU'}).then( user => {
-        console.log('create iu success', user.dataValues);
-        return Profile.create({address:'Seoul', phone:'010-1234-5678', user_id : user.get('user_id')});
-    }, error => {
-        console.log('create iu fail');
-    }).then( detail => {
-        console.log('detail create success', detail.dataValues);
-    }, error => {
-        console.log('detail creation fail : ', error.message);
-    });
-}
 
 
-function doOneToMany() {
+async function doOneToMany() {
     const Member = sequelize.define('Member', {
-        member_id: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
+        memberId: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
         name: { type: Sequelize.STRING(100), allowNull: false }
     }, { timestamps: false });
 
     const Team = sequelize.define('Team', {
-        team_id: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
+        teamId: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
         name: { type: Sequelize.STRING(100), allowNull: false }
     }, { timestamps: false });
 
-    Team.hasMany(Member, {foreignKey:'team_id'});
+    Team.hasMany(Member, {foreignKey:'teamId'});
 
-    Team.sync().then(result => {
-        console.log('Member sync fulfilled');
-        Member.sync().then(
-                result => {
-                    console.log('Member sync fulfilled');
-                    insertOneToManyData(Member, Team);
-                },
-                error => { console.log('Member sync Error : ', error)}
-        );
-    }, error => { console.log('Member sync Error : ', error) });
-}
-
-function insertOneToManyData(Member, Team) {
-    console.log('insert One to Many Data');
-    
-    Team.create({name:'idols'}).then( result => {
-            console.log('insert success : ', member.dataValues);
-            return Member.create({name:'IU', team_id: result.get('team_id') })
-        }, error => {console.log('Team create fail', error.message);})
-        .then( result => {console.log('Member create success');}, error => {
-            console.error('Member create Error');
-        });
+    Team.sync().then(result => {    
+        return Member.sync()
+    }).then(result => {
+        return Team.create({name:'idols'});
+    }).then(result => {
+        return Member.create({name:'IU', teamId: result.get('teamId')})
+    }).then(result => {
+        console.log('One to Many Example Success')
+    }).catch(error => {
+        console.log('Error :', error);
+    });    
 }
 
 
