@@ -26,3 +26,6 @@ Promise에 대한 예제
 
 ES7에 추가된 await-async를 이용한 비동기 태스크 작성 방법. Promise를 먼저 익혀야한다.
 
+- await : Await/Await를 이용한 비동기 태스크 작성
+- await2 : 다수의 비동기 태스크 동작 시키기
+

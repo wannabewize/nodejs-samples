@@ -23,7 +23,7 @@ async function doIt() {
         let r2 = await randomTask();
         let sum = await addTask(r1, r2);
         console.log('Random Numbers : ', r1, r2);
-        console.log('Sum =', sum);
+        console.log('sum =', sum);
     } catch (error) {
         console.log('Task Failure', error);
     }
