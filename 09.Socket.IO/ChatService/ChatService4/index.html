@@ -84,10 +84,6 @@
         socket.emit('chatRooms');
     });
 
-    socket.on('notice', function(data) {
-        appendMessage(data.user + ' >> ' + data.message);
-    });
-
     // 채팅방 목록
     socket.on('chatRoomsResult', function (data) {
         console.log('chat rooms :',data);
@@ -105,22 +101,41 @@
         $('#messages').append($('<li>').text(msg));
     }
 
+    socket.on('notice', function(data) {
+        appendMessage(data.user + ' >> ' + data.message);
+    });
+
     socket.on('joinRoomResult', function (data) {
         console.log('join room result :', data);
         if ( data.room ) {
             appendMessage(data.user + ' 님이 ' + data.room + '에 입장했습니다');
             room = data.room;
+
+            socket.emit('unreadMessage', {user:user});
         }
         else {
             appendMessage('채팅방 입장 실패');
         }
     });
 
+    socket.on('unreadMessageResult', function(data) {
+        for(var i = 0 ; i < data.length ; i++) {
+            var item = data[i];
+            const sender = item.sender;
+            const message = item.message;
+            appendMessage(sender + ' >> ' + message);
+        }
+    });
+
     socket.on('messageReceive', function (data) {
         console.log('message receive', data);
-        const sender = data.user;
+        const sender = data.sender;
         const message = sender + ' >> ' + data.message;
         appendMessage(message);
+
+        // 메세지 수신 체크
+        var messageId = data.messageId;
+        socket.emit('messageRead', {user:user, messageId:messageId});
     });
 
     // 메세지 보내기

@@ -14,23 +14,16 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 
-// 채팅방 관련 모델
-const Chat = require('./chat').Chat;
-const Room = require('./chat').Room;
-
-(function() {
-    console.log('create initial chat room');
-
-    // 아이유가 채팅방 room1을 만들고 설현이 채팅방에 참가
-    const room1 = Chat.createRoom('아이유', 'room1');
-    room1.addParticipant('설현');
-
-    // 태연이 채팅방 room2를 만들고 아이유가 채팅방에 참가
-    const room2 = Chat.createRoom('태연', 'room2');
-    room2.addParticipant('아이유')
-
-    console.log('rooms :',Chat.getRoomList());
-})();
+var rooms = ['room1', 'room2'];
+function getRoom(roomId) {
+    for(var i = 0 ; i < rooms.length ; i++) {
+        const room = rooms[i];
+        if ( room == roomId ) {
+            return room;
+        }
+    }
+    return null;
+}
 
 // Socket.io 서버
 var io = require('socket.io')(server);
@@ -43,7 +36,6 @@ io.on('connection', socket => {
     socket.emit('notice', {user: 'Admin', message: 'Welcome to Socket.IO Chat-Service'});
 
     socket.on('chatRooms', function () {
-        const rooms = Chat.getRoomList();
         socket.emit('chatRoomsResult', rooms);
     });
 
@@ -52,33 +44,23 @@ io.on('connection', socket => {
         user = info.user;
         // 기존 룸에서 나가기
         if ( room ) {
-            socket.leave(room.name);
+            socket.leave(room);
             room = null;
         }
 
         // 채팅방 얻어오기
         const roomId = info.room;
-        room = Chat.getRoom(roomId);
-        // console.log('Chatroom :',room);
+        room = getRoom(roomId);
 
         // 채팅방 입장
         if ( room ) {
-            socket.join(room.name);
-            room.addParticipant(user);
-            console.log('user', user, 'join room:', room.name, ' room participants :', room.getParticipants());
-
-            // 채팅방 참여 알림
-            io.to(room.name).emit('joinRoomResult', {user:user, room:room.name})
+            socket.join(room);
+            console.log('user ', user, 'join room:', room);
+            io.to(room).emit('joinRoomResult', {user:user, room:room})
         }
         else {
             socket.emit('joinRoomResult', {user:user, room:null});
         }
-    });
-
-    // 읽지 않은 메세지
-    socket.on('unreadMessage', function(data) {
-        const messages = room.getUnreadMessage(data.user);
-        socket.emit('unreadMessageResult', messages);
     });
 
     // 클라이언트가 보낸 메세지 이벤트
@@ -86,22 +68,10 @@ io.on('connection', socket => {
         console.log('client message :', data);
 
         const text = data.message;
-        const message = room.addMessage(user, text);
 
-        console.log('[' + room.name + ']', user, '>>', text);
+        console.log('[' + room + ']', user, '>>', text);
         if ( user && text ) {
-            io.to(room.name).emit('messageReceive', message)
+            io.to(room).emit('messageReceive', {user:user, message:text})
         }
     });
-
-    // 클라이언트의 메세지 수신 확인
-    socket.on('messageRead', function(data) {
-        const messageId = data.messageId;
-        const user = data.user;
-
-        console.log(user + 'read message ', messageId);
-        const message = room.getMessage(messageId);
-        message.readMessage(user);
-    });
-
 });

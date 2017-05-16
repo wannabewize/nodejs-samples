@@ -5,7 +5,7 @@ const db = mongoose.connection;
 const url = 'mongodb://localhost:27017/samples';
 mongoose.connect(url);
 
-const PersonSchema = mongoose.Schema({
+const PersonSchema = new mongoose.Schema({
    name : String, 
    value : Number,
    modified : { type:Date, default:Date.now }
