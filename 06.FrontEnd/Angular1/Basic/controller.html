@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script>
+        var app = angular.module('ExampleApp', []);
+        app.controller('DefaultCtrl', function() {
+            console.log('Default Controller works');
+        });
+
+        app.controller('OtherCtrl', function() {
+            console.log('Other Controller works');
+        });
+    </script>
+</head>
+<body ng-app="ExampleApp">
+<div ng-controller="DefaultCtrl">
+    <h1>Default Controller</h1>
+</div>
+
+<div ng-controller="OtherCtrl as other">
+    <h1>Another Controller</h1>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP Service example</title>    
+    <script src="/lib/angular/angular.min.js"></script>
+    <script>
+        var app = angular.module('ExampleApp', []);
+        app.controller('DefaultCtrl', ['$scope', '$http', function($scope, $http) {
+            $scope.sendGetRequest = function() {
+                var url = '/greeting';
+                $http.get(url).then(function onSuccess(response){
+                    console.log('Success. hello : ', response.data.hello);
+                    $scope.getResult = response.data;
+                }, function onFailure(error) {
+                    console.log('Fail : ', error);
+                    $scope.getResult = 'Error';
+                });
+            };
+
+            $scope.sendPostRequest = function() {
+                var url = '/greeting';
+                $http.post(url, {'hello':$scope.postData}).then(function onSuccess(response) {
+                    $scope.postResult = 'Success';
+                }, function onFailure(error) {
+                    console.log(error);
+                    $scope.postResult = 'Error : ' + error.status;
+                });
+            }
+        }]);
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+
+<div id="target">
+    <h1>GET Request Example</h1>
+    <h3>Request</h3>
+    <p>Send GET Request to /greeting</p>
+    <input type="button" ng-click="sendGetRequest()" value="Send"/>
+    <h3>Response</h3>
+    {{getResult}}
+</div>
+
+
+<div>
+    <h1>POST Reqeust Example</h1>
+    <h3>Request</h3>
+    <p>Send POST Reqeust to /greeting.</p>
+    <p>4자리 이상 입력</p>
+    <input type="input" ng-model="postData">
+    <input type="button" ng-click="sendPostRequest()" value="POST">
+    <h3>Response</h3>
+    {{postResult}}
+</div>
+
+</body>
+</html>

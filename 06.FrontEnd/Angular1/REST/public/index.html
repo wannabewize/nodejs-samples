@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular REST Module</title>
+    <script src="/lib/angular/angular.min.js"></script>
+    <script src="/lib/angular-resource/angular-resource.js"></script>
+    <script>
+        var app = angular.module('ExampleApp', ['ngResource']);
+
+        app.factory('Movie', function($resource) {
+            var Movie = $resource('/movies/:movieId',{movieId:'@id'}, {post : { method:'POST'}, put : { method : 'PUT'} });
+            return Movie;
+        });
+
+        app.controller('DefaultCtrl', function($scope, Movie) {
+            $scope.sendGet = function (path) {
+                console.log('Send get request : ', path);
+
+                if ( path ) {
+                    var detail = Movie.get({id:path});
+                    console.log('/movies/' + path, detail);
+                    $scope.result = detail;
+                }
+                else {
+                    var movies = Movie.get();
+                    console.log('/movies : ', movies);
+                    $scope.result = movies;
+                }
+            }
+
+            $scope.sendPost = function(path) {
+                console.log('Send Post request : ', path);
+                var res = Movie.post({title:'Titanic', director:'James cameron'});
+                $scope.result = res;
+                console.log(res);
+            }
+
+            $scope.sendPut = function (path) {
+                var res = Movie.put({});
+                $scope.result = res;
+                console.log('Send Put request : ', res);
+            }
+
+            $scope.sendDelete = function(path) {
+                var res = Movie.delete({});
+                $scope.result = res;
+                console.log('Send Delete request : ', res);
+            }
+        });
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+<h1>Angular Resource Example</h1>
+
+<div>
+    <h3>/movies Request</h3>
+    <input type="button" ng-click="sendGet()" value="GET">
+    <input type="button" ng-click="sendPost()" value="POST">
+    <input type="button" ng-click="sendPut()" value="PUT">
+    <input type="button" ng-click="sendDelete()" value="DELETE">
+</div>
+
+<div>
+    <h3>/movies/:item Request</h3>
+    <p>
+    Path : <input type="text" ng-model="path" ng-init="path='Avata'">
+    </p>
+    <input type="button" ng-click="sendGet(path)" value="GET">
+    <input type="button" ng-click="sendPost(path)" value="POST">
+    <input type="button" ng-click="sendPut(path)" value="PUT">
+    <input type="button" ng-click="sendDelete(path)" value="DELETE">
+</div>
+
+<div>
+    <h3>Result</h3>
+    <div>
+        {{result}}
+
+    </div>
+</div>
+</body>
+</html>

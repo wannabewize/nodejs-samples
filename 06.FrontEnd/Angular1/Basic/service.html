@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" ng-app='ExampleApp'>
+<head>
+    <meta charset='UTF-8'>
+    <title>Service Example</title>
+    <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js'></script>
+    <script>
+        var app = angular.module('ExampleApp', []);
+
+        // 서비스 정의
+        app.factory('addService', function() {
+            var service = {};
+
+            service.add = function(i, j) {
+                return i + j;
+            };
+
+            return service;
+        });
+
+        app.controller('DefaultCtrl', ['$scope','addService', function($scope, addService) {
+
+            $scope.addNumber = function() {
+                $scope.result = addService.add($scope.num1, $scope.num2);
+            }
+        }]);
+
+        app.controller('OtherCtrl', ['$scope', 'addService', function($scope, addService) {
+            $scope.appendStr = function() {
+                // undefined면 공백문자로
+                var str1 = $scope.str1 || '';
+                var str2 = $scope.str2 || '';
+
+                $scope.result = addService.add(str1, str2);
+            }
+        }]);
+
+    </script>
+
+</head>
+<body>
+<div ng-controller='DefaultCtrl' ng-init="num1=0;num2=0;result=0">
+    <h1>Add Service</h1>
+    <div>
+        Operand1 : <input ng-model="num1" type="number" ng-change="addNumber()">
+        Operand2 : <input ng-model="num2" type="number" ng-change="addNumber()">
+        Result : <input ng-model="result" readonly>
+    </div>
+</div>
+<div ng-controller="OtherCtrl">
+    <h1>Append Service</h1>
+    <div>
+        Operand1 : <input ng-model="str1" type="text" ng-change="appendStr()">
+        Operand2 : <input ng-model="str2" type="text" ng-change="appendStr()">
+        Result : <input ng-model="result" readonly>
+    </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ExampleApp">
+<head>
+    <meta charset="UTF-8">
+    <title>Angular Data Binding example</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+    <script>
+        angular.module('ExampleApp', []).controller('DefaultCtrl', function($scope) {
+            $scope.data2 = 0;
+
+            $scope.dataChanged = function() {
+                $scope.preNumber = $scope.data3 - 1;
+            }
+        });
+    </script>
+</head>
+<body ng-controller="DefaultCtrl">
+
+<div>
+
+    <div ng-init="data1='Hello'">
+        <h1>Text Model</h1>
+        Input : <input type="text" ng-model="data1"><br />
+        Follow : <input type="text" ng-model="data1">
+    </div>
+
+    <div>
+        <h1>Next Number</h1>
+        Input : <input type="number" ng-model="data2"> <br />
+        Next Number : {{data2+1}}
+    </div>
+
+    <div>
+        <h1>Previous Number</h1>
+        Input : <input type="number" ng-model="data3" ng-change="dataChanged()"> <br />
+        Previous Number : {{preNumber}}
+    </div>
+</div>
+
+</body>
+</html>
