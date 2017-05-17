@@ -104,6 +104,9 @@ FCM 예제
 
 ### Mail
 메일 발송 예제
+Gmail 사용하기 : https://community.nodemailer.com/using-gmail/
+
+
 
 ### Crawling
 크롤링

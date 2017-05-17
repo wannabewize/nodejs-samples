@@ -5,17 +5,20 @@ mongoose.Promise = global.Promise;
 mongoose.connect('mongodb://localhost/chat-service');
 const ObjectId = mongoose.Schema.Types.ObjectId;
 
+// 메세지 수신 기록
 const LogSchema = new mongoose.Schema({
 	user : String,
 	date : Date
 });
 
+// 개별 메세지. 보낸 사람(sender), 메세지, 메세지 수신 기록
 const MessageSchema = new mongoose.Schema({
 	sender : String,
 	message : String,
 	logs : [LogSchema]
 });
 
+// 채팅방. 채팅방 이름, 생성자, 채팅 방 내 메세지, 채팅 방 참여자
 const RoomSchema = new mongoose.Schema({
     name : String,
     creator : String,
@@ -23,8 +26,6 @@ const RoomSchema = new mongoose.Schema({
     created : Date,
 	participants : [String]
 });
-
-
 
 // Method in Schema. http://mongoosejs.com/docs/guide.html#methods
 

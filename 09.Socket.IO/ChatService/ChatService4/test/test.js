@@ -15,29 +15,31 @@ describe('Message', function() {
 		mongoose.connection.db.collection('rooms').remove({}, {multiple:true});
     });
 
-    it('create room', function(done) {
-        const user = '아이유';
-		Chat.createRoom(user, 'room1').then( function(room) {
-            (room.participants).should.have.length(1);
-            (room.participants[0]).should.be.equal(user);
+    it('create room', async function(done) {
+        try {
+            const user = '아이유';
+            const room = await Chat.createRoom(user, 'room1');
+            
+            (room.getParticipants()).should.have.length(1);
+            (room.getParticipants()[0]).should.be.equal(user);
 
-			room.addParticipant('설현').then( function(room) {
-				(room.participants).should.have.length(2);
-				(room.participants[1]).should.be.equal('설현');
-				chatRoom = room;
+            await room.addParticipant('설현')
+            (room.getParticipants()).should.have.length(2);
+            (room.getParticipants()[1]).should.be.equal('설현');
 
-				return done();
-            }, function(error) {
-                return done(error);
-            });
-
-		}, function(error) {
+            // const msg1 = await room.addMessage('아이유', 'hello');
+            // (msg1.isUnreadFor('설현')).should.be.true('설현은 채팅방에 있지만 아직 메세지를 읽지 않았다');
+            chatRoom = room;
+            done();
+        }
+        catch ( error ) {
             done(error);
-        });
+        }
     });
 
     it('message read', function(done) {
         // 아이유, 설현이 채팅방에 있고 메세지를 보낸다
+        chatRoom.should.exist();
         chatRoom.addMessage('아이유', 'hello').then( function(message) {
             (message.isUnreadFor('설현')).should.be.true('설현은 채팅방에 있지만 아직 메세지를 읽지 않았다');
             return done();
