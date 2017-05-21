@@ -12,5 +12,7 @@ Multer를 이용한 이미지 업로드, EasyImage로 썸네일 생성과 S3로 
   - Get /posts : 제목과 이미지, 썸네일 경로 보기
   - Post /posts : 제목(title)과 이미지 업로드
 
-[요청]: https://raw.githubusercontent.com/wannabewize/Node-Samples/master/Images/16-ImageThumbnailS3.png
+### POST 요청 보내기 예
+
+![요청](https://raw.githubusercontent.com/wannabewize/Node-Samples/master/Images/16-ImageThumbnailS3.png)
 
