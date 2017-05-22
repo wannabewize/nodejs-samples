@@ -95,8 +95,13 @@ http://127.0.0.1:3000/items?page=2&count=10&keyword=1
 ````
 
 - model : 모델과 스키마
-- mongoose : 모델을 이용한 CRUD. 
+- crud : 모델을 이용한 CRUD. 
+- method : 스키마에 정의하는 Instance Method, Static Method
 
+
+### MongoosePostReply
+
+Mongoose를 이용한 글과 댓글 쓰기. 댓글은 글(post) 도큐먼트의 배열로 저장된다.
 
 ### MoviestMongoDB
 
