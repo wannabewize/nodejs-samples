@@ -123,11 +123,9 @@ class Chat {
 
 Chat.rooms = [];
 
-Chat.createRoom = function(user, name) {
-    const room = new Room(user, name);
-    Chat.rooms[name] = room;
-    return room;
-};
+Chat.addRoom = function(room) {
+    Chat.rooms[room.name] = room;
+}
 
 Chat.getRoom = function(name) {
     return Chat.rooms[name];

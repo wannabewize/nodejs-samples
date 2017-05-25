@@ -17,8 +17,11 @@ describe('Message', function() {
 
     it('create room', async function(done) {
         try {
-            const user = '아이유';
+            const user = '아이유';            
             const room = await Chat.createRoom(user, 'room1');
+
+            console.log('room :', room instanceof Room);
+            console.log('participants : ', room.getParticipants());
             
             (room.getParticipants()).should.have.length(1);
             (room.getParticipants()[0]).should.be.equal(user);

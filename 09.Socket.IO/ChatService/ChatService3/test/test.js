@@ -63,10 +63,8 @@ describe('Room', function() {
 
 describe('Chat', function() {
     it('Create Chat room', function() {
-		const room = Chat.createRoom('iu', 'room1');
-
-        should.exist(room);
-		// room.should.be.exist(); // TODO
+		const room = new Room('iu', 'room1');
+        Chat.addRoom(room);
 
         const room2 = Chat.getRoom('room1');
         should.exist(room2);

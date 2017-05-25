@@ -11,12 +11,77 @@ const LogSchema = new mongoose.Schema({
 	date : Date
 });
 
+const Log = mongoose.model('Log', LogSchema);
+
 // 개별 메세지. 보낸 사람(sender), 메세지, 메세지 수신 기록
 const MessageSchema = new mongoose.Schema({
 	sender : String,
 	message : String,
 	logs : [LogSchema]
 });
+
+MessageSchema.methods.getUserLog = function(user) {
+	for(let i = 0 ; i < this.logs.length ; i++) {
+		const log = this.logs[i];
+		if ( log.user == user ) {
+			return this;
+		}
+	}
+	return null;
+};
+
+MessageSchema.methods.readMessage = function(user) {
+	const log = this.getUserLog(user);
+	if ( log ) {
+		log.date = new Date();
+		return log.save();
+	}
+
+	return new Promise((fullfill, reject) => {
+		reject("User doesn't participate this message");
+	});
+};
+
+MessageSchema.methods.isRead = function(user) {
+	const log = this.getUserLog(user);
+	if ( ! log ) {
+		return false;
+	}
+
+	if ( log.date ) return true;
+	return false;
+};
+
+MessageSchema.methods.isUnreadFor = function(user) {
+	const log = this.getUserLog(user);
+	if ( ! log ) {
+		return false;
+	}
+
+	// 읽은 날짜가 기록됐으면
+	if ( log.date ) {
+		return false;
+	}
+
+	return true;
+};
+
+MessageSchema.statics.createMessage = function(sender, text, participants) {
+    const message = new Message();
+    message.sender = sender;
+    message.message = text;
+
+    for(let i = 0 ; i < participants.length ; i++) {
+        const user = participants[i];
+        const log = new Log();
+        log.user = user;
+        this.logs.push(log);
+    }
+
+    return message.save();
+};
+
+const Message = mongoose.model('Message', MessageSchema);
 
 // 채팅방. 채팅방 이름, 생성자, 채팅 방 내 메세지, 채팅 방 참여자
 const RoomSchema = new mongoose.Schema({
@@ -36,6 +101,8 @@ RoomSchema.methods.getParticipants = function() {
 RoomSchema.methods.addParticipant = function(user) {
 	if ( this.participants.indexOf(user) < 0 ) {
 		this.participants.push(user);
+		const ret = this.save();
+		console.log('save result : ', ret);
 		return this.save();
 	}
 	else {
@@ -69,55 +136,6 @@ RoomSchema.methods.getUnreadMessage = function(user) {
 	});
 };
 
-
-
-MessageSchema.methods.getUserLog = function(user) {
-	for(let i = 0 ; i < this.logs.length ; i++) {
-		const log = this.logs[i];
-		if ( log.user == user ) {
-			return this;
-		}
-	}
-	return null;
-};
-
-MessageSchema.methods.readMessage = function(user) {
-	const log = this.getUserLog(user);
-	if ( log ) {
-		log.date = new Date();
-		return log.save();
-	}
-
-	return new Promise((fullfill, reject) => {
-		reject("User doesn't participate this message");
-	});
-};
-
-
-MessageSchema.methods.isRead = function(user) {
-	const log = this.getUserLog(user);
-	if ( ! log ) {
-		return false;
-	}
-
-	if ( log.date ) return true;
-	return false;
-};
-
-MessageSchema.methods.isUnreadFor = function(user) {
-	const log = this.getUserLog(user);
-	if ( ! log ) {
-		return false;
-	}
-
-	// 읽은 날짜가 기록됐으면
-	if ( log.date ) {
-		return false;
-	}
-
-	return true;
-};
-
 RoomSchema.methods.getMessage = function(messageId) {
 	return Message.find({_id:messageId});
 };
@@ -135,29 +153,17 @@ RoomSchema.methods.addMessage = function(user, message) {
 	});
 };
 
-MessageSchema.statics.createMessage = function(sender, text, participants) {
-    const message = new Message();
-    message.sender = sender;
-    message.message = text;
-
-    for(let i = 0 ; i < participants.length ; i++) {
-        const user = participants[i];
-        const log = new Log();
-        log.user = user;
-        this.logs.push(log);
-    }
-
-    return message.save();
-};
-
-const Log = mongoose.model('Log', LogSchema);
-const Message = mongoose.model('Message', MessageSchema);
 const Room = mongoose.model('Room', RoomSchema);
 
 class Chat {
 }
 
 Chat.rooms = [];
+
+Chat.addRoom = function(room) {
+	Chat.rooms[room.name] = room;
+	return room.save();
+}
 
 Chat.createRoom = function(user, name) {
 	const room = new Room();
