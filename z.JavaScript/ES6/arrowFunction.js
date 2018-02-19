@@ -9,7 +9,7 @@ doIt(function() {
 
 doIt( ()=> { console.log('Hello Arrow Function'); });
 
-// with One param
+// 파라미터가 1개인 경우
 function add(i, j, handler) {
     handler(i + j);
 }

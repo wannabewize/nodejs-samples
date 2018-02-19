@@ -1,3 +1,8 @@
+/** 
+ * 클래스 문법
+*/
+
+// 클래스 정의
 class Person {
     // constructor는 1개만
     constructor(name) {
@@ -11,11 +16,12 @@ class Person {
     }
 }
 
+// 클래스에서 객체 생성
 const iu = new Person('IU');
 iu.sayHello();
 
 
-// 상속
+// 클래스 상속
 class Actor extends Person {
     constructor(name, movie) {
         super(name);
