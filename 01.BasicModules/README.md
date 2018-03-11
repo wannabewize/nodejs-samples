@@ -29,11 +29,14 @@ Util 모듈
 - classInheritance : ES6의 클래스와 상속, 재정의
 
 ## Event
-이벤트
-- event : 이벤트 핸들러 등록
+이벤트 다루기
+
+- eventListener : 이벤트 리스너 등록
+- maxEventListner : 이벤트 리스너 개수 얻기/설정
 - eventEmit : 코드로 이벤트 발생시키기
 - uncaughtedException : uncaughtedException 에러 이벤트 다루기
 - customEvent : 이벤트에 반응할 수 있는 커스텀 클래스 작성하기
+- customEventError : EventEmitter가 아닌 타입에 이벤트 리스너 등록 시도
 
 ## Buffer
 버퍼 모듈 예제

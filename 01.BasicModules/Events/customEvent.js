@@ -15,34 +15,18 @@ class Person extends EventEmitter {
 };
 
 const p = new Person('IU');
+
+// howAreYou 이벤트 리스터 등록
 p.on('howAreYou', () => {
     console.log('How are you? ', this.name)
 });
 
-// 이벤트 핸들러가 정의된 이벤트
+// 이벤트 리스터가 등록된 이벤트 발생시키기
 console.log('howAreYou 이벤트 발생');
 const ret1 = p.emit('howAreYou');
 console.log('이벤트 발생 결과 : ', ret1);
 
-// 이벤트 핸들러가 없는 이벤트
+// 이벤트 핸들러가 등록되지 않은 이벤트
 console.log('WTH 이벤트 발생');
-const ret2 = p.emit('WTH');
+const ret2 = p.emit('wth');
 console.log('이벤트 발생 결과 : ', ret2);
-
-
-
-//
-// Error 상황 : Event Emitter가 아닌 객체에 이벤트 등록과 발생(emit) 시도
-//
-
-class Actor {    
-    constructor(name) {
-        this.name = name;
-    }
-}
-
-const johansson = new Actor('Scarlett Johansson');
-johansson.on('act', () => {
-    console.log('Act Event!');
-});
-johansson.emit('act');
