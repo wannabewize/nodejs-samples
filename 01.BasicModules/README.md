@@ -2,16 +2,27 @@
 기본 모듈 예제
 
 ## Global
-전역 객체
+전역 객체 예제
+- fileLocator : __filename, __dirname 정보 다루기
 - add : process의 콘솔 입력 다루기
-- console : 콘솔을 이용한 정보 출력, 시간 측정
 - process : 프로세스 정보 얻기
 - processEvent : 프로세스 전역 객체의 이벤트
+
+## Timer
+전역 객체 - 타이머 예제
+- timer : 타이머
+- interval : 반복
+
+## Console
+전역 객체 - 콘솔
+- logging : 콘솔을 이용한 정보 출력
+- timeMeasure : 콘솔의 time 함수를 이용해서 실행시간 측정하기
+- customConsole : 파일로 로그를 기록하는 커스텀 콘솔 만들기
 
 ## Util
 Util 모듈
 - format : 포맷 문자열 생성
-- inherits : 생성자를 이용한 상속. inherits 대신 ES6의 클래스와 extends 사용을 권장.
+- inherits : 생성자를 이용한 상속으로 deprecated. ES6에서 도입된 class와 extends 사용 권장
 - inspector : 객체 상태 출력하기
 - class_extends : ES6의 클래스와 상속, 재정의
 
@@ -46,10 +57,7 @@ Util 모듈
 - url_parsing
 - url_making
 
-## Timer
-타이머 예제
-- timer : 타이머
-- interval : 반복
+
 
 ## Others
 - readline : readline 모듈
