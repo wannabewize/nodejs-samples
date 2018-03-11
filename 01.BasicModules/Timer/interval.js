@@ -1,9 +1,15 @@
+'use strict'
+/**
+ * 타이머의 interval 예제
+ */
+
 // Interval Sample
 var count = 5;
-function sayGoodbay(who) {
-   console.log('Good bye', who);   
-   if ( count-- <= 0 )
+
+function sayHello(who) {
+   console.log('Hello', who);   
+   if ( --count <= 0 )
       clearInterval(repeat);
 }
 
-const repeat = setInterval(sayGoodbay, 1 * 1000, 'Friend');
+const repeat = setInterval(sayHello, 1000, 'Friend');

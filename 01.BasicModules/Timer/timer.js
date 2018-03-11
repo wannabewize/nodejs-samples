@@ -10,12 +10,17 @@ function sayHello() {
 console.log('== Timer Example.');
 setTimeout(sayHello, 3 * 1000);
 
+
+// Arrow Function과 파라미터 전달
+setTimeout( (arg1, arg2) => {
+      var result = arg1 + arg2;
+      console.log('Arrow Function, parameter를 사용한 타이머 예제');
+      console.log(`${arg1} + ${arg2} = ${arg1 + arg2}`)
+}, 1000, 1, 2);
+
 // 타이머 취소
-const t = setTimeout(sayHello, 10 * 1000);
+function cancelledFunction() {
+      console.log('이 함수는 실행 취소됩니다');
+}
+const t = setTimeout(cancelledFunction, 2000);
 clearTimeout(t);
-
-
-// Inline 방식으로 작성
-setTimeout((arg) => {
-      console.log("Inline 방식으로 작성한 타이머 실행. 파라미터 :", arg);
-}, 2 * 1000, "Timer Example");

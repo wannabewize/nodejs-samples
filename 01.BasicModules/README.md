@@ -6,6 +6,7 @@
 - add : process의 콘솔 입력 다루기
 - console : 콘솔을 이용한 정보 출력, 시간 측정
 - process : 프로세스 정보 얻기
+- processEvent : 프로세스 전역 객체의 이벤트
 
 ## Util
 Util 모듈
