@@ -17,8 +17,8 @@ class Child extends Parent {
 const child = new Child();
 child.doIt();
 
-console.log(child instanceof Parent);
-console.log(child instanceof Child);
+console.log('Child object is Parent?', child instanceof Parent);
+console.log('Child object is Child?', child instanceof Child);
 
 
 //
@@ -30,6 +30,4 @@ Parent.prototype.sayHello = function() {
 };
 
 child.sayHello();
-
-
 

@@ -22,9 +22,11 @@
 ## Util
 Util 모듈
 - format : 포맷 문자열 생성
+- callbackify : 프라미스 기반의 함수를 콜백 기반의 함수 생성
+- promisify : 콜백 기반의 함수를 프라미스 기반의 함수 생성
 - inherits : 생성자를 이용한 상속으로 deprecated. ES6에서 도입된 class와 extends 사용 권장
 - inspector : 객체 상태 출력하기
-- class_extends : ES6의 클래스와 상속, 재정의
+- classInheritance : ES6의 클래스와 상속, 재정의
 
 ## Event
 이벤트
