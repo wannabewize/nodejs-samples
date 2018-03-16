@@ -1,11 +1,11 @@
-var async = require('async');
+const async = require('async');
 
 async.series([
       function task1(callback) {
          console.log('태스크 1 시작');
          setTimeout(function() {
             console.log('태스크 1 종료');
-            callback(null, '태스크 1 결과');
+            callback(null, '태스크 1 결과);
          }, 3000);         
       },
       // errorTask, // Error 발생 태스크
