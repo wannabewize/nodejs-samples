@@ -1,17 +1,20 @@
-//
-// Class 문법을 이용한 모듈 작성
-//
-class Singer {
-    constructor(name) {
-        this.name = name;
-    }
-    sing() {
-        console.log('sing sing');
-    }
+/**
+ * 다수의 클래스를 하나의 모듈에 작성
+ */
+class Bird {
+   sing() {
+      console.log('Bird sing');
+   }
 }
 
-Singer.prototype.dance = function() {
-    console.log('dance dance');
-}
+exports.Bird = Bird;
 
-module.exports = Singer;
+// exports와 클래스 선언을 동시에
+exports.Cat = class {
+   constructor(name) {
+      this.name = name;
+   }
+   sleep() {
+      console.log(`cat ${this.name} sleeps`);
+   }
+};

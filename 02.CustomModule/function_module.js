@@ -1,12 +1,16 @@
 /**
  * 함수 단위의 모듈
 */
-module.exports.goodMorning = function() {
+
+// 함수 별도 정의 후 exports
+function goodMorning() {
 	console.log('Good Mornring!');
 }
 
-// module은 생략 가능
-exports.goodNight = function(who) {
+exports.goodMorning = goodMorning;
+
+// module은 생략 가능, exports로 직접 함수 작성, Arrow Function
+exports.goodNight = (who) => {
    console.log('Good Afternoon, ' + who);
 }
 

@@ -1,7 +1,13 @@
-//
-// ES6에 도입된 Class를 이용해서 작성한 모듈 사용
-//
-const  Singer = require('./class_module.js');
-const singer = new Singer('IU');
-singer.sing();
-singer.dance();
+/**
+ * 클래스 정의 모듈 사용하기
+ */
+
+// 모듈에 작성한 타입 이름으로 require
+const Bird = require('./class_module').Bird;
+
+let bird = new Bird;
+bird.sing();
+
+const Cat = require('./class_module').Cat;
+let cat = new Cat('고양씨');
+cat.sleep();

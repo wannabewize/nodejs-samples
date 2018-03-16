@@ -1,12 +1,17 @@
-function Exercise() {
-	this.pushup = function() {
-		console.log('Push up, Push up!');
-	}
+/**
+ * 다수의 Constructor를 exports 하는 모듈
+ */
+function Bus() {
+   this.take = function() {
+      console.log('Take bus');
+   }
 }
 
-Exercise.prototype.run = function() {
-	console.log('Fast, Fast');
-}
+exports.Bus = Bus;
 
-// module 생략 불가
-module.exports = Exercise;
+// module 생략 가능
+exports.Metro = function() {
+   this.ride = function() {
+      console.log('Metro');
+   }
+};
