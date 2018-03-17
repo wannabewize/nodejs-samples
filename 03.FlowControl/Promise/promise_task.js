@@ -33,6 +33,6 @@ task(false).then((result) => {
 // catch를 이용해서 실패시의 콜백을 등록할 수 있다.
 task(false).then(result => {
     console.log('세 번째 비동기 태스크 성공 :', result);
-}).catch(failure => {
-    console.log('세 번째 비동기 태스크 실패 :', failure);
+}).catch(error => {
+    console.log('세 번째 비동기 태스크 실패 :', error);
 });

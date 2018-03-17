@@ -15,7 +15,6 @@ Async 예제
 
 Promise에 대한 예제
 
-- asyncTask : Promise 사용 방식을 익히기 위한 예제. 비동기 태스크를 생성하고, 성공 콜백/실패 콜백 사용하기.
 - promise : Promise 객체 생성과 동작 방법 
 - promise_task : Promise를 이용하는 비동기 태스크 만들기
 - promise_series : 연속적으로 Promise 사용하기. 이전 비동기 태스크의 결과를 다음 태스크에 전달한다.

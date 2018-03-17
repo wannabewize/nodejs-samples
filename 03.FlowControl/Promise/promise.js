@@ -4,17 +4,22 @@
  * 프라미스로 작성한 태스크가 성공적으로 수행(fullfill)되면 resolve 함수를 동작시키고, 실패(reject)하면 reject 함수를 실행한다.
  */
 
-var condition;
-var asyncTask = new Promise( (resolve, reject) => {
+let asyncSuccessTask = new Promise( (resolve, reject) => {
       setTimeout(function () {
-         condition ? resolve() : reject();
+         resolve('Task Result');
       }, 1000);  
 });
 
-condition = true;
-
-asyncTask.then( () => {
-   console.log('Promise Fullfileld');
-} , () => {
-   console.log('Promise Rejected');
+let asyncFailTask = new Promise( (resolve, reject) => {
+      setTimeout(function () {
+         reject('Task Error');
+      }, 1000);  
 });
+
+
+// Promise 기반의 
+// asyncSuccessTask.then( (result) => {
+//    console.log('Task1 Success :', result);
+// }, (error) => {
+//    console.log('Task1 Fail :', error);
+// });
