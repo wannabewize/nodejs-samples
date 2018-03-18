@@ -34,6 +34,7 @@ Node.js 예제 모음
 - CallbackHell : 콜백 지옥 상황
 - Async : Async 모듈을 이용한 흐름 제어 
 - Promise : Promise를 이용한 태스크 작성과 진행
+- Await : await를 이용한 비동기 태스크 동작 제어
 
 ## 04.HTTP
 http 모듈을 이용한 예제

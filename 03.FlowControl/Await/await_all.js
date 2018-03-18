@@ -1,8 +1,3 @@
-/**
- * Promise.all을 이용한 다수의 비동기 태스크 실행하기
- * then에는 각 태스크의 결과 전달된다.
- */
-
 // 100 자리에 사용할 난수 발생
 function task1() {
     return new Promise((resolve, reject) => {        
@@ -58,11 +53,15 @@ function task3() {
     });
 }
 
-Promise.all([task1(), task2(), task3()])
-    .then(results => {
-        console.log('모든 태스크 성공. ', results);
-    })
-    .catch(error => {
-        console.log('태스크 실패. ', error);
-    });
 
+async function doIt() {
+    try {
+        let result = await Promise.all( [task1(), task2(), task3()]);
+        console.log('Result :', result);
+    }
+    catch ( error ) {
+        console.log(error);
+    }
+}
+
+doIt();

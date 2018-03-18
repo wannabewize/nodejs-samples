@@ -4,63 +4,30 @@
  */
 
 // 비동기 태스크1. 0~9 사이의 난수 결과
-function task1(success) {
+function task(name) {
     return new Promise((resolve, reject) => {
-        console.log('Task1 started');
+        console.log(`Task${name} started`);
+
+        const random = Math.ceil(Math.round(Math.random() * 3) + 1);
+        const time = random * 1000;
+        
         setTimeout(() => {
-            const taskResult = Math.round(Math.random() * 10);
-            console.log('Task1 Finished with', taskResult);
-            success ? resolve('Taks1 Result ' + taskResult) : reject('Task1 Failure');
-        }, 1000)
+            console.log(`Task${name} random number : ${random}`);
+            if ( random % 2 == 0 ) {
+                resolve(random);
+            }
+            else {
+                reject(`Task${name}'s random number is odd`);
+            }
+        }, time)
     });
 };
 
-// 비동기 태스크2. 10~19 사이의 난수 결과
-function task2(success) {
-    return new Promise((resolve, reject) => {
-        console.log('Task2 started');
-        setTimeout(() => {
-            const taskResult = Math.round(Math.random() * 10) + 10;
-            console.log('Task2 Finished with', taskResult);
-            success ? resolve('Taks2 Result ' + taskResult) : reject('Task2 Failure');
-        }, 1500)
+
+Promise.race([task('1'), task('2'), task('3')])
+    .then(results => {
+        console.log('Race Task 종료 : ', results);
+    })
+    .catch(error => {
+        console.log(error);
     });
-}
-
-// 비동기 태스크3. 20~29 사이의 난수 결과
-function task3(success) {
-    return new Promise((resolve, reject) => {
-        console.log('Task3 started');
-        setTimeout(() => {
-            const taskResult = Math.round(Math.random() * 10) + 20;
-            console.log('Task3 Finished with', taskResult);
-            success ? resolve('Taks3 Success ' + taskResult) : reject('Task3 Failure');
-        }, 1500)
-    });
-}
-
-function runWithSuccess() {
-    Promise.race([task1(true), task2(true), task3(true)]).then(
-        results => {
-            console.log('Race Task 종료 : ', results);
-        },
-        error => {
-            console.error('태스크 오류 : ', error);
-        }
-    );
-}
-
-function runWithFailure() {
-    Promise.race([task1(false), task2(false), task3(true)]).then(
-        results => {
-            console.log('Race Task 종료 : ', results);
-        },
-        error => {
-            console.error('태스크 오류 : ', error);
-        }
-    );    
-}
-
-
-runWithSuccess();
-// runWithFailure();

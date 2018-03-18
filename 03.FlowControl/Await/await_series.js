@@ -1,3 +1,7 @@
+/**
+ * Promise 기반으로 비동기 방식의 난수 발생 태스크, 비동기 방식의 덧셈 태스크
+ * await를 이용해서 비동기 태스크를 순차로 동작시키기
+ */
 function randomTask() {
     return new Promise((resolve, reject) => {
             const taskResult = Math.round(Math.random() * 10);
@@ -13,7 +17,6 @@ function addTask(arg1, arg2) {
         const result = arg1 + arg2;
         setTimeout(()=>{
             resolve(result);
-            // reject('error');
         }, 1000);
     });
 }
@@ -24,22 +27,10 @@ async function doIt() {
         let r2 = await randomTask();
         let sum = await addTask(r1, r2);
         console.log('Random Numbers : ', r1, r2);
-        console.log('DoIt finish, sum =', sum);
-        return sum;
+        console.log('sum =', sum);
     } catch (error) {
         console.log('Task Failure', error);
-        throw error;
     }
 }
 
-async function runTask() {
-    try {
-        let ret = await doIt();
-        console.log('Run Task Ret : ', ret);
-    }
-    catch ( error ) {
-        console.log('Run Task Error :', error);
-    }
-}
-
-runTask();
+doIt();

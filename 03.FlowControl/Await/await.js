@@ -24,4 +24,4 @@ async function doIt(success) {
 doIt(true);
 
 // 비동기 태스크 실패
-// doIt(false);
+doIt(false);
