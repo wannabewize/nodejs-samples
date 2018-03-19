@@ -2,6 +2,8 @@
 
 ## Basic
 - helloWorld : Hello World 출력하는 HTTP 서버
+- urlAnalysis : 요청 메세지의 URL 분석
+
 - calculation : 쿼리 문자열을 이용한 값 계산
 - staticFileService : 정적 파일 서비스
 - htmlServer : css/image를 포함한 HTML 서비스

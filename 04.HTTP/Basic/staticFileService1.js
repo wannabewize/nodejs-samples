@@ -1,7 +1,7 @@
-var http = require('http');
-var fs = require('fs');
+const http = require('http');
+const fs = require('fs');
 
-var server = http.createServer(function (req, res) {
+const server = http.createServer(function (req, res) {
    // 이미지 파일 경로
    var path = './images/dog.jpg';
    fs.access(path, fs.F_OK, function (err) {

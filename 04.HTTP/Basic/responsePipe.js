@@ -7,12 +7,3 @@ http.createServer(function(req, res) {
    fs.createReadStream(path).pipe(res);
    
 }).listen(3000);
-
-
-// http.createServer(function(req, res) {   
-//    res.setHeader('content-type','video/mp4');   
-//    fs.readFile(path, function(err, data) {
-//       res.end(data);
-//    });      
-// }).listen(3001);
-
