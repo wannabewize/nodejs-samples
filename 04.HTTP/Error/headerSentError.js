@@ -3,6 +3,7 @@
 * */
 
 const http = require('http');
+const port = 3000;
 
 http.createServer(function (req, res) {
    res.write('Hello World');
@@ -10,4 +11,6 @@ http.createServer(function (req, res) {
    res.setHeader('Content-Type', 'text/plain');
    res.end();
 
-}).listen(3000);
+}).listen(port, () => {
+   console.log(`Server is running at ${port}`);
+});

@@ -1,16 +1,17 @@
 const http = require('http');
 const fs = require('fs');
 
-const server = http.createServer(function (req, res) {
+const server = http.createServer( (req, res) => {
    // 이미지 파일 경로
-   var path = './images/dog.jpg';
-   fs.access(path, fs.F_OK, function (err) {
+   // const path = './image/dog.jpg';
+   const path = './image/cat.jpg';
+   fs.access(path, fs.F_OK, (err) => {
       if (err) {
          res.statusCode = 404;
-         res.end('Not found');
+         res.end();
          return;
       }
-      fs.readFile(path, function (err, data) {
+      fs.readFile(path, (err, data) => {
          res.statusCode = 200;
          res.setHeader('Content-type', 'image/jpg');
          res.end(data);
