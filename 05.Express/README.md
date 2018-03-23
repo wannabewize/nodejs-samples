@@ -14,7 +14,7 @@ Express 예제
 - routing : 경로와 메소드를 이용한 라우팅
 - routing_params : 라우팅 파라미터
 - routing_reg : 정규식을 이용한 라이팅
-- router_server, router_eating, router_greeting : 라우팅 모듈
+- externalRouter, router_eating, router_greeting : 라우팅 모듈을 별도로 작성하기
 
 ## ErrorHandling
 에러 다루기
@@ -30,12 +30,8 @@ Express 예제
 - faviconAndLog : 파비콘과 로그 미들웨어
 - methodOverride : HTML폼에서 Delete/Put 등의 메소드 사용하기
 - morgan : 로그 남기기
-
-## MessageBody
- 바디파서 모듈을 이용해서 메세지 바디를 사용하는 요청 분석.
-
-- urlencoded : URLEncoded 바디 분석
-- json : JSON 메세지 분석
+- bodyParser_urlencoded : URLEncoded 바디 분석
+- bodyParser_json : JSON 메세지 분석
 
 ## FileUpload
 멀티파트 메세지 분석
@@ -46,6 +42,6 @@ express-formidable을 이용한 멀티파트 요청 다루기. 임시 파일을 
 ### Multer
 Multer 를 이용한 파일 업로드 예제
 
-
 ## AwaitExpress
 async/await와 Express
+- app.js : Promise, Await를 이용한 미들웨어
