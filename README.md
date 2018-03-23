@@ -51,6 +51,7 @@ Express 예제
 - Routing : 라우팅
 - Loggin : 로그 남기기
 - Multipart : 멀티파트
+- AwaitExpresss : 미들웨어에서 promise/await 비동기 API 사용
 
 ## 06.FrontEnd
 프론트 엔드
