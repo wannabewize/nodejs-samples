@@ -33,7 +33,7 @@ Express 예제
 - bodyParser_urlencoded : URLEncoded 바디 분석
 - bodyParser_json : JSON 메세지 분석
 
-## FileUpload
+## Multipart
 멀티파트 메세지 분석
 
 ### Formidable
