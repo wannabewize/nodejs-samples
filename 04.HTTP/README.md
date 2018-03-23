@@ -21,9 +21,9 @@
 ## Post
 Post 요청
 
-- prg-pattern : Post-Redirect-Get 패턴
 - urlencoded : URLEncoded 방식의 Post 요청
 - jsonRequest : JSON 방식의 Post 요청
+- prg-pattern : Post-Redirect-Get 패턴
 
 ## Multipart
 - multipartRequest : 멀티파트 메세지 분석

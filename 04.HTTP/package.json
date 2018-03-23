@@ -9,6 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "formidable": "^1.0.17"
+    "formidable": "^1.0.17",
+    "urlencode": "^1.1.0"
   }
 }

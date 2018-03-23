@@ -1,23 +1,27 @@
-var http = require('http');
-var query = require('querystring');
-var fs = require('fs');
+const http = require('http');
+const query = require('querystring');
+const fs = require('fs');
+const urlencode = require('urlencode');
 
-var server = http.createServer(function (req, res) {
-   if (req.method.toLowerCase() == 'post') {
+const server = http.createServer( (req, res) =>  {
+    console.log('req.method :', req.method);
+    
+   if (req.method == 'POST') {
       const contentType = req.headers['content-type'];
       console.log('content type : ', contentType);
 
       // contentType : application/x-www-form-urlencoded 비교
-      if ( contentType.search('urlencoded') >= 0 ) {
+      if ( contentType.search('application/x-www-form-urlencoded') >= 0 ) {
          handlePostReqeust(req, res);
       }
       else {
-         res.end('Not URLEncoded');
+         res.statusCode = 400;
+         res.end();
       }
    }
    // get이면 폼 목록 출력
    else {
-      fs.createReadStream('form.html').pipe(res);
+      fs.createReadStream('urlencoded_form.html').pipe(res);
    }
 });
 
@@ -30,9 +34,11 @@ function handlePostReqeust(req, res) {
    });
    req.on('end', function () {
       console.log('end : ' + buffer);
+      console.log('decode :', urlencode.decode(buffer, 'utf-8'));
 
       // 바디 파싱
       var parsed = query.parse(buffer);
+      console.log('decoded : ', urlencode.decode(parsed.textarea));
       // JSON 형태로 출력      
       res.end(JSON.stringify(parsed));
    });
