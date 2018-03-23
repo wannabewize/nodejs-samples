@@ -19,13 +19,9 @@
 - portOpenError : 포트 오픈 에러
 
 ## Post
-Post 요청
+Post 요청 다루기.
 
 - urlencoded : URLEncoded 방식의 Post 요청
 - jsonRequest : JSON 방식의 Post 요청
 - prg-pattern : Post-Redirect-Get 패턴
-
-## Multipart
-- multipartRequest : 멀티파트 메세지 분석
-- formidable : formidable 모듈
-- favoritePaint : 그림과 제목 서비스
+- multipart : 멀티파트 메세지 구조 보기
