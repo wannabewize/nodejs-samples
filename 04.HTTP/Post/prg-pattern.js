@@ -1,8 +1,8 @@
 const http = require('http');
 const fs = require('fs');
 
-http.createServer(function(req, res) {
-   if (req.method.toLowerCase() == 'post') {
+http.createServer((req, res) => {
+   if (req.method == 'POST') {
       res.statusCode = 303;
       res.setHeader('Location', '/redirected');
       res.end('success');

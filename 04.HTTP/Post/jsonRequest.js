@@ -1,41 +1,41 @@
 const http = require('http');
 
-http.createServer(function(req, res) {
-   if ( req.method.toLowerCase() == 'post') {
+http.createServer( (req, res) => {
+   if ( req.method == 'POST') {
       const contentType = req.headers['content-type'];
       console.log('content type : ', contentType);
 
-      // contentType : application/json 비교
+      // contentType : application/json, text/json도 사용한다고.
       if ( contentType.search('json') > 0 ) {
-         var body = '';
+         let body = '';
          req.on('data', function(chunk) {
             body += chunk;
          });
          req.on('end', function() {
-            var parsed = JSON.parse(body);
+            const parsed = JSON.parse(body);
             console.log(parsed);
 
-            var intVal = parsed['intVal'];
-            console.log('intVal : ', intVal, ' is Number? : ', typeof intVal);
+            const intVal = parsed['int'];
+            console.log('int : ', intVal, ' is Number? : ', typeof intVal);
 
-            var floatVal = parsed['floatVal'];
-            console.log('floatVal : ', floatVal, ' is Number? : ', typeof floatVal);
+            const floatVal = parsed['float'];
+            console.log('float : ', floatVal, ' is Number? : ', typeof floatVal);
 
-            var boolVal = parsed['boolVal'];
-            console.log('boolVal : ', boolVal);
+            const boolVal = parsed['bool'];
+            console.log('bool : ', boolVal);
 
-            var nullVal = parsed['nullVal'];
-            console.log('nullVal : ', nullVal, ' is null? : ', (nullVal == null));
+            const nullVal = parsed['null'];
+            console.log('null : ', nullVal, ' is null? : ', (nullVal == null));
 
-            var dateStr = parsed['dateStr'];
-            var date = new Date(dateStr);
-            console.log('date from dateStr : ', date);
+            const dateStr = parsed['date'];
+            const date = new Date(dateStr);
+            console.log('date : ', date);
 
-            var arrVal = parsed["arrVal"];
-            console.log('arrVal : ', arrVal);
+            const arrVal = parsed["array"];
+            console.log('array : ', arrVal);
 
-            var objVal = parsed["objVal"];
-            console.log('objVal : ', objVal);
+            const objVal = parsed["object"];
+            console.log('object : ', objVal);
 
             res.end('OK');
          });
