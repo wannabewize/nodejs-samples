@@ -9,7 +9,7 @@ app.listen(3000, function () {
 });
 
 app.get('/download', (req, res) => {
-   res.download('../../Resources/images/baseball.png');
+   res.download('./resource.zip');
 });
 
 app.get('/json', (req, res) => {
@@ -22,6 +22,11 @@ app.get('/json', (req, res) => {
 
 app.get('/redirect', (req, res) => {
    res.redirect('http://google.com');
+});
+
+app.get('/error', (req, res) => {
+   res.status(400);
+   res.send({error:'Your Fault'});
 });
 
 app.get('/status', (req, res) => {

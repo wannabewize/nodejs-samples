@@ -12,14 +12,12 @@ app.listen(3000);
 
 // add?value1=1&value2=2
 function add(req, res, next) {
-   const v1 = req.query['value1'];
-   const v2 = req.query['value2'];
+   const v1 = req.query.num1;
+   const v2 = req.query.num2;
    
    // 입력 파라미터 체크
    if ( v1 == null || v1.length == 0 || v2 == null || v2.length == 0 ) {
-      const error = new Error('value1, value2 입력이 없습니다.');
-      error.code = 400;
-      return next(error);
+      return next(40002);
    }
    
    const num1 = parseInt(v1);
@@ -27,9 +25,7 @@ function add(req, res, next) {
    
    // 숫자 체크
    if ( isNaN(num1) || isNaN(num2) ) {
-      const error = new Error('value1, value2는 숫자만 입력');
-      error.code = 400;
-      return next(error);
+      return next(40003);
    }
    
    var result = num1 + num2;
@@ -40,16 +36,25 @@ function add(req, res, next) {
 function showAdmin(req, res, next) {
    var error = new Error('권한 없음');
    error.code = 401;
-   return next(error);
+   return next(40001);
+}
+
+const customError = {
+   40001 : { msg: '권한 없음', code: 401},
+   40002 : { msg: '입력값 없음', code: 400},
+   40003 : { msg: '입력값이 숫자가 아님', code: 400},
 }
 
 function errorHandler(err, req, res, next) {
+   // 에러 코드
+   const errorInfo = customError[err];
+   console.log('errorInfo :', errorInfo);
+   
    // JSON 에러 메세지
    var msg = {
-      code:err.code,
-      message:err.message
+      code:err,
+      message:errorInfo.msg
    }
-   console.log(msg);
    // 상태코드
-   res.status(err.code).json(msg);
+   res.status(errorInfo.code).json(msg);
 }
