@@ -1,4 +1,4 @@
-var pool = require('./dbConnection');
+const pool = require('./dbConnection');
 
 console.log('커넥션 풀 ', pool);
 pool.getConnection(function (err, conn) {

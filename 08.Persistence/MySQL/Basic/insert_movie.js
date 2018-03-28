@@ -1,4 +1,4 @@
-var pool = require('./dbConnection');
+const pool = require('./dbConnection');
 
 pool.getConnection(function(err, conn) {
    var sql = 'INSERT INTO movies (title, director, year) VALUES ("인셉션", "크리스토퍼 놀란", 2010);';

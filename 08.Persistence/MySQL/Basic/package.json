@@ -10,6 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "async": "^2.1.2",
-    "mysql": "^2.12.0"
+    "mysql": "^2.15.0"
   }
 }

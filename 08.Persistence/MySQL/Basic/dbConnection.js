@@ -1,6 +1,6 @@
-var mysql = require('mysql');
+const mysql = require('mysql');
 
-var dbConfig = {
+const dbConfig = {
    host: 'localhost',
    user: 'root',
    password: '',
@@ -9,6 +9,6 @@ var dbConfig = {
    database: 'example'
 };
 
-var pool = mysql.createPool(dbConfig);
+const pool = mysql.createPool(dbConfig);
 
 module.exports = pool;

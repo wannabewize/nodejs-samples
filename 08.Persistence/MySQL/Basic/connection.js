@@ -1,5 +1,5 @@
-var mysql = require('mysql');
-var dbConfig = {
+const mysql = require('mysql');
+const dbConfig = {
    host: 'localhost',
    user: 'root',
    password: '',
@@ -7,15 +7,15 @@ var dbConfig = {
    database: 'example'
 };
 
-var conn = mysql.createConnection(dbConfig);
+const conn = mysql.createConnection(dbConfig);
 
-conn.connect(function (err) {
+conn.connect( (err) => {
    if (err) {
       console.error('error connecting: ', err);
       return;
    }
 
-   console.log(conn);
+   //console.log(conn);
    console.log('DB 연결 성공 ');
    // 연결 종료
    conn.end();
