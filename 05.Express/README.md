@@ -7,6 +7,7 @@ Express 예제
 - middleware : Express 서버와 미들웨어. 요청 분석
 - middleware_next : 연속된 미들웨어 사용하기
 - responses : 다양한 응답 처리 함수
+- async-middleware : 비동기 API를 사용하는 미들웨어 작성
 
 ## Routing
 라우팅 예제
