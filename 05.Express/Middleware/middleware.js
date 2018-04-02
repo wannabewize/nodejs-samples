@@ -1,5 +1,5 @@
 /**
- * 미들웨어와 Express 서버
+ * 미들웨어에서 요청 분석하기
  */
 const express = require('express');
 const app = express();
@@ -9,7 +9,7 @@ app.use( (req, res) => {
    console.log('path :', req.path);
    console.log('query :', req.query);
    console.log('method :', req.method);
-   // console.log('headers :', req.headers);
+   console.log('headers :', req.headers);
 
    res.send('Hello Express!');
 });

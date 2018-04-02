@@ -36,3 +36,9 @@ app.get('/status', (req, res) => {
 app.get('/', (req, res) => {
    res.sendFile(__dirname + '/index.html');
 });
+
+app.get('/header', (req, res) => {
+    res.append('name1', 'value1');
+    res.append('name2', 'value2');
+    res.end('Header Writing');
+});
