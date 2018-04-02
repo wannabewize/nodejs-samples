@@ -18,6 +18,7 @@ app.post('/single', upload.single('image'),(req, res) => {
     const image = req.file;
     if ( ! image ) {
         res.status(400).send({msg:'no image'});
+        return;
     }
 
     // 파일이 아닌 Text 데이터
@@ -37,6 +38,7 @@ app.post('/array', upload.array('image'), (req, res) => {
 
     if ( ! images ) {
         res.status(400).send({msg:'no images'});
+        return;        
     }
 
     // 파일이 아닌 Text 데이터
@@ -53,6 +55,7 @@ app.post('/fields', upload.fields([{name:'image1'}, {name:'image2'}]), (req, res
 
     if ( ! image1 || ! image2 ) {
         res.status(400).send({msg:'no image1, image2'});
+        return;        
     }
 
     // 파일이 아닌 Text 데이터
