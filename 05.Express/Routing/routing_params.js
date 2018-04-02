@@ -10,13 +10,13 @@ app.listen(3000, (err) => {
 });
 
 // 파라미터 1개
-app.get('/user/:id', function (req, res) {
+app.get('/user/:id',  (req, res) => {
    var userId = req.params.id;
    res.send('User ID ' + userId);
 });
 
 // 파라미터 2개
-app.get('/movies/:movieId/:actor', function (req, res) {
+app.get('/movies/:movieId/:actor', (req, res) => {
    var movieId = req.params.movieId;
    var actor = req.params.actor;
 
@@ -24,6 +24,6 @@ app.get('/movies/:movieId/:actor', function (req, res) {
 });
 
 // /user/:id 와 겹친다.
-app.get('/user/sample', function(req, res) {
+app.get('/user/sample', (req, res) => {
    res.send('GET /user/sample');
 });
