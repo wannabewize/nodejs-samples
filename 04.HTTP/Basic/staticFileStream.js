@@ -3,7 +3,7 @@
  */
 const http = require('http');
 const fs = require('fs');
-const path = 'movie/movie.mp4'
+const path = 'movie/movie.mp4';
 
 const contentType = 'video/mp4';
 

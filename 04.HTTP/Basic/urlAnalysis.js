@@ -7,6 +7,7 @@ const server = http.createServer( (req, res) => {
    let result = {};
 
    // URL 분석
+   console.log('req.url :', req.url);
    const parsed = url.parse(req.url, true);
    result.pathname = parsed.pathname
 
