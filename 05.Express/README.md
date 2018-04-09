@@ -7,7 +7,7 @@ Express 예제
 - middleware : Express 서버와 미들웨어. 요청 분석
 - middleware_next : 연속된 미들웨어 사용하기
 - responses : 다양한 응답 처리 함수
-- async-middleware : 비동기 API를 사용하는 미들웨어 작성
+- async-middleware : 비동기 API, Promise, Await를 이용한 미들웨어를 사용하는 미들웨어 작성
 
 ## Routing
 라우팅 예제
@@ -42,7 +42,3 @@ express-formidable을 이용한 멀티파트 요청 다루기. 임시 파일을 
 
 ### Multer
 Multer 를 이용한 파일 업로드 예제
-
-## AwaitExpress
-async/await와 Express
-- app.js : Promise, Await를 이용한 미들웨어
