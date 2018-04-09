@@ -1,14 +1,15 @@
 {
-  "name": "express-json-example",
+  "name": "json-examples",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "jsonParsing.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.18.2",
+    "express": "^4.16.3"
   }
 }

@@ -3,7 +3,10 @@
 ## JSON
 JSON 파싱, 요청과 응답
 
-## XML
+- jsonParsing : JSON 파싱
+- jsonRequest : JSON 요청 분석하기. HTTP 모듈과 Express 모듈
+- jsonResponse : JSON 응답 작성하기. HTTP 모듈과 Express 모듈
+
 
 ## Moviest
 

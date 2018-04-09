@@ -1,7 +1,8 @@
 /**
  * JSON 파싱
  */
-var fs = require('fs');
+
+const fs = require('fs');
 fs.readFile('./topSongs.json', function(err, data) {
    if ( err ) {
       console.error('JSON Parsing Errro', err);
