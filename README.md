@@ -53,21 +53,21 @@ Express 예제
 - Multipart : 멀티파트
 - AwaitExpresss : 미들웨어에서 promise/await 비동기 API 사용
 
-## 06.FrontEnd
-프론트 엔드
-
-- EJS
-- Pug
-- AJAX
-- Angular
-
-## 07.REST Service
+## 06.REST Service
 
 JSON, XML 요청/응답 예제
 
 ### RESTful
 
 REST 기반의 서비스 작성 예제
+
+## 07.FrontEnd
+프론트 엔드
+
+- EJS
+- Pug
+- AJAX
+- Angular
 
 ## 08.Persistence
 
