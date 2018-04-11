@@ -8,8 +8,17 @@
 
 <h1>Single Upload Test</h1>
 <form method="post" action="/single" enctype="multipart/form-data">
-    <input type="file" name="file">
-    <input type="text" name="title">
+    <input type="file" name="image"><br>
+    <input type="text" name="title"><br>
+    <input type="submit">
+</form>
+
+
+<h1>Array Upload Test</h1>
+<form method="post" action="/array" enctype="multipart/form-data">
+    <input type="file" name="image"><br>
+    <input type="file" name="image"><br>
+    <input type="text" name="title"><br>
     <input type="submit">
 </form>
 

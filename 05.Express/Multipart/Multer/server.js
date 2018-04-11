@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 });
 
 // image 이름으로 파일 하나 올리기
-app.post('/single', upload.single('image'),(req, res) => {
+app.post('/single', upload.single('image'),(req, res) => {    
     const image = req.file;
     if ( ! image ) {
         res.status(400).send({msg:'no image'});

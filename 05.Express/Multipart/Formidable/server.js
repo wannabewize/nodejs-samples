@@ -36,6 +36,7 @@ app.use(formidable({
 
 app.post('/upload', (req, res) => {
    // file 업로드 시 image로 전달
+   console.log('==body==\n',req.body);
    const imageFile = req.files.image;
    const text = req.fields.text;
    if ( !imageFile || !text ) {
@@ -77,10 +78,6 @@ app.post('/upload', (req, res) => {
 
 app.get('/list', (req, res) => {
    res.send({count:data.length, data : data});
-});
-
-app.get('/', (req, res) => {   
-   res.send('public/index.html');
 });
 
 app.listen(3000, err => {
