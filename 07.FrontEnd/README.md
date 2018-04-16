@@ -1,5 +1,11 @@
 # FrontEnd
 
+## HTML
+정적 파일과 코드를 이용해서 HTML 만들기
+
+- htmlFile : HTML과 CSS파일 제공 응답
+- htmlResponse : 코드로 HTML 만들기 
+
 ## EJS
 Express와 Template Engine EJS
 EJS : <http://www.embeddedjs.com>
