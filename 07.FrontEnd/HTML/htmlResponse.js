@@ -12,7 +12,6 @@ const data = [
 ];
 
 app.get('/', (req, res) => {
-
     let html = '';
     html += '<html>';
     html += '<head>';
