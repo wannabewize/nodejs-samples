@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-<script src="lib/jquery/dist/jquery.js"></script>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script>
    $(document).ready(function() {
       console.log('ready!');
@@ -13,7 +13,7 @@
       $.getJSON('/items', function(data, status, xhr) {
          console.log('status :', status);
          console.log('count :', data.count);
-         var items = data.data;
+         const items = data.data;
          console.log(items);
          for(item of items) {
             $("#balls").append('<li><img src="' + item.image + '" height="50px">' + item.title + '</li>');
