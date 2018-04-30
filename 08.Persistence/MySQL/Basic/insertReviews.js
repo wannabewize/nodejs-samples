@@ -38,7 +38,7 @@ pool.getConnection((err, conn) => {
                movie_id : movieId,
                review : item
             };
-            const insertSql = 'INSERT INTO review SET ?';
+            const insertSql = 'INSERT INTO reviews SET ?';
             conn.query(insertSql, review, (err, result) => {
                console.log(title + '에 리뷰 ' + review.review + ' 등록');
                if ( err ) {               

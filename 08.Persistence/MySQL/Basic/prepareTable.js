@@ -9,7 +9,11 @@ var conn = mysql.createConnection(dbConfig);
 
 // multiline string
 let sql = `
-drop table if exists movies;
+DELETE FROM if exists reviews;
+DELETE FROM if exists movies;
+
+DROP TABLE if exists movies;
+DROP TABLE if exists reviews;
 
 CREATE TABLE if not exists movies (
 	movie_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -18,13 +22,13 @@ CREATE TABLE if not exists movies (
 	year INT,
 	synopsis VARCHAR(255)
 );
-drop table if exists reviews;
 
-CREATE TABLE if not exists review (
+CREATE TABLE if not exists reviews (
 	movie_id int,
 	review VARCHAR(255),
 	FOREIGN KEY(movie_id) REFERENCES movies(movie_id)
-);`;
+);
+`;
 
 conn.query(sql, (err, result) => {
    if ( err ) {
