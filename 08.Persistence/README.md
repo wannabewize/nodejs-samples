@@ -3,6 +3,13 @@
 ## MySQL
 MySQL
 
+### Connect
+
+- connection : 데이터베이스 커넥션
+- connectionModule, connectionPool : 데이터베이스 커넥션 풀 모듈과 사용하기
+- connectionPoolError : 커넥션 풀에서 오류(커넥션 반환 안함)
+- connectionPromiseModule, connectionPromise : Promise 기반의 모듈, 커넥션 풀 모듈과 사용하기
+
 ### Basic
 
 #### 데이터베이스 준비
@@ -11,8 +18,6 @@ MySQL
 
 #### 예제
 
-- connection : 데이터베이스 커넥션
-- dbConnection, connectionPool : 데이터베이스 커넥션풀. 
 - insert_movie : 영화 데이터 추가. Placeholder 사용 
 - select_movies : SELECT로 데이터 얻기
 - insert_review : 영화와 리뷰. 리뷰 추가

@@ -1,7 +1,6 @@
-const pool = require('./dbConnection');
+const pool = require('./connectionModule');
 
-console.log('커넥션 풀 ', pool);
-pool.getConnection(function (err, conn) {
+pool.getConnection( (err, conn) => {
    if (err) {
       console.error('error connecting: ', err);
       return;

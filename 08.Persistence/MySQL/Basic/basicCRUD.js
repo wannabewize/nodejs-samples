@@ -5,18 +5,18 @@ const dbConfig = {
    password: '',
    port: 3306,
    database: 'example',
-   multipleStatements : true
+   multipleStatements : true // drop, create 쿼리를 모두 실행하기 위한 옵션
 };
 
 var conn = mysql.createConnection(dbConfig);
 
 console.log('Database CRUD Basic');
 // prepareTable();
-// tryInsert1();
+tryInsert1();
 // tryInsert2();
 // tryUpdate1();
 // tryUpdate2();
-tryDelete();
+// tryDelete();
 
 function prepareTable() {
    const sql = 'drop table if exists movies; create table movies (movie_id int primary key auto_increment, title varchar(50), director varchar(50), year int);';
