@@ -2,7 +2,7 @@ const pool = require('./dbConnection');
 
 pool.getConnection(function(err, conn) {
    var sql = 'INSERT INTO movies (title, director, year) VALUES ("인셉션", "크리스토퍼 놀란", 2010);';
-   conn.query(sql,function(err, results) {
+   conn.query(sql, (err, results) => {
       if ( err ) {
          console.error('INSERT Error', err);
       }
@@ -12,7 +12,7 @@ pool.getConnection(function(err, conn) {
    });
       
    var sql2 = 'INSERT INTO movies (title, director, year) VALUES (?, ?, ?);';
-   conn.query(sql2, ['인터스텔라', '크리스토퍼 놀란', 2015],function(err, results) {
+   conn.query(sql2, ['인터스텔라', '크리스토퍼 놀란', 2015], (err, results) => {
       if ( err ) {
          console.error('INSERT Error', err);
       }
@@ -27,7 +27,7 @@ pool.getConnection(function(err, conn) {
       year : 2000
    };
    var sql3 = 'INSERT INTO movies SET ?';
-   conn.query(sql3, data, function(err, results) {
+   conn.query(sql3, data, (err, results) => {
       if ( err ) {
          console.error('INSERT Error', err);
       }

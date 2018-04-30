@@ -3,14 +3,14 @@
  */
 const pool = require('./dbConnection');
 
-pool.getConnection(function(err, conn) {
+pool.getConnection((err, conn) => {
    if ( err ) {
       console.error('Error', err);
       return;
    }
    
    var sql = 'SELECT * FROM movies';
-   conn.query(sql, function(err, results) {
+   conn.query(sql, (err, results) => {
       if ( err ) {
          console.error('Error', err);
          return;

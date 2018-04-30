@@ -5,7 +5,7 @@
 const async = require('async');
 const pool = require('./dbConnection');
 
-pool.getConnection(function(err, conn) {
+pool.getConnection((err, conn) => {
    if ( err ) {
       console.error('Error', err);
       return;
@@ -13,7 +13,7 @@ pool.getConnection(function(err, conn) {
    
    // 임의의 1개 로우 선택
    const sql = 'SELECT movie_id, title FROM movies ORDER BY RAND() LIMIT 1;'
-   conn.query(sql, function(err, result) {
+   conn.query(sql, (err, result) => {
       if ( err ) {
          console.error('Error', err);
          return;
@@ -33,13 +33,13 @@ pool.getConnection(function(err, conn) {
    
       // async.each를 이용한 3개의 리뷰를 등록   
       async.each(reviews,
-         function(item, callback) {
+         (item, callback) => {
             const review = {
                movie_id : movieId,
                review : item
             };
             const insertSql = 'INSERT INTO review SET ?';
-            conn.query(insertSql, review, function(err, result) {
+            conn.query(insertSql, review, (err, result) => {
                console.log(title + '에 리뷰 ' + review.review + ' 등록');
                if ( err ) {               
                   return callback(err);
@@ -47,7 +47,7 @@ pool.getConnection(function(err, conn) {
                callback();
             });         
          },
-         function(err) { // async.each의 최종 콜백
+         (err) => { // async.each의 최종 콜백
             if ( err ) {
                console.error('리뷰 등록 에러 ', err);
             }
