@@ -9,9 +9,6 @@ var conn = mysql.createConnection(dbConfig);
 
 // multiline string
 let sql = `
-DELETE FROM if exists reviews;
-DELETE FROM if exists movies;
-
 DROP TABLE if exists movies;
 DROP TABLE if exists reviews;
 
