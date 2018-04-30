@@ -15,7 +15,7 @@ pool.getConnection( (err, conn) => {
       
       var movieId = result[0].movie_id;
       
-      var sql = 'SELECT movies.title, reviews.review FROM movies, reviews WHERE movies.movie_id = review.movie_id';
+      var sql = 'SELECT movies.title, reviews.review FROM movies, reviews WHERE movies.movie_id = reviews.movie_id';
       conn.query(sql, (err, results) => {
          if ( err ) {
             console.error('Error', err);
