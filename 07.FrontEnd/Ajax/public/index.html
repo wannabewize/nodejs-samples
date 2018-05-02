@@ -27,7 +27,8 @@
          type : 'put',
          data : 'name1=value1&name2=value2',
          success : function(data) {
-            console.log('ajax put request/response');
+            console.log('ajax put request/response', data);
+            alert(data.msg);
          }
       });
    }
@@ -39,6 +40,11 @@
 <h1>Balls</h1>
 <ul id="balls">
 </ul>
+
+<div>
+   <button onclick="sendPutRequest()">Put 요청 테스트</button>
+</div>
+
 </body>
 
 </html>

@@ -5,8 +5,6 @@ const app = express();
 
 // 정적 파일 서비스
 app.use('/image', express.static(__dirname + '/../../Resources/images'));
-// js 파일
-app.use('/lib', express.static(__dirname + '/public/bower_components'));
 
 app.use(bodyParser.urlencoded({extended : false}));
 
@@ -27,7 +25,7 @@ app.get('/items', (req, res) => {
 app.put('/items', (req, res) => {
    console.log('put request');
    console.log('request body :', req.body);
-   res.send(data);
+   res.send({msg: 'Put Request success'});
 });
 
 // index.html
