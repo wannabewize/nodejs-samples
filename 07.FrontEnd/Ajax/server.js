@@ -28,6 +28,13 @@ app.put('/items', (req, res) => {
    res.send({msg: 'Put Request success'});
 });
 
+app.delete('/items/:id', (req, res) => {
+   console.log('delete request');
+   console.log('request body :', req.body);
+   res.send({msg: 'Delete Request success'});
+});
+
+
 // index.html
 app.get('/', (req, res) => {
    res.sendFile(__dirname + '/public/index.html');

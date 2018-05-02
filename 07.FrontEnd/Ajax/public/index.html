@@ -32,6 +32,16 @@
          }
       });
    }
+   function sendDeleteRequest() {
+      $.ajax({
+         url : '/items/1234',
+         type : 'delete',         
+         success : function(data) {
+            console.log('ajax delete request/response', data);
+            alert(data.msg);
+         }
+      });
+   }   
 </script>
 
 </head>
@@ -43,6 +53,7 @@
 
 <div>
    <button onclick="sendPutRequest()">Put 요청 테스트</button>
+   <button onclick="sendDeleteRequest()">Delete 요청 테스트</button>
 </div>
 
 </body>
