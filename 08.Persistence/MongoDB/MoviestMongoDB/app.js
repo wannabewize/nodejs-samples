@@ -7,10 +7,6 @@ var app = express();
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended: false }))
 
-// EJS
-app.set('view engine', 'ejs');
-app.set('views', __dirname + '/views');
-
 app.use(movieRouter);
 
 // 여기까지 오면 - 에러
