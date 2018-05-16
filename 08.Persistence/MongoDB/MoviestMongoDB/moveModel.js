@@ -41,6 +41,10 @@ class MovieModel {
    getMovieDetail(id) {
       return db.collection('movies').findOne({_id:new ObjectId(id)})
    }
+
+   addMovie(title, director, year) {
+       // TODO
+   }
 }
 
 module.exports = new MovieModel()

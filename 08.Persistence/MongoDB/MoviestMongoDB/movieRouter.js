@@ -92,8 +92,16 @@ async function showMovieDetail(req, res, next) {
 	}	
 }
 
-function addMovie(req, res) {
+function addMovie(req, res, next) {
    // TODO : 새 영화 추가
+
+   // 바디 파서
+   let title = req.body.title;
+
+   // 모델에 호출
+   movieModel.addMovie()
+
+   // 결과
    res.send('TODO : 새 영화 추가');
 }
 
