@@ -1,7 +1,7 @@
 var db;
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/moviest';
-var ObjectId = require('mongodb').ObjectID;
+var ObjectID = require('mongodb').ObjectID;
 
 MongoClient.connect(url, function (err, database) {
    if (err) {
@@ -39,7 +39,7 @@ class MovieModel {
    }
 
    getMovieDetail(id) {
-      return db.collection('movies').findOne({_id:new ObjectId(id)})
+      return db.collection('movies').findOne({_id:new ObjectID(id)})
    }
 
    addMovie(title, director, year) {

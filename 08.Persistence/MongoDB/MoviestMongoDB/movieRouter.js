@@ -4,7 +4,7 @@ var fs = require('fs');
 var db;
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/moviest';
-const movieModel = require('./moveModel');
+const movieModel = require('./movieModel');
 
 MongoClient.connect(url, function (err, database) {
    if (err) {

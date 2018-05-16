@@ -2,7 +2,7 @@
 // Mongoose를 이용한 기본 CRUD
 //
 
-var Movie = require('./model').Movie;
+const Movie = require('./model').Movie;
 
 //
 // 실행 순서
