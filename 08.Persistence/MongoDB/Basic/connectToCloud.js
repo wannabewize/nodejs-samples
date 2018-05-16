@@ -1,10 +1,15 @@
 const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27017/example';
 
-let db;
+const fs = require('fs');
+const urlFile = fs.readFileSync('./mongoCloudUrl.json');
+const url = JSON.parse(urlFile).url
+
+var db;
 
 MongoClient.connect(url, (err, database) => {
   console.log("MongoDB 연결 성공");
   
   db = database;
 });
+
+
