@@ -1,10 +1,10 @@
 var express = require('express');
 var fs = require('fs');
 
-var db;
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/moviest';
 const movieModel = require('./movieModel');
+var db;
 
 MongoClient.connect(url, function (err, database) {
    if (err) {

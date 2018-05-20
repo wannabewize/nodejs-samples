@@ -1,7 +1,8 @@
-var db;
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/moviest';
 var ObjectID = require('mongodb').ObjectID;
+
+var db;
 
 MongoClient.connect(url, function (err, database) {
    if (err) {
