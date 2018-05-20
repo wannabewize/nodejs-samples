@@ -6,13 +6,56 @@ MongoClient.connect(url, (err, db) => {
    if (err) {
       console.error('MongoDB 연결 실패', err);
       return;
-   }   
-   // 다수의 도큐먼트 추가
-   executeFindExample(db);
+   }
+   // doFindOneExample(db);
+   doFindWithCursor(db)
+//    doFindExample(db);
 });
 
 
-async function executeFindExample(db) {
+
+async function doFindOneExample(db) {
+   // 콜렉션
+   let movies = db.collection('movies');   
+   
+   movies.findOne({director:'크리스토퍼 놀란'}, (err, doc) => {
+      if ( err ) {
+         return console.log('findOne Error :', err);
+      }
+      console.log('FindOne Result : ', doc);
+   });
+
+   movies.findOne({director:'크리스토퍼 놀란'}).then( doc => {
+      console.log('FindOne.then Result :', doc);
+   }).catch( err => {
+      console.log('FindOne.catch :', err);
+   });
+
+   try {
+      let doc = await movies.find({director: '크리스토퍼 놀란'})
+      console.log('await Find result :', doc);
+   }
+   catch ( err ) {
+      console.log('await Find Error :', err);
+   }
+}
+
+function doFindWithCursor(db) {
+   // 콜렉션
+   let movies = db.collection('movies');
+
+   const cursor = movies.find();
+   cursor.count( (err, result) => {
+       console.log('Cursor.count : ', result);
+   });
+
+   cursor.each( (err, doc) => {
+      console.log('document : ', doc);
+   });
+}
+
+
+async function doFindExample(db) {
    // 콜렉션
    let movies = db.collection('movies');
    
