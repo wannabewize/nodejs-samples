@@ -32,11 +32,11 @@ async function doFindOneExample(db) {
    });
 
    try {
-      let doc = await movies.find({director: '크리스토퍼 놀란'})
-      console.log('await Find result :', doc);
+      let doc = await movies.findOne({director: '크리스토퍼 놀란'})
+      console.log('await FindOne result :', doc);
    }
    catch ( err ) {
-      console.log('await Find Error :', err);
+      console.log('await FindOne Error :', err);
    }
 }
 
