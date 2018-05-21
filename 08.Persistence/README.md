@@ -24,7 +24,6 @@ MySQL
 - select_reviews : 영화의 리뷰 얻기
 - basicCRUD : 기본CRUD
 
-
 ### Sequelize
 
 도큐먼트 보기 : [링크](http://docs.sequelizejs.com)
@@ -99,10 +98,9 @@ http://127.0.0.1:3000/items?page=2&count=10&keyword=1
 > db.movies.find()
 ````
 
-- model : 모델과 스키마
-- crud : 모델을 이용한 CRUD. 
+- moviest, movieModel : 모델을 이용한 기본 CRUD. 
+- errors : 스키마와 모델, 모델 생성시 에러 발생 경우
 - method : 스키마에 정의하는 Instance Method, Static Method
-
 
 ### MongoosePostReply
 

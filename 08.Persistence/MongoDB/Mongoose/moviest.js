@@ -2,7 +2,7 @@
 // Mongoose를 이용한 기본 CRUD
 //
 
-const Movie = require('./model').Movie;
+const Movie = require('./movieModel');
 
 //
 // 실행 순서
@@ -11,9 +11,9 @@ const Movie = require('./model').Movie;
 // 3. 데이터 수정
 // 4. 데이터 삭제
 
-saveInitialData();
+// saveInitialData();
 // findData();
-// modifyData();
+modifyData();
 // removeData();
 
 function resolved(result) {
@@ -27,7 +27,7 @@ function rejected(err) {
 async function saveInitialData() {
     // Callback Based
     var avata = new Movie({ title: '인터스텔라', director: '크리스토퍼 놀란', year: 2014 });
-    avata.save(function (err, product, numAffected) {
+    avata.save( (err, product, numAffected) => {
         if (err) {
             console.error('인터스텔라 저장 에러 :', err);
             return;

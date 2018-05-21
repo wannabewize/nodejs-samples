@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var url = 'mongodb://localhost:27017/mongoose';
+var url = 'mongodb://localhost:27017/moviest';
 mongoose.connect(url);
 
 var db = mongoose.connection;
@@ -19,6 +19,6 @@ var MovieScheme = mongoose.Schema({
 });
 
 // movies 콜렉션으로 생성
-module.exports.Movie = mongoose.model('Movie', MovieScheme);
+module.exports = mongoose.model('Movie', MovieScheme);
 
 
