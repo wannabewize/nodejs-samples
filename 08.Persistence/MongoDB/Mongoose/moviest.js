@@ -39,9 +39,9 @@ async function saveInitialData() {
     // Promise Based
     // notDefined는 스키마에 정의된 항목이 아니다. - 저장 안됨
     const starwars = new Movie({ title: '스타워즈7', director: 'JJ 에이브럼스', year: 2015, notDefined: true });
-    starwars.save().then(function (product) {
+    starwars.save().then( product => {
         console.log('스타워즈 저장 성공 : ', product);
-    }, function rejected(err) {
+    }).catch( err => {
         console.log('Save Rejected : ', err);
     });
 
