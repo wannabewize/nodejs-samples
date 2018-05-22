@@ -1,6 +1,8 @@
-# Socket.IO
+# Realtime
 
-## Connection
+## Socket.IO
+
+### Connection
 
 기본 연결 예제. 연결되면 io 서버에는 connection 이벤트 발생, 클라이언트에는 connect 이벤트 발생
 
