@@ -29,6 +29,7 @@ socket.connect({port : port, host : ip}, () => {
    
    socket.on('close', () => {
       console.log('Socket Close Event');
+      process.exit();
    });
       
 })

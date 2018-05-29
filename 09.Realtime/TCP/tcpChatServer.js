@@ -1,69 +1,56 @@
 const net = require('net');
 
 var clientList = [];
-// 클라이언트 목록에서 소켓을 이용해서 클라이언트 정보 찾기   
-function findClient(socket) {
-   for(var i = 0 ; i < clientList.length ; i++ ) {
-      var client = clientList[i];
-      if ( client.socket == socket ) {
-         return client;
-      }
-   }
-   console.error('Server Error!','Can not find client');
-   return null;
-}
 
 var server = net.createServer( socket => {
    // Connection Event
    console.log('Remote Address : ', socket.remoteAddress);
    
-   // 클라이언트와 접속한 소켓을 채팅 클라이언트 목록에 추가
-   var nickname = 'Guest' + Math.floor(Math.random()*100);
-   clientList.push({nickname:nickname, socket:socket});
-   
    socket.write('Welcome to TCP Chat Service, ' + nickname + '\n');
    socket.write('대화명 변경 : \\rename [NAME]\n');
    socket.write('채팅방 종료 : \\exit\n');   
 
-   socket.on('data', data => {
-      var sender = findClient(socket);      
+   // 임시 닉네임 생성
+
+   var nickname = 'Guest' + Math.floor(Math.random()*100);
+   clientList.push(socket);
+
+   socket.on('data', (data) => {
+         console.log('socket is nil?', !socket)
       var message = data.toString('UTF-8');
-      
+
       if ( message.trim() == '\\exit' ) {
-         sender.socket.end();
+         socket.end();
          return;
       }
       else if ( message.indexOf('\\rename') != -1 ) {
          var newNickName = message.split(' ')[1];
          
-         message = sender.nickname + ' change nickname ' + newNickName;
+         message = nickname + ' change nickname ' + newNickName;
          console.log(message);
                   
-         sender.nickname = newNickName;
+         nickname = newNickName;
          return;         
       }
       else {
-         console.log(sender.nickname + ' write ' + message);   
-         message = sender.nickname + ' : ' + message;
+         console.log(nickname + ' write ' + message);   
+         message = nickname + ' : ' + message;
       }
                   
       // 채팅 메세지를 모든 클라이언트 소켓에 전달
       for(var client of clientList) {
-         var socket = client.socket;
          // 글 작성자에게는 보내지 않는다.
-         if ( socket != sender.socket )      
-            socket.write(message);
+         if ( socket != client )      
+         client.write(message);
       };
    });
 
    socket.on('end', () => {
-      console.log('connection end')
       // 소켓 목록에서 삭제
-      var client = findClient(socket);
-      var index = clientList.indexOf(client);
+      var index = clientList.indexOf(socket);
       clientList.splice(index, 1);
       
-      console.log(client.nickname + "님이 채팅방을 떠났습니다.");
+      console.log(nickname + "님이 채팅방을 떠났습니다.");
    });
 });
 
