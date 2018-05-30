@@ -29,7 +29,7 @@ app.use( (req, res) => {
 	res.cookie('last',last);			
 
 	// 최초 방문 날짜를 기록하는 since 쿠키	
-	const since = req.cookies.since;
+	let since = req.cookies.since;
 	if (! since ) {
 		since = last;
 	}
