@@ -19,12 +19,13 @@ const secretKey = 'IUakstp'
 const user = {
    id : 'iu',
    password : '1234',
-   name : '아이유'
+   name : '아이유',
+   instagram : 'https://www.instagram.com/dlwlrma'
 }
 
 function handleLogin(req, res) {
    const id = req.body.id;
-   const pw = req.body.pw;
+   const pw = req.body.password;
 
    // 로그인 성공
    if ( id === user.id && pw === user.password ) {

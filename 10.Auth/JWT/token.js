@@ -21,7 +21,6 @@ const option = {
 const token = jwt.sign(payload, secretKey, option);
 console.log('token :', token);
 
-
 //
 // 토큰 검사. 디코딩
 // jwt.verify(token, secretOrPublicKey, [options, callback])
@@ -39,7 +38,7 @@ jwt.verify(token, secretKey, (err, decoded) => {
 setTimeout( () => {
    jwt.verify(token, secretKey, (err, decoded) => {
       if ( err ) {
-         console.error('Verify 10sec error :', err);
+         console.error('Verify 10sec error');
          return;
       }
       console.log('Verify 10sec success :', decoded);
