@@ -6,12 +6,11 @@ app.use(session({
    secret: 'Secret Key',
    resave: false,
    saveUninitialized: false
-   //cookie:{maxAge:3000} // 쿠키의 maxAge를 이용해서 세션 유효기간 설정. 3초
+   // ,cookie:{maxAge:3000} // 쿠키의 maxAge를 이용해서 세션 유효기간 설정. 3초
 }));
 
 // 파비콘 무시
-app.use('/favicon.ico', function () {
-});
+app.use('/favicon.ico',  () => {});
 
 app.use(function (req, res) {
    // 세션 ID

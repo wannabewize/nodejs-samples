@@ -9,11 +9,10 @@ app.use(session({
    secret:'Secret Key'})
 );
 
-app.use(express.static('./public'));
-app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:false}));
 
 app.get('/', (req, res) => {
-   res.sendFile(__dirname + '/public/index.html');
+   res.sendFile(__dirname + '/index.html');
 });
 
 app.post('/login', handleLogin);

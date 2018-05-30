@@ -1,12 +1,13 @@
-var express = require('express');
-var session = require('express-session');
-var MongoStore = require('connect-mongo')(session);
+const express = require('express');
+const session = require('express-session');
+const MongoStore = require('connect-mongo')(session);
 
-var app = express();
-var sessionStoreOptions = {
-   url: 'mongodb://localhost:27017/session',
-   ttl : 3 * 1000,   // 세션 유효기간 3초
-   autoRemoveInterval : 1 // 1분
+const app = express();
+const sessionStoreOptions = {
+   url: 'mongodb://localhost:27017/session'
+   // ,ttl : 3   // 세션 유효기간 초 단위. 3초
+   // ,autoRemove : 'interval' // 주기적으로 제거
+   // ,autoRemoveInterval: 1 // 분 단위
 };
 app.use(session({
    secret: 'Secret Key',
@@ -16,25 +17,25 @@ app.use(session({
 }));
 
 // 파비콘 무시
-app.use('/favicon.ico', function () {
+app.use('/favicon.ico', () => {
 });
 
-app.use(function (req, res) {
+app.use( (req, res) => {
    console.log('req.session', req.session);
    // 세션 ID
-   var sessionID = req.sessionID;
+   const sessionID = req.sessionID;
    console.log('session id :', sessionID);
 
    // 방문 횟수
    console.log('sessionVisit : ', req.session.sessionVisit);
    if (req.session.sessionVisit)
       req.session.sessionVisit = parseInt(req.session.sessionVisit) + 1;
-   else
+   else // 방문한 적이 없으면 1로 초기화
       req.session.sessionVisit = 1;
 
    // 마지막 방문 날짜
-   var now = new Date();
-   var last = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
+   const now = new Date();
+   const last = now.getFullYear() + '.' + (now.getMonth() + 1) + '.' + now.getDate();
    req.session.sessionLast = last;
 
    // 첫 방문 날짜

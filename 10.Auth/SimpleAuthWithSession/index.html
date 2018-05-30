@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>Simple Auth</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+   <div>
+      <h1>Login</h1>
+      <p>User ID : iu, Password : 1234</p>
+      <input type="text" id="userId" placeholder="User ID">
+      <input type="password" id="userPw" placeholder="Password">
+      <input type="button" onclick="login()" value="Login">
+      <input type="button" onclick="logout()" value="Logout">
+      <div>
+         <span>Login Result :</span>
+         <span id="login-result"></span>
+      </div >
+      
+   </div>
+   <div>
+      <h1>Public Page</h1>
+      <input type="button" class="btn btn-secondary" onclick="showPublicInfo()" value="Show Public Info">
+      <div id="public-info"></div>
+  </div>
+  <div>
+      <h1>Personal Page</h1>
+      <input type="button" class="btn btn-secondary" onclick="showPrivateInfo()" value="Show Private Info">
+      <div id="private-info"></span>
+  </div>   
+
+
+   <script>
+      $(document).ready(function () {
+         console.log('ready!');
+      });
+
+      function login() {
+         var id = $("#userId").val();
+         var pw = $("#userPw").val();
+
+         $.ajax({
+            url: '/login',
+            type: 'post',
+            data: `id=${id}&password=${pw}`
+         }).done((data) => {
+            // 로그인 성공
+            alert('로그인 성공');
+            $("#login-result").text(data);
+         }).fail((err) => {
+            // 로그인 실패            
+            alert('로그인 실패');
+            $("#login-result").text(err.statusText);
+         });
+      }
+
+      function logout() {
+         $.ajax({
+            url: '/logout',
+            type: 'delete'
+         }).done((data) => {
+            // 로그아웃 성공
+            $("#login-result").text("로그아웃 성공");
+         }).fail((err) => {
+            // 로그아웃 실패            
+            $("#login-result").text("로그아웃 실패");
+         });
+      }
+      
+      function showPublicInfo() {
+         $.getJSON('/public').done( data => {
+            console.log('/public success : ', data);
+            $('#public-info').text(data.message);
+         }).fail(err => {
+            console.log('/public fail : ', err);
+            alert('public info fail');
+         });
+      }
+
+      function showPrivateInfo() {
+         $.getJSON('/private').done( data => {
+            console.log('/private success : ', data);
+            $('#private-info').text( JSON.stringify(data) );            
+         }).fail(err => {
+            console.log('/private fail : ', err);
+            $('#private-info').text('');
+            alert('정보 얻기 실패 :' + err.statusText);
+         });
+      }      
+      </script>
+</body>
+</html>
