@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Firebase Auth</title>
+
+   <script src="https://www.gstatic.com/firebasejs/5.0.4/firebase.js"></script>
+   <script src="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.js"></script>
+   <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.5.1/firebaseui.css" />
+
+   <script>
+      // Initialize Firebase
+      var config = {
+         apiKey: "AIzaSyDRwc_8ZK3ysHN6ROTvnaUTaEoE-VfSvUA",
+         authDomain: "example-1cde9.firebaseapp.com",
+         databaseURL: "https://example-1cde9.firebaseio.com",
+         projectId: "example-1cde9",
+         storageBucket: "",
+         messagingSenderId: "503612801018"
+      };
+      firebase.initializeApp(config);
+
+      var ui = new firebaseui.auth.AuthUI(firebase.auth());
+
+      var uiConfig = {
+         callbacks: {
+            signInSuccessWithAuthResult: function (authResult, redirectUrl) {
+               // User successfully signed in.
+               // Return type determines whether we continue the redirect automatically
+               // or whether we leave that to developer to handle.
+               return true;
+            },
+            uiShown: function () {
+               // The widget is rendered.
+               // Hide the loader.
+               document.getElementById('loader').style.display = 'none';
+            }
+         },
+         // Will use popup for IDP Providers sign-in flow instead of the default, redirect.
+         signInFlow: 'popup',
+         signInSuccessUrl: '<url-to-redirect-to-on-success>',
+         signInOptions: [
+            // Leave the lines as is for the providers you want to offer your users.
+            firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+            firebase.auth.FacebookAuthProvider.PROVIDER_ID,
+            firebase.auth.TwitterAuthProvider.PROVIDER_ID,
+            firebase.auth.GithubAuthProvider.PROVIDER_ID,
+            firebase.auth.EmailAuthProvider.PROVIDER_ID,
+            firebase.auth.PhoneAuthProvider.PROVIDER_ID
+         ],
+         // Terms of service url.
+         tosUrl: '<your-tos-url>'
+      };
+      ui.start('#firebaseui-auth-container', uiConfig);      
+   </script>
+</head>
+
+<body>
+
+   <h1>Welcome to My Awesome App</h1>
+   <div id="firebaseui-auth-container"></div>
+   <div id="loader">Loading...</div>
+
+</body>
+
+</html>
