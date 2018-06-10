@@ -1,17 +1,17 @@
 const AWS = require('aws-sdk');
 
-AWS.config.region = 'S3 경로 중 region 부분 입력';
-AWS.config.accessKeyId = 'ACCESS-KEY-ID';
-AWS.config.secretAccessKey = 'ACCESS-KEY';
+// ~/.aws/credential 작성. https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html
+var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+AWS.config.credentials = credentials;
 
 // Listup All Files
-var s3 = new AWS.S3();
+const s3 = new AWS.S3();
 console.log('endpoint : ', s3.endpoint);
 console.log('href', s3.endpoint.href);
 
 // 버킷 내 객체 목록
-var bucketName = 's3-examples';
-s3.listObjects({Bucket: bucketName}, function(err, data) {
+const bucketName = 's3-examples';
+s3.listObjects({Bucket: bucketName}, (err, data) => {
    console.log('== List Object');
 	if ( err ) {
 		console.error('S3 listObjects Error', err);
@@ -19,7 +19,7 @@ s3.listObjects({Bucket: bucketName}, function(err, data) {
 	} 
 	
 	var items = data.Contents;
-	items.forEach(function(item) {
+	items.forEach( (item) => {
 		// console.log('item : ', item);
       const path1 = s3.endpoint.href + '/' + bucketName + '/' + item.Key;
       const path2 = 'http://' + s3.endpoint.host + '/' + bucketName + '/' + item.Key;		
@@ -30,7 +30,7 @@ s3.listObjects({Bucket: bucketName}, function(err, data) {
 
 // 파일 확인, 메타 데이터
 var key = 'posters/avata.jpg';
-s3.headObject({Bucket:bucketName, Key:key}, function(err, data) {
+s3.headObject({Bucket:bucketName, Key:key}, (err, data) => {
    console.log('== HeadObject');
 	if ( err && err.statusCode == 404 ) {
 		console.log('Not Found');
