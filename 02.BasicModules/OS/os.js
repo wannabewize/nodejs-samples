@@ -1,4 +1,4 @@
-var os = require('os');
+const os = require('os');
 
 console.log('tmpdir : ', os.tmpdir());
 console.log('homedir : ', os.homedir());
@@ -14,7 +14,7 @@ console.log('release : ', os.release());
 console.log('uptime : ', os.uptime());
 console.log('loadavg : ', os.loadavg());
 
-console.log('totlamem : ', os.totalmem());
+console.log('totalmem : ', os.totalmem());
 console.log('freemem : ', os.freemem());
 
 console.log('cpus : ', os.cpus());

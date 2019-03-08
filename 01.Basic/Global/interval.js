@@ -8,6 +8,8 @@ var count = 5;
 
 function sayHello(who) {
    console.log('Hello', who);   
+
+   // count 번 실행 후 반복 종료
    if ( --count <= 0 )
       clearInterval(repeat);
 }

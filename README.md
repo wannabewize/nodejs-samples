@@ -1,10 +1,17 @@
 # Node-Samples
 Node.js 예제 모음
 
-## 01.BasicModules
+## 01.Basic
+
+Node.js 기본
+
+- Module : 모듈 로딩과 모듈 내 클래스, 함수 사용 방법
+- Global : 전역 객체
+
+## 02.BasicModules
+
 기본 모듈 예제
 
-- Global : 전역 객체 예제
 - Util : 유틸 모듈
 - Event : 이벤트 모듈
 - Buffer : 버퍼
@@ -12,7 +19,6 @@ Node.js 예제 모음
 - FileSystem : 파일 시스템 다루기
 - Networking : 네트워크에 관련된 모듈
 - Cluster
-- Timer : 타이머
 - readline, os 모듈 
 
 ## 02.CustomModule
