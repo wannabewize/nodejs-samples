@@ -4,6 +4,19 @@
 ## OS
 운영체제 정보 얻기
 
+- os : 운영체제 정보
+
+## Path
+경로 다루기
+
+- path : 경로 정보 얻기, 경로 만들기
+
+## FileSystem
+파일 시스템 모듈
+
+- sync_async : 동기/비동기식 API 특징
+- file_read : 파일 읽기
+
 ## Util
 Util 모듈
 
@@ -40,8 +53,7 @@ Util 모듈
 - stream-pipe
 - stream_stdin_stdout
 
-## FileSystem
-파일 시스템 모듈
+
 
 ## Networking
 네트워크에 관련된 모듈
