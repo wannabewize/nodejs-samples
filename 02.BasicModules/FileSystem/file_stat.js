@@ -1,12 +1,10 @@
-var fs = require('fs');
+const fs = require('fs');
 
-var path1 = __dirname;
-var path2 = './song.txt';
-
-
+// 디렉토리 정보
+const path1 = __dirname;
 console.log('== fs.statSync ==');
 try {
-   var stats = fs.statSync(path1);
+   const stats = fs.statSync(path1);
    console.log('isDirectory : ', stats.isDirectory());
    console.log('isFile : ', stats.isFile());
    console.log('isSocket : ', stats.isSocket());
@@ -20,8 +18,10 @@ try {
 }
 
 
-// 비동기
-fs.stat(path2, function(err, stats) {
+// 파일 정보 얻기 - 비동기
+const path2 = './song.txt';
+
+fs.stat(path2, (err, stats) => {
    console.log('== fs.stat ==');
    if ( err ) {
       console.log('파일 상태 읽기 에러 :', err);
