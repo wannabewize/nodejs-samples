@@ -1,11 +1,16 @@
-var fs = require('fs');
+const fs = require('fs');
 
-fs.mkdirSync('test');
+// fs.mkdirSync('test');
 
 // test 폴더 감시
-var watcher = fs.watch('test', function(event, filename) {
-   console.log('파일 ', filename, ' 이벤트 : ' + event);
-});
+try {
+   var watcher = fs.watch('test', (event, filename) => {
+      console.log('파일 ', filename, ' 이벤트 : ' + event);
+   });
+}
+catch ( err ) {
+   console.log('감시 실패 :', err);
+}
 
 setTimeout(() => {
    console.log('파일 생성');

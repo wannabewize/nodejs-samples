@@ -1,5 +1,6 @@
 const fs = require('fs');
 
+// 디렉토리 생성
 fs.mkdir('test', err => {
    if ( err ) {
       console.error('mkdir error : ', err);
@@ -12,6 +13,7 @@ fs.mkdir('test', err => {
    fs.writeFileSync('./test/text.txt', 'Hello World');
    console.log('test 디렉토리 내 파일 생성');
    
+   // 디렉토리 삭제
    fs.rmdir('test', err => {
       if ( err ) {
          console.log('비어있지 않은 디렉토리 삭제 실패');
@@ -30,5 +32,5 @@ fs.mkdir('test', err => {
       else {
          console.error('에러 : 비어있지 않은 디렉토리 test 삭제');
       }
-   })
+   });
 });

@@ -16,6 +16,19 @@
 
 - sync_async : 동기/비동기식 API 특징
 - file_read : 파일 읽기
+- file_read_error : 파일 읽기 에러 처리
+- file_read_fd : 파일 디스크립터를 이용해서 파일 읽기
+- file_access : 파일 접근 검사
+- file_stat : 파일 상태와 정보 얻기
+- file_write : 파일에 내용 쓰기
+- file_append : 파일 내용 추가
+- file_write_fd : 파일 특정 위치에 내용 작성
+- file_delete : 파일 삭제
+- file_rename : 파일(폴더) 이름 변경
+- dir_read : 폴더 읽기
+- dir_make_delete : 폴더 생성과 삭제
+- watch_dir : 폴더 내 변경 감시
+- watch_file : 파일 변경 감시
 
 ## Util
 Util 모듈
@@ -24,11 +37,6 @@ Util 모듈
 - inspector : 객체 상태 출력하기
 - callbackify : 프라미스 기반의 함수를 콜백 기반의 함수 생성
 - promisify : 콜백 기반의 함수를 프라미스 기반의 함수 생성
-
-## Console
-콘솔
-
-- customConsole : 파일로 로그를 기록하는 커스텀 콘솔 만들기
 
 ## Event
 이벤트 다루기
