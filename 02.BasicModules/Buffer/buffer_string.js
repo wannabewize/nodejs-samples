@@ -2,11 +2,17 @@
  * 버퍼와 문자열
  */
 
-var strBuffer = Buffer.from('Hello World');
-console.log(strBuffer);
-console.log('utf8 : ', strBuffer.toString('utf-8'));
-console.log('hex : ', strBuffer.toString('hex'));
-console.log('base64 : ', strBuffer.toString('base64'));
+const strBuffer = Buffer.from('Hello World');
+console.log('Buffer.from(Hello World) :', strBuffer);
+console.log('toString(utf8) : ', strBuffer.toString('utf-8'));
+console.log('toString(hex) : ', strBuffer.toString('hex'));
+console.log('toString(base64) : ', strBuffer.toString('base64'));
+
+
+const byteBuffer = Buffer.from([0x48, 0x65, 0x6c, 0x6c, 0x6f]);
+console.log('Buffer.from([0x48, 0x65, 0x6c, 0x6c, 0x6f]) :', byteBuffer);
+console.log('byteBuffer toString(utf8) :', byteBuffer.toString());
+console.log('byteBuffer toString(hex) :', byteBuffer.toString('hex'));
 
 console.log('== Buffer write');
 
