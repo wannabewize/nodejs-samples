@@ -50,12 +50,15 @@ Util 모듈
 ## Buffer
 버퍼 모듈 예제
 - buffer : 버퍼 기본 사용
-- buffer_collection : 배열 방식으로 버퍼 다루기
-- buffer_image_detect : 버퍼를 이용해서 파일 포맷 검사
+- buffer_array : 배열 방식으로 버퍼 다루기
 - buffer_readwrite : 버퍼에서 데이터 읽기/쓰기
+- buffer_image_detect : 버퍼를 이용해서 파일 포맷 검사
 
 ## Stream
 스트림 모듈
+
+- stream_stdin : 키보드 입력, Flowing 모드 사용
+- stream_file_flowing : 파일 Flowing 모드로 읽기
 - stream_flowing
 - stream-pause
 - stream-pipe
