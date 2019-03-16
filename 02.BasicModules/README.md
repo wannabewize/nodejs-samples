@@ -50,9 +50,9 @@ Util 모듈
 ## Buffer
 버퍼 모듈 예제
 - buffer : 버퍼 기본 사용
-- buffer_string : 문자열과 버퍼
-- buffer_unicode : 이모지와 버퍼
-- buffer_data
+- buffer_collection : 배열 방식으로 버퍼 다루기
+- buffer_image_detect : 버퍼를 이용해서 파일 포맷 검사
+- buffer_readwrite : 버퍼에서 데이터 읽기/쓰기
 
 ## Stream
 스트림 모듈

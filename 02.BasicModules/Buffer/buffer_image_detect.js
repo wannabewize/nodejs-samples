@@ -10,6 +10,7 @@ const buffer = require('buffer');
 const pngHeader = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);
 
 const pngBuffer = fs.readFileSync('./node.png');
+// 0부터 8바이트만 비교
 if ( pngHeader.compare(pngBuffer, 0, 8) == 0) {
     console.log('node.png는 png 파일입니다.')
 }
