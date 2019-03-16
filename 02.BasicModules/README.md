@@ -57,14 +57,13 @@ Util 모듈
 ## Stream
 스트림 모듈
 
-- stream_stdin : 키보드 입력, Flowing 모드 사용
-- stream_file_flowing : 파일 Flowing 모드로 읽기
-- stream_flowing
-- stream-pause
-- stream-pipe
-- stream_stdin_stdout
-
-
+- stdin_read : 키보드 입력, Flowing 모드 사용
+- file_read_flowing : 파일을 Flowing 모드로 읽기
+- file_read_paused : 파일을 Paused 모드로 읽기
+- file_write : 파일을 스트림 방식으로 쓰기
+- stdin_pipe_file : 키보드 입력 스트림을 파일 출력 스트림과 연결
+- memory_usage : 파일 전체 읽기와 스트림 방식의 메모리 사용량 비교
+- cork_uncork : 키보드 입력을 파일로 연결. cork를 하면 파일에 쓰지 않고 메모리에만 저장.
 
 ## Networking
 네트워크에 관련된 모듈
