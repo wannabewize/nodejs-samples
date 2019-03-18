@@ -49,6 +49,7 @@ Util 모듈
 
 ## Buffer
 버퍼 모듈 예제
+
 - buffer : 버퍼 기본 사용
 - buffer_array : 배열 방식으로 버퍼 다루기
 - buffer_readwrite : 버퍼에서 데이터 읽기/쓰기
@@ -65,12 +66,20 @@ Util 모듈
 - memory_usage : 파일 전체 읽기와 스트림 방식의 메모리 사용량 비교
 - cork_uncork : 키보드 입력을 파일로 연결. cork를 하면 파일에 쓰지 않고 메모리에만 저장.
 
-## Networking
-네트워크에 관련된 모듈
-- querystring
+## URL, QueryStrings
+URL과 쿼리 문자열 모듈
+
+- url_parsing : URL 분석하기
+- url_making : URL 만들기
+- querystring : 쿼리 문자열 분석, 만들기
+
+## Http
+Http 모듈
+
 - request
-- url_parsing
-- url_making
+
+## Net
+소켓 통신을 위한 모듈
 
 ## Others
 
