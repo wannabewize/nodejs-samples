@@ -2,7 +2,7 @@
 const m = require('./complex_module');
 m.sayGoodMorning();
 
-// 함수
+// 함수. destructuring
 const { sayGoodMorning } = require('./complex_module');
 sayGoodMorning();
 

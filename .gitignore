@@ -38,13 +38,3 @@ db
 
 # Webstorm
 .idea
-
-BasicModules/FileSystem/textData.txt
-
-BasicModules/fs/none_exist.txt
-
-BasicModules/fs/textData.txt
-
-BasicModules/FileSystem/binaryData.dat
-
-package-lock.json
