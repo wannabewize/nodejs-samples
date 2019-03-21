@@ -5,7 +5,7 @@
  */
 
 // 성공하는 Promise
-const asyncSuccessTask = new Promise( (resolve, reject) => {
+const successPromise = new Promise( (resolve, reject) => {
       // 비동기 동작 실행    
       console.log('Async Success Task started.'); 
       setTimeout( () => {
@@ -14,7 +14,7 @@ const asyncSuccessTask = new Promise( (resolve, reject) => {
 });
 
 // 실패하는 Promise
-let asyncFailTask = new Promise( (resolve, reject) => {
+let failurePromise = new Promise( (resolve, reject) => {
    // 비동기 동작 실행      
    setTimeout(function () {
       reject('Task Error');
@@ -22,7 +22,7 @@ let asyncFailTask = new Promise( (resolve, reject) => {
 });
 
 // 성공/실패 콜백 함수를 입력해서 사용하기
-asyncSuccessTask.then( (result) => {
+successPromise.then( (result) => {
    console.log('asyncSuccessTask success');
 }, (err) => {
    console.log('asyncSuccessTask fail');
@@ -30,7 +30,7 @@ asyncSuccessTask.then( (result) => {
 
 
 // then 함수의 에러 처리 함수(onRejected)로 에러 다루기
-asyncFailTask.then( (result) => {
+failurePromise.then( (result) => {
    console.log('asyncFailTask success');
 }, (err) => {
    console.log('asyncFailTask fail');
@@ -38,7 +38,7 @@ asyncFailTask.then( (result) => {
 
 
 // catch 함수를 이용한 에러 처리
-asyncFailTask.then( (result) => {
+failurePromise.then( (result) => {
    console.log('asyncFailTask success');
 }).catch( (error) => {
    console.log('asyncFailTask fail');
