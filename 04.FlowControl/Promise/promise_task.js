@@ -3,16 +3,15 @@
  */
 function task(success) {
     return new Promise((resolve, reject) => {
-        if (success) {
-            // 비동기 태스크가 성공(fullfill)하면 resolve 콜백 실행.
-            // 결과를 전달하기 위한 파라미터 설정
-            resolve('Success');
-        }
-        else {
-            // 비동기 태스크가 실패(reject)하면 reject 콜백 실행.
-            // 에러 정보를 파라미터로 전달한다.
-            reject('Error');
-        }
+        console.log('Task started');
+        setTimeout( () => {
+            if (success) {
+                resolve('Success');
+            }
+            else {
+                reject('Error');
+            }
+        }, 1000);
     });
 }
 

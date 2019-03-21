@@ -5,9 +5,10 @@
  */
 
 // 성공하는 Promise
-let asyncSuccessTask = new Promise( (resolve, reject) => {
-      // 비동기 동작 실행     
-      setTimeout(function () {
+const asyncSuccessTask = new Promise( (resolve, reject) => {
+      // 비동기 동작 실행    
+      console.log('Async Success Task started.'); 
+      setTimeout( () => {
          resolve('Task Result');
       }, 1000);  
 });

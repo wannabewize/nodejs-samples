@@ -24,10 +24,11 @@ function addTask(arg1, arg2) {
 async function doIt() {
     try {
         let r1 = await randomTask();
+        console.log('Generate Random Number : ', r1);
         let r2 = await randomTask();
+        console.log('Generate Random Number : ', r2);
         let sum = await addTask(r1, r2);
-        console.log('Random Numbers : ', r1, r2);
-        console.log('sum =', sum);
+        console.log('Add Two NUmber : ', sum);
     } catch (error) {
         console.log('Task Failure', error);
     }

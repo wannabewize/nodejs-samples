@@ -56,7 +56,7 @@ function task3() {
 
 async function doIt() {
     try {
-        let result = await Promise.all( [task1(), task2(), task3()]);
+        const result = await Promise.all( [task1(), task2(), task3()]);
         console.log('Result :', result);
     }
     catch ( error ) {
