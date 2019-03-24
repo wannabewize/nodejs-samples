@@ -10,6 +10,10 @@ const server = http.createServer( (req, res) => {
    console.log('req.url :', req.url);
    const parsed = url.parse(req.url, true);
    result.pathname = parsed.pathname
+   console.log('path :', parsed.path);
+   console.log('pathnamme :', parsed.pathname);
+   console.log('query :', parsed.query);
+
 
    // URL중 query
    result.query = parsed.query;
