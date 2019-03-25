@@ -13,12 +13,7 @@ function task(name) {
         
         setTimeout(() => {
             console.log(`Task${name} random number : ${random}`);
-            if ( random % 2 == 0 ) {
-                resolve(random);
-            }
-            else {
-                reject(`Task${name}'s random number is odd`);
-            }
+            resolve(random);
         }, time)
     });
 };

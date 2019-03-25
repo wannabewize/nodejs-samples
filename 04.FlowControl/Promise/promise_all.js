@@ -17,6 +17,7 @@ function randomNumberTask(times) {
 // 100자리, 10자리, 1자리 난수 만들어서 3자리 숫자 만들기
 Promise.all([randomNumberTask(100), randomNumberTask(10), randomNumberTask(1)])
 .then(results => {
+    console.log('Promise.all 결과 : ', results);
     const ret = results.reduce( (preValue, curValue, index, array) => {
         return  preValue + curValue
     });

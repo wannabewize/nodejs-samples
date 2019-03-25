@@ -3,8 +3,6 @@
 
 const async = require('async');
 
-const array = [1, 2, 3, 4, 5];
-
 const makeDouble = (item) => {
     return new Promise((resolve, reject) => {
         console.log(`task${item} started`);
@@ -41,6 +39,8 @@ async function doItByForLoop(values) {
     console.log('results :', results);
 }
 
+
+const array = [1, 2, 3, 4, 5];
 doItByAsyncMap(array);
 // doItByPromise(array);
 // doItByForLoop(array);
