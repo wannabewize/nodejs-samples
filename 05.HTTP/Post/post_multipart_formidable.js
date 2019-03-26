@@ -48,21 +48,28 @@ function handleMultipartRequest(req, res) {
          res.end();
          return;
       }
-      console.log('== Fields ==');
-      for ( var key in fields ) {
-         console.log('Field name : ', key, ' value : ', fields[key]);
-      }
+      console.log('title :', fields['title']);
+      console.log('director :', fields['director']);
+      const posterFile = files['poster'];
+      console.log('poster file path :', posterFile.path);
+      console.log('poster file name :', posterFile.name);
+      console.log('poster file type :', posterFile.type);
 
-      console.log('== Files ==');
-      for ( var key in files ) {
-         var file = files[key];
-         // console.log(file);
-         console.log('Key : ', key);
-         console.log('path : ', file.path);
-         console.log('name : ', file.name);
-         console.log('type : ', file.type);
-         console.log('size : ', file.size);
-      }
+      // console.log('== Fields ==');
+      // for ( var key in fields ) {
+      //    console.log('Field name : ', key, ' value : ', fields[key]);
+      // }
+
+      // console.log('== Files ==');
+      // for ( var key in files ) {
+      //    var file = files[key];
+      //    // console.log(file);
+      //    console.log('Key : ', key);
+      //    console.log('path : ', file.path);
+      //    console.log('name : ', file.name);
+      //    console.log('type : ', file.type);
+      //    console.log('size : ', file.size);
+      // }
 
       res.setHeader('Content-Type', 'application/json');
       res.end(JSON.stringify({fields : fields, files : files}));
