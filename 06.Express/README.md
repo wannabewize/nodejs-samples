@@ -5,10 +5,11 @@ Express 예제
 미들웨어 예제
 
 - request : 요청 분석
-
+- response : 응답 작성
+- response_error : 응답 작성 시 에러 발생 상황
 - middleware_next : 연속된 미들웨어 사용하기
 - responses : 다양한 응답 처리 함수
-- async-middleware : 비동기 API, Promise, Await를 이용한 미들웨어를 사용하는 미들웨어 작성
+- middleware_async : 비동기 API, Promise, Await를 이용한 미들웨어를 사용하는 미들웨어 작성
 
 ## Routing
 라우팅 예제

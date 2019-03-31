@@ -26,7 +26,8 @@ function asyncTask2() {
 app.get('/callback', (req, res) => {
    asyncTask( (error, result ) => {
       if ( error ) {
-         res.status(500).send(`Error with ${error}`);
+         res.status(500);
+         res.send(`Error with ${error}`);
          return;
       }
       res.send(`OK with ${result}`);
