@@ -6,10 +6,11 @@ Express 예제
 
 - request : 요청 분석
 - response : 응답 작성
+- middleware_async : 비동기 API, Promise, Await를 이용한 미들웨어를 사용하는 미들웨어 작성
+- response : 다양한 응답 처리 함수
 - response_error : 응답 작성 시 에러 발생 상황
 - middleware_next : 연속된 미들웨어 사용하기
-- responses : 다양한 응답 처리 함수
-- middleware_async : 비동기 API, Promise, Await를 이용한 미들웨어를 사용하는 미들웨어 작성
+
 
 ## Routing
 라우팅 예제
@@ -17,7 +18,7 @@ Express 예제
 - routing : 경로와 메소드를 이용한 라우팅
 - routing_params : 라우팅 파라미터
 - routing_reg : 정규식을 이용한 라이팅
-- externalRouter, router_eating, router_greeting : 라우팅 모듈을 별도로 작성하기
+- routing_module, router_eating, router_greeting : 라우팅 모듈을 별도로 작성하기
 
 ## ErrorHandling
 에러 다루기

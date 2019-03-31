@@ -10,9 +10,9 @@ app.listen(3000, (err) => {
 });
 
 // 파라미터 1개
-app.get('/user/:id',  (req, res) => {
-   var userId = req.params.id;
-   res.send('User ID ' + userId);
+app.get('/game/:item',  (req, res) => {
+   var item = req.params.item;
+   res.send('Game ' + item);
 });
 
 // 파라미터 2개
@@ -23,7 +23,12 @@ app.get('/movies/:movieId/:actor', (req, res) => {
    res.send('Actor : ' + actor + ' -  Movie ID : ' + movieId);
 });
 
-// /user/:id 와 겹친다.
+app.get('/user/:id', (req, res) => {
+   res.send('GET /user/:id');
+});
+
+// /user/:id 와 겹친다. 위치 변경 필요
 app.get('/user/sample', (req, res) => {
    res.send('GET /user/sample');
 });
+
