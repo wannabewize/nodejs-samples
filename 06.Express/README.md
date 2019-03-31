@@ -4,7 +4,8 @@ Express 예제
 ## Middleware
 미들웨어 예제
 
-- middleware : Express 서버와 미들웨어. 요청 분석
+- request : 요청 분석
+
 - middleware_next : 연속된 미들웨어 사용하기
 - responses : 다양한 응답 처리 함수
 - async-middleware : 비동기 API, Promise, Await를 이용한 미들웨어를 사용하는 미들웨어 작성
