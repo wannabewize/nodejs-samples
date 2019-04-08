@@ -7,9 +7,8 @@ Express 예제
 - request : 요청 분석
 - response : 응답 작성
 - middleware_async : 비동기 API, Promise, Await를 이용한 미들웨어를 사용하는 미들웨어 작성
-- response : 다양한 응답 처리 함수
 - response_error : 응답 작성 시 에러 발생 상황
-- middleware_next : 연속된 미들웨어 사용하기
+- middleware_next : 연속된 미들웨어 사용, 미들웨어간 데이터 전달
 
 
 ## Routing
@@ -23,9 +22,10 @@ Express 예제
 ## ErrorHandling
 에러 다루기
 
-- errorHandling : 에러 처리
+- error_handling : 에러 처리
+- error_env : 동작 환경(development, production) 별 에러 다루기
 - addService : 두 값을 더하는 서비스. 입력값이 잘못되면 에러.
-- env : 동작 환경(development, production) 별 에러 다루기
+
 
 ## UsefulMiddleware
 유용한 미들웨어 소개
