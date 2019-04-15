@@ -11,7 +11,7 @@ var data = [
 	{title:'축구', image:'football.png'}	
 ];
 
-app.get('/', function(req, res) {
+app.get('/', (req, res) => {
 	res.render('sports', {title:'구기 종목', sports:data});
 });
 
