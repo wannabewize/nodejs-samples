@@ -1,11 +1,10 @@
 const React = require('react');
+const SportItem = require('./SportItem');
 
 class Sports extends React.Component {
     render() {
-        let list = this.props.sports.map( (item, index) => {
-            return (
-                <li><img src={'images/' + item.image}></img>{item.title}</li>
-            )
+        let items = this.props.sports.map( (item, index) => {
+            return <SportItem item={item} key={index}/>
         });
 
         return (
@@ -15,7 +14,7 @@ class Sports extends React.Component {
                     <div>
                         <h1>{this.props.title}</h1>
                         <ul>
-                            {list}
+                            {items}
                         </ul>
                     </div>
                 </body>
