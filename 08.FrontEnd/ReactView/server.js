@@ -21,6 +21,10 @@ app.get('/howAreYou', (req, res) => {
     res.render('howAreYou', {value: 'How are you?'})
 });
 
+app.get('/greeting', (req,res) => {
+    res.render('greeting');
+});
+
 app.get('/', (req, res) => {
     res.render('sports', {title:'구기 종목', sports:data})
 });

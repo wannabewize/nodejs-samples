@@ -1,8 +1,9 @@
 const React = require('react');
 
 function Hello(props) {
+    const message = 'Hello World';
     return (
-        <h1>Hello World</h1>
+        <h1>{message}</h1>
     )
 }
 
