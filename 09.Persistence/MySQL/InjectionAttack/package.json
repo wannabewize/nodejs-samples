@@ -1,15 +1,15 @@
 {
-  "name": "connect",
+  "name": "InjectionAttack",
   "version": "1.0.0",
   "description": "",
-  "main": "connection.js",
+  "main": "attack.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql": "^2.15.0",
-    "promise-mysql": "^3.2.1"
+    "mysql": "^2.17.1"
   }
 }

@@ -11,12 +11,12 @@ const conn = mysql.createConnection(dbConfig);
 
 conn.connect( (err) => {
    if (err) {
-      console.error('error connecting: ', err);
+      console.error('DB 연결 실패: ', err);
       return;
    }
 
    //console.log(conn);
-   console.log('DB 연결 성공 ');
+   console.log('DB 연결 성공');
    // 연결 종료
    conn.end();
 });

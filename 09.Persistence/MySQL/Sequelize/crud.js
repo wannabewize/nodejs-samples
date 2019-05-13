@@ -22,10 +22,10 @@ const Movie = sequelize.define('movie', {
 
 // prepareModel();
 // addNewMovies();
-// showMovieList();
+showMovieList();
 // showMovieDetail('제임스 카메론');
 // modify();
-removeMovie();
+// removeMovie();
 
 
 async function prepareModel() {

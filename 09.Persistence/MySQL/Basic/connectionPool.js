@@ -1,4 +1,4 @@
-const pool = require('./connectionModule');
+const pool = require('./dbconnection');
 
 pool.getConnection( (err, conn) => {
    if (err) {
@@ -6,12 +6,14 @@ pool.getConnection( (err, conn) => {
       return;
    }
 
-   console.log('DB 연결 성공 ');
+   console.log('풀에서 커넥션 얻기 성공');
    
    // 커넥션을 풀에 반환
    conn.release();
 
+   console.log('커넥션에 풀 반환');
+
    // 풀 종료
-   console.log('== 풀 닫기');
    pool.end();
+   console.log('풀 닫기');   
 });

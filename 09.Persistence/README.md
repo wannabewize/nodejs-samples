@@ -3,64 +3,48 @@
 ## MySQL
 MySQL
 
-### Connect
+### Basic
+
+MySQL 콜백 기반의 모듈 예제
 
 - connection : 데이터베이스 커넥션
 - connectionModule, connectionPool : 데이터베이스 커넥션 풀 모듈과 사용하기
 - connectionPoolError : 커넥션 풀에서 오류(커넥션 반환 안함)
-- connectionPromiseModule, connectionPromise : Promise 기반의 모듈, 커넥션 풀 모듈과 사용하기
+- CRUD : 기본 CRUD 예제
+- movieModel, modelController : 데이터베이스를 다루는 모델과 컨트롤러
+- movieService : movieModel을 이용하는 Express 서버
 
-### Basic
 
-#### 데이터베이스 준비
+### Promise Based
 
-데이터베이스(mysql_example) 생성과 테이블(Movies,  Reviews) 테이블 생성 : `mysql -u root -p < moviest.sql`
+프라미스 기반의 MySQL 모듈 사용
 
-#### 예제
+- connectionPromise : promise-mysql 모듈을 이용해서 커넥션 풀, 커넥션 얻기
+- CRUD : promise-mysql 모듈을 이용한 CRUD 예제
 
-- insert_movie : 영화 데이터 추가. Placeholder 사용 
-- select_movies : SELECT로 데이터 얻기
-- insert_review : 영화와 리뷰. 리뷰 추가
-- select_reviews : 영화의 리뷰 얻기
-- basicCRUD : 기본CRUD
+### Injection Attack
+
+SQLInjection 의 상황과 방지
+
+- attack : SQL Injection 공격의 예, 방지하기
 
 ### Sequelize
 
 도큐먼트 보기 : [링크](http://docs.sequelizejs.com)
 
 #### 데이터베이스 준비
-1. 데이터베이스 : sequelize_example 사용
+
+데이터베이스 생성
 
     `CREATE DATABASE sequelize_example;`
 
 #### 예제
+
 - model : 모델 정의하고 데이터베이스에 반영
 - crud : 영화 정보 CRUD. 코드 내 실행 순서 참고
 - relations : One To One, One To Many 관계, Many to Many는 작성 예정
 - rawQuery : SQL을 직접 실행하기
 
-### MoviestMySQL
-MySQL을 이용한 영화 정보 서버
-
-#### 데이터베이스 준비 
-
-1. 데이터베이스(moviest)와 테이블 준비
-
-    `mysql -u root -p < moviest.sql`
-1. 초기 데이터 입력
-
-    `mysql -u root -p < initialData.sql`
-
-### MoviestSequelize
-준비중
-
-
-### FindAndPagingMySQL
-MySQL을 이용한 페이지네이션과 검색. 데이터베이스 mysql_example 사용
-
-- prepare : 테이블 생성과 초기 데이터 300건 입력
-
-http://127.0.0.1:3000/items?page=2&count=10&keyword=1
 
 ## MongoDB
 
