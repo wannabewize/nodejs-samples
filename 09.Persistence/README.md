@@ -3,7 +3,36 @@
 ## MySQL
 MySQL
 
+### MySQL 설치 후
+
+dev 유저 만들기
+
+    `mysql> create user 'dev'@'localhost' identified by '';`
+
+example 데이터베이스 생성
+
+    `mysql> create database example;`
+
+dev 유저에 example 데이터베이스 다루기 권한 주기
+
+    `mysql> grant all on example.* to 'dev'@'localhost';`
+
+dev 유저의 인증 방식을 예정 방식(mysql-native)로. 새로운 방식을 모듈에서 지원 안함
+
+    `mysql> ALTER USER 'dev'@'localhost' IDENTIFIED WITH mysql_native_password BY '';`
+
+
+
 ### Basic
+
+mysql2 모듈을 이용한 데이터베이스 다루기. 작성 중
+
+- connect : 데이터베이스 연결하기. Callback, Promise, Async/Await
+- dbConnect, simpleQuery : 케넉션 풀과 간단한 쿼리
+- parameterized : 파라미터를 이용한 쿼리 생성
+
+
+### Basic - Old
 
 MySQL 콜백 기반의 모듈 예제
 
@@ -21,6 +50,7 @@ MySQL 콜백 기반의 모듈 예제
 
 - connectionPromise : promise-mysql 모듈을 이용해서 커넥션 풀, 커넥션 얻기
 - CRUD : promise-mysql 모듈을 이용한 CRUD 예제
+
 
 ### Injection Attack
 

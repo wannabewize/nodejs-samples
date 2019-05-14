@@ -1,5 +1,16 @@
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('sequelize_example', 'root', '');
+const sequelize = new Sequelize('sequelize_example', 'dev', '1', {
+   dialect: 'mysql',
+   host: 'localhost'
+});
+
+sequelize.authenticate()
+  .then(() => {
+    console.log('Connection has been established successfully.');
+  })
+  .catch(err => {
+    console.error('Unable to connect to the database:', err);
+  });
 
 // 복수형 단어로 자동 변환 : Person => People
 const Person = sequelize.define('Person', {

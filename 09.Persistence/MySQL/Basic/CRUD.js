@@ -1,106 +1,113 @@
-const mysql = require('mysql');
+const mysql = require('mysql2');
+
 const dbConfig = {
    host: 'localhost',
-   user: 'root',
+   user: 'dev',
    password: '',
    port: 3306,
    database: 'example',
-   multipleStatements : true // drop, create 쿼리를 모두 실행하기 위한 옵션
+   multipleStatements: true,
 };
 
-var conn = mysql.createConnection(dbConfig);
+const conn = mysql.createConnection(dbConfig).promise();
 
-console.log('Database CRUD Basic');
 // prepareTable();
-tryInsert1();
-// tryInsert2();
-// tryUpdate1();
-// tryUpdate2();
-// tryDelete();
+// addMovies();
+// updateMovie1();
+// updateMovie2();
+deleteMovie();
 
 function prepareTable() {
-   const sql = 'drop table if exists movies; create table movies (movie_id int primary key auto_increment, title varchar(50), director varchar(50), year int);';
-   conn.query(sql, (err, result) => {
-      if ( err ) {
-         console.error('Error : ', err);
-         return;
-      }
-      console.log('Table prepration completed!');
-      conn.end();
-   });
+    const sql = 'drop table if exists movies; create table movies (movie_id int primary key auto_increment, title varchar(50), director varchar(50), year int);';
+    conn.query(sql).then(ret => {
+        console.log('Movies 테이블 준비 완료');
+        conn.end();
+    }).catch(err => {
+        console.log('Movies 테이블 준비 실패 :', err);
+        conn.end();
+    });
 }
 
-// INSERT - VALUES
-function tryInsert1() {
-   const sql = 'INSERT INTO movies (title, director, year) VALUES (?, ?, ?);';
-   const params = ["스타워즈", "조지 루카스", 0];
-   conn.query(sql, params, function(err, results) {
-      if ( err ) {
-         console.error('Error : ', err);
-         return;
-      }
-      // 새로 추가한 항목의 InsertID
-      const insertId = results.insertId;
-      console.log('INSERT 성공 ', insertId);
-      conn.end();      
-   });
+function addMovies() {
+    const sqls = [
+        { title: '어벤져스: 엔드게임', director: '앤서니 루소, 조 루소', year: '2019'},
+        { title: '캡틴 마블', director: '애나 보든, 라이언 플렉', year: '2019'},
+        { title: '앤트맨과 와스프', director: '페이턴 리드', year: '2018'},
+        { title: '어벤져스: 인피니티 워', director: '앤서니 루소, 조 루소', year: '2018'},
+        { title: '블랙 팬서', director: '라이언 쿠글러', year: '2018'},
+        { title: '토르: 라그나로크', director: '타이카 와이티티', year: '17'},
+        { title: '스파이더맨: 홈커밍', director: '존 왓츠', year: '17'}
+    ];
+
+    // Query 실행 프라미스 배열 만들기
+    const queryPromises = sqls.map( (item) => {
+        return conn.query('INSERT INTO movies SET ?', item)
+    });
+
+    Promise.all( queryPromises ).then( results => {
+        console.log('영화 정보 추가 성공');
+        // console.log('results :', results);
+        conn.end();
+    }).catch( err => {
+        console.error('영화 정보 추가 실패 :', err);
+        conn.end();
+    });
 }
 
-// INSERT - SET
-function tryInsert2() {
-   const params = { title : '아바타', director : '제임스 카메론', year:2012 };
-   const sql = 'INSERT INTO movies SET ?;';
-   conn.query(sql, params, function(err, results) {
-      if ( err ) {
-         console.error('Error : ', err);
-         return;
-      }
-      // 새로 추가한 항목의 InsertID
-      var insertId = results.insertId;
-      console.log('INSERT 성공 ', insertId);
-      conn.end();
-   });
+
+function updateMovie1() {
+    const sql = 'UPDATE movies SET year = ? WHERE year = ?';
+    const params = [2017, 17];
+
+    conn.query(sql, params).then(results => {
+        console.log('UPDATE Success');
+
+        const info = results[0];
+        // console.log(results);
+        console.log('수정 대상 Row(affectedRows) :', info['affectedRows']);
+        console.log('수정된 Row(changedRows) :', info['changedRows']);
+
+        console.log('메세지 :', info['info']);
+        conn.end();
+    }).catch( err => {
+        console.error('updateMovie1 실패 :', err);
+        conn.end();
+    });    
 }
 
-function tryUpdate1() {
-   const sql = 'UPDATE movies SET year = ? WHERE title = ?';
-   const params = [1977, '스타워즈'];
+// 필드 이름과 객체의 프로퍼티 이름을 동일하게 설정해서 UPDATE
+function updateMovie2() {
+    const sql = 'UPDATE movies SET ? WHERE title = ?';
+    const param = {title: 'Avengers: Endgame', director: 'Anthony Russo, Joe Russo'};
+    const title = '어벤져스: 엔드게임';
 
-   conn.query(sql, params, function(err, result) {
-      if ( err ) {
-         console.error('Error : ', err);
-         return;
-      }
-      console.log('UPDATE 성공 ', result);
-      conn.end();
-   });
+    conn.query(sql, [param, title]).then(results => {
+        console.log('UPDATE Success');
+
+        const info = results[0];
+
+        console.log('메세지 :', info['info']);
+        conn.end();
+    }).catch( err => {
+        console.error('updateMovie2 실패 :', err);
+        conn.end();
+    });    
 }
 
-// UPDATA - SET
-function tryUpdate2() {
-   const params = { title:'Avata', director:'James Cameron' };
-   const sql = 'UPDATE movies SET ? WHERE title = ?';
+function deleteMovie() {
+    const sql = 'DELETE FROM movies WHERE year = ?';
+    const param = 2018;
+    // 파라미터가 1개면 배열 형식이 아니어도 된다.
+    conn.query(sql, param).then(results => {
+        console.log('DELETE Success');
 
-   conn.query(sql, [params, '아바타'], function(err, result) {
-      if ( err ) {
-         console.error('Error : ', err);
-         return;
-      }
-      console.log('UPDATE 성공 ', result);
-      conn.end();
-   });
-}
+        // console.log(results);
+        const info = results[0];
+        console.log('삭제된 Row(affectedRows) :', info['affectedRows']);
 
-function tryDelete() {
-   const year = 2000;
-   const sql = 'DELETE FROM movies WHERE year <= ?';
-   
-   conn.query(sql, year, function(err, result) {
-      if ( err ) {
-         console.error('Error : ', err);
-         return;
-      }
-      console.log('DELETE 성공 ', result);
-      conn.end();
-   });   
+        conn.end();
+    }).catch( err => {
+        console.error('deleteMovie 실패 :', err);
+        conn.end();
+    });    
 }
