@@ -30,27 +30,9 @@ mysql2 모듈을 이용한 데이터베이스 다루기. 작성 중
 - connect : 데이터베이스 연결하기. Callback, Promise, Async/Await
 - dbConnect, simpleQuery : 케넉션 풀과 간단한 쿼리
 - parameterized : 파라미터를 이용한 쿼리 생성
-
-
-### Basic - Old
-
-MySQL 콜백 기반의 모듈 예제
-
-- connection : 데이터베이스 커넥션
-- connectionModule, connectionPool : 데이터베이스 커넥션 풀 모듈과 사용하기
-- connectionPoolError : 커넥션 풀에서 오류(커넥션 반환 안함)
-- CRUD : 기본 CRUD 예제
-- movieModel, modelController : 데이터베이스를 다루는 모델과 컨트롤러
-- movieService : movieModel을 이용하는 Express 서버
-
-
-### Promise Based
-
-프라미스 기반의 MySQL 모듈 사용
-
-- connectionPromise : promise-mysql 모듈을 이용해서 커넥션 풀, 커넥션 얻기
-- CRUD : promise-mysql 모듈을 이용한 CRUD 예제
-
+- metaData : 쿼리 실행 후 보조 정보 활용
+- CRUD : 다양한 종류의 쿼리 실행
+- movieModel, movieRouter, movieServer, movieController : 영화 정보 서비스 아키텍쳐 
 
 ### Injection Attack
 
