@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const dbConfig = {
    host: 'localhost',
    user: 'dev',
-   password: '',
+   password: 'secret',
    port: 3306,
    database: 'example',
    multipleStatements: true,
@@ -17,6 +17,7 @@ function prepareTable() {
         conn.end();
     }).catch(err => {
         console.log('테이블 생성 실패 :', err);
+        conn.end();
     });
 }
 
@@ -28,6 +29,7 @@ function doItPlainText(num, kor, eng) {
         conn.end();
     }).catch ( err => {
         console.log('doItPlainText Error :', err);
+        conn.end();
     });
 }
 
@@ -39,6 +41,7 @@ function doItPlainTextParam(num, kor, eng) {
         conn.end();
     }).catch ( err => {
         console.log('doItPlainTextParam Error :', err);
+        conn.end();
     });
 }
 
@@ -50,6 +53,7 @@ function doItQueryParam(num, kor, eng) {
         conn.end();
     }).catch ( err => {
         console.log('doItQueryParam Error :', err);
+        conn.end();
     });
 }
 
@@ -61,11 +65,12 @@ function doItQueryParam2(values) {
         conn.end();
     }).catch ( err => {
         console.log('doItQueryParam Error :', err);
+        conn.end();
     });
 }
 
 // prepareTable();
 // doItPlainText(1, '일', 'one');
 // doItPlainTextParam(2, '이', 'two');
-// doItQueryParam(3, '삼', 'three');
+doItQueryParam(3, '삼', 'three');
 // doItQueryParam2( { num: 4, kor: '사', eng: 'four'} );

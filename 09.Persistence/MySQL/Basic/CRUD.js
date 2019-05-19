@@ -3,7 +3,7 @@ const mysql = require('mysql2');
 const dbConfig = {
    host: 'localhost',
    user: 'dev',
-   password: '',
+   password: 'secret',
    port: 3306,
    database: 'example',
    multipleStatements: true,
@@ -13,9 +13,10 @@ const conn = mysql.createConnection(dbConfig).promise();
 
 // prepareTable();
 // addMovies();
+// selectMoviesByPromise();
 // updateMovie1();
 // updateMovie2();
-deleteMovie();
+// deleteMovie();
 
 function prepareTable() {
     const sql = 'drop table if exists movies; create table movies (movie_id int primary key auto_increment, title varchar(50), director varchar(50), year int);';
@@ -27,6 +28,7 @@ function prepareTable() {
         conn.end();
     });
 }
+
 
 function addMovies() {
     const sqls = [
@@ -52,6 +54,24 @@ function addMovies() {
         console.error('영화 정보 추가 실패 :', err);
         conn.end();
     });
+}
+
+
+function selectMoviesByCallback() {
+    const sql = 'SELECT * FROM movies WHERE year > ?';
+}
+
+function selectMoviesByPromise() {
+    const sql = 'SELECT * FROM movies WHERE year > ?';
+    conn.query(sql, 2017).then(results => {
+        for (const row of results) {            
+            console.log(row);
+        }
+        conn.end();
+    }).catch( err => {
+        console.error('Error :', err);
+        conn.end();
+    });    
 }
 
 

@@ -2,7 +2,7 @@ const mysql = require('mysql2');
 const dbConfig = {
     host: 'localhost',
     user: 'dev',
-    password: '',
+    password: 'secret',
     port: 3306,
     database: 'example'
 };
@@ -46,6 +46,6 @@ async function connectByAwait() {
     }
 }
 
-// connect();
+connect();
 // connectByPromise();
-connectByAwait();
+// connectByAwait();

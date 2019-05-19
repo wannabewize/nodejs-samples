@@ -26,7 +26,6 @@ function doItByPoolQuery() {
     pool.query('SELECT 1 + 2 AS SUM;', (err, results) => {
         if ( err ) {
             console.error('ERROR :', err);
-            conn.release();
             pool.end();
             return;
         }
