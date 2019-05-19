@@ -28,7 +28,7 @@ dev 유저의 인증 방식을 예정 방식(mysql-native)로. 새로운 방식�
 mysql2 모듈을 이용한 데이터베이스 다루기. 작성 중
 
 - connect : 데이터베이스 연결하기. Callback, Promise, Async/Await
-- dbConnect, simpleQuery : 케넉션 풀과 간단한 쿼리
+- dbConnect, simpleQuery : 커넥션 풀과 간단한 쿼리
 - parameterized : 파라미터를 이용한 쿼리 생성
 - metaData : 쿼리 실행 후 보조 정보 활용
 - CRUD : 다양한 종류의 쿼리 실행

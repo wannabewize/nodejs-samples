@@ -1,4 +1,4 @@
-const pool = require('./dbConnect');
+const pool = require('./dbConnection');
 
 function doIt() {
     pool.getConnection( (err, conn) => {
