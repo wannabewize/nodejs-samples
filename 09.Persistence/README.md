@@ -7,7 +7,11 @@ MySQL
 
 dev 유저 만들기
 
-    `mysql> create user 'dev'@'localhost' identified by '';`
+    `mysql> create user 'dev'@'*';`
+
+dev 유저의 인증 방식을 예정 방식(mysql-native)로. 새로운 방식을 모듈에서 지원 안함
+
+    `mysql> ALTER USER 'dev'@'*' IDENTIFIED WITH mysql_native_password BY 'secret';`
 
 example 데이터베이스 생성
 
@@ -15,13 +19,7 @@ example 데이터베이스 생성
 
 dev 유저에 example 데이터베이스 다루기 권한 주기
 
-    `mysql> grant all on example.* to 'dev'@'localhost';`
-
-dev 유저의 인증 방식을 예정 방식(mysql-native)로. 새로운 방식을 모듈에서 지원 안함
-
-    `mysql> ALTER USER 'dev'@'localhost' IDENTIFIED WITH mysql_native_password BY '';`
-
-
+    `mysql> grant all on example.* to 'dev'@'*';`
 
 ### Basic
 
@@ -52,6 +50,7 @@ SQLInjection 의 상황과 방지
 
 #### 예제
 
+- connect : 연결하기
 - model : 모델 정의하고 데이터베이스에 반영
 - crud : 영화 정보 CRUD. 코드 내 실행 순서 참고
 - relations : One To One, One To Many 관계, Many to Many는 작성 예정

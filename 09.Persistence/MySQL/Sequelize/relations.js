@@ -3,10 +3,10 @@
 //
 
 var Sequelize = require('sequelize');
-var sequelize = new Sequelize('sequelize_example', 'root', '');
+const sequelize = new Sequelize('sequelize_example', 'dev', 'secret', { dialect: 'mysql', host: '127.0.0.1'});
 
-// doOneToOne();
-doOneToMany();
+doOneToOne();
+// doOneToMany();
 // doManyToMany()
 
 /**
@@ -22,17 +22,20 @@ CREATE TABLE IF NOT EXISTS `Profiles` (
     PRIMARY KEY (`id`)) ENGINE=InnoDB;     
  * */
 async function doOneToOne() {
-    const User = sequelize.define('User', {
+    class User extends Sequelize.Model {}
+    User.init({
         userId: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
         name: { type: Sequelize.STRING(100), allowNull: false }
-    }, { timestamps: false });
+    }, {sequelize, timestamps: false});
 
-    const Profile = sequelize.define('Profile', {
+    class Profile extends Sequelize.Model {}
+    Profile.init({
         address: Sequelize.STRING,
         phone: Sequelize.STRING(13)
-    }, { timestamps: false });
+    }, {sequelize, timestamps: false });
 
-    Profile.belongsTo(User, {targetKey:'userId', foreignKey:'userId'});
+    User.hasOne(Profile);
+    // Profile.belongsTo(User, {targetKey:'userId', foreignKey:'userId'});
 
     try {
         let syncResult1 = await User.sync();
@@ -41,9 +44,16 @@ async function doOneToOne() {
         console.log('sync Scheme success');
 
         let user = await User.create({name:'IU'});
-        let profile = await Profile.create({address:'Korea', phone:'010-1234-5678', userId:user.get('userId')});
+        let profile = await Profile.create({address:'Korea', phone:'010-1234-5678'});
 
         console.log('Create Success');
+
+        await user.setProfile(profile);
+
+        const findRet = await User.findAll({include: [{model: Profile}]});
+        console.log('file ret :', findRet.name, findRet.userId);
+        const findProfile = findRet.profile;
+        console.log('Profile :', findProfile);
     }
     catch ( error ) {
         console.log('Error :', error);
