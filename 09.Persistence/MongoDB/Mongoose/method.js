@@ -3,11 +3,10 @@
 //
 
 const mongoose = require('mongoose');
-mongoose.Promise = global.Promise;
 
 const db = mongoose.connection;
 const url = 'mongodb://localhost:27017/samples';
-mongoose.connect(url);
+mongoose.connect(url, {useNewUrlParser: true });
 
 const PersonSchema = new mongoose.Schema({
     name: String,

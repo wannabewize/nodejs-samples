@@ -2,11 +2,12 @@ const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017/moviest';
 const ObjectID = require('mongodb').ObjectID;
 
-MongoClient.connect(url, (err, db) => {
+MongoClient.connect(url, (err, client) => {
    if (err) {
       console.error('MongoDB 연결 실패', err);
       return;
    }
+   const db = client.db();
    // doFindOneExample(db);
    doFindWithCursor(db)
 //    doFindExample(db);

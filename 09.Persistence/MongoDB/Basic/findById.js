@@ -2,12 +2,13 @@ const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017/moviest';
 const ObjectID = require('mongodb').ObjectID;
 
-MongoClient.connect(url, (err, db) => {
+MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
    if (err) {
       console.error('MongoDB 연결 실패', err);
       return;
    }   
    // 다수의 도큐먼트 추가
+   const db = client.db();
    executeFindByIdExample(db);
 });
 

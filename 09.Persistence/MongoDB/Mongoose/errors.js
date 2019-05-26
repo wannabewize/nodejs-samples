@@ -1,13 +1,13 @@
 const mongoose = require('mongoose');
 const url = 'mongodb://localhost:27017/samples';
-mongoose.connect(url);
+mongoose.connect(url, {useNewUrlParser: true });
 
 const db = mongoose.connection;
 
-db.on('error', function(err) {
+db.on('error', (err) => {
    console.log('Error : ', err);
 });
-db.on('open', function() {
+db.on('open', () => {
    console.log('Open Event');
 });
 

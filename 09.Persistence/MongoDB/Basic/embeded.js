@@ -1,11 +1,13 @@
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017/moviest';
 
-MongoClient.connect(url, function (err, db) {
+MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
    if (err) {
       console.error('MongoDB 연결 실패', err);
       return;
    }
+
+   const db = client.db();
    
    var movies = db.collection('movies');
    var movieTitle = '영화' + Math.floor(Math.random() * 100);

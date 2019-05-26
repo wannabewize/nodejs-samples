@@ -1,11 +1,13 @@
 var MongoClient = require('mongodb').MongoClient
 var url = 'mongodb://localhost:27017/moviest';
 
-MongoClient.connect(url, function (err, db) {
+MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
    if (err) {
       console.error('MongoDB 연결 실패', err);
       return;
    }
+
+   const db = client.db();
 
    // db.movies.insertMany([
    // { title: '스타워즈', director: '조지 루카스', year: 1977 },

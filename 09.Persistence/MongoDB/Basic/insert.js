@@ -1,22 +1,26 @@
 const MongoClient = require('mongodb').MongoClient
 const url = 'mongodb://localhost:27017/moviest';
 
-MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
+MongoClient.connect(url, { useNewUrlParser: true }, (err, client) => {
    if (err) {
       console.error('MongoDB 연결 실패', err);
       return;
    }
+
+   const db = client.db();
 
    doInsertExample(db);
 });
 
 async function doInsertExample(db) {
 
-   console.log('db.collection:',db.collection);
+   console.log('db :', db);
 
 
    // 콜렉션
    let movies = db.collection('movies');
+
+   console.log('collection movies :', movies);
 
    // 도큐먼트 추가, 콜백 방식   
    movies.insert({ title: '인터스텔라', director: '크리스토퍼 놀란', year: 2014 },
