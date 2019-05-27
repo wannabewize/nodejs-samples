@@ -1,43 +1,36 @@
-const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27017/moviest';
+const dbConn = require('./connection');
 const ObjectID = require('mongodb').ObjectID;
 
-MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
-   if (err) {
-      console.error('MongoDB 연결 실패', err);
-      return;
-   }   
-   // 다수의 도큐먼트 추가
-   const db = client.db();
-   executeFindByIdExample(db);
-});
+doIt();
 
+async function doIt() {
+   try {
+      const db = await dbConn.getConn();
+      const movies = db.collection('movies');
 
-async function executeFindByIdExample(db) {
-   // 콜렉션
-   let movies = db.collection('movies');
+      // ObjectID 문자열 얻기
+      const ret = await movies.findOne({});
+      const objectIdStr = ret._id.toString();
    
-   // ObjectID
-   movies.findOne({}).then( (result) => {
-      // 임의의 ID를 문자열로 얻기
-      var objectIDStr = result._id.toString();
+      const item1 = await movies.findOne({_id:objectIdStr})
+      if ( item1 ) {
+         console.log('Find By ID Str Success :', item1);
+      }
+      else {
+         console.log('Find By ID Str Failure');
+      }
+   
+      const docId = new ObjectID(objectIdStr);
+      const item2 = await movies.findOne({_id:docId})
+   
+      if ( item2 ) {
+         console.log('Find By ObjectID(ID) Success :', item2);
+      }
+      else {
+         console.log('Find By ObjectID(ID) Failure');
+      }      
 
-      
-      movies.findOne({_id:objectIDStr})
-      .then( (result) => {
-         console.log('Find By ID Str : \n', result);
-      })
-      .catch( (err) => {
-         console.log('Find By ID Str Error : ', err);
-      });
-      
-      const docId = new ObjectID(objectIDStr);
-      movies.findOne({_id:docId})
-      .then( (result) => {
-         console.log('Find By ObjectID : \n', result);
-      })
-      .catch( err => {
-         console.log('Find By ObjectID Error : ', err);
-      });
-   });
+   } catch (error) {
+      console.error('Error :', error);
+   }
 }

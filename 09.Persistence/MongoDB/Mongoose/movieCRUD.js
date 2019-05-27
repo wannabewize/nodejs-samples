@@ -13,16 +13,9 @@ const Movie = require('./movieModel');
 
 // saveInitialData();
 // findData();
-modifyData();
-// removeData();
+// modifyData();
+removeData();
 
-function resolved(result) {
-    console.log('Resolved : ', result);
-}
-
-function rejected(err) {
-    console.log('Rejected : ', err);
-}
 
 async function saveInitialData() {
     // Callback Based
@@ -58,46 +51,71 @@ async function saveInitialData() {
 }
 
 
-function findData() {
+async function findData() {
     // 콜백을 이용한 검색
-    Movie.find({ year: { $gt: 2010 } }, function (err, docs) {
+    Movie.find({ year: { $gt: 2010 } }, (err, docs) => {
         console.log(docs);
     });
 
     // 쿼리 객체 - exec를 이용하는 방법
-    Movie.findOne({ title: '인터스텔라' }).exec(function (err, docs) {
+    Movie.findOne({ title: '인터스텔라' }).exec()
+    .then( docs => {
         console.log(docs);
+    })
+    .catch( err => {
+        console.error('Error :', err);
     });
 
-    Movie.where('year').gt(2010).exec(function (err, docs) {
-        console.log('year > 20!0 : ', docs);
-    });
+    try {
+        const docs = await Movie.where('year').gt(2010).exec();
+        console.log('docs : ', docs);        
+    } catch (error) {
+        console.error('Error :', error);        
+    }
 }
 
-function modifyData() {
-    // 도큐먼트 수정 후 저장 
-    Movie.findOne({ title: '아바타' }).exec(function (err, doc) {
-        if (doc) {
-            doc.title = 'Avata';
-            doc.save(function (err, product) {
-                console.log('Modify and Save : ', product);
-            });
+async function modifyData() {
+    Movie.updateMany({ director: '크리스토퍼 놀란' }, { $set: { director: 'Christopher Nolan' } })
+    .then( ret => {
+        console.log('update success. ret :', ret);
+    })
+    .catch( err => {
+        console.error('update error :', err);
+    });
+
+    try {
+        const doc = await Movie.findOne({ title: '아바타' });
+        if ( ! doc ) {
+            console.log('Can not find doc');
+            return;
         }
-    });
-
-    Movie.update({ director: '크리스토퍼 놀란' }, { $set: { director: 'Christopher Nolan' } }).then(resolved, rejected);
+        doc.title = 'Avata';
+        await doc.save();
+        console.log('find 후 변경 성공');
+    } catch (error) {
+        console.error('Error :', error);        
+    }
 }
 
-function removeData() {
+async function removeData() {
     // 도큐먼트 삭제
-    Movie.findOne({ title: '아바타' }).exec(function (err, doc) {
-        if (doc) {
-            doc.title = 'Avata';
-            doc.remove(function (err, product) {
-                console.log('Find and Remove : ', err, product);
-            });
-        }
+    Movie.deleteMany({ director: '크리스토퍼 놀란' })
+    .then( ret => {
+        console.log('remove success. ret :', ret);
+    })
+    .catch( err => {
+        console.error('remove error :', err);
     });
 
-    Movie.remove({ director: '크리스토퍼 놀란' }).then(resolved, rejected);
+    try {
+        const doc = await Movie.findOne({ title: '아바타' });
+        if ( ! doc ) {
+            console.log('Can not find doc');
+            return;
+        }
+        await doc.remove();
+        console.log('find 후 삭제 성공');        
+    } catch (error) {
+        console.error('Error :', error);        
+    }
 }

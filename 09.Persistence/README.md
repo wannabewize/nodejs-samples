@@ -76,14 +76,22 @@ SQLInjection 의 상황과 방지
 
 ### Basic
 
-- connection : 커넥션
+기본 CRUD
+
+- connect, connect2 : 데이터베이스 연결하기
 - insert : 콜렉션에 데이터 추가
-- find : 콜렉션에서 데이터 얻기
-- find_array : 배열을 정의한 도큐먼트에서 데이터 얻기. 태그 검색
+- find : 콜렉션에서 도큐먼트 얻기
+- findById : ObjectID를 이용해서 도큐먼트 얻기
+- count : 콜렉션 내 도큐먼트 수
 - update : 도큐먼트 수정
 - delete : 도큐먼트 삭제
-- embeded : 도큐먼트 내장
 
+### ModelArchitecture
+
+도큐먼트 내장/배열 사용하기
+
+- array : 배열을 정의한 도큐먼트에서 데이터 얻기. 태그 검색
+- embeded : 도큐먼트 내장
 
 ### Mongoose
 
@@ -92,8 +100,8 @@ SQLInjection 의 상황과 방지
 > use mongoose;
 > db.movies.find()
 ````
-
-- moviest, movieModel : 모델을 이용한 기본 CRUD. 
+- basic : 스키마 정의, 모델을 이용해서 저장하기
+- movieModel, movieCRUD : 모델을 이용한 기본 CRUD. 
 - errors : 스키마와 모델, 모델 생성시 에러 발생 경우
 - method : 스키마에 정의하는 Instance Method, Static Method
 

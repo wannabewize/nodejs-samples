@@ -9,7 +9,7 @@ module.exports = {
         }
 
         const client = await MongoClient.connect(url, {useNewUrlParser: true})
-        this.db = client.db('moviest');
+        this.db = client.db('example');
 
         return this.db;
     }

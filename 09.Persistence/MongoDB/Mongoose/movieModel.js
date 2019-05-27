@@ -1,13 +1,13 @@
 var mongoose = require('mongoose');
 var url = 'mongodb://localhost:27017/moviest';
-mongoose.connect(url);
+mongoose.connect(url, { useNewUrlParser: true });
 
 var db = mongoose.connection;
 
-db.on('error', function(err) {
+db.on('error', (err) => {
    console.log('Error : ', err);
 });
-db.on('open', function() {
+db.on('open', () => {
    console.log('Open Event');
 });
 

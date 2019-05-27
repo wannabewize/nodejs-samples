@@ -12,8 +12,6 @@ MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
 //    doFindExample(db);
 });
 
-
-
 async function doFindOneExample(db) {
    // 콜렉션
    let movies = db.collection('movies');   
