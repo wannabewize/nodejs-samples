@@ -19,17 +19,24 @@ async function executeFindByIdExample(db) {
    
    // ObjectID
    movies.findOne({}).then( (result) => {
+      // 임의의 ID를 문자열로 얻기
       var objectIDStr = result._id.toString();
+
       
-      movies.findOne({_id:objectIDStr}).then(function(result) {
+      movies.findOne({_id:objectIDStr})
+      .then( (result) => {
          console.log('Find By ID Str : \n', result);
-      }, function(err) {
+      })
+      .catch( (err) => {
          console.log('Find By ID Str Error : ', err);
       });
       
-      movies.findOne({_id:new ObjectID(objectIDStr)}).then(function(result) {
+      const docId = new ObjectID(objectIDStr);
+      movies.findOne({_id:docId})
+      .then( (result) => {
          console.log('Find By ObjectID : \n', result);
-      }, function(err) {
+      })
+      .catch( err => {
          console.log('Find By ObjectID Error : ', err);
       });
    });
