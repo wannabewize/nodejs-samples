@@ -27,12 +27,12 @@ io.on('connection', (socket) => {
 const is = process.stdin;
 
 // System Namespace
-var system = io.of('/system');
+const system = io.of('/system');
 system.on('connection', (socket) => {
-   console.log('emergency namespace connected');
+   console.log('system namespace connected');
 
    is.on('data', (chunk) => {
-      console.log('emergency namespace!');
-      socket.emit('message', { msg: chunk.toString() });
+      console.log(`system message inputed : ${chunk}`);
+      socket.emit('message', { namespace: 'system', msg: `message received : ${chunk}` });
    });
 });

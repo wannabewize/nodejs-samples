@@ -16,6 +16,7 @@ app.get('/', function (req, res) {
 
 // Socket.io 서버
 const io = require('socket.io')(server);
+
 io.on('connection', socket => {
    // 클라이언트가 보낸 메세지 이벤트
    socket.on('message', (data) => {

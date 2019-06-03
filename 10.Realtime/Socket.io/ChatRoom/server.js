@@ -14,16 +14,16 @@ app.get('/', function (req, res) {
     res.sendFile(__dirname + '/index.html');
 });
 // Socket.io 서버
-var io = require('socket.io')(server);
+const io = require('socket.io')(server);
 io.on('connection', socket => {
     // 연결된 사용자와 채팅방 정보
-    var user;
-    var room;
+    let user;
+    let room;
 
     // 채팅방 입장
-    socket.on('joinRoom', function (info) {
+    socket.on('joinRoom', (info) => {
         user = info.user;
-        // 기존 룸에서 나가기
+        // 기존 룸에서 나가기 - 안나가면 기존 채팅방 메세지가 그대로 전달
         if ( room ) {
             socket.leave(room);
             room = null;
@@ -38,7 +38,7 @@ io.on('connection', socket => {
     });
 
     // 클라이언트가 보낸 메세지 이벤트
-    socket.on('message', function(data) {
+    socket.on('message', (data) => {
         console.log('client message :', data);
 
         const text = data.message;
