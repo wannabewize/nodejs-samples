@@ -38,3 +38,4 @@ db
 
 # Webstorm
 .idea
+aws_config.json

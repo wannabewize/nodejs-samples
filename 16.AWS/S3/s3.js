@@ -1,8 +1,11 @@
 const AWS = require('aws-sdk');
 
+// 공용 credential 읽기
 // ~/.aws/credential 작성. https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html
-var credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
-AWS.config.credentials = credentials;
+// const credentials = new AWS.SharedIniFileCredentials({profile: 'default'});
+// AWS.config.credentials = credentials;
+
+AWS.config.loadFromPath('./aws_config.json');
 
 // Listup All Files
 const s3 = new AWS.S3();
@@ -10,7 +13,7 @@ console.log('endpoint : ', s3.endpoint);
 console.log('href', s3.endpoint.href);
 
 // 버킷 내 객체 목록
-const bucketName = 's3-examples';
+const bucketName = 'idu-s3-example';
 s3.listObjects({Bucket: bucketName}, (err, data) => {
    console.log('== List Object');
 	if ( err ) {
