@@ -27,8 +27,8 @@ io.on('connection', (socket) => {
 const is = process.stdin;
 
 // System Namespace
-const system = io.of('/system');
-system.on('connection', (socket) => {
+const systemNS = io.of('/system');
+systemNS.on('connection', (socket) => {
    console.log('system namespace connected');
 
    is.on('data', (chunk) => {
