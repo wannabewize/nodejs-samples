@@ -1,4 +1,6 @@
-# Node.js 학습을 위한 자바 스크립트
+# Node.js 학습을 위한 최신 자바 스크립트
+
+Node.js 코드에서 자주 접하는 최신 자바 스크립트(ES6)
 
 ## 01.Data
 
@@ -53,8 +55,16 @@
 
 에러 처리
 
+- throw : 예외 상황
+- error_cache : 예외 상황에서 발생한 에러 처리
+- try_catch : 에러 발생하는 함수와 에러 발생 상황 처리하기
+- custom_error : 커스텀 에러 정의
+
 ## 08. deconstruction
 
+- destructuring : 객체에서 deconstructuring
+- destructuring_array : 배열에서 deconstructuring
+- destructuring_function : 함수 호출에서 deconstructuring, object shorthand
 
 ## 09. Promise
 
@@ -69,6 +79,10 @@
 - [Array.Filter API](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/filter)
 
 - [Array Reduce API](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce)
+
+- [Error 타입](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Global_Objects/Error)
+
+- [Deconstructuring](https://developer.mozilla.org/ko/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment)
 
 - https://github.com/lukehoban/es6features
 - https://jsdev.kr/t/es6/2944
