@@ -1,32 +1,27 @@
-/**
- * 에러 처리
- */
-console.log('== try/catch ==');
-try {
-   throw new Error('Error Message');
-   console.log('After Error');
-}
-catch ( err ) {
-   console.log('catch', err);
+function throwStringError(arg) {
+   if ( arg < 0 )
+      throw '0보다 작은 값 입력 에러';
 }
 
-console.log('== try/catch/finally ==');
-try {
-   throw new Error('Error Message');
-   console.log('After Error');
-}
-catch ( err ) {
-   console.log('catch', err);
-}
-finally {
-   console.log('Finally');
+function inputPositive(arg) {
+   if ( arg < 0 )
+      throw new Error('0보다 작은 값 입력');
 }
 
-console.log('== try/finally ==');
 try {
-   // 예외 처리 안됨
-   throw new Error('Error Message');
+   throwStringError(-1);
 }
-finally {
-   console.log('Finally');
+catch ( error ) {
+   console.error(error);
 }
+
+try {
+   inputPositive(-1);
+}
+catch ( error ) {
+   const message = error.message;
+   console.error(message);
+}
+
+// throwError(-1);
+console.log('== END ==');

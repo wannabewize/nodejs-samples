@@ -1,18 +1,25 @@
 /**
  * 에러 발생
  */
-function errorFn1() {
+function throwStringError() {
    throw 'a';
 }
 
-function errorFn2() {
+function throwNumberError() {
    throw 1;
 }
 
-function errorFn3() {
+function throwObjectError() {
    throw { value : '1234' };
 }
 
-function errorFn4() {
+function throwError() {
    throw new Error('Error Message');
 }
+
+
+throwStringError();
+throwNumberError();
+throwObjectError();
+throwError();
+console.log('== END ==');

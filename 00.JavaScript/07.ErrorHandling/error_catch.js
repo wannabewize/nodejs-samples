@@ -5,7 +5,8 @@ try {
     doIt();
 }
 catch ( error ) {
-    console.log('error :', error);
+    const message = error.message;
+    console.error(message);
 }
 
 console.log('== END ==');
