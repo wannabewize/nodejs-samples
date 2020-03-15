@@ -57,6 +57,7 @@ Node.js 코드에서 자주 접하는 최신 자바 스크립트(ES6)
 
 - throw : 예외 상황
 - error_cache : 예외 상황에서 발생한 에러 처리
+- finally : try-catch-finally
 - try_catch : 에러 발생하는 함수와 에러 발생 상황 처리하기
 - custom_error : 커스텀 에러 정의
 
