@@ -1,0 +1,47 @@
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <script src="/socket.io/socket.io.js"></script>
+   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+   <script>
+      var socket = io();
+  
+      socket.on('connect', function () {
+         console.log('server connect');
+      });
+
+      socket.on('echo', function (data) {
+         var msg = data['message'];
+         console.log('Server Event :', msg);
+         $('#serverEcho').append($('<li>').text(msg));
+      });
+
+      function sendMessage() {
+         var userInput = $('#userInput').val();
+         socket.emit('message', { message: userInput });
+         $('#userInput').val('');
+      }
+
+      const systemNS = io('/systemNS');
+      systemNS.on('connect', function () {
+         console.log('SystemNS Namespace connect');
+      });
+
+      // 시스템 메세지는 얼럿창으로
+      systemNS.on('message', function (data) {
+         alert('Emergency : ' + data.msg);
+      });
+   </script>
+</head>
+
+<body>
+   <div id="clientInput">
+      <input type="text" id="userInput" class="input" />
+      <input type="button" class="submit" value="Send" onclick="sendMessage()" />
+   </div>
+   <h3>Server Echo</h3>
+   <ul id="serverEcho">
+   </ul>
+</body>
+</html>

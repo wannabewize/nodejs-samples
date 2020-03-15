@@ -1,0 +1,10 @@
+{
+  "name": "nodejs-mysql-examples",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.17.0",
+    "mysql2": "^1.6.5"
+  }
+}

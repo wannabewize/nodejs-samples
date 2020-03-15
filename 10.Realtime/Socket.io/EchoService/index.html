@@ -1,0 +1,40 @@
+<html>
+
+<head>
+   <meta charset="UTF-8">
+   <!-- <script src="/socket.io/socket.io.js"></script> -->
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"></script>
+   <script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+   
+   <script>
+      const socket = io();
+
+      socket.on('connect', () => {
+         console.log('server connect');
+      });
+
+      socket.on('echo', (data) => {
+         var msg = data['message'];
+         console.log('Server Event :', msg);
+         $('#serverEcho').append($('<li>').text(msg));
+      });
+
+      function sendMessage() {
+         var userInput = $('#userInput').val();
+         socket.emit('message', { message: userInput });
+         $('#userInput').val('');
+      }
+   </script>
+</head>
+
+<body>
+   <div id="clientInput">
+      <input type="text" id="userInput" />
+      <input type="button" value="Send" onclick="sendMessage()" />
+   </div>
+   <h3>Server Echo</h3>
+   <ul id="serverEcho">
+   </ul>
+</body>
+
+</html>

@@ -1,16 +1,14 @@
 const AWS = require('aws-sdk');
 const fs = require('fs');
 
-// ~/.aws/credential 작성. https://docs.aws.amazon.com/sdk-for-javascript/v2/developer-guide/getting-started-nodejs.html
-var credentials = new AWS.SharedIniFileCredentials({ profile: 'default' });
-AWS.config.credentials = credentials;
+AWS.config.loadFromPath('./aws_config.json');
 
 // 파일 스트림 생성 - 폴더에 파일 저장하고 사용
 const file = './image.jpg';
 const readStream = fs.createReadStream(file);
 
 // 버킷 이름
-const bucketName = 's3-examples';
+const bucketName = 'idu-s3-example';
 // S3에 저장되는 객체 키 - 임의의 이름 만들기(시분초) + 난수 + 확장자
 const now = new Date()
 const itemKey = 'upload/' + now.getHours() + now.getMinutes() + now.getSeconds() + Math.floor(Math.random() * 1000) + '.jpg';
