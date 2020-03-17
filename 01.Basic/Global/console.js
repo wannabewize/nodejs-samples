@@ -12,7 +12,7 @@ console.log('obj : ' + obj); // [object Object]
 console.log('obj : ', obj); // { name: 'IU', job: 'Singer' }
 
 // 배열 출력하기
-var array = [1, 2, 3];
+const array = [1, 2, 3];
 console.log('array : ' + array);
 console.log('array : ' , array);
 
