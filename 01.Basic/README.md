@@ -7,12 +7,12 @@
 - consoleTime : 실행 시간 측정
 - consoleCount: 횟수 측정
 - timer, interval : 지연 실행, 반복 실행
+- process : 프로세스 정보
+- processArg : 애플리케이션 실행 파라미터 활용하기
 
 
 - require : require() 함수 정보 출력
 
-- process : 프로세스 정보
-- process_arg : 애플리케이션 실행 파라미터 활용하기
 
 ## 모듈 사용 방법(Module)
 
