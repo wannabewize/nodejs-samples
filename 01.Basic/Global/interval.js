@@ -14,4 +14,5 @@ function sayHello(who) {
       clearInterval(repeat);
 }
 
+console.log('5번 실행되고 멈춥니다.');
 const repeat = setInterval(sayHello, 1000, 'Friend');

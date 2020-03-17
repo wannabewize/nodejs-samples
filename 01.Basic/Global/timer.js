@@ -8,6 +8,7 @@ function sayHello() {
 }
 
 console.log('== Timer Example.');
+console.log('3초뒤에 "Hello World"가 출력됩니다.');
 setTimeout(sayHello, 3 * 1000);
 
 
@@ -16,11 +17,11 @@ setTimeout( (arg1, arg2) => {
       var result = arg1 + arg2;
       console.log('Arrow Function, parameter를 사용한 타이머 예제');
       console.log(`${arg1} + ${arg2} = ${arg1 + arg2}`)
-}, 1000, 1, 2);
+}, 3 * 1000, 1, 2);
 
 // 타이머 취소
 function cancelledFunction() {
-      console.log('이 함수는 실행 취소됩니다');
+      console.log('이 함수는 setTimeout으로 실행되지만 바로 취소돼서 실행되지 않습니다.');
 }
 const t = setTimeout(cancelledFunction, 2000);
 clearTimeout(t);
