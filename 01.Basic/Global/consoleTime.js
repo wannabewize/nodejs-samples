@@ -25,3 +25,11 @@ for(let i = 1 ; i < num ; i ++ ) {
 // 시간 측정 시작
 console.log(`Prime Numbers count : ${primeNumbers.length}`);
 console.timeEnd('PRIME NUMBER');
+
+console.time('SUM');
+let sum = 0;
+for(let i = 1 ; i < 10000 ; i++ ) {
+   sum += i;
+}
+// 시간 측정 시작
+console.timeEnd('SUM');

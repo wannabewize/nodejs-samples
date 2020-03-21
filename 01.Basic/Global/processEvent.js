@@ -2,8 +2,12 @@
  * process의 이벤트 다루기
  */
 
+process.on('beforeExit', () => {
+    console.log('Before Event 발생!');
+});
+
 process.on('exit', (code) => {
-    console.log('프로그램이 종료됩니다. 종료 코드', code);
+    console.log('프로그램이 종료 이벤트! 종료 코드 :', code);
 });
 
 // 강제 종료
