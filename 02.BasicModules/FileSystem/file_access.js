@@ -1,11 +1,11 @@
 const fs = require('fs');
-
-const  file = './song.txt';
+const mode = fs.F_OK;
+const path = __dirname + '/movies.json';
 try {
-   fs.accessSync(file, fs.F_OK)
+   fs.accessSync(path, mode)
    console.log('파일 접근 가능(Sync)');
    
-   var data = fs.readFileSync(file, 'utf8');
+   const data = fs.readFileSync(path, 'utf8');
    console.log('파일 내용(Sync) : ', data);
 }
 catch ( exception ) {
@@ -14,16 +14,16 @@ catch ( exception ) {
 }
 
 // 비동기
-const mode = fs.F_OK | fs.R_OK;
-fs.access(file, mode, err => {
-   if ( err ) {
-      console.error('파일 없음(Async) : ', err);
+
+fs.access(path, mode, error => {
+   if ( error ) {
+      console.error('파일 없음(Async) : ', error);
       return;
    }
    
-   fs.readFile(file, 'utf8', (err, data) => {
-      if ( err ) {
-         console.error('파일 읽기 에러(Async) : ', err);
+   fs.readFile(path, 'utf8', (err, data) => {
+      if ( error ) {
+         console.error('파일 읽기 에러(Async) : ', error);
          return;
       }
       

@@ -3,16 +3,18 @@ const intValue = 3;
 console.log('int Value ' + 3);
 
 // 객체 출력하기
-const obj = {
-   name : 'IU',
-   job : 'Singer'
-}
-
-console.log('obj : ' + obj); // [object Object]
-console.log('obj : ', obj); // { name: 'IU', job: 'Singer' }
+const movie = {
+   title: "새로운 희망",
+   year: 1977
+};
+console.log(movie);
+// movie:[object Object]
+console.log('movie: ' + movie); 
+// movie: { title: '새로운 희망', year: 1977 }
+console.log('movie:', movie); 
 
 // 배열 출력하기
-var array = [1, 2, 3];
+const array = [1, 2, 3];
 console.log('array : ' + array);
 console.log('array : ' , array);
 
