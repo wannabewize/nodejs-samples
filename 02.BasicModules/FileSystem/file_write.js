@@ -3,8 +3,20 @@
  */
 const fs = require('fs');
 
-// 문자 데이터 작성 utf-8
-fs.writeFile('./textData.txt', 'Hello World', 'utf-8',  err => {
+const path = './newFile.txt';
+const data = 'Hello Node.js';
+
+// 동기식 방식으로 내용 저장
+try {
+   fs.writeFileSync(path, data);
+} catch ( error ) {
+   console.error(error);
+}
+
+// 비동기 방식으로 내용 저장
+const path2 = __dirname + '/newFile2.txt';
+
+fs.writeFile(path2, data, 'utf-8', err => {
    if ( err ) {
       console.error('File write Errro : ', err);
       return;

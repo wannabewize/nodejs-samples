@@ -6,11 +6,6 @@
 
 - os : 운영체제 정보
 
-## Path
-경로 다루기
-
-- path : 경로 정보 얻기, 경로 만들기
-
 ## FileSystem
 파일 시스템 모듈
 
@@ -19,8 +14,10 @@
 - file_read_error : 파일 읽기 에러 처리
 - file_read_fd : 파일 디스크립터를 이용해서 파일 읽기
 - file_access : 파일 접근 검사
-- file_stat : 파일 상태와 정보 얻기
+- movie_reading, movie_reading_sync : 데이터 파일 읽고 분석 후 출력하기
 - file_write : 파일에 내용 쓰기
+- movie_writing, movie_writing_sync : 데이터를 파일로 저장
+- file_stat : 파일 상태와 정보 얻기
 - file_append : 파일 내용 추가
 - file_write_fd : 파일 특정 위치에 내용 작성
 - file_delete : 파일 삭제
@@ -29,6 +26,13 @@
 - dir_make_delete : 폴더 생성과 삭제
 - watch_dir : 폴더 내 변경 감시
 - watch_file : 파일 변경 감시
+
+## Path
+경로 다루기
+
+- path : 경로 정보 얻기, 경로 만들기
+
+
 
 ## Util
 Util 모듈
