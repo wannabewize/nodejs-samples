@@ -11,26 +11,14 @@ const rl = readline.createInterface({
    output: process.stdout
 });
 
-rl.once('line', (input) => {
-   console.log(`line event 발생. once로 등록. ${input}`);
+rl.once('line', input => {
+   console.log('once(line) Event:', input);
 });
 
-var count = 10;
-
-rl.on('line', (input) => {
-   console.log(`line event 발생. on으로 등록. ${input}`);
-
-   // count가 0이 되면 더이상 이벤트 리스너가 동작하지 않는다.
-   if ( --count < 0 ) {
-      rl.removeAllListeners();
-   }
+rl.addListener('line', input => {
+   console.log('addListener(line) Event:', input);
 });
 
-
-setTimeout( () => {
-   rl.emit('line', '자동으로 이벤트 발생...1');
-}, 1000);
-
-setTimeout( () => {
-   rl.emit('line', '자동으로 이벤트 발생...2');
-}, 2000);
+rl.on('line', input => {
+   console.log('on(line) Event:', input);
+});

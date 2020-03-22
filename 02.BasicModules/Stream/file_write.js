@@ -13,6 +13,12 @@ fos.on('error', (err) => {
     console.log('error event :', err);
 });
 
-fos.write('Hello\n', () => { console.log('hello writed') });
+fos.write('Hello\n');
 
-fos.end('World\n'); 
+setTimeout(() => {
+    fos.write('Stream write Example\n');
+}, 1000);
+
+setTimeout(() => {
+    fos.end('bye bye\n');
+}, 2000);

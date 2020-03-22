@@ -32,32 +32,17 @@
 
 - path : 경로 정보 얻기, 경로 만들기
 
-
-
-## Util
-Util 모듈
-
-- format : 포맷 문자열 생성
-- inspector : 객체 상태 출력하기
-- callbackify : 프라미스 기반의 함수를 콜백 기반의 함수 생성
-- promisify : 콜백 기반의 함수를 프라미스 기반의 함수 생성
-
 ## Event
 이벤트 다루기
 
 - eventListener : 이벤트 리스너 등록
 - maxEventListner : 이벤트 리스너 개수 얻기/설정
-- uncaughtException : 예외 상황 이벤트와 이벤트 리스너
+- removeEventListner : 이벤트 리스터 제거
+- emit : 강제로 이벤트 발생시키기
 - customEvent : 이벤트에 반응할 수 있는 커스텀 클래스 작성하기
 - customEventError : EventEmitter가 아닌 타입에 이벤트 리스너 등록 시도 - 에러 발생
+- uncaughtException : 예외 상황 이벤트와 이벤트 리스너
 
-## Buffer
-버퍼 모듈 예제
-
-- buffer : 버퍼 기본 사용
-- buffer_array : 배열 방식으로 버퍼 다루기
-- buffer_readwrite : 버퍼에서 데이터 읽기/쓰기
-- buffer_image_detect : 버퍼를 이용해서 파일 포맷 검사
 
 ## Stream
 스트림 모듈
@@ -69,6 +54,27 @@ Util 모듈
 - stdin_pipe_file : 키보드 입력 스트림을 파일 출력 스트림과 연결
 - memory_usage : 파일 전체 읽기와 스트림 방식의 메모리 사용량 비교
 - cork_uncork : 키보드 입력을 파일로 연결. cork를 하면 파일에 쓰지 않고 메모리에만 저장.
+
+
+## Util
+Util 모듈
+
+- format : 포맷 문자열 생성
+- inspector : 객체 상태 출력하기
+- callbackify : 프라미스 기반의 함수를 콜백 기반의 함수 생성
+- promisify : 콜백 기반의 함수를 프라미스 기반의 함수 생성
+
+
+
+## Buffer
+버퍼 모듈 예제
+
+- buffer : 버퍼 기본 사용
+- buffer_array : 배열 방식으로 버퍼 다루기
+- buffer_readwrite : 버퍼에서 데이터 읽기/쓰기
+- buffer_image_detect : 버퍼를 이용해서 파일 포맷 검사
+
+
 
 ## URL, QueryStrings
 URL과 쿼리 문자열 모듈
