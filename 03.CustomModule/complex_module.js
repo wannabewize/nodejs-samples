@@ -1,5 +1,5 @@
 // 값
-module.exports.thisYear = '2019';
+exports.thisYear = '2020';
 
 // 함수
 exports.sayGoodMorning = () => {

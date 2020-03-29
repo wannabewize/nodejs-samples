@@ -1,8 +1,10 @@
 // 함수
 const m = require('./complex_module');
 m.sayGoodMorning();
+m.student.study();
+const b = new m.Bird();
 
-// 함수. destructuring
+// destructuring
 const { sayGoodMorning } = require('./complex_module');
 sayGoodMorning();
 
@@ -10,12 +12,12 @@ sayGoodMorning();
 const you = require('./complex_module').student;
 you.study();
 
-// 객체와 값
-const { thisYear, student } = require('./complex_module');
+// destructuring, 이름 변경
+const { thisYear: currYear, student } = require('./complex_module');
 student.study();
-console.log('this year : ', thisYear);
+console.log('this year : ', currYear);
 
-// 클래스
+// 클래스 - 이름 변경
 const ClassDef = require('./complex_module').Bird;
 const sparrow = new ClassDef();
 sparrow.sing();
