@@ -1,2 +1,2 @@
-const value = require('./value_module');
-console.log(value);
+const maximumValue = require('./value_module');
+console.log(maximumValue);
