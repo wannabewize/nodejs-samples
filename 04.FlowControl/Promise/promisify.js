@@ -1,23 +1,28 @@
 const util = require('util');
 
-function task(callback) {
+function successTask(callback) {
    setTimeout( () => {
-      // 난수가 짝수면 성공, 홀수는 실패
       const random = Math.ceil(Math.round(Math.random() * 9) + 1);
-      if ( random % 2 == 0 ) {
-         callback(null, random);
-      }
-      else {
-         const errorMessage = `Error, random number is ${random}`;
-         callback(errorMessage, null);
-      }
+      callback(null, random);
    }, 1000);
 }
 
-const promisifiedTask = util.promisify(task);
+function failTask(callback) {
+   setTimeout( () => {
+      callback('Error');
+   }, 1000);
+}
+
+
+const promisifiedTask = util.promisify(successTask);
 
 promisifiedTask().then( result => {
-   console.log('Promisisy Task Success with', result, result2);   
+   console.log('Promisisy Task Success with', result);   
 }).catch( error => {
    console.log(error);
 });
+
+
+util.promisify(failTask)()
+.then()
+.catch(error => {console.error('FailTask 에러 발생:',error);});
