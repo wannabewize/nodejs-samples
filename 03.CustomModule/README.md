@@ -7,4 +7,5 @@
 - class_module, class_module_app : 클래스 모듈 작성과 사용하기
 - complex_module, complex_module_app : 복합 모듈 작성과 사용
 - SubFolder/counter, subfolder_module_app : 하위 폴더에 작성한 모듈과 사용
+- foldere_modlue_app, /FolderModule : 폴더 단위로 모듈 작성/로딩
 - module_cache : 모듈 캐시, 객체 공유 현상
