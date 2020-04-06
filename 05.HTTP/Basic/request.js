@@ -2,6 +2,7 @@ const http = require('http');
 const port = 3000;
 
 const server = http.createServer( (req, res) => {
+    console.log('\n\n== Request Event fired ==');
     switch ( req.method.toUpperCase() ) {
         case 'GET':
         console.log('GET 요청'); break;
@@ -17,7 +18,7 @@ const server = http.createServer( (req, res) => {
     console.log('from :', req.headers['from']);
     console.log('user-agent :', req.headers['user-agent']);
     console.log('connection :', req.headers['connection']);
-    console.log('connection :', req.headers['content-type']);
+    console.log('content-type :', req.headers["content-type"]);
     
 	
 	res.end('Hello Node.js');
