@@ -2,9 +2,8 @@ const express = require('express');
 const app = express();
 app.listen(3000);
 
-app.use('/', (req, res) => {
-    // res.send({msg: 'Hello'});
-    // res.send({msg: 'World'});
-    res.json({msg: 'Hello'});
-    res.json({msg: 'World'});
+// 헤더 종료 후 헤더 보내기
+app.use('/error', (req, res) => {
+    res.send({msg: 'Hello'});
+    res.send({msg: 'World'});
 });

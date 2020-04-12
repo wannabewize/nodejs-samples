@@ -5,7 +5,7 @@ const express = require('express');
 const app = express();
 app.listen(3000);
 
-function asyncTask(callback) {
+function callbackTask(callback) {
    setTimeout(() => {
       let result = Math.round(Math.random() * 1000);
       callback(null, result);
@@ -13,7 +13,7 @@ function asyncTask(callback) {
   }, 3000);
 }
 
-function asyncTask2() {
+function promiseTask() {
     return new Promise( (resolve, reject) => {
         setTimeout(() => {
             let result = Math.round(Math.random() * 1000);
@@ -24,7 +24,7 @@ function asyncTask2() {
 }
 
 app.get('/callback', (req, res) => {
-   asyncTask( (error, result ) => {
+   callbackTask( (error, result ) => {
       if ( error ) {
          res.status(500);
          res.send(`Error with ${error}`);
@@ -35,7 +35,7 @@ app.get('/callback', (req, res) => {
 });
 
 app.get('/promise', (req, res) => {
-    asyncTask2().then( (result) => {
+    promiseTask().then( (result) => {
       res.send(`OK with ${result}`);
     }).catch( (error) => {
       res.status(500).send(`Error with ${error}`);
@@ -44,7 +44,7 @@ app.get('/promise', (req, res) => {
 
 app.get('/await', async (req, res) => {
     try {
-        let result = await asyncTask2();
+        let result = await promiseTask();
         res.send(`OK with ${result}`);        
     } catch (error) {
         res.status(500).send(`Error with ${error}`);
