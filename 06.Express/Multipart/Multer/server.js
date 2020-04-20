@@ -28,7 +28,7 @@ app.post('/single', upload.single('image'),(req, res) => {
     const ext = pathUtil.extname(image.originalname);
     image.ext = ext;
 
-    res.send({msg:'ok', image:image, fields:fields});
+    res.send({msg:'ok', image, fields});
 });
 
 
@@ -44,7 +44,7 @@ app.post('/array', upload.array('image'), (req, res) => {
     // 파일이 아닌 Text 데이터
     const fields = req.body;
 
-    res.send({msg:'ok', images:images, fields:fields});
+    res.send({msg:'ok', images, fields});
 });
 
 // 서로 다른 이름으로 다수의 파일 올리기
