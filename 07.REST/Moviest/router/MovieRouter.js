@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const movies = require('../model/movies');
+const movies = require('../model/MovieModel');
 
 router.get('/movies', showMovieList);
 router.get('/movies/:movieId', showMovieDetail);
