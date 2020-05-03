@@ -6,7 +6,7 @@ const app = express();
 app.use(bodyParser.json({}));
 app.use(bodyParser.urlencoded({ extended: false }));
 
-const movieRouter = require('./router/movie_router');
+const movieRouter = require('./router/MovieRouter');
 app.use(movieRouter);
 
 module.exports = app;

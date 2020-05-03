@@ -1,16 +1,15 @@
 const fs = require('fs');
 
-
 class Movie {
     constructor() {
         const data = fs.readFileSync('./model/data.json');
-        this.data = JSON.parse(data)
+        this.movies = JSON.parse(data)
     }
 
     // Promise 예제
     getMovieList() {
-        if (this.data) {
-            return this.data;
+        if (this.movies) {
+            return this.movies;
         }
         else {
             return [];
@@ -19,11 +18,11 @@ class Movie {
 
     addMovie(title, director, year, synopsis) {
         return new Promise((resolve, reject) => {
-            let last = this.data[this.data.length - 1];
+            let last = this.movies[this.movies.length - 1];
             let id = last.id + 1;
 
-            let newMovie = {id:id, title:title, director:director, year:year, synopsis:synopsis};
-            this.data.push(newMovie);
+            let newMovie = {id, title, director, year, synopsis};
+            this.movies.push(newMovie);
 
             resolve(newMovie);
         });
@@ -32,7 +31,7 @@ class Movie {
     // Promise - Reject
     getMovieDetail(movieId) {
         return new Promise((resolve, reject) => {
-            for (var movie of this.data ) {
+            for (var movie of this.movies ) {
                 if ( movie.id == movieId ) {
                     resolve(movie);
                     return;
