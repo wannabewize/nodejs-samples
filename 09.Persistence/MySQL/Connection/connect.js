@@ -46,6 +46,6 @@ async function connectByAwait() {
     }
 }
 
-connect();
+// connect();
 // connectByPromise();
-// connectByAwait();
+connectByAwait();

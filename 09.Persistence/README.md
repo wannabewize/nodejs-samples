@@ -1,9 +1,22 @@
 # Persistence
 
-## MySQL
-MySQL
+데이터베이스를 이용한 영속성 서비스
 
-### MySQL 설치 후
+## MySQL
+
+MySQL 혹은 MariaDB를 사용한다.
+
+### MySQL 준비
+
+MySQL 8.0 이후에 기본 적용된 인증 플러그인 호환성 문제 발생. MariaDB는 문제 없음.
+
+#### 인증 플러그인 변경
+
+인증 플러그인을 caching_sha2_password -> mysql_native_password 변경
+
+    `alter user 'root'@'%' identified with mysql_native_password by 'password';`
+
+#### 유저 생성과 권한
 
 dev 유저 만들기
 
@@ -21,16 +34,30 @@ dev 유저에 example 데이터베이스 다루기 권한 주기
 
     `mysql> grant all on example.* to 'dev'@'*';`
 
-### Basic
+### Basic 예제
 
-mysql2 모듈을 이용한 데이터베이스 다루기. 작성 중
+mysql2 모듈을 이용한 데이터베이스 다루기
+
+- insert : 데이터 추가(INSERT)
+
+#### Connection
+
+커넥션 예제
 
 - connect : 데이터베이스 연결하기. Callback, Promise, Async/Await
-- dbConnect, simpleQuery : 커넥션 풀과 간단한 쿼리
+- connectionPool1, connectionPool2 : 커넥션 풀
+- connectionPoolWait : 커넥션 풀의 커넥션 관리 정책
+- dbConnect, App : 커넥션 모듈과 사용 모듈
+
+#### Basic
+
+기본 CRUD
+
 - parameterized : 파라미터를 이용한 쿼리 생성
 - metaData : 쿼리 실행 후 보조 정보 활용
 - CRUD : 다양한 종류의 쿼리 실행
 - movieModel, movieRouter, movieServer, movieController : 영화 정보 서비스 아키텍쳐 
+
 
 ### Injection Attack
 

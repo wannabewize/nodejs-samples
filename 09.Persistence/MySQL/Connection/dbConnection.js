@@ -6,8 +6,9 @@ const dbConfig = {
    password: 'secret',
    port: 3306,
    database: 'example',
-   multipleStatements: true,
+   connectionLimit: 5,
+   waitForConnections: true
 };
 
-const pool = mysql.createPool(dbConfig).promise();
+const pool = mysql.createPool(dbConfig);
 module.exports = pool;

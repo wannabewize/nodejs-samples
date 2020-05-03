@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
-    "express": "^4.17.0",
-    "mysql2": "^1.6.5"
+    "express": "^4.17.1",
+    "mysql2": "^2.1.0"
   }
 }
