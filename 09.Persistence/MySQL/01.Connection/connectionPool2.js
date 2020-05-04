@@ -54,14 +54,19 @@ function doIt3() {
 }
 
 async function doIt4() {
+    let conn;
     try {
-        const conn = await pool.getConnection();
+        conn = await pool.getConnection();
         const ret = await conn.query('SELECT 4;');
-        conn.release();
         console.log('query result:', ret[0]);
     } catch (error) {
         console.log('error:', error);
-    }    
+    } finally {
+        // 에러는 커넥션을 얻는 과정 혹은 쿼리 수행 중에 발생 가능
+        if ( conn ) {
+            conn.release();
+        }
+    }
 }
 
 // doIt2();

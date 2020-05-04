@@ -40,7 +40,7 @@ mysql2 모듈을 이용한 데이터베이스 다루기
 
 - insert : 데이터 추가(INSERT)
 
-#### Connection
+#### 01.Connection
 
 커넥션 예제
 
@@ -49,13 +49,15 @@ mysql2 모듈을 이용한 데이터베이스 다루기
 - connectionPoolWait : 커넥션 풀의 커넥션 관리 정책
 - dbConnect, App : 커넥션 모듈과 사용 모듈
 
-#### Basic
+#### 02.Basic
 
 기본 CRUD
 
-- parameterized : 파라미터를 이용한 쿼리 생성
-- metaData : 쿼리 실행 후 보조 정보 활용
-- CRUD : 다양한 종류의 쿼리 실행
+- insert : INSERT SQL 구문을 이용한 데이터 추가
+- select : SELECT SQL 구문을 이용한 데이터 조회
+- update : UPDATE SQL 구문을 이용한 데이터 수정
+- delete : DELETE SQL 구문을 이용한 데이터 삭제
+
 - movieModel, movieRouter, movieServer, movieController : 영화 정보 서비스 아키텍쳐 
 
 
