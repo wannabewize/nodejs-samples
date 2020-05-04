@@ -1,5 +1,5 @@
 {
-  "name": "InjectionAttack",
+  "name": "injection-attack",
   "version": "1.0.0",
   "description": "",
   "main": "attack.js",
@@ -10,6 +10,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql": "^2.17.1"
+    "mysql2": "^2.1.0"
   }
 }
