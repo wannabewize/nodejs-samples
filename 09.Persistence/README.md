@@ -69,6 +69,8 @@ SQLInjection 의 상황과 방지
 
 - attack : SQL Injection 공격의 예, 방지하기
 
+#### 05.Transaction
+
 ### Sequelize
 
 도큐먼트 보기 : [링크](http://docs.sequelizejs.com)

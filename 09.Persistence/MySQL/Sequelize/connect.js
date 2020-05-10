@@ -1,10 +1,10 @@
 const Sequelize = require('sequelize');
 
-const sequelize = new Sequelize('sequelize_example', 'dev', 'secret', {
+const sequelize = new Sequelize('example', 'dev', 'secret', {
     dialect: 'mysql', host: '127.0.0.1'
 });
 
-const sequelize2 = new Sequelize('mysql://dev:secret@127.0.0.1:3306/sequelize_example');
+const sequelize2 = new Sequelize('mysql://dev:secret@127.0.0.1:3306/example');
 
 sequelize2.authenticate()
 .then(() => {
