@@ -92,6 +92,7 @@ SQLInjection 의 상황과 방지
 
 #### 관계
 
+- relation_1on1 : One to One 관계
 - relations : One To One, One To Many 관계, Many to Many는 작성 예정
 
 ## MongoDB

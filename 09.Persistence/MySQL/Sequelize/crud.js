@@ -166,8 +166,6 @@ async function removeMovie() {
     }
 }
 
-
-//
 // 1. Movie 모델 정의
 // 2. 영화 정보 추가
 // 3. 영화 정보 보기
