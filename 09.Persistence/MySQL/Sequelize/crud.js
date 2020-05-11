@@ -1,19 +1,14 @@
 /**
  * Sequelize를 이용한 영화 정보 CRUD 예제
  */
-
 const Sequelize = require('sequelize');
-const sequelize = new Sequelize('sequelize_example', 'dev', 'secret', {
+const sequelize = new Sequelize('example', 'dev', 'secret', {
     dialect: 'mysql', host: '127.0.0.1'
 });
 const Op = Sequelize.Op;
 
 class Movie extends Sequelize.Model {}
 Movie.init({
-    movie_id: {
-        type: Sequelize.INTEGER(2),
-        primaryKey: true,
-        autoIncrement: true },
     title: Sequelize.STRING,
     director: {
         type: Sequelize.STRING,
@@ -24,31 +19,31 @@ Movie.init({
         defaultValue: 0}
 }, {sequelize});
 
-//
-// 실행 순서
-// 1. Movie 모델 정의
-// 2. 영화 정보 추가
-// 3. 영화 정보 보기
-// 3. 수정
-// 4. 삭제
-
-// prepareModel();
-// addNewMovies();
-showMovieList();
-// showMovieSome();
-// showMovieDetail(8);
-// modify();
-// removeMovie();
-
-
 async function prepareModel() {
     try {
         await Movie.sync({force:true});
+        sequelize.close();
     }
     catch (error) {
         console.log('Movie.sync Error ', error);
     }
 }
+
+async function addNewMovie() {
+    try {
+        const ret = await Movie.create({
+            title: '스파이더맨: 홈커밍',
+            director: '존 왓츠'
+        }, {logging: false});
+        const newData = ret.dataValues;
+        console.log(newData);
+        console.log('Create success');
+    }
+    catch (error) {
+        console.log('Error : ', error);
+    }
+}
+
 async function addNewMovies() {
     const movies = [
         { title: '어벤져스: 엔드게임', director: '앤서니 루소, 조 루소', year: '2019'},
@@ -59,31 +54,21 @@ async function addNewMovies() {
         { title: '토르: 라그나로크', director: '타이카 와이티티', year: '2017'}
     ];
 
-    const creates = movies.map( item => Movie.create(item) );
+    const creates = movies.map( item => Movie.create(item, {logging: false}) );
     Promise.all(creates)
     .then( ret => {
-        console.log('Create Success : ', ret);
+        const newAddIds = ret.map( result => result.dataValues.id );
+        console.log('Create Success. new ids:', newAddIds);
     }).catch( err => {
         console.error('Create Failure :', err);
     });
-
-    try {
-        let result1 = await Movie.create({
-            title: '스파이더맨: 홈커밍',
-            director: '존 왓츠'
-        });
-        console.log('Create success ', result1);
-    }
-    catch (error) {
-        console.log('Error : ', error);
-    }
 }
 
 function showMovieList() {
-    Movie.findAll({ attributes: ['movie_id', 'title'] })
+    Movie.findAll({})
     .then( results => {
         for (var item of results) {
-            console.log('movie_id : ', item.movie_id, ' title : ', item.title);
+            console.log('id:', item.id, ' title:', item.title);
         }
     })
     .catch( error => {
@@ -91,11 +76,40 @@ function showMovieList() {
     });
 }
 
+async function showMovieIdTitleList() {
+    try {
+        const ret = await Movie.findAll({ attributes: ['id', 'title'] });
+        for(item of ret) {
+            console.log('id : ', item.id, ' title : ', item.title);
+        }    
+    } catch (error) {
+        console.error('Error :', error);    
+    }
+}
+
+async function showMovieOne(movieId) {
+    try {
+        // Primary Key로 찾기
+        console.log('Find by PK', movieId);
+        let result = await Movie.findByPk(movieId);
+        // let result = await Movie.findOne({where: {year: {[Op.eq]: 2019}}});
+        if ( result ) {
+            console.log(result.dataValues);
+        }
+        else {
+            console.log('no data');
+        }
+    }
+    catch (error) {
+        console.log('Error :', error);
+    }
+}
+
 async function showMovieSome() {
     try {
-        let results = await Movie.findAll({where: { year:{[Op.gt]:2000}}});
+        let results = await Movie.findAll({where: { year:{[Op.gt]: 2000}}});
         for (var item of results) {
-            console.log('movie_id : ', item.movie_id, ' title : ', item.title);
+            console.log('id : ', item.id, ' title : ', item.title);
         }
     }
     catch (error) {
@@ -103,21 +117,39 @@ async function showMovieSome() {
     }
 }
 
-async function showMovieDetail(movieId) {
+async function showMovieCount() {
     try {
-        // Primary Key로 찾기
-        let result = await Movie.findByPk(movieId);
-        console.log('id : ', result.movie_id, ' title : ', result.title, ' director : ', result.director);
+        let {count, rows} = await Movie.findAndCountAll({where: { year:{[Op.gt]: 2000}}});
+        console.log('count:', count, 'row.count:', rows.length);
+
+        const countOnly = await Movie.count({where: { year:{[Op.gt]: 2000}}});
+        console.log(countOnly);
+    }
+    catch (error) {
+        console.log('Error : ', error);
+    }
+}
+
+async function modifyByCondition() {
+    try {
+        let result = await Movie.update(
+            { title: 'Avengers: Endgame' },
+            { where: { title: '어벤져스: 엔드게임' }}); // {[Op.eq]: '어벤져스: 엔드게임' }}도 가능
+        console.log('Modify success :', result);
     }
     catch (error) {
         console.log('Error :', error);
     }
 }
 
-async function modify() {
+async function modifyByModel(movieId) {
     try {
-        let result = await Movie.update({ title: 'Avengers: Endgame' }, { where: { title: '어벤져스: 엔드게임' } });
-        console.log('Modify success :', result);
+        let movie = await Movie.findByPk(movieId);
+        movie.title = "modifiedTitle"
+
+        let ret = await movie.save();
+        let changedMovie = ret.dataValues;
+        console.log('ret :',changedMovie);
     }
     catch (error) {
         console.log('Error :', error);
@@ -133,3 +165,23 @@ async function removeMovie() {
         console.log('Remove Error :', error);
     }
 }
+
+
+//
+// 1. Movie 모델 정의
+// 2. 영화 정보 추가
+// 3. 영화 정보 보기
+// 3. 수정
+// 4. 삭제
+
+// prepareModel();
+// addNewMovie();
+// addNewMovies();
+// showMovieList();
+// showMovieIdTitleList();
+// showMovieOne(3);
+// showMovieSome();
+// showMovieCount();
+// modifyByCondition();
+// modifyByModel(2);
+removeMovie();

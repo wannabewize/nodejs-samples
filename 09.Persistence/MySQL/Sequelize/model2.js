@@ -4,13 +4,13 @@ const sequelize = new Sequelize('example', 'dev', 'secret', {
    host: '127.0.0.1'
 });
 
-class NumberLang extends Sequelize.Model {}
-
-NumberLang.init({
+// Define 함수로 정의
+const NumberLang = sequelize.define('NumberLang',{
+   // property 정의
    number: Sequelize.INTEGER,
    kor: Sequelize.STRING,
    eng: Sequelize.STRING
-}, {sequelize});
+});
 
 NumberLang.sync().then( ret => {
    console.log('Sync Success :', ret);

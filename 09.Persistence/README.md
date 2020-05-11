@@ -75,20 +75,24 @@ SQLInjection 의 상황과 방지
 
 도큐먼트 보기 : [링크](http://docs.sequelizejs.com)
 
-#### 데이터베이스 준비
+#### 모델링 예제
 
-데이터베이스 생성
-
-    `CREATE DATABASE sequelize_example;`
-
-#### 예제
 
 - connect : 연결하기
-- model : 모델 정의하고 데이터베이스에 반영
+- model1, model2 : 모델 정의하고 데이터베이스에 반영
+- data_types : 모델 프로퍼티의 데이터 타입 설정
+- model_property: 모델 프로퍼티 상세 설정
+- model_id : 모델 id
+- table_name : 모델 이름과 테이블 이름
+
+#### 기본 CRUD
+
 - crud : 영화 정보 CRUD. 코드 내 실행 순서 참고
-- relations : One To One, One To Many 관계, Many to Many는 작성 예정
 - rawQuery : SQL을 직접 실행하기
 
+#### 관계
+
+- relations : One To One, One To Many 관계, Many to Many는 작성 예정
 
 ## MongoDB
 
