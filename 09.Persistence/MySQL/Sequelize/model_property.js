@@ -15,7 +15,7 @@ Month.init({
       type: Sequelize.STRING,
       allowNull: true
    }
-}, {modelName: 'month', tableName: 'MonthKor', sequelize});
+}, {tableName: 'MonthKor', sequelize});
 
 Month.sync({force:true}).then( ret => {
    console.log('Sync Success :', ret);
