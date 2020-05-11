@@ -5,7 +5,6 @@ var Sequelize = require('sequelize');
 const sequelize = new Sequelize('example', 'dev', 'secret', { dialect: 'mysql', host: '127.0.0.1'});
 const Op = Sequelize.Op;
 
-
 class User extends Sequelize.Model {}
 User.init({
     userId: { type: Sequelize.INTEGER(3), primaryKey: true, autoIncrement: true },
@@ -19,13 +18,12 @@ Profile.init({
 }, {sequelize, timestamps: false });
 
 
-async function doOneway1() {
-    // 단방향
-    User.hasOne(Profile);
-
+async function doOneway1() {    
     try {
-        await User.sync({});
-        await Profile.sync({});
+        // 단방향
+        User.hasOne(Profile);
+        await User.sync({logging: false});
+        await Profile.sync({logging: false});
 
         let user = await User.create({name:'btc'}, {logging: false});
         let profile = await Profile.create({address:'Korea', phone:'010-1111-1111'}, {logging: false});
@@ -34,10 +32,7 @@ async function doOneway1() {
 
         await user.setProfile(profile);
 
-        const ret = await User.findAll({
-            where: {phone: {[Op.eq]:'010-1111-1111'}},
-            include: [{model: Profile}]
-        });
+        const ret = await User.findAll({include: [{model: Profile}]}, {log: false});
         const findUser = ret[0];
 
         console.log('find user :', findUser.name);
@@ -58,18 +53,16 @@ async function doOneway2() {
         await User.sync({});
         await Profile.sync({});
 
-        let user = await User.create({name:'twice'}, {logging: false});
-        let profile = await Profile.create({address:'Korea', phone:'010-2222-2222'}, {logging: false});
+        let user = await User.create({name:'twice'}, {log: false});
+        let profile = await Profile.create({address:'Korea', phone:'010-2222-2222'}, {log: false});
                         
         await profile.setUser(user);
 
-        const ret = await Profile.findAll({
-            where: {phone: {[Op.eq]:'010-2222-2222'}},
-            include: [{model: User}]});
+        const ret = await Profile.findAll({include: [{model: User}]});
         const findProfile = ret[0];
         console.log('address:', findProfile.address, 'phone:', findProfile.phone);
         const findUser = findProfile.User;
-        console.log('use :', findUser.name);
+        console.log('user :', findUser.name);
     }
     catch ( error ) {
         console.log('Error :', error);
@@ -114,7 +107,9 @@ async function doByway() {
     }
 }
 
-
-// doOneway1();
-// doOneway2();
-doByway();
+(async () => {
+    doOneway1();
+    // doOneway2();
+    // doByway();
+    sequelize.close();
+})();
