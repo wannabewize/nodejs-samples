@@ -1,11 +1,8 @@
-const dbConn = require('./connection');
+const MongoClient = require('mongodb').MongoClient
 
-// countAll();
-countCondition();
 
-async function countAll() {
-    const db = await dbConn.getConn();
 
+async function countAll(db) {
     const movies = db.collection('movies');   
 
    movies.countDocuments()
@@ -13,10 +10,8 @@ async function countAll() {
    .catch( err => {console.log('count error ;', err); });
 }
 
-async function countCondition() {
+async function countCondition(db) {
     try {
-        const db = await dbConn.getConn();
-
         const movies = db.collection('movies');  
         
         const ret = await movies.countDocuments({ year: { $lt: 2000 } });
@@ -25,3 +20,18 @@ async function countCondition() {
         console.error('Count year > 2000 Error : ',err);        
     }
 }
+
+
+const url = 'mongodb://localhost:27017/example';
+
+MongoClient.connect(url, {useUnifiedTopology: true}, (err, client) => {
+   if (err) {
+      console.error('MongoDB 연결 실패', err);
+      return;
+   }
+   const db = client.db();
+//    countAll(db);
+   countCondition(db);
+});
+
+

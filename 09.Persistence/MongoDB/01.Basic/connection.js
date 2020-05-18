@@ -8,7 +8,7 @@ module.exports = {
             return this.db;  
         }
 
-        const client = await MongoClient.connect(url, {useNewUrlParser: true})
+        const client = await MongoClient.connect(url, {useUnifiedTopology: true})
         this.db = client.db('moviest');
 
         return this.db;

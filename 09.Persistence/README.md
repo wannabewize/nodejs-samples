@@ -112,11 +112,11 @@ SQLInjection 의 상황과 방지
 > db.movies.find();
 ````
 
-### Basic
+### 01.Basic
 
 기본 CRUD
 
-- connect, connect2 : 데이터베이스 연결하기
+- connect, connect2 : 데이터베이스 연결하기(Callback, Promise)
 - insert : 콜렉션에 데이터 추가
 - find : 콜렉션에서 도큐먼트 얻기
 - findById : ObjectID를 이용해서 도큐먼트 얻기
@@ -124,7 +124,7 @@ SQLInjection 의 상황과 방지
 - update : 도큐먼트 수정
 - delete : 도큐먼트 삭제
 
-### ModelArchitecture
+### 02.Model
 
 도큐먼트 내장/배열 사용하기
 

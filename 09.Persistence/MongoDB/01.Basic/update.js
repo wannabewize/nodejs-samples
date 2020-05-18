@@ -1,11 +1,7 @@
-const dbConn = require('./connection');
+const MongoClient = require('mongodb').MongoClient
 
-// insertInitialData();
-doUpdateExample();
-
-async function insertInitialData() {
-   try {
-      const db = await dbConn.getConn();
+async function insertInitialData(db) {
+   try {      
       const movies = db.collection('movies');
 
       await movies.insertMany([
@@ -21,9 +17,8 @@ async function insertInitialData() {
    }
 }
 
-async function doUpdateExample() {
+async function doUpdateOne(db) {
    try {
-      const db = await dbConn.getConn();
       let movies = db.collection('movies');
 
       // Callback
@@ -34,6 +29,15 @@ async function doUpdateExample() {
          }
          console.log('Callback 기반 updateOne 성공: 변경 도큐먼트 개수 : ', result.modifiedCount);
       });
+   } catch (error) {
+      console.log('Error :', error);      
+
+   }      
+}
+async function doUpdateMany(db) {
+
+   try {
+      let movies = db.collection('movies');
    
       // Update Multi Option - Promise Based
       movies.updateMany(
@@ -51,4 +55,21 @@ async function doUpdateExample() {
 
    }
 }
+
+const url = 'mongodb://localhost:27017/example';
+MongoClient.connect(url, {useUnifiedTopology: true}, async (err, client) => {
+   if (err) {
+      console.error('MongoDB 연결 실패', err);
+      return;
+   }
+
+   const db = client.db();
+
+   // insertInitialData(db);
+   // doUpdateOne(db);
+   doUpdateMany(db);
+});
+
+
+
 

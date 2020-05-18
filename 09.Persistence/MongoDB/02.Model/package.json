@@ -1,14 +1,15 @@
 {
-  "name": "mongodb-basic-example",
+  "name": "model",
   "version": "1.0.0",
   "description": "",
-  "main": "connection.js",
+  "main": "array.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mongodb": "^3.2.6"
+    "mongodb": "^3.5.7"
   }
 }

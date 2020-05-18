@@ -1,15 +1,9 @@
 const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27017/moviest';
 
-MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
-   if (err) {
-      console.error('MongoDB 연결 실패', err);
-      return;
-   }
-
-   const db = client.db();
-   
+function doEmbedExample(db) {
+   // 콜렉션
    var movies = db.collection('movies');
+
    var movieTitle = '영화' + Math.floor(Math.random() * 100);
    // console.log(title);
    
@@ -37,4 +31,16 @@ MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
          }
       );
    });
+}
+
+const url = 'mongodb://localhost:27017/example';
+
+MongoClient.connect(url, {useUnifiedTopology: true}, (err, client) => {
+   if (err) {
+      console.error('MongoDB 연결 실패', err);
+      return;
+   }
+
+   const db = client.db();
+   doEmbedExample(db);   
 });

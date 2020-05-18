@@ -1,16 +1,4 @@
 const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27017/moviest';
-
-MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
-   if (err) {
-      console.error('MongoDB 연결 실패', err);
-      return;
-   }
-   const db = client.db();
-   // doFindOneExample(db);
-   doFindWithCursor(db)
-//    doFindExample(db);
-});
 
 async function doFindOneExample(db) {
    // 콜렉션
@@ -53,7 +41,7 @@ function doFindWithCursor(db) {
 }
 
 
-async function doFindExample(db) {
+async function doFindWithArrayExample(db) {
    // 콜렉션
    let movies = db.collection('movies');
    
@@ -97,6 +85,11 @@ async function doFindExample(db) {
       console.log('== Find ALL with Projection');
       console.log(docs);
    });
+}
+
+async function doFindWithConditionExample(db) {   
+   // 콜렉션
+   let movies = db.collection('movies');
 
    // Query
    movies.find({ title: '인터스텔라' }).toArray( (err, docs) => {
@@ -148,3 +141,17 @@ async function doFindExample(db) {
       console.log(docs);
    });
 }
+
+const url = 'mongodb://localhost:27017/example';
+
+MongoClient.connect(url, {useUnifiedTopology: true}, (err, client) => {
+   if (err) {
+      console.error('MongoDB 연결 실패', err);
+      return;
+   }
+   const db = client.db();
+   // doFindOneExample(db);
+   // doFindWithCursor(db)
+   // doFindWithArrayExample(db);
+   doFindWithConditionExample(db);
+});

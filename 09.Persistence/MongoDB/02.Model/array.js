@@ -1,12 +1,8 @@
-const dbConn = require('./connection');
+const MongoClient = require('mongodb').MongoClient
 
-// insertData();
-// doArrayFindExample();
-doArrayUpdateExample();
 
-async function insertData() {
+async function insertData(db) {
    try {
-      const db = await dbConn.getConn();
       const movies = db.collection('movies');
 
       await movies.insertMany([
@@ -19,9 +15,8 @@ async function insertData() {
       console.log('Error :', error);
    }
 }
-async function doArrayFindExample() {
+async function doArrayFindExample(db) {
    try {
-      const db = await dbConn.getConn();
       const movies = db.collection('movies');
 
       // 배열(TAG)로 검색
@@ -41,9 +36,8 @@ async function doArrayFindExample() {
    }
 }
 
-async function doArrayUpdateExample() {
+async function doArrayUpdateExample(db) {
    try {
-      const db = await dbConn.getConn();
       const movies = db.collection('movies');
 
       // 추가
@@ -65,4 +59,20 @@ async function doArrayUpdateExample() {
       console.log('Error :', error);
    }
 }
+
+
+const url = 'mongodb://localhost:27017/example';
+
+MongoClient.connect(url, {useUnifiedTopology: true}, (err, client) => {
+   if (err) {
+      console.error('MongoDB 연결 실패', err);
+      return;
+   }
+
+   const db = client.db();
+   // insertData(db);
+   // doArrayFindExample(db);
+   doArrayUpdateExample(db);
+});
+
 

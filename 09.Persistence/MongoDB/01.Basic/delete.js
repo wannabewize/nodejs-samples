@@ -1,11 +1,8 @@
-const dbConn = require('./connection');
+const MongoClient = require('mongodb').MongoClient
 
-// insertInitialData();
-doDeleteExample();
 
-async function insertInitialData() {
+async function insertInitialData(db) {
    try {
-      const db = await dbConn.getConn();
       const movies = db.collection('movies');
 
       await movies.insertMany([
@@ -21,9 +18,8 @@ async function insertInitialData() {
    }
 }
 
-async function doDeleteExample() {
+async function doDeleteOneExample(db) {
    try {
-      const db = await dbConn.getConn();
       const movies = db.collection('movies');
    
       // Delete One
@@ -34,6 +30,14 @@ async function doDeleteExample() {
          }      
          console.log('DeleteOne 성공. 결과 : ', result.result);
       });
+   } catch (error) {
+      console.log('Error :', error);      
+   }    
+}
+
+async function doDeleteManyExample(db) {
+   try {
+      const movies = db.collection('movies');
       
       // Delete Many Documents
       movies.deleteMany({director:'크리스토퍼 놀란'})
@@ -45,6 +49,22 @@ async function doDeleteExample() {
       });        
    } catch (error) {
       console.log('Error :', error);      
-
    }
 }
+
+const url = 'mongodb://localhost:27017/example';
+MongoClient.connect(url, {useUnifiedTopology: true}, async (err, client) => {
+   if (err) {
+      console.error('MongoDB 연결 실패', err);
+      return;
+   }
+
+   const db = client.db();
+
+   // insertInitialData(db);
+   // doDeleteOneExample(db);
+   doDeleteManyExample(db);
+});
+
+
+

@@ -1,18 +1,6 @@
 const MongoClient = require('mongodb').MongoClient
-const url = 'mongodb://localhost:27017/moviest';
 
-MongoClient.connect(url, {useNewUrlParser: true }, (err, client) => {
-   if (err) {
-      console.error('MongoDB 연결 실패', err);
-      return;
-   }
-
-   const db = client.db();
-
-   doInsertExample(db);
-});
-
-async function doInsertExample(db) {
+async function doInsertOneCallbackExample(db) {
    // 콜렉션
    const movies = db.collection('movies');
 
@@ -23,11 +11,16 @@ async function doInsertExample(db) {
             console.error('Insert Error', err);
             return;
          }
-         console.log('INERT 성공');
+         console.log('doInsertOneCallbackExample 성공');
          // console.log(result);
          console.log('새로 추가한 항목의 ObjectID : ', result.insertedId);
       }
    );
+}
+
+async function doInsertManyCallbackExample(db) {
+   // 콜렉션
+   const movies = db.collection('movies');
 
    // 다수의 도큐먼트 추가, 콜백 방식
    movies.insertMany([
@@ -38,9 +31,14 @@ async function doInsertExample(db) {
             console.error('Insert Error', err);
             return;
          }
-         console.log('INERT Many 성공');
+         console.log('doInsertManyCallbackExample 성공');
          console.log('새로 추가한 항목들 ObjectID : ', results.insertedIds);
       });
+   }
+
+async function doInsertOnePromiseExample(db) {
+   // 콜렉션
+   const movies = db.collection('movies');
 
    // Promise Based  
    movies.insertOne({ title: '스타워즈7', director: 'JJ 에이브럼스', year: 2015 })
@@ -49,12 +47,33 @@ async function doInsertExample(db) {
       }).catch(err => {
          console.log('== Rejected\n', err);
       });
+}
+
+async function doInsertOneAwaitExample(db) {
+   // 콜렉션
+   const movies = db.collection('movies');
 
    try {
-      let result = await movies.insertOne({title: 'Infinity War', year: 2018})
+      let result = await movies.insertOne({title: 'Infinity War', year: 2018});
+      console.log('doInsertManyCallbackExample 성공');
       console.log('await 기반 Insert 도큐먼트 ID :', result.insertedId);
    }
    catch ( error ) {
       console.log('Insert Error', error);
    }
 }
+
+const url = 'mongodb://localhost:27017/example';
+MongoClient.connect(url, {useUnifiedTopology: true}, async (err, client) => {
+   if (err) {
+      console.error('MongoDB 연결 실패', err);
+      return;
+   }
+
+   const db = client.db();
+
+   // doInsertOneCallbackExample(db);
+   // doInsertManyCallbackExample(db);
+   // doInsertOnePromiseExample(db);
+   await doInsertOneAwaitExample(db);
+});
