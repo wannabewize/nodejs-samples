@@ -15,7 +15,8 @@ app.use(function(req, res, next) {
 });
 
 app.use(function(err, req, res, next) {
-   res.send('ERROR', err.stack);
+  console.error(err);
+   res.status(500).send({'ERROR': err.stack});
 });
 
 app.listen(3000, function() {

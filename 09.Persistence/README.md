@@ -131,6 +131,14 @@ SQLInjection 의 상황과 방지
 - array : 배열을 정의한 도큐먼트에서 데이터 얻기. 태그 검색
 - embeded : 도큐먼트 내장
 
+### 03.ServiceWithMongoDB
+
+MongoDB를 이용한 영화 정보 서비스
+
+- app
+- movieRouter
+- movieModel
+
 ### Mongoose
 
 데이터 확인
@@ -147,9 +155,7 @@ SQLInjection 의 상황과 방지
 
 Mongoose를 이용한 글과 댓글 쓰기. 댓글은 글(post) 도큐먼트의 배열로 저장된다.
 
-### MoviestMongoDB
 
-작성중
 
 
 ### FindAndPagingMongoDB
