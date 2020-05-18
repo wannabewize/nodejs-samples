@@ -5,7 +5,7 @@
 const mongoose = require('mongoose');
 
 const db = mongoose.connection;
-const url = 'mongodb://localhost:27017/samples';
+const url = 'mongodb://localhost:27017/mongoose';
 mongoose.connect(url, {useNewUrlParser: true });
 
 const PersonSchema = new mongoose.Schema({
