@@ -23,13 +23,13 @@
          $('#userInput').val('');
       }
 
-      const systemNS = io('/systemNS');
-      systemNS.on('connect', function () {
+      const systemNS = io('/system');
+      systemNS.on('connect', function () {         
          console.log('SystemNS Namespace connect');
       });
 
       // 시스템 메세지는 얼럿창으로
-      systemNS.on('message', function (data) {
+      systemNS.on('message', function (data) {         
          alert('Emergency : ' + data.msg);
       });
    </script>
