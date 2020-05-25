@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <title>WebSocket Test</title>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <style>
+        body {
+            margin-left: 10px;
+        }
+
+        #chatInput {
+            position: fixed;
+            bottom: 3%;
+            width: 100%
+        }
+
+        #joinPanel span {
+            margin-left: 12px;
+            margin-right: 12px;
+        }
+
+        #joinPanel input {
+            margin-left: 12px;
+        }
+
+        /* 화면 하단 고정 */
+        #userInput {
+            width: 80%;
+            margin-left: 1%;
+            margin-right: 1%;
+        }
+
+        #sendButton {
+            width: 15%;
+        }
+
+        #messages {
+            padding-top: 10px;
+        }
+
+        #messages li {
+            list-style-type: none;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>WebSocket Test</h2>
+
+    <div id="output"></div>
+
+    <ul id="messages">
+    </ul>
+
+    <form id="chatInput" action="./" class="form-inline">
+        <input type="text" id="userInput" class="form-control" />
+        <input type="submit" id="sendButton" class="btn btn-default" value="보내기" />
+    </form>
+
+    <script language="javascript" type="text/javascript">
+        var wsUri = "ws://127.0.0.1:3000/";
+        var output;
+
+        websocket = new WebSocket(wsUri);
+
+        websocket.onopen = (evt) => {
+            $('#messages').append($('<li>').text('onOpen'));
+
+        };
+        websocket.onclose = function (evt) { onClose(evt) };
+        websocket.onmessage = (evt) => { 
+            console.log('onMessage :', evt);
+            // writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
+            $('#messages').append($('<li>').text(evt.data));
+        };
+        websocket.onerror = function (evt) { onError(evt) };
+
+        function onOpen(evt) {
+            
+        }
+
+        function onClose(evt) {
+            writeToScreen("DISCONNECTED");
+        }
+
+
+        function onError(evt) {
+            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
+        }
+
+        // 메세지 보내기
+        $("#chatInput").submit(function () {
+            // 사용자가 입력한 내용을 서버로 이벤트 발생
+            var message = $("#userInput").val();
+            websocket.send(message);
+
+            $("#userInput").val("")
+            console.log('message :', message);
+            return false;
+        });        
+
+        // function doSend(message) {
+        //     writeToScreen("SENT: " + message);
+        //     websocket.send(message);
+        // }
+
+
+        // window.addEventListener("load", init, false);
+
+    </script>    
+
+</body>
+
+</html>
