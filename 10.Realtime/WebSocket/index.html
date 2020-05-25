@@ -71,26 +71,18 @@
             $('#messages').append($('<li>').text('onOpen'));
 
         };
-        websocket.onclose = function (evt) { onClose(evt) };
+        websocket.onclose = (evt) => { 
+            $('#messages').append($('<li>').text('onclose'));
+        };
         websocket.onmessage = (evt) => { 
             console.log('onMessage :', evt);
             // writeToScreen('<span style="color: blue;">RESPONSE: ' + evt.data + '</span>');
-            $('#messages').append($('<li>').text(evt.data));
+            $('#messages').append($('<li>').text('>> ' + evt.data));
         };
-        websocket.onerror = function (evt) { onError(evt) };
 
-        function onOpen(evt) {
-            
-        }
-
-        function onClose(evt) {
-            writeToScreen("DISCONNECTED");
-        }
-
-
-        function onError(evt) {
-            writeToScreen('<span style="color: red;">ERROR:</span> ' + evt.data);
-        }
+        websocket.onerror = (evt) => {
+            $('#messages').append($('<li>').text('Error :' + evt.data));
+        };
 
         // 메세지 보내기
         $("#chatInput").submit(function () {
@@ -102,15 +94,6 @@
             console.log('message :', message);
             return false;
         });        
-
-        // function doSend(message) {
-        //     writeToScreen("SENT: " + message);
-        //     websocket.send(message);
-        // }
-
-
-        // window.addEventListener("load", init, false);
-
     </script>    
 
 </body>
