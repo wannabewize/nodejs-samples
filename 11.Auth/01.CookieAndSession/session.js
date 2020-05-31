@@ -40,6 +40,7 @@ app.use(function (req, res) {
    console.log('cookies : ', cookies);
 
    res.send({
+      sessionID,
       sessionVisit: req.session.sessionVisit,
       sessionSince: req.session.sessionSince,
       sessionLast: req.session.sessionLast

@@ -31,8 +31,8 @@ const user = {
 }
 
 function handleLogin(req, res) {
-   var id = req.body.id;
-   var password = req.body.password;
+   const id = req.body.id;
+   const password = req.body.password;
 
    if ( id === user.id && password === user.password ) {
       // 로그인 성공시 : 세션에 사용자 ID 저장
@@ -61,7 +61,7 @@ function sendPublicInfo(req, res) {
 }
 
 function sendPrivateInfo(req, res) {
-   var id = req.session.userid;
+   const id = req.session.userid;
    if ( id ) {
       res.send(user);
    }

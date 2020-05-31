@@ -44,7 +44,7 @@ function sendPublicInfo(req, res) {
 
 function sendPrivateInfo(req, res) {
    // 요청 헤더 중 token 필드로 토큰 얻기
-   const token = req.headers['token'];
+   const token = req.headers['authorization'];
    console.log('token :', token);
    jwt.verify(token, secretKey, (err, decoded) => {
       if ( err ) {

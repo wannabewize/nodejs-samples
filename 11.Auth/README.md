@@ -1,12 +1,12 @@
 # 인증
 
-## CookieAndSession
+## 01.CookieAndSession
 
 - cookie : 쿠키
 - session : 세션 
 - sessionStore : 세션 스토어
 
-## SimpleAuthWithSession
+## 02.SimpleAuthWithSession
 
 세션을 이용한 인증 예제. iu/1234
 클라이언트 : angular 혹은 HTTP client 사용
@@ -15,6 +15,10 @@
 - Get /private : 인증이 필요한 API. 인증된 상태가 아니면 401 에러
 - Post /login : 로그인. 로그인 성공하면 세션에 기록한다.
 - Delete /logout : 로그아웃. 세션 정보 삭제
+
+## 03.JWT
+
+- token : JWT 토큰 생성/검증하기
 
 ## LocalAuth
 Passport를 이용한 Local Auth Strategy를 사용한 예제

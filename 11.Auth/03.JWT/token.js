@@ -26,6 +26,7 @@ console.log('token :', token);
 // jwt.verify(token, secretOrPublicKey, [options, callback])
 // jwt.decode(token [, options])
 //
+console.log('Trying to Verify Token immediately!')
 jwt.verify(token, secretKey, (err, decoded) => {
    if ( err ) {
       console.error('Verify error :', err);
@@ -36,9 +37,10 @@ jwt.verify(token, secretKey, (err, decoded) => {
 
 // Expire Error
 setTimeout( () => {
+   console.log('Trying to Verify Token After 10 sec(expire time)')   
    jwt.verify(token, secretKey, (err, decoded) => {
       if ( err ) {
-         console.error('Verify 10sec error');
+         console.error('Verify 10sec Error');
          return;
       }
       console.log('Verify 10sec success :', decoded);
