@@ -1,43 +1,37 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
 
 const app = express();
 
-const secretKey = 'IUakstp'
+const secretKey = 'rhdiddl'
 
 const user = {
-   id : 'iu',
+   id : 'user',
    password : '1234',
-   name : '아이유',
-   instagram : 'https://www.instagram.com/dlwlrma'
+   name : '유저',
+   photo : 'https://placekitten.com/g/600/400'
 }
 
-app.use(cookieParser());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
-
-// 토큰 검증 미들웨어
-app.use(tokenVerifier);
 
 function tokenVerifier(req, res, next) {
-    let token = req.headers['token'];
-    if ( ! token ) {
-        token = req.cookies['token'];
-    }
+    let token = req.headers['authorization'];
     
     if (token) {
         console.log('token :', token);
         jwt.verify(token, secretKey, (err, decoded) => {
             if (decoded) {
                 req.user = decoded;
+                next();
             }
-            next();
+            else {
+                next({code: 401, msg: 'UnAuthorized'});
+            }            
         });
     }
     else {
-        next();
+        next({code: 401, msg: 'UnAuthorized'});
     }    
 }
 
@@ -46,7 +40,10 @@ app.get('/', (req, res) => {
  });
 app.post('/login', handleLogin);
 app.get('/public', sendPublicInfo);
-app.get('/private', authenticate, sendPrivateInfo);
+app.get('/profile', tokenVerifier, sendProfile);
+app.use((err, req, res, next) => {
+    res.status(err.code).send({msg: err.msg});
+});
 
 app.listen(3000, err => {
    console.log('Server is running @ 3000');
@@ -57,14 +54,14 @@ function handleLogin(req, res) {
     const id = req.body.id;
     const pw = req.body.password;
 
+    console.log('trying to login:', id, pw);
+
     // 로그인 성공
     if (id === user.id && pw === user.password) {
         // 토큰 생성
         const token = jwt.sign({ id: user.id, name: user.name }, secretKey);
         console.log('Success :', token);
 
-        // 웹의 경우 쿠키에 토큰을 제공
-        res.cookie('token',token);
         res.send({ msg: 'success', token: token });
     }
     else {
@@ -76,12 +73,12 @@ function sendPublicInfo(req, res) {
     res.send({ msg: 'This is public information' });
 }
 
-function sendPrivateInfo(req, res) {
+function sendProfile(req, res) {
     const user = req.user;
     const id = user.id;
     const name = user.name;
 
-    res.send({ msg: 'This is private Information', name: name });
+    res.send({id: user.id, name: user.name, photo: user.photo});
 };
 
 function authenticate(req, res, next) {

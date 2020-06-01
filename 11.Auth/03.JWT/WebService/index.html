@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+   <meta charset="utf-8" />
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <title>Simple Auth</title>
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/js-cookie@2/src/js.cookie.min.js"></script>
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css">
+</head>
+
+<body>
+
+   <div>
+      <h1>Login</h1>
+      <p>User ID : user, Password : 1234</p>
+      <input type="text" id="id" placeholder="User ID">
+      <input type="password" id="password" placeholder="Password">
+      <input type="button" onclick="login()" value="Login">
+      <input type="button" onclick="logout()" value="Logout">
+      <div>
+         <span>Login Result :</span>
+         <span id="login-result"></span>
+      </div>
+
+   </div>
+   <div>
+      <h1>Public Page</h1>
+      <input type="button" class="btn btn-secondary" onclick="showPublicInfo()" value="Show Public Info">
+      <div id="public-info"></div>
+   </div>
+   <div>
+      <h1>Personal Page</h1>
+      <input type="button" class="btn btn-secondary" onclick="showPrivateInfo()" value="Show Private Info">
+   </div>
+   <div>
+      <p id="result"></p>
+   </div>
+
+
+      <script>
+         var jwt = null;
+         function login() {
+            const id = document.getElementById('id').value;
+            const password = document.getElementById('password').value;
+
+            console.log('id:',id,'password:',password);
+
+            if ( !id || !password ) {
+               console.log('no id, password');
+               return
+            }
+
+            fetch('/login', {
+               method: 'POST',
+               headers: [["Content-Type", "application/json"]],
+               body: JSON.stringify({id, password})
+            })
+            .then(response => {
+               const statusCode = response.status;
+               if ( 200 != statusCode ) {
+                  alert("로그인 실패");
+                  return;
+               }
+               return response.json()
+            })
+            .then( data => {
+               const token = data.token;
+               document.getElementById('result').innerHTML = token;
+               console.log('login success. Token:', token);
+               jwt = token;
+            })
+            .catch( error => {
+               console.error('login error :', error);
+            })
+
+         }         
+
+         function logout() {
+            // 쿠키 제거
+            token = null;
+         }
+
+         function showPublicInfo() {
+            fetch('/public')
+            .then(response => response.json())
+            .then(data => {
+               console.log('data :', data);
+               document.getElementById('result').innerHTML = JSON.stringify(data);
+            })
+            .catch( error => {
+               console.error('public info error :', error);
+            });            
+         }
+
+         function showPrivateInfo() {
+            fetch('/profile', {
+               method: 'GET',
+               headers: [["Authorization", jwt]]
+            })
+            .then(response => {
+               const statusCode = response.status;
+               if ( 200 != statusCode ) {
+                  document.getElementById('result').innerHTML = '로그인 실패, statusCode: ' + statusCode;
+                  return;
+               }
+               return response.json()
+            })
+            .then(data => {
+               console.log('data :', data);
+               document.getElementById('result').innerHTML = JSON.stringify(data);
+            })
+            .catch( error => {
+               console.error('public info error :', error);
+            });
+         }      
+      </script>
+</body>
+
+</html>

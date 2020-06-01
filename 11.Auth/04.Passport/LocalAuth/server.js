@@ -70,7 +70,7 @@ app.post('/login', function(req, res) {
          }
          res.json({name : user.name , msg : 'Login Success'});         
       });
-   })(req);  
+   })(req);
 });
 
 app.get('/', (req, res) => {
