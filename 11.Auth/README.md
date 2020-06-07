@@ -35,5 +35,6 @@ Facebook OAuth를 이용한 인증 예제
 
 ## SSL
 
-인증서/개인키 생성
+인증서/개인키 생성 방법
+
 openssl req -nodes -new -x509 -keyout server.key -out server.cert
