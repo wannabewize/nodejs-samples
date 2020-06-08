@@ -23,10 +23,10 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 const user = {
-   id : 'iu',
+   id : 'user',
    password : '1234',
-   name : '아이유',
-   instagram : 'https://www.instagram.com/dlwlrma'
+   name : 'User',
+   instagram : 'https://www.instagram.com/apple'
 }
 
 // Local Strategy
