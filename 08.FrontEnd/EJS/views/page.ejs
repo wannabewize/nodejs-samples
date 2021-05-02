@@ -6,6 +6,7 @@
 
 <h1> <%= title %></h1>
 
+<h3>if 문</h3>
 <div>
     <% if ( count ) { %> 
         num의 값은 <%= count %> 그리고
@@ -21,19 +22,19 @@
     <% } %>
 </div>
 
+<h3>For 반복문</h3>
 <ul>
-
    <!-- for 반복문 -->
    <% for ( var i = 0 ; i < count ; i++) { %>
     <li>
-        <a href="./page_<%= i %>"> <%= i %> </a>
+        <a href="./page/<%= i %>"> <%= i %> </a>
     </li>
     <% } %>
 </ul>
 <h1>태그와 어트리뷰트에서 사용</h1>
 <%
-    var tag = 'h3'
-    var data = {title:'Title', link:'./link'}
+    const tag = 'h3'
+    const data = {title:'Title', link:'./link'}
 %>
 <<%= tag %>> TAG 이름에 사용  </<%= tag %>/>
 
@@ -42,6 +43,11 @@
 <div>
     <!-- 어트리뷰트의 값으로 사용 -->
     <a href="<%= data.link %>">link1</a>
+</div>
+
+<h3>Sports</h3>
+<div>
+    <a href="/sports">Sports</a>
 </div>
 
 </body>

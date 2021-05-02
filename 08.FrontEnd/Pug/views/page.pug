@@ -1,58 +1,58 @@
 html
-head
-body
+   head
+   body
+      h1 Pug Document Struct!
 
-h1 Jade Document Struct!
+      div
+         p unordered list
+         ul
+            li item1
+            li item2
 
-div
-   ul
-      li item1
-      li item2
-   p Paragraph
+      h2= 'Writing Pug Code'
 
-h1= 'Writing Pug Code'
+      - const title = 'Pug Example'
+      - const message = 'Hello Pug'
+      h3= title
+      div #{message} 
 
-- var title = 'Pug Example'
-- var message = 'Hello Pug'
-h1= title
-div #{message} 
+      h3 For Loop
+      ul
+      - for(var i = 0 ; i < 10 ; i++ ) {
+         li= i
+      - }
 
-ul
-- for(var i = 0 ; i < 10 ; i++ ) {
-   li= i
-- }
+      h3 Attribute
+      a(href="http://google.com") google
+      img(src="http://www.ibiblio.org/wm/paint/auth/munch/munch.scream.jpg" height="100px")
 
-h1 Attribute
-a(href="http://google.com") google
-img(src="http://www.ibiblio.org/wm/paint/auth/munch/munch.scream.jpg" height="100px")
+      h3 Interpolation
 
-h1 Interpolation
+      - var strVal = 'Hello <strong>World</strong>'
+      div escaped. : #{strVal}
+      div unescaped. : !{strVal}
 
-- var strVal = 'Hello <strong>World</strong>'
-div escaped. : #{strVal}
-div unescaped. : !{strVal}
+      - var strVal2 = 'Hello World<strong>!</strong>!'
+      div!= strVal2
+         
+      div= 'Hello <strong>World</strong>'
+      div!= 'Unecsaped <strong>String</strong>'
 
-- var strVal2 = 'Hello World<strong>!</strong>!'
-div!= strVal2
-   
-div= 'Hello <strong>World</strong>'
-div!= 'Unecsaped <strong>String</strong>'
+      h3 Condition Execute
 
-h1 Condition Sample
-
-- var val = true
-if ( val ) 
-   div val is True
-else
-   div val is False
-      
-h1 Loop Sample
-- var array = ['First', 'Second', 'Third']
-ul
-   each item, index in array
-     li #{index} : #{item}      
-   
-- var i = 0
-ul   
-   while i < 4
-      li item #{i++}
+      - var val = true
+      if ( val ) 
+         div val is True
+      else
+         div val is False
+            
+      h3 Loop with Each
+      - var array = ['First', 'Second', 'Third']
+      ul
+         each item, index in array
+            li #{index} : #{item}      
+         
+      - var i = 0
+      ul   
+         while i < 4
+            li item #{i++}

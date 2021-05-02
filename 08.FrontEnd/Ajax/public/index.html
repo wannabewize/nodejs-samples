@@ -2,12 +2,14 @@
 <html>
 <head>
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
    $(document).ready(function() {
       console.log('ready!');
    });   
 
-   function resolveItems() {
+   function resolveItemsByJQuery() {
+      // callback 기반
       $.getJSON('/items', function(data, status, xhr) {
          console.log('status :', status);
          console.log('count :', data.count);
@@ -19,26 +21,109 @@
       });
    }
 
-   function sendPutRequest() {
+   function sendPutRequestByJQuery() {
       $.ajax({
          url : '/items',
          type : 'put',
-         data : 'name1=value1&name2=value2',
-         success : function(data) {
-            console.log('ajax put request/response', data);
-            alert(data.msg);
-         }
-      });
+         data : 'name1=value1&name2=value2'
+      }).then( (data, textStauts, xhr) => {
+         console.log('promise with parmas :', data, 'textStatus:',textStauts, 'xhr', xhr)
+         alert('success with ' + xhr.status);
+      })
+
    }
-   function sendDeleteRequest() {
+   function sendDeleteRequestByJQuery() {
       $.ajax({
          url : '/items/1234',
          type : 'delete',         
-         success : function(data) {
-            console.log('ajax delete request/response', data);
-            alert(data.msg);
+      })
+      .then( (data, textStauts, xhr) => {
+         alert('ajax delete success with ' + xhr.status);
+      })
+      .catch( error => {
+         console.log('error :', error);
+         alert('ajax delete fail with ' + error.status);
+      }) 
+   }   
+
+   function resolveItemsByFetch() {
+      fetch('/items')
+      .then(res => res.json())
+      .then(root => {
+         const items = root.data;
+         const html = items.map( item => `<li><img src="${item.image}" height="50px">${item.title}</li>`);
+         document.getElementById('balls').innerHTML = html;
+      })
+      .catch( error => {
+         alert('Error');
+      })
+   }
+
+   function sendPutRequestByFetch() {
+      fetch('/items', {
+         method: 'put',
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         body: JSON.stringify({name1: 'value1', name2: 'value2'})
+      }).then(res => {
+         console.log('res :',res);
+         return res.json()
+      })
+      .then(root => alert('Fetch Put Request success'))
+      .catch(error => alert('Fetch Put Reuest Fail'));
+   }
+
+   async function sendDeleteRequestByFetch() {
+      try {
+         const res = await fetch('/items/1', {method: 'delete'})
+         if ( res.ok ) {
+            alert('Fetch Delete Request success');
          }
-      });
+         else {
+            console.log('res :', res);
+            // 응답 오류 코드
+            alert(`Fetch Delete Response Fail : ${res.status}`)
+         }         
+      } catch (error) {
+         // 네트워크 에러
+         alert(`Fetch Delete Reuest Fail : ${error}`)
+      }
+   }
+
+   function resolveItemsByAxios() {
+      axios('/items')
+      .then(res => {
+         const root = res.data;
+         const items = root.data;
+         const html = items.map( item => `<li><img src="${item.image}" height="50px">${item.title}</li>`);
+         document.getElementById('balls').innerHTML = html;
+      })
+      .catch( error => {
+         alert('Error: ' + JSON.stringify(error));
+      })
+   }
+
+   function sendPutRequestByAxios() {
+      axios.put('/items', {
+         headers: {
+            'Content-Type': 'application/json'
+         },
+         data: {name1: 'value1', name2: 'value2'}
+      }).then(res => {
+         alert('Axios Put Request success :' + res.status);
+      }).catch(error => alert('Fetch Put Reuest Fail'));
+   }
+
+   async function sendDeleteRequestByAxios() {
+      try {
+         const res = await axios.delete('/items/1')
+         alert('Axios Delete Request success');
+      } catch (error) {
+         // 네트워크 에러, 응답 코드 에러
+         console.log('Axios error:', error.response);
+         alert(`Axios Delete Fail : ${error.response.status}`)
+      }
    }   
 </script>
 
@@ -48,10 +133,21 @@
 <h1>Balls</h1>
 <ul id="balls">
 </ul>
+<h3>Axios</h3>
 <div>
-   <button onclick="resolveItems()">Get 요청</button>
-   <button onclick="sendPutRequest()">Put 요청 테스트</button>
-   <button onclick="sendDeleteRequest()">Delete 요청 테스트</button>
+   <button onclick="resolveItemsByAxios()">Get 요청</button>
+   <button onclick="sendPutRequestByAxios()">Put 요청 테스트</button>
+   <button onclick="sendDeleteRequestByAxios()">Delete 요청 테스트</button>
+<h3>Fetch</h3>
+<div>
+   <button onclick="resolveItemsByFetch()">Get 요청</button>
+   <button onclick="sendPutRequestByFetch()">Put 요청 테스트</button>
+   <button onclick="sendDeleteRequestByFetch()">Delete 요청 테스트</button>
+<h3>jQuery</h3>
+<div>
+   <button onclick="resolveItemsByJQuery()">Get 요청</button>
+   <button onclick="sendPutRequestByJQuery()">Put 요청 테스트</button>
+   <button onclick="sendDeleteRequestByJQuery()">Delete 요청 테스트</button>
 </div>
 </body>
 </html>

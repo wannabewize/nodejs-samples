@@ -13,6 +13,10 @@ var data = [
 	{title:'축구', image:'football.png'}	
 ];
 
+app.get('/', (req, res) => {
+    res.render('index');
+})
+
 app.get('/hello', (req, res) => {
     res.render('hello');
 });
@@ -25,7 +29,7 @@ app.get('/greeting', (req,res) => {
     res.render('greeting');
 });
 
-app.get('/', (req, res) => {
+app.get('/sports', (req, res) => {
     res.render('sports', {title:'구기 종목', sports:data})
 });
 

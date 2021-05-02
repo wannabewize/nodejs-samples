@@ -29,9 +29,7 @@ app.put('/items', (req, res) => {
 });
 
 app.delete('/items/:id', (req, res) => {
-   console.log('delete request');
-   console.log('request body :', req.body);
-   res.send({msg: 'Delete Request success'});
+   res.status(501).send({msg: 'Delete not supported'});
 });
 
 

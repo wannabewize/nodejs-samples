@@ -3,6 +3,11 @@ var app = express();
 app.set('views', __dirname + '/views');
 app.set('view engine', 'pug');
 
+app.get('/', function(req, res) {
+	res.render('page', {count:10});
+});
+
+
 app.use('/images', express.static(__dirname + '/../../Resources/images'));
 
 var data = [
@@ -11,7 +16,7 @@ var data = [
 	{title:'축구', image:'football.png'}	
 ];
 
-app.get('/', (req, res) => {
+app.get('/sports', (req, res) => {
 	res.render('sports', {title:'구기 종목', sports:data});
 });
 
