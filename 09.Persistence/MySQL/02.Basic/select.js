@@ -68,9 +68,9 @@ async function findByCondtion(year) {
 }
 
 try {
-    // find1();
+    find1();
     // find2();
-    findByCondtion(2017);
+    // findByCondtion(2017);
 } catch (error) {
     console.error(error);    
 }

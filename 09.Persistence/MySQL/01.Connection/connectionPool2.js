@@ -19,7 +19,11 @@ pool.on('release', conn => {
     console.log('released!', conn.threadId);
 });
 
-
+/**
+ * 2개의 Promise 동작 - 콜백으로
+ * 1 - 커넥션 풀 얻기
+ * 2 - 쿼리
+ */
 function doIt2() {    
     pool.getConnection().then(conn => {
         conn.query('SELECT 2;').then( ret => {
@@ -35,7 +39,12 @@ function doIt2() {
     });
 }
 
-function doIt3() {
+/**
+ * 2개의 Promise 동작 - 체인 형태로
+ * 1 - 커넥션 풀 얻기
+ * 2 - 쿼리
+ */
+ function doIt3() {
     let connection;
     pool.getConnection().then(conn => {
         connection = conn;
@@ -53,6 +62,11 @@ function doIt3() {
     });
 }
 
+/**
+ * 2개의 Promise 동작 - async/await
+ * 1 - 커넥션 풀 얻기
+ * 2 - 쿼리
+ */
 async function doIt4() {
     let conn;
     try {

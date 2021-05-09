@@ -9,6 +9,6 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "mysql2": "^2.1.0"
+    "mysql2": "^2.2.5"
   }
 }
