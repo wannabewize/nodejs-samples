@@ -7,9 +7,9 @@
   },
   "author": "",
   "license": "ISC",
+  "description": "",
   "dependencies": {
     "mysql2": "^2.2.5",
-    "sequelize": "^5.22.4"
-  },
-  "description": ""
+    "sequelize": "^6.6.2"
+  }
 }
