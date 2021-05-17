@@ -30,7 +30,7 @@ Person.sync({force: true}).then( ret => {
     console.error('Sync Failure :', error);
 });
 
-// 복수형 단어로 자동 변환 : Person => People
+// 테이블 이름 직접 지정. option의 tableName
 class Actor extends Sequelize.Model {}
 Actor.init({
    name : Sequelize.STRING(50),

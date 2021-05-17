@@ -3,7 +3,8 @@
  */
 const Sequelize = require('sequelize');
 const sequelize = new Sequelize('example', 'dev', 'secret', {
-    dialect: 'mysql', host: '127.0.0.1'
+    dialect: 'mysql',
+    host: '127.0.0.1'
 });
 const Op = Sequelize.Op;
 
@@ -19,7 +20,7 @@ Movie.init({
         defaultValue: 0}
 }, {sequelize});
 
-async function prepareModel() {
+const prepareModel = async () => {
     try {
         await Movie.sync({force:true});
         sequelize.close();
@@ -38,6 +39,7 @@ async function addNewMovie() {
         const newData = ret.dataValues;
         console.log(newData);
         console.log('Create success');
+        sequelize.close();
     }
     catch (error) {
         console.log('Error : ', error);
@@ -54,11 +56,14 @@ async function addNewMovies() {
         { title: '토르: 라그나로크', director: '타이카 와이티티', year: '2017'}
     ];
 
+    // 프라미스 배열
     const creates = movies.map( item => Movie.create(item, {logging: false}) );
+    // 동시 실행
     Promise.all(creates)
     .then( ret => {
         const newAddIds = ret.map( result => result.dataValues.id );
         console.log('Create Success. new ids:', newAddIds);
+        sequelize.close();
     }).catch( err => {
         console.error('Create Failure :', err);
     });
@@ -70,6 +75,7 @@ function showMovieList() {
         for (var item of results) {
             console.log('id:', item.id, ' title:', item.title);
         }
+        sequelize.close();
     })
     .catch( error => {
         console.error('Error :', error);
@@ -99,6 +105,7 @@ async function showMovieOne(movieId) {
         else {
             console.log('no data');
         }
+        sequelize.close();
     }
     catch (error) {
         console.log('Error :', error);
@@ -107,10 +114,11 @@ async function showMovieOne(movieId) {
 
 async function showMovieSome() {
     try {
-        let results = await Movie.findAll({where: { year:{[Op.gt]: 2000}}});
+        let results = await Movie.findAll({where: { year:{[Op.gt]: 2018}}});
         for (var item of results) {
-            console.log('id : ', item.id, ' title : ', item.title);
+            console.log('id :', item.id, 'title :', item.title, 'year:', item.year);
         }
+        sequelize.close();
     }
     catch (error) {
         console.log('Error : ', error);
@@ -119,11 +127,12 @@ async function showMovieSome() {
 
 async function showMovieCount() {
     try {
-        let {count, rows} = await Movie.findAndCountAll({where: { year:{[Op.gt]: 2000}}});
+        let {count, rows} = await Movie.findAndCountAll({where: { year:{[Op.gt]: 2018}}});
         console.log('count:', count, 'row.count:', rows.length);
 
         const countOnly = await Movie.count({where: { year:{[Op.gt]: 2000}}});
         console.log(countOnly);
+        sequelize.close();
     }
     catch (error) {
         console.log('Error : ', error);
@@ -136,6 +145,7 @@ async function modifyByCondition() {
             { title: 'Avengers: Endgame' },
             { where: { title: '어벤져스: 엔드게임' }}); // {[Op.eq]: '어벤져스: 엔드게임' }}도 가능
         console.log('Modify success :', result);
+        sequelize.close();
     }
     catch (error) {
         console.log('Error :', error);
@@ -150,6 +160,7 @@ async function modifyByModel(movieId) {
         let ret = await movie.save();
         let changedMovie = ret.dataValues;
         console.log('ret :',changedMovie);
+        sequelize.close();
     }
     catch (error) {
         console.log('Error :', error);
@@ -160,6 +171,7 @@ async function removeMovie() {
     try {
         let result = await Movie.destroy({ where: { year: { [Op.gt]: 2018 } } });
         console.log('Remove success :', result);
+        sequelize.close();
     }
     catch (error) {
         console.log('Remove Error :', error);
@@ -172,7 +184,7 @@ async function removeMovie() {
 // 3. 수정
 // 4. 삭제
 
-// prepareModel();
+prepareModel();
 // addNewMovie();
 // addNewMovies();
 // showMovieList();
@@ -182,4 +194,4 @@ async function removeMovie() {
 // showMovieCount();
 // modifyByCondition();
 // modifyByModel(2);
-removeMovie();
+// removeMovie();

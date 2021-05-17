@@ -22,6 +22,7 @@ async function doOneway1() {
     try {
         // 단방향
         User.hasOne(Profile);
+        // User 먼저 생성 후 Profile 생성
         await User.sync({logging: false});
         await Profile.sync({logging: false});
 
@@ -50,8 +51,9 @@ async function doOneway2() {
     Profile.belongsTo(User);
 
     try {
-        await User.sync({});
-        await Profile.sync({});
+        // User 생성 후 Profile 생성
+        await User.sync({force: true});
+        await Profile.sync({force: true});
 
         let user = await User.create({name:'twice'}, {log: false});
         let profile = await Profile.create({address:'Korea', phone:'010-2222-2222'}, {log: false});
@@ -75,8 +77,8 @@ async function doByway() {
     Profile.belongsTo(User);
 
     try {
-        await User.sync();
-        await Profile.sync();
+        await User.sync({force: true});
+        await Profile.sync({force: true});
 
         let user = await User.create({name:'black pink'});
         let profile = await Profile.create({address:'Korea', phone:'010-3333-3333'});
@@ -108,8 +110,8 @@ async function doByway() {
 }
 
 (async () => {
-    doOneway1();
-    // doOneway2();
-    // doByway();
+    // await doOneway1();
+    // await doOneway2();
+    await doByway();
     sequelize.close();
 })();
