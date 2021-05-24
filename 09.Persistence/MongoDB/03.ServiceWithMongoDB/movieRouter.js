@@ -1,6 +1,6 @@
 const express = require('express');
 const router=express.Router();
-const MovieModel = require('./movieModel');
+const {getMovieList, getMovieDetail} = require('./movieModel');
 
 router.route('/movies')
 	.get(showMovieList)
@@ -29,7 +29,7 @@ function addReview(req, res) {
 // 전체 도큐먼트 목록 얻기
 async function showMovieList(req, res, next) {
 	try {
-		const ret = await MovieModel.getMovieList();
+		const ret = await getMovieList();
 		res.send(ret);
 	} catch (error) {
 		// TODO : Error 처리
@@ -40,7 +40,7 @@ async function showMovieList(req, res, next) {
 async function showMovieDetail(req, res, next) {
 	let movieId = req.params.id;
 	try {
-		let result = await MovieModel.getMovieDetail(movieId);
+		let result = await getMovieDetail(movieId);
 		res.send(result);
 	}
 	catch ( error ) {

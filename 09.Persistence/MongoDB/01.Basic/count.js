@@ -1,7 +1,5 @@
 const MongoClient = require('mongodb').MongoClient
 
-
-
 async function countAll(db) {
     const movies = db.collection('movies');   
 

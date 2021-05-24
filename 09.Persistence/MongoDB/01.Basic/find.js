@@ -151,7 +151,7 @@ MongoClient.connect(url, {useUnifiedTopology: true}, (err, client) => {
    }
    const db = client.db();
    // doFindOneExample(db);
-   // doFindWithCursor(db)
+   doFindWithCursor(db);
    // doFindWithArrayExample(db);
-   doFindWithConditionExample(db);
+   // doFindWithConditionExample(db);
 });

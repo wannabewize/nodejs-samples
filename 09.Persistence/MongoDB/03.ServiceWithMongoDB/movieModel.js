@@ -12,18 +12,15 @@ MongoClient.connect(url, {useUnifiedTopology: true}, (err, client) => {
    db = client.db();
 });
 
-class MovieModel {}
-
 // 전체 도큐먼트 목록 얻기
-MovieModel.getMovieList = () => {   
+exports.getMovieList = () => {   
    return db.collection('movies').find({}).toArray()   
 }
 
-MovieModel.getMovieDetail = (id) => {
+exports.getMovieDetail = (id) => {
    return db.collection('movies').findOne({_id:new ObjectID(id)})
 }
 
-MovieModel.addMovie = (title, director, year) => {
+exports.addMovie = (title, director, year) => {
+   // TODO
 }
-
-module.exports = MovieModel;

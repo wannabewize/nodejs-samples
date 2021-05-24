@@ -74,6 +74,6 @@ MongoClient.connect(url, {useUnifiedTopology: true}, async (err, client) => {
 
    // doInsertOneCallbackExample(db);
    // doInsertManyCallbackExample(db);
-   // doInsertOnePromiseExample(db);
-   await doInsertOneAwaitExample(db);
+   doInsertOnePromiseExample(db);
+   // await doInsertOneAwaitExample(db);
 });
