@@ -1,0 +1,87 @@
+html
+    head
+        <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    body
+        h3= movie.title
+        ul
+            li 
+                img(src=movie.image height=200)
+            li 영화 장르: #{movie.genre}
+            li 출연: #{movie.stars}
+            li 방영: #{movie.year}
+
+        h3 영화 댓글
+
+        ul(id="comments")
+
+        h3 영화 댓글 달기
+        // 폼의 요청 주소(action)은 백틱 기호를 사용한 템플릿 문자열로 작성합니다.
+        form(
+            method="post"
+            onsubmit="return uploadComment(event)"
+            enctype="application/x-www-form-urlencoded"
+            action="#")
+
+            ul
+                li
+                    label(for="name") 이름
+                    input(type="text" id="name" name="name")
+                li
+                    label(for="name") 댓글
+                    input(type="text" id="comment" name="comment")
+                li
+                    label(for="name") 평점
+                    input(type="number" id="rating" name="rating")
+                li
+                    input(type="submit" value="작성")
+        
+        script.       
+            console.log('movie :', #{movie.id});
+            function resolveComments() {
+                axios.get('http://localhost:3000/movies/#{movie.id}/comments')
+                .then(function(res) {                    
+                    console.log('fetch response :', res.data);
+                    const comments_node = document.getElementById('comments');
+                    // 기존 댓글 모두 지우기
+                    comments_node.innerHTML = '';
+
+                    const comments = res.data.data;
+                    comments.forEach( item => {
+                        const node_li = document.createElement('li');
+                        node_li.innerHTML = `<li>${item.name} - ${item.comment} (${item.rating})</li>`;
+                        
+                        comments_node.appendChild(node_li);                        
+                    });
+                }).catch(function(err) {
+                    console.error('fetch error :', err);
+                });
+            }
+            resolveComments();
+
+
+            function uploadComment(e) {
+                // 폼 리로드 방지
+                e.preventDefault();
+
+                const nameNode = document.getElementsByName('name')[0];
+                const commentNode = document.getElementsByName('comment')[0];
+                const ratingNode = document.getElementsByName('rating')[0];
+
+                const data = {name: nameNode.value, comment: commentNode.value, rating: ratingNode.value};
+                axios.post(`http://localhost:3000/movies/#{movie.id}`, data)
+                .then( function(res)  {
+                    console.log('ret :', res);
+                    resolveComments();
+
+                    // 폼의 값 초기화
+                    nameNode.value = "";
+                    commentNode.value = "";
+                    ratingNode.value = "";
+                }).catch( function(err) {
+                    console.error('error :', error);
+                });
+            }
+
+            function deleteComment(movieId) {
+                alert('delte movie :' + movieId);
+            }

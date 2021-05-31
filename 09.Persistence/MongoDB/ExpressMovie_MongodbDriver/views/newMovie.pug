@@ -1,0 +1,21 @@
+html
+    body
+        h1 새 영화 입력
+        form(action="/movies" method="POST" enctype="multipart/form-data")
+            ul
+                li
+                    label 제목 :
+                    input(type="text" name="title")                    
+                li
+                    label 방영 연도 :
+                    input(type="number" name="year")
+                li
+                    label 장르 :
+                    input(type="text" name="genre")
+                li
+                    label 출연 배우 :
+                    input(type="text" name="stars")
+                li
+                    label 포스터 :
+                    input(type="file" name="poster")
+            input(type="submit" value="입력")

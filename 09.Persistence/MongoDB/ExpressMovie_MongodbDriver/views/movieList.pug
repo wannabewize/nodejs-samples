@@ -1,0 +1,11 @@
+html
+body
+    h1 넷플릭스 인기 콘텐츠
+    div
+        a(href='/newMovie') 새 영화 추가
+    ul
+        // for 반복문을 이용해서 영화 목록 순회하기
+        for movie in movies
+            li
+                // 영화 id를 이용해서 상세 정보 보기 링크 작성
+                a(href=`/movies/${movie._id}`)= movie.title
