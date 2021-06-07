@@ -1,9 +1,13 @@
 // Socket.IO 서버
 
-// const SocketIO = require('socket.io');
-// const io = new SocketIO(3000);
-
-const io = require('socket.io')(3000);
+const httpServer = require("http").createServer();
+const io = require('socket.io')(httpServer, {
+   cors: { origin: (origin, callback) => {
+      console.log('cors function works:', origin);
+      callback(null, origin);
+   } }
+});
+httpServer.listen(3000);
 
 io.on('connection', (socket) => {
    console.log('클라이언트 연결');
