@@ -1,5 +1,5 @@
 {
     "accessKeyId": "ACCESS-KEY",
     "secretAccessKey": "SECRET-ACCESS-KEY",
-    "region": "ap-northeast-2" // seoul
+    "region": "ap-northeast-2"
  }
