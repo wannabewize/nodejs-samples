@@ -10,6 +10,6 @@
   "description": "",
   "dependencies": {
     "mysql2": "^2.2.5",
-    "sequelize": "^6.6.2"
+    "sequelize": "^6.28.2"
   }
 }
