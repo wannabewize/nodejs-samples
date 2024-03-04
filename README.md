@@ -69,9 +69,13 @@ REST 기반의 서비스 작성 예제
 
 MySQL과 MongoDB 예제
 
+TODO : update 필요
+
 ## 10.Realtime
 
 Socket.io를 이용한 실시간 서비스 작성
+
+TODO : update 필요
 
 ## 10.Socket
 
