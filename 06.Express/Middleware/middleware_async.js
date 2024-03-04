@@ -27,26 +27,26 @@ app.get('/callback', (req, res) => {
    callbackTask( (error, result ) => {
       if ( error ) {
          res.status(500);
-         res.send(`Error with ${error}`);
+         res.send(`Callback based Task Error with ${error}`);
          return;
       }
-      res.send(`OK with ${result}`);
+      res.send(`Callback based Task is Done with Random number ${result}`);
    });
 });
 
 app.get('/promise', (req, res) => {
     promiseTask().then( (result) => {
-      res.send(`OK with ${result}`);
+      res.send(`Promise based task is done with Random number ${result}`);
     }).catch( (error) => {
-      res.status(500).send(`Error with ${error}`);
+      res.status(500).send(`Promise based task Error with ${error}`);
     });
 });
 
 app.get('/await', async (req, res) => {
     try {
         let result = await promiseTask();
-        res.send(`OK with ${result}`);        
+        res.send(`Promise based Task is done by async with Random number ${result}`);        
     } catch (error) {
-        res.status(500).send(`Error with ${error}`);
+        res.status(500).send(`Promise based Task by async Error with ${error}`);
     }
 });

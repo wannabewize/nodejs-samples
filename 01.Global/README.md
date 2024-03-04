@@ -1,6 +1,4 @@
-# Node.js 기본
-
-## 전역객체(Global)
+# Node.js - 전역객체(Global)
 
 - fileLocation : __dirname, __filename 정보 출력과 리소스 경로 얻기
 - console : 정보 출력하기
