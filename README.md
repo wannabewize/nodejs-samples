@@ -73,19 +73,19 @@ TODO : update 필요
 
 ## 10.Realtime
 
-Socket.io를 이용한 실시간 서비스 작성
+### Socket.io
+
+socket.io를 이용한 실시간 서비스 작성
 
 TODO : update 필요
 
-## 10.Socket
+### TCP
 
 소켓을 이용한 실시간 서비스 작성
 
-### net 모듈
-
 TCP를 이용한 실시간 통신
 
-### dgram 모듈
+### UDP
 
 UDP를 이용한 실시간 통신
 
