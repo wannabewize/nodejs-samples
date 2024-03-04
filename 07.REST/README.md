@@ -17,3 +17,7 @@ JSON 초기 데이터, Express를 이용해서 작성한 REST 서버
 
 - 페이지 기반의 페이지네이션 : /items?page=p&count=c&keyword=k
 - 앞뒤 기반의 페이지네이션 : /articles?skip=s&count=c&keyword=k
+
+## XML
+
+TODO : 모듈 오류 해결
